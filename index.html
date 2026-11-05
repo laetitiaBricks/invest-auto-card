@@ -140,6 +140,12 @@
   .card-acts .btn-ghost{padding:0 12px}
   .ia-box{border-radius:12px;padding:10px 12px;display:flex;align-items:center;justify-content:space-between;gap:12px;background:var(--orange-tint)}
   .ia-box.green{background:var(--green-soft)}
+  .ia-box.ia-1{padding:8px 12px}
+  .ia-l{display:flex;align-items:center;gap:8px;min-width:0}
+  .ia-l .strip-t{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .ia-box.ia-1{gap:8px;height:36px;padding:0 12px;box-sizing:border-box}
+  .a-ic svg{vertical-align:-2px}
+  .dk .ia-l .strip-t{font-size:13px}.dk .ia-l .a-sub{font-size:11px}
   .ia-box.neutral{background:var(--neutral-100)}
   .ia-box .strip-t a,.ia-box .go{color:inherit;text-decoration:none}
   .strip-k{display:flex;align-items:center;gap:4px;font-size:12px;line-height:16.5px;font-weight:700;margin-bottom:2px;white-space:nowrap}
@@ -233,6 +239,14 @@
   .f-score span{color:var(--shiny-text)}
 
   .f-bar{position:absolute;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--line);padding:16px 20px 32px;display:flex;flex-direction:column;gap:12px}
+  
+  .fiche.scrolly{overflow-y:auto;scrollbar-width:none}
+  .fiche.scrolly .f-body{padding-bottom:24px}
+  .fiche.scrolly .f-bar{position:sticky}
+  .fiche.scrolly .f-bar :is(.ia-box,.cd-a){transition:height .25s,opacity .2s,margin .25s;overflow:hidden}
+  .fiche.ia-hide .f-bar :is(.ia-box,.cd-a){height:0;opacity:0;margin-bottom:-12px}
+  .f-more h4{margin:8px 0 4px;font-size:15px}
+  .f-more p{margin:0;font-size:13px;line-height:1.5;color:var(--grey)}
   .f-bar.one{flex-direction:row;align-items:center;justify-content:space-between}
   .f-bar .acts{display:grid;grid-template-columns:1fr 1.6fr;gap:10px}
   .f-bar .btn{height:50px;font-size:14px}
@@ -346,7 +360,7 @@
   .match>div{flex:1;min-width:0}
   .match-ic{width:36px;height:36px;border-radius:50%;background:#fff;display:grid;place-items:center;flex:none}
   .match-k{display:block;font-size:11px;font-weight:700;color:var(--orange);margin-bottom:2px}
-  .match b{font-size:14px}.match p{margin:2px 0 0;font-size:12px;color:var(--grey);line-height:1.45}
+  .match b{font-size:14px}.match .lnk{display:inline-block;margin-top:6px;font-size:12px}.match p{margin:2px 0 0;font-size:12px;color:var(--grey);line-height:1.45}
   .btn-ghost-o{width:100%;height:40px;border-radius:10px;background:#fff;border:1px solid #D8D9D7;font-size:13px;font-weight:700;color:var(--navy)}
   .cd-a{display:flex;align-items:center;justify-content:center;gap:6px;height:32px;border-radius:10px;background:var(--neutral-100);font-size:12px;color:var(--grey);white-space:nowrap}
   .cd-a b{display:inline-flex;align-items:center;gap:4px;color:var(--orange);font-weight:700}
@@ -440,7 +454,7 @@
   .dk .alert-o{display:flex;align-items:center;gap:16px;padding:14px 16px}.dk .alert-a{display:flex;flex-direction:row-reverse;align-items:center;gap:16px}.dk .alert-a .btn{width:auto;margin:0;padding:0 18px;white-space:nowrap}.dk .alert-l{margin:0}
   .alert-i{display:flex;gap:10px;align-items:flex-start;background:var(--neutral-100);border-radius:16px;padding:12px;font-size:12px;line-height:1.45}.alert-i b{font-size:13px}.alert-i p{margin:2px 0 0;color:var(--grey)}.alert-i u{color:var(--navy);font-weight:700;cursor:pointer}.alert-i .x{font-size:18px;color:var(--grey);cursor:pointer;line-height:1;padding:0 2px}
   .tips{display:flex;flex-direction:column;gap:8px;margin-top:12px}.dk .tips{display:grid;grid-template-columns:repeat(auto-fit,minmax(0,1fr));margin-top:0}.dk .tips .match{height:100%}
-  .badge-warn{background:var(--orange);margin-left:4px}.lnk{color:var(--navy);font-weight:700;text-decoration:underline;cursor:pointer}.note-o{background:var(--orange-tint)}
+  .badge-warn{background:var(--orange);margin-left:4px}.lnk{color:var(--navy);font-weight:700;text-decoration:underline;cursor:pointer}
   .dk .hero .btn{width:auto!important;padding:0 28px}
   .dk .match,.dk .quiet{max-width:none}
   .dnote{color:#bbb;font-size:13px;margin:6px 0 0}
@@ -479,7 +493,7 @@
       <p class="muted" style="margin:0 0 6px;font-weight:700">En cours</p>
       <ul><li><b>La même ligne que le footer de la fiche</b> : montant collecté et barre à gauche, l'action à droite.</li><li><b>« Réinvestir » dès qu'on a des bricks sur le projet</b>, « Investir » sinon. Le bouton dit où on en est.</li><li><b>Vos bricks dans un tag sur la photo</b>, comme en prod : le total d'abord, puis la part invest auto si elle existe (« 8 🧱 | dont ⚡5 »). Tout en auto : « ⚡5 🧱 ». Sans auto : « 3 🧱 ». La card reste légère, le détail est dans la fiche.</li><li><b>Plus de compte à rebours sur la photo</b> : la collecte est ouverte, « Collecte en cours » passe sous le nom.</li></ul>
       <p class="muted" style="margin:12px 0 6px;font-weight:700">Prochainement</p>
-      <ul><li><b>Le même bloc que le footer de la fiche</b> : un bandeau gris « Invest auto · Expire dans… ⓘ », le même que sur l'écran Investissements automatiques, puis « Refuser » et « Confirmer 5 🧱 (50 €) ». On retrouve la même chose du listing à la fiche.</li><li><b>Le montant est dans le bouton</b> : le bandeau ne porte que le délai, le bouton a toute la largeur et n'est plus coupé.</li><li><b>Une seule unité, la brick</b>, avec son prix entre parenthèses, comme partout ailleurs.</li><li><b>La photo ne garde que le compte à rebours</b> : toute l'info invest auto est en bas de la card.</li><li><b>« 860 ont déjà investi en automatique »</b> remplace « intéressés » : une preuve sociale liée à la feature.</li><li><b>On confirme en un clic depuis le listing</b> : l'encart passe en vert « confirmées ». Un clic sur la card ouvre la fiche pour en savoir plus.</li></ul>
+      <ul><li><b>Le même bloc que le footer de la fiche</b> : un bandeau gris « Invest auto · Expire dans… ⓘ », le même que sur l'écran Investissements automatiques, puis « Refuser » et « Confirmer 5 🧱 (50 €) ». On retrouve la même chose du listing à la fiche.</li><li><b>Le montant est dans le bouton</b> : le bandeau ne porte que le délai, le bouton a toute la largeur et n'est plus coupé.</li><li><b>Une seule unité, la brick</b>, avec son prix entre parenthèses, comme partout ailleurs.</li><li><b>La photo ne garde que le compte à rebours</b> : toute l'info invest auto est en bas de la card.</li><li><b>« 860 ont déjà investi en automatique »</b> remplace « intéressés » : une preuve sociale liée à la feature.</li><li><b>On confirme en un clic depuis le listing</b> : l'encart passe en vert « 5 🧱 investies (soit 50 €) », le même que sur la fiche. Un clic sur la card ouvre la fiche pour en savoir plus.</li></ul>
     </aside>
   </div>
 
@@ -497,7 +511,7 @@
     </div>
     <aside class="why-col">
       <h2>Ce qu'on a fait, et pourquoi</h2>
-      <ul><li><b>L'info est à un seul endroit</b> : le footer, toujours visible. L'étiquette du haut est supprimée.</li><li><b>Même structure dans tous les états</b> : l'encart de vos bricks, puis la ligne de collecte de la prod, le montant à gauche et l'action à droite. Avant l'ouverture : « 774 000 € à collecter » et « Rappel d'ouverture », pour être alerté et investir à la main. Le calendrier passe à côté du nom du projet, comme sur la card du listing.</li><li><b>« Refuser » en texte</b> : possible, mais secondaire. « Confirmer » reste l'action principale.</li><li><b>Le montant est dans le bouton</b> : « Confirmer 5 🧱 (50 €) », comme en prod. Au-dessus, un bandeau gris « Invest auto · Expire dans… ⓘ », le même que sur la card et l'écran Investissements automatiques. Le i ouvre la bottom sheet du délai.</li><li><b>Le refus passe par une bottom sheet</b> : on évite les erreurs, on explique que les bricks sont libérées et qu'on peut toujours investir à l'ouverture.</li><li><b>Une signature unique pour l'invest auto</b> : un encart teinté avec l'icône et « Investissement automatique » en en-tête, identique sur la card et dans les états avant l'ouverture. Orange à confirmer, gris refusé, vert confirmé. Une fois investi, l'icône invest auto reste dans la sous-ligne.</li><li><b>Le personnel est séparé du commun</b> : vos bricks sont dans l'encart ; l'ouverture de la collecte, la même pour tous, passe sous le titre, comme sur la card. Le footer ne garde que l'encart et l'action, collés.</li><li><b>Une fois investi, l'encart devient « mes bricks sur ce projet »</b> : le total, avec « dont 5 via l'investissement automatique » si on a réinvesti à la main. Il remplace la barre grise du haut et devient le seul accès au détail de l'investissement (chevron).</li><li><b>Collecte terminée, un seul chemin</b> : « Collecte terminée », commun à tous, passe sous le titre. L'encart devient un bandeau vert qui s'adapte : « 8 bricks (soit 80 €), dont 5 via Invest auto », « 5 bricks (soit 50 €) via Invest auto » ou « 3 bricks (soit 30 €) investies sur ce projet », toujours dans la couleur de vos bricks, mais fin et sans chevron. Dessous, la même ligne que dans les autres états : montant collecté et barre à gauche, un seul bouton à droite, « Suivre le projet ».</li><li><b>L'encart est toujours au même endroit</b> : dans le footer, au-dessus du bouton, y compris une fois la collecte ouverte (« 5 bricks investies sur ce projet », puis « Réinvestir »), jusqu'à la fin de la collecte où il devient un bandeau.</li></ul>
+      <ul><li><b>L'info est à un seul endroit</b> : le footer, toujours visible. L'étiquette du haut est supprimée.</li><li><b>Même structure dans tous les états</b> : l'encart de vos bricks, puis la ligne de collecte de la prod, le montant à gauche et l'action à droite. Avant l'ouverture : « 774 000 € à collecter » et « Rappel d'ouverture », pour être alerté et investir à la main. Le calendrier passe à côté du nom du projet, comme sur la card du listing.</li><li><b>« Refuser » en texte</b> : possible, mais secondaire. « Confirmer » reste l'action principale.</li><li><b>Le montant est dans le bouton</b> : « Confirmer 5 🧱 (50 €) », comme en prod. Au-dessus, un bandeau gris « Invest auto · Expire dans… ⓘ », le même que sur la card et l'écran Investissements automatiques. Le i ouvre la bottom sheet du délai.</li><li><b>Le bandeau se cache au scroll</b> : dans tous les états, le bandeau au-dessus de l'action (vert, gris ou « Expire dans… ») se replie quand on descend dans la fiche et revient dès qu'on remonte. La collecte et le bouton restent visibles.</li><li><b>Le footer sticky reste léger</b> : une fois refusé, il ne garde que la collecte et « Rappel d'ouverture ». Une fois confirmé, l'encart vert tient sur une ligne, puis la collecte et « Rappel d'ouverture ».</li><li><b>Le refus passe par une bottom sheet</b> : on évite les erreurs, on explique que les bricks sont libérées et qu'on peut toujours investir à l'ouverture.</li><li><b>Un seul encart vert, partout</b> : même hauteur, même texte « X 🧱 investies (soit Y €) », du listing à la collecte terminée. Le ✓ avant l'ouverture, le chevron pendant la collecte, rien une fois terminée. Un encart teinté sur une seule ligne, l'icône invest auto à gauche à la place du texte « Investissement automatique », identique sur la card, la fiche et en desktop. Gris refusé, vert confirmé ou investi, avec le chevron quand l'encart mène au détail.</li><li><b>Le personnel est séparé du commun</b> : vos bricks sont dans l'encart ; l'ouverture de la collecte, la même pour tous, passe sous le titre, comme sur la card. Le footer ne garde que l'encart et l'action, collés.</li><li><b>Une fois investi, l'encart devient « mes bricks sur ce projet »</b> : le total, avec « dont ⚡5 » si on a réinvesti à la main, comme le tag du listing, et sans icône à gauche dès qu'une partie a été investie à la main. Il remplace la barre grise du haut et devient le seul accès au détail de l'investissement (chevron).</li><li><b>Collecte terminée, un seul chemin</b> : « Collecte terminée », commun à tous, passe sous le titre. L'encart vert reste le même que pendant la collecte, sans le chevron. Dessous, la même ligne que dans les autres états : montant collecté et barre à gauche, un seul bouton à droite, « Suivre le projet ».</li><li><b>L'encart est toujours au même endroit</b> : dans le footer, au-dessus du bouton, y compris une fois la collecte ouverte (« 5 🧱 investies (soit 50 €) », puis « Réinvestir »), jusqu'à la fin de la collecte où il devient un bandeau.</li></ul>
     </aside>
   </div>
 
@@ -510,12 +524,12 @@
     </div>
     <div class="col">
       <h2>Proposition</h2>
-      <div class="toggle" data-v="R2"><button class="on" data-s="card">En attente</button><button data-s="solde">Solde insuffisant</button><button data-s="vide">Rien en attente · avec historique</button><button data-s="rien">Rien en attente · sans historique</button><button data-s="pause">En pause</button><button data-s="jamais">Jamais activé</button></div>
+      <div class="toggle" data-v="R2"><button class="on" data-s="card">En attente</button><button data-s="solde">Solde sous le maximum</button><button data-s="vide">Rien en attente · avec historique</button><button data-s="rien">Rien en attente · sans historique</button><button data-s="pause">En pause</button><button data-s="jamais">Jamais activé</button></div>
       <div id="R2"></div>
     </div>
     <aside class="why-col">
       <h2>Ce qu'on a fait, et pourquoi</h2>
-      <ul><li><b>Le collectif d'abord</b> : la ligne communauté en haut rappelle qu'on n'est pas seul, d'où le partage des bricks.</li><li><b>Les cartes en attente reprennent la DA de la card et de la fiche</b> : le compte à rebours au-dessus de la carte comme aujourd'hui, puis « Refuser » et « Confirmer 5 🧱 (50 €) ».</li><li><b>« Répartition équitable » devient un nom qu'on retient</b> : une icône balance et une ligne courte sur la carte (le nombre de bricks est déjà dans le bouton), une seule définition en bottom sheet, et la même icône partout où le montant a été ajusté.</li><li><b>Des bricks partout, et « Maximum par projet »</b> au lieu de « Montant » : on comprend que c'est un plafond.</li><li><b>Vos derniers investissements</b> : vos bricks et la date d'investissement, comme un historique.</li><li><b>Rien en attente, un seul état</b> : avec historique, on montre ses derniers investissements ; sans historique, l'activité de la communauté prend leur place. Même section « En attente de confirmation ». L'état vide est une simple ligne d'info, sans encart, car il n'appelle aucune action. Le conseil devient une carte courte et cliquable, à part, qui mène aux critères.</li><li><b>La ligne communauté explique le partage</b> : « Vous investissez à plusieurs », en 3 étapes, jusqu'à la répartition équitable.</li><li><b>Chaque état a son rôle</b> : sans historique (on montre que la feature tourne), en pause (réactiver en 1 clic), jamais activé (une histoire en 4 étapes, de la réassurance et un bouton toujours visible).</li><li><b>Les bottom sheets d'info sont réécrites</b> : plus courtes, « libérées pour d'autres investisseurs ».</li><li><b>Un seul bandeau à la fois, par ordre d'urgence, toujours sous la ligne communauté</b> : le solde insuffisant passe avant l'annonce du nouveau délai. Aujourd'hui, trois encarts s'empilent avant le contenu.</li><li><b>Solde insuffisant</b> : un encart orange clair dit combien il manque (« Il manque 70 € sur votre solde Bricks »), avec « Ajouter de l'argent ». Sur chaque carte, « Il manque 30 € sur votre solde · Ajouter » ; le bouton « Confirmer » ne change pas. Le tag « Solde insuffisant » reste sur les critères.</li><li><b>Le virement automatique n'a plus son propre bandeau</b> : solde insuffisant, c'est un lien dans l'encart ; solde suffisant, c'est un conseil dans la section « Conseils ». Pour ceux qui n'ont jamais activé, une ligne dans « Investissez en toute sérénité ».</li><li><b>Les conseils sortent de « En attente de confirmation »</b> : « Recevez des bricks plus souvent » et le virement automatique sont regroupés dans une section « Conseils », juste sous les attentes.</li><li><b>Le nouveau délai est une annonce temporaire</b> : un bandeau gris qu'on peut fermer, en haut de tous les états des utilisateurs déjà actifs, pendant quelques semaines. Seul le solde insuffisant passe devant. Jamais en « Jamais activé » : un nouvel utilisateur n'a pas de changement à comprendre.</li></ul>
+      <ul><li><b>Le collectif d'abord</b> : la ligne communauté en haut rappelle qu'on n'est pas seul, d'où le partage des bricks.</li><li><b>Les cartes en attente reprennent la DA de la card et de la fiche</b> : le compte à rebours au-dessus de la carte comme aujourd'hui, puis « Refuser » et « Confirmer 5 🧱 (50 €) ».</li><li><b>« Répartition équitable » devient un nom qu'on retient</b> : une icône balance et une ligne courte sur la carte (le nombre de bricks est déjà dans le bouton), une seule définition en bottom sheet, et la même icône partout où le montant a été ajusté.</li><li><b>Des bricks partout, et « Maximum par projet »</b> au lieu de « Montant » : on comprend que c'est un plafond.</li><li><b>Vos derniers investissements</b> : vos bricks et la date d'investissement, comme un historique.</li><li><b>Rien en attente, un seul état</b> : avec historique, on montre ses derniers investissements ; sans historique, l'activité de la communauté prend leur place. Même section « En attente de confirmation ». L'état vide est une simple ligne d'info, sans encart, car il n'appelle aucune action. Le conseil devient une carte courte et cliquable, à part, qui mène aux critères.</li><li><b>La ligne communauté explique le partage</b> : « Vous investissez à plusieurs », en 3 étapes, jusqu'à la répartition équitable.</li><li><b>Chaque état a son rôle</b> : sans historique (on montre que la feature tourne), en pause (réactiver en 1 clic), jamais activé (une histoire en 4 étapes, de la réassurance et un bouton toujours visible).</li><li><b>Les bottom sheets d'info sont réécrites</b> : plus courtes, « libérées pour d'autres investisseurs ».</li><li><b>Un seul bandeau à la fois, par ordre d'urgence, toujours sous la ligne communauté</b> : le solde insuffisant passe avant l'annonce du nouveau délai. Aujourd'hui, trois encarts s'empilent avant le contenu.</li><li><b>Solde sous le maximum par projet</b> : un encart orange clair compare le solde au maximum (« Solde : 20 € · maximum par projet : 50 € ») et dit combien ajouter pour recevoir le maximum au prochain projet, avec « Ajouter de l'argent ». Aujourd'hui, rien n'est attribué si le solde ne suffit pas et un ajout ne complète pas une attribution passée : il rend éligible au tour suivant.</li><li><b>Le virement automatique n'a plus son propre bandeau</b> : solde insuffisant, « Ajouter de l'argent » suffit, il ouvre le RIB Bricks qui sert aussi au virement récurrent ; solde suffisant, une carte « Programmez un virement récurrent » avec « Voir comment faire », dans la section « Ne manquez aucun projet ». Pour ceux qui n'ont jamais activé, une ligne dans « Investissez en toute sérénité ».</li><li><b>Les conseils sortent de « En attente de confirmation »</b> : « Recevez des bricks plus souvent » et le virement automatique sont regroupés dans une section « Ne manquez aucun projet », juste sous les attentes. On ne dit pas quel critère changer : conseiller une configuration reste délicat en finance.</li><li><b>Le nouveau délai est une annonce temporaire</b> : un bandeau gris qu'on peut fermer, en haut de tous les états des utilisateurs déjà actifs, pendant quelques semaines. Seul le solde insuffisant passe devant. Jamais en « Jamais activé » : un nouvel utilisateur n'a pas de changement à comprendre.</li></ul>
     </aside>
   </div>
 
@@ -538,7 +552,7 @@
     </div>
     <aside class="why-col">
       <h2>Ce qu'on a fait, et pourquoi</h2>
-      <ul><li><b>On prévient avant de couper</b> : un push après la 2e expiration laisse une chance de réagir.</li><li><b>Une pause, pas une désactivation</b> : critères et historique conservés, on réactive en un clic depuis le push, l'email ou l'écran.</li><li><b>On dit pourquoi, sans reproche</b> : « vous n'avez pas confirmé vos bricks sur vos 3 derniers projets », avec la liste des projets concernés.</li><li><b>On rassure sur l'argent</b> : « Rien n'est perdu », le solde n'a pas été débité.</li><li><b>Le collectif justifie la pause</b> : les bricks non confirmées reviennent à d'autres investisseurs.</li><li><b>On traite la cause</b> : lien pour activer les notifications, souvent à l'origine des oublis.</li><li><b>L'email porte le message</b> : si les push sont désactivés, c'est le seul canal qui arrive.</li></ul>
+      <ul><li><b>On prévient avant de couper</b> : un push après la 2e expiration laisse une chance de réagir.</li><li><b>Une pause, pas une désactivation</b> : critères et historique conservés, on réactive en un clic depuis le push, l'email ou l'écran.</li><li><b>On dit pourquoi, sans reproche</b> : « vous n'avez pas confirmé vos bricks sur vos 3 derniers projets », avec la liste des projets concernés.</li><li><b>On rassure sur l'argent</b> : « Rien n'est perdu », le solde n'a pas été débité.</li><li><b>Le collectif justifie la pause</b> : les bricks non confirmées reviennent à d'autres investisseurs.</li><li><b>L'email porte le message</b> : si les push sont désactivés, c'est le seul canal qui arrive.</li></ul>
     </aside>
   </div>
 
@@ -578,7 +592,7 @@
     </div>
     <aside class="why-col">
       <h2>Ce qu'on a fait, et pourquoi</h2>
-      <ul><li><b>Le panneau de droite joue le rôle du footer mobile</b> : la collecte en haut, puis l'encart de vos bricks, puis une seule action.</li><li><b>L'étiquette « 1 🧱 10 € investis sur ce projet » au-dessus du titre est supprimée</b> : vos bricks sont dans l'encart du panneau, à côté de l'action.</li><li><b>Avant l'ouverture</b> : « 5 000 000 € à collecter », le bandeau « Invest auto · Expire dans… ⓘ », puis « Refuser » et « Confirmer 5 🧱 (50 €) ». Le calendrier et « Ouverture le 5 novembre à 12h30 » passent à côté du titre.</li><li><b>Refusé et confirmé</b> : l'encart gris ou vert, puis « Rappel d'ouverture » en orange.</li><li><b>Pendant la collecte</b> : l'encart vert « 8 bricks investies sur ce projet » avec l'icône invest auto, puis « Réinvestir ».</li><li><b>Collecte terminée</b> : le bandeau vert, puis « Suivre le projet ». En prod, on garde aujourd'hui un « Investir maintenant » grisé qui ne mène nulle part.</li><li><b>Le refus et le délai passent par une modale centrée</b>, la version desktop de la bottom sheet, avec le même texte.</li></ul>
+      <ul><li><b>Le panneau de droite joue le rôle du footer mobile</b> : la collecte en haut, puis l'encart de vos bricks, puis une seule action.</li><li><b>L'étiquette « 1 🧱 10 € investis sur ce projet » au-dessus du titre est supprimée</b> : vos bricks sont dans l'encart du panneau, à côté de l'action.</li><li><b>Avant l'ouverture</b> : « 5 000 000 € à collecter », le bandeau « Invest auto · Expire dans… ⓘ », puis « Refuser » et « Confirmer 5 🧱 (50 €) ». Le calendrier et « Ouverture le 5 novembre à 12h30 » passent à côté du titre.</li><li><b>Refusé et confirmé</b> : l'encart gris ou vert sur une ligne, puis « Rappel d'ouverture » en orange.</li><li><b>Pendant la collecte</b> : l'encart vert sur une ligne, « 8 🧱 investies (soit 80 €), dont ⚡5 » et le chevron : l'icône remplace « bricks » pour tenir sur une ligne, puis « Réinvestir ».</li><li><b>Collecte terminée</b> : le bandeau vert, puis « Suivre le projet ». En prod, on garde aujourd'hui un « Investir maintenant » grisé qui ne mène nulle part.</li><li><b>Le refus et le délai passent par une modale centrée</b>, la version desktop de la bottom sheet, avec le même texte.</li></ul>
     </aside>
   </div>
 
@@ -592,12 +606,12 @@
     </div>
     <div class="dcol">
       <h2>Proposition</h2>
-      <div class="toggle" data-v="DR"><button class="on" data-s="card">En attente</button><button data-s="solde">Solde insuffisant</button><button data-s="vide">Rien en attente · avec historique</button><button data-s="rien">Rien en attente · sans historique</button><button data-s="pause">En pause</button><button data-s="jamais">Jamais activé</button></div>
+      <div class="toggle" data-v="DR"><button class="on" data-s="card">En attente</button><button data-s="solde">Solde sous le maximum</button><button data-s="vide">Rien en attente · avec historique</button><button data-s="rien">Rien en attente · sans historique</button><button data-s="pause">En pause</button><button data-s="jamais">Jamais activé</button></div>
       <div id="DR"></div>
     </div>
     <aside class="why-col">
       <h2>Ce qu'on a fait, et pourquoi</h2>
-      <ul><li><b>Les mêmes blocs que la proposition mobile</b>, dans la colonne centrale de la prod : ligne communauté, en attente de confirmation, derniers investissements, critères.</li><li><b>Les cartes en attente côte à côte</b> : le compte à rebours au-dessus, puis « Refuser » et « Confirmer 5 🧱 (50 €) ».</li><li><b>Les critères sur une ligne</b> : « Maximum par projet » en bricks, limite mensuelle, rendement, horizon.</li><li><b>« Jamais activé »</b> : un carrousel, une étape à la fois en pleine largeur, le texte à gauche et l'illustration à droite, avec des flèches et des points.</li><li><b>Les bandeaux suivent la même règle qu'en mobile</b> : un seul à la fois, le solde insuffisant en ligne avec son bouton et le lien vers le virement automatique.</li><li><b>Les bottom sheets deviennent des modales centrées</b>, avec le même texte.</li></ul>
+      <ul><li><b>Les mêmes blocs que la proposition mobile</b>, dans la colonne centrale de la prod : ligne communauté, en attente de confirmation, derniers investissements, critères.</li><li><b>Les cartes en attente côte à côte</b> : le compte à rebours au-dessus, puis « Refuser » et « Confirmer 5 🧱 (50 €) ».</li><li><b>Les critères sur une ligne</b> : « Maximum par projet » en bricks, limite mensuelle, rendement, horizon.</li><li><b>« Jamais activé »</b> : un carrousel, une étape à la fois en pleine largeur, le texte à gauche et l'illustration à droite, avec des flèches et des points.</li><li><b>Les bandeaux suivent la même règle qu'en mobile</b> : un seul à la fois, le solde insuffisant en ligne avec son bouton « Ajouter de l'argent ».</li><li><b>Les bottom sheets deviennent des modales centrées</b>, avec le même texte.</li></ul>
     </aside>
   </div>
 
@@ -622,15 +636,14 @@ const tag = (s, extra='') => `<div class="chip">${ICON_AUTO('#EC5223',14)}<span>
 
 const cardHead = `<div class="row"><div><div class="name">Immeuble Gare - Nevers</div><div class="date">Le 5 novembre à 12h30</div></div><div class="cal">${ICON_CAL}</div></div>`;
 const SIG_C = {orange:'#EC5223', green:'#08744D', neutral:'#76818B'};
-const SIG = tone => `<div class="strip-k" style="color:${SIG_C[tone]}">${ICON_AUTO(SIG_C[tone],14)}<span>Investissement automatique</span></div>`;
-const iaBox = (tone, title, sub='', right='') => `<div class="ia-box ${tone==='orange'?'':tone}"><div style="min-width:0">${SIG(tone)}<div class="strip-t">${title}</div>${sub?`<div class="strip-s">${sub}</div>`:''}</div>${right}</div>`;
+const iaBox = (tone, title, sub='', right='') => `<div class="ia-box ia-1 ${tone==='orange'?'':tone}"><div class="ia-l">${ICON_AUTO(tone==='neutral'?SIG_C.neutral:SIG_C.orange,16)}<div class="strip-t">${title}</div></div>${right}</div>`;
 const cdLine = (t='3j, 12h et 24min', go='F3c:delai') => `<div class="cd-a"><b>${ICON_AUTO('#EC5223',13)}Invest auto</b><span>·</span><span class="cd-t">Expire dans ${t}<span class="cd-i" data-go="${go}">${ICON_INFO('#13273E',14)}</span></span></div>`;
 const chipAuto = `<div class="chip">${ICON_AUTO('#EC5223',14)}<span>Investissement automatique</span></div>`;
 function cardB(s){
   const strip = s==='todo'
     ? `<div class="card-ia">${cdLine('1j et 34min')}
       <div class="card-acts"><button class="btn btn-ghost" data-go="F3c:sheet">Refuser</button><button class="btn btn-primary" data-go="F3c:done">Confirmer 5 🧱 (50 €)</button></div></div>`
-    : `<div class="card-ia">${iaBox('green', '5 bricks confirmées <span class="a-sub">(soit 50 €)</span>', '', ICON_CHECK('#08744D',20))}</div>`;
+    : `<div class="card-ia">${iaBox('green', '5 🧱 investies <span class="a-sub">(soit 50 €)</span>', '', ICON_CHECK('#08744D',18))}</div>`;
   return `<div class="card" data-go="F3c:${s==='done'?'done':'todo'}"><div class="img">${countdown}<div class="patch"></div></div>
     <div class="body">${cardHead}${bricksers}</div>${strip}</div>`;
 }
@@ -659,7 +672,7 @@ const ficheContent = `
   <div class="f-score">Score Bricks : <span>Équilibré</span> ›</div>`;
 
 const sheet = `<div class="dim"></div><div class="bs"><div class="handle"></div>
-  <h3>Refuser ces 5 bricks <span class="a-sub" style="font-size:16px">(soit 50 €)</span></h3>
+  <h3>Refuser ces 5 🧱 <span class="a-sub" style="font-size:16px">(soit 50 €)</span></h3>
   <p>Elles seront libérées pour d'autres investisseurs.<br><br>Vous pourrez toujours investir sur ce projet à l'ouverture de la collecte, dans la limite des bricks disponibles.</p>
   <div class="acts"><button class="btn btn-primary" data-go="F3c:refused">Refuser</button><button class="btn btn-ghost" data-go="F3c:todo">Annuler</button></div></div>`;
 
@@ -672,7 +685,7 @@ const ICON_CAL_SM = ICON_CAL.replace('width="20" height="20"','width="18" height
 
 const FOOTER = {
   todo: `<div class="f-bar">
-    ${summary(ICON_AUTO('#EC5223',18), '', '5 bricks attribuées <span class="a-sub">(soit 50 €)</span>', 'par votre investissement automatique', refuseLink)}
+    ${summary(ICON_AUTO('#EC5223',18), '', '5 🧱 attribuées <span class="a-sub">(soit 50 €)</span>', 'par votre investissement automatique', refuseLink)}
     ${confirmBtn('width:100%')}
   </div>`,
   refused: `<div class="f-bar">
@@ -680,7 +693,7 @@ const FOOTER = {
     <button class="btn btn-outline" style="height:54px;width:100%">Me le rappeler</button>
   </div>`,
   done: `<div class="f-bar">
-    ${summary(ICON_CHECK('#08744D',18), 'green', '5 bricks confirmées <span class="a-sub">(soit 50 €)</span>', RETRACT_SHORT)}
+    ${summary(ICON_CHECK('#08744D',18), 'green', '5 🧱 investies <span class="a-sub">(soit 50 €)</span>', RETRACT_SHORT)}
     <div class="f-row">
       <div><div class="muted">Ouverture de la collecte</div><div class="amt" style="margin-top:2px">Jeu. 5 nov. à 12 h 30</div></div>
       <button class="btn btn-disabled" style="height:54px;padding:0 24px">Réinvestir</button>
@@ -708,37 +721,48 @@ const FOOTER_C = {...FOOTER,
   get sheet(){ return this.todo; },
   get delai(){ return this.todo; },
   refused: `<div class="f-bar">
-    ${iaBox('neutral', '5 bricks refusées <span class="a-sub">(soit 50 €)</span>')}
     ${preOpen}
   </div>`,
   done: `<div class="f-bar">
-    ${iaBox('green', '5 bricks confirmées <span class="a-sub">(soit 50 €)</span>', '', ICON_CHECK('#08744D',20))}
+    ${iaBox('green', '5 🧱 investies <span class="a-sub">(soit 50 €)</span>', '', ICON_CHECK('#08744D',18))}
     ${preOpen}
   </div>`,
 };
-const holdBox = (title, sub='') => `<div class="ia-box green"><div style="min-width:0"><div class="strip-t">${title}</div>${sub?`<div class="strip-s" style="display:flex;align-items:center;gap:4px">${ICON_AUTO('#EC5223',13)} ${sub}</div>`:''}</div>${ICON_CHEV('#08744D',20)}</div>`;
+const holdBox = (title, auto=false, chev=true) => `<div class="ia-box ia-1 green"><div class="ia-l">${auto?ICON_AUTO(SIG_C.orange,16):''}<div class="strip-t">${title}</div></div>${chev?ICON_CHEV('#08744D',20):''}</div>`;
 FOOTER_C.open = FOOTER.open.replace('<div class="f-bar">', `<div class="f-bar">
-    ${holdBox('5 bricks investies sur ce projet <span class="a-sub">(soit 50 €)</span>', "via l'investissement automatique")}`);
+    ${holdBox('5 🧱 investies <span class="a-sub">(soit 50 €)</span>', true)}`);
 FOOTER_C.reinvManual = FOOTER.open.replace('<div class="f-bar">', `<div class="f-bar">
-    ${holdBox('8 bricks investies sur ce projet <span class="a-sub">(soit 80 €)</span>')}`);
+    ${holdBox('3 🧱 investies <span class="a-sub">(soit 30 €)</span>')}`);
 FOOTER_C.reinv = FOOTER.open.replace('<div class="f-bar">', `<div class="f-bar">
-    ${holdBox('8 bricks investies sur ce projet <span class="a-sub">(soit 80 €)</span>', "dont 5 via l'investissement automatique")}`);
+    ${holdBox(`8 🧱 investies <span class="a-sub">(soit 80 €), dont <span class="a-ic">${ICON_AUTO(SIG_C.orange,12)}</span>5</span>`)}`);
 const closedStats = `<div style="flex:1;min-width:0"><div class="f-row" style="gap:8px"><span class="amt">774 000 €</span><span style="display:flex;align-items:center;gap:8px"><span class="muted">100 %</span><span class="chev-c">${ICON_UP}</span></span></div><div class="prog" style="max-width:none;margin-top:6px"><i style="width:100%;background:var(--green-600)"></i></div></div>`;
 const closedFooter = line => `<div class="f-bar">
-    <div class="cd-a cd-green">${ICON_CHECK('#08744D',14)}${line}</div>
+    ${line}
     <div class="f-row">${closedStats}
       <button class="btn btn-primary" style="height:54px;padding:0 18px;white-space:nowrap">Suivre le projet</button>
     </div>
   </div>`;
 const AUTO_TAG = `<b>${ICON_AUTO('#EC5223',13)}Invest auto</b>`;
-FOOTER_C.closed = closedFooter(`<span class="cd-t"><b style="color:var(--navy)">8 bricks</b> (soit 80 €), dont 5 via</span>${AUTO_TAG}`);
-FOOTER_C.closedAuto = closedFooter(`<span class="cd-t"><b style="color:var(--navy)">5 bricks</b> (soit 50 €) via</span>${AUTO_TAG}`);
-FOOTER_C.closedManual = closedFooter(`<span class="cd-t"><b style="color:var(--navy)">3 bricks</b> (soit 30 €) investies sur ce projet</span>`);
+
+FOOTER_C.closed = closedFooter(holdBox(`8 🧱 investies <span class="a-sub">(soit 80 €), dont <span class="a-ic">${ICON_AUTO(SIG_C.orange,12)}</span>5</span>`, false, false));
+FOOTER_C.closedAuto = closedFooter(holdBox('5 🧱 investies <span class="a-sub">(soit 50 €)</span>', true, false));
+FOOTER_C.closedManual = closedFooter(holdBox('3 🧱 investies <span class="a-sub">(soit 30 €)</span>', false, false));
+
+const FICHE_MORE = `<div class="f-more"><h4>Le projet</h4><p>Acquisition d'une maison créole à Saint-Paul, rénovée puis revendue à l'unité. Travaux de 9 mois menés par un marchand de biens présent sur l'île depuis 12 ans.</p><h4>Le porteur de projet</h4><p>Société réunionnaise, 18 opérations réalisées dont 4 financées sur Bricks, toutes remboursées à l'échéance.</p><h4>Les garanties</h4><p>Hypothèque de premier rang à 150 % du montant collecté, caution personnelle du dirigeant.</p><h4>Le calendrier</h4><p>Ouverture de la collecte le 5 novembre, remboursement prévu en mai 2028.</p><h4>Les risques</h4><p>Retard de travaux, baisse des prix de revente, défaut du porteur de projet. Le capital n'est pas garanti.</p></div>`;
+document.addEventListener('scroll', e => {
+  const f = e.target;
+  if (!f.classList?.contains('scrolly')) return;
+  const y = f.scrollTop, last = +f.dataset.y || 0;
+  if (Math.abs(y - last) < 4) return;
+  f.classList.toggle('ia-hide', y > last && y > 20);
+  f.dataset.y = y;
+}, true);
 
 function fiche(s, F=FOOTER){
   const owned = '';
-  return `<div class="fiche"><div class="f-photo"><a class="f-back" data-go="B:${s==='done'||s==='open'||s==='reinv'||s.startsWith('closed')?'done':'todo'}" title="Retour au listing"></a></div>
-    <div class="f-body">${owned}${s.startsWith('closed') ? ficheContent.replace(bricksers, BRICKSERS_OPEN).replace('</div>', `</div><div class="date" style="text-align:center;margin:2px 0 4px;color:#08744D;display:flex;align-items:center;justify-content:center;gap:4px">${ICON_CHECK('#08744D',14)}Collecte terminée</div>`) : ['open','reinv','reinvManual'].includes(s) ? ficheContent.replace(bricksers, BRICKSERS_OPEN) : ['todo','sheet','delai','refused','done'].includes(s) ? ficheContent.replace('<div class="f-title">Maison Eperon Réunion</div>', `<div class="f-title" style="display:flex;align-items:center;justify-content:center;gap:10px">Maison Eperon Réunion<span class="cal" title="Ajouter à mon calendrier">${ICON_CAL}</span></div>`).replace('</div>', '</div><div class="date" style="text-align:center;margin:2px 0 4px">Ouverture le 5 novembre à 12h30</div>') : ficheContent}</div>${F[s]}${s==='sheet'?sheet:s==='delai'?NEW_DELAI:''}</div>`;
+  const scrolly = F===FOOTER_C && !['sheet','delai'].includes(s);
+  return `<div class="fiche${scrolly?' scrolly':''}"><div class="f-photo"><a class="f-back" data-go="B:${s.startsWith('done')||s==='open'||s==='reinv'||s.startsWith('closed')?'done':'todo'}" title="Retour au listing"></a></div>
+    <div class="f-body">${owned}${s.startsWith('closed') ? ficheContent.replace(bricksers, BRICKSERS_OPEN).replace('</div>', `</div><div class="date" style="text-align:center;margin:2px 0 4px;color:#08744D;display:flex;align-items:center;justify-content:center;gap:4px">${ICON_CHECK('#08744D',14)}Collecte terminée</div>`) : ['open','reinv','reinvManual'].includes(s) ? ficheContent.replace(bricksers, BRICKSERS_OPEN) : ['todo','sheet','delai','refused','done'].includes(s) ? ficheContent.replace('<div class="f-title">Maison Eperon Réunion</div>', `<div class="f-title" style="display:flex;align-items:center;justify-content:center;gap:10px">Maison Eperon Réunion<span class="cal" title="Ajouter à mon calendrier">${ICON_CAL}</span></div>`).replace('</div>', '</div><div class="date" style="text-align:center;margin:2px 0 4px">Ouverture le 5 novembre à 12h30</div>') : ficheContent}${scrolly?FICHE_MORE:''}</div>${F[s]}${s==='sheet'?sheet:s==='delai'?NEW_DELAI:''}</div>`;
 }
 
 const ICON_INFO = (c='#76818B',s=14)=>`<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="${c}" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>`;
@@ -765,10 +789,10 @@ const R_EXTRA = {
   R2: `<div class="note">${ICON_SCALE('#13273E',16)}<span><b>Répartition équitable appliquée</b></span><span data-go="R2:sheet" style="display:inline-flex;margin-left:auto;cursor:pointer">${ICON_INFO('#13273E',15)}</span></div>`,
 };
 const DEAL = [['Camille',3,'#BEF0C6'],['Léo',3,'#C5ECFD'],['Vous',2,'#FFD9A2'],['Inès',2,'#F9C9D4']];
-const dealIll = `<div class="fair-ex"><div class="fair-ex-h"><b>Exemple</b> : 10 bricks à distribuer, 4 investisseurs qui en veulent 5 chacun</div>
+const dealIll = `<div class="fair-ex"><div class="fair-ex-h"><b>Exemple</b> : 10 🧱 à distribuer, 4 investisseurs qui en veulent 5 chacun</div>
   <div class="fair-ex-g"><span></span><em>1er tour</em><em>2e tour</em><em>3e tour</em><em>Reçu</em>
   ${DEAL.map(([n,k,c])=>`<span class="fair-ex-n${n==='Vous'?' me':''}"><i style="background:${c}"></i>${n}</span>${[1,2,3].map(t=>`<em>${t<=k?'🧱':'<span class="fair-ex-0">–</span>'}</em>`).join('')}<em><b>${k}</b> sur 5</em>`).join('')}</div>
-  <div class="fair-ex-f">Au 3e tour, il ne reste que 2 bricks : la distribution s'arrête.</div></div>`;
+  <div class="fair-ex-f">Au 3e tour, il ne reste que 2 🧱 : la distribution s'arrête.</div></div>`;
 const whySheet = `<div class="dim"></div><div class="bs"><div class="handle"></div>
   <h3 style="display:flex;align-items:center;gap:8px">${ICON_SCALE('#EC5223',22)}Répartition équitable</h3>
   <p style="margin-bottom:16px">Comme dans un jeu de cartes, les bricks d'un projet sont distribuées une par une, à tour de rôle, entre les investisseurs dont les critères correspondent.<br><br>Quand il n'y a pas assez de bricks pour tout le monde, la distribution s'arrête en cours de route : vous pouvez en recevoir moins que votre maximum.</p>
@@ -786,7 +810,7 @@ const CHEV_R = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stro
 const scrTop = `<div class="scr-sb"><span>9:41</span><span>●●● 32</span></div>
   <div class="scr-hd"><span>←</span><span>Investissement automatique</span><span></span></div>`;
 const matchCard = () => `<div class="match"><span class="match-ic">${ICON_TREND.replace('width="14" height="14"','width="18" height="18"')}</span>
-  <div><span class="match-k">Conseil</span><b>Recevez des bricks plus souvent</b><p>Élargissez votre rendement minimum ou votre horizon.</p></div>${CHEV_R}</div>`;
+  <div><span class="match-k">Conseil</span><b>Recevez des bricks plus souvent</b><p>Modifiez vos critères pour correspondre à plus de projets.</p></div>${CHEV_R}</div>`;
 const quietEmpty = (t, d) => `<div class="quiet"><span class="quiet-ic">${ICON_CLOCK('#76818B',18)}</span><div><b>${t}</b><p>${d}</p></div></div>`;
 const emptyBlock = `<div><div class="h3s">En attente de confirmation</div>
   ${quietEmpty('Aucun investissement en attente', "Vous serez notifié dès qu'un nouveau projet correspond à vos critères.")}</div>`;
@@ -805,8 +829,8 @@ const memo3 = cs => `<span class="memo" style="display:flex">${cs.map(c=>`<span 
 const cStrip = `<div class="cstrip" data-go="R2:com"><span class="memo" style="display:flex">${AV.slice(0,3).map((c,i)=>`<span style="background:${c};margin-left:${i?-10:0}px"></span>`).join('')}</span><span><b>2 340 investisseurs</b> investissent automatiquement, comme vous</span>${CHEV_R}</div>`;
 const feedBlock = `<div><div class="crit-h"><div class="h3s">Vos derniers investissements</div><span class="why">Voir plus</span></div>
   <div class="feed">
-    <div data-go="F3c:open"><div class="th" style="background:url(img.png) center/cover"></div><div style="min-width:0"><div class="t">Immeuble Gare - Nevers</div><div class="m">${ICON_CAL_XS} Investi le 28/10/2026</div></div><div class="you">Vous<b>5 🧱</b></div></div>
-    <div data-go="F3c:open"><div class="th" style="background:url(fiche.png) center 18%/260% auto"></div><div style="min-width:0"><div class="t">Maison Eperon Réunion</div><div class="m">${ICON_CAL_XS} Investi le 21/10/2026</div></div><div class="you">Vous<b style="display:flex;align-items:center;gap:4px;justify-content:flex-end">${ICON_SCALE('#EC5223',14)}4 🧱</b></div></div>
+    <div data-go="F3c:open"><div class="th" style="background:url(img.png) center/cover"></div><div style="min-width:0"><div class="t">Immeuble Gare - Nevers</div><div class="m">${ICON_CAL_XS} Confirmé le 28/10/2026</div></div><div class="you">Vous<b>5 🧱</b></div></div>
+    <div data-go="F3c:open"><div class="th" style="background:url(fiche.png) center 18%/260% auto"></div><div style="min-width:0"><div class="t">Maison Eperon Réunion</div><div class="m">${ICON_CAL_XS} Confirmé le 21/10/2026</div></div><div class="you">Vous<b style="display:flex;align-items:center;gap:4px;justify-content:flex-end">${ICON_SCALE('#EC5223',14)}4 🧱</b></div></div>
   </div></div>`;
 const pendingBlock = `<div><div class="h3s">En attente de confirmation</div>${cardSainte}
   ${pCard({deadline:'Expire dans 3j, 12h et 24min.', title:'Immeuble Dax', img:'-36px -632px', rate:'10,00 %', years:'3 ans', bricks:4, extra:R_EXTRA.R2})}</div>`;
@@ -876,7 +900,7 @@ const storyBlock = `<div class="bnf-band"><div class="h3s">Comment ça marche</d
 const SAFE = [
   ['Vous validez chaque investissement', "Rien n'est signé sans vous. Sans réponse 1 h avant l'ouverture, les bricks sont remises dans la collecte."],
   ['Vous investissez uniquement sur les nouveaux projets', 'Les projets déjà en collecte ou prochainement ne sont pas concernés.'],
-  ['Vous payez avec votre solde Bricks, sans frais en plus', 'Jamais votre carte bancaire. Solde insuffisant ? Second essai le lendemain à 16 h. Programmez un virement automatique depuis votre banque pour ne jamais en manquer.'],
+  ['Vous payez avec votre solde Bricks, sans frais en plus', 'Jamais votre carte bancaire. Solde insuffisant ? Second essai le lendemain à 16 h. Programmez un virement récurrent depuis votre banque pour ne jamais en manquer.'],
   ['Vous gardez 4 jours pour vous rétracter', "Après l'achat, vous pouvez annuler et être remboursé."],
 ];
 const safeBlock = `<div><div class="h3s">Investissez en toute sérénité</div><div class="ok-list">
@@ -904,20 +928,18 @@ const comSheet = `<div class="dim"></div><div class="bs"><div class="handle"></d
   <div class="acts"><button class="btn btn-primary">J'ai compris</button></div></div>`;
 const NEW_SHEETS = {delai:NEW_DELAI, sheet:whySheet, com:comSheet};
 const tipVir = () => `<div class="match"><span class="match-ic">${ICON_WALLET}</span>
-  <div><span class="match-k">Conseil</span><b>Gardez votre solde approvisionné</b><p>Programmez un virement automatique depuis votre banque pour ne jamais manquer un investissement.</p></div>${CHEV_R}</div>`;
-const tipsBlock = (...t) => `<div><div class="h3s">Conseils</div><div class="tips">${t.join('').replaceAll('<span class="match-k">Conseil</span>','')}</div></div>`;
+  <div><span class="match-k">Conseil</span><b>Programmez un virement récurrent</b><p>Votre solde se recharge chaque mois depuis votre banque.</p><span class="lnk">Voir comment faire</span></div>${CHEV_R}</div>`;
+const tipsBlock = (...t) => `<div><div class="h3s">Ne manquez aucun projet</div><div class="tips">${t.join('').replaceAll('<span class="match-k">Conseil</span>','')}</div></div>`;
 const ICON_WALLET = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#EC5223" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h14a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a1 1 0 0 1-1-1z"/><path d="M4 7V6a2 2 0 0 1 2-2h10v3"/><path d="M16 13.5h.01"/></svg>`;
-const soldeAlert = `<div class="alert-o"><div class="alert-h"><span class="alert-ic">${ICON_WALLET}</span><div><b>Il manque 70 € sur votre solde Bricks</b><p>pour confirmer vos 2 investissements en attente. Solde actuel : 20 €.</p></div></div>
-  <div class="alert-a"><button class="btn btn-primary">Ajouter de l'argent</button><a class="alert-l">Programmer un virement automatique</a></div></div>`;
+const soldeAlert = `<div class="alert-o"><div class="alert-h"><span class="alert-ic">${ICON_WALLET}</span><div><b>Votre solde est inférieur à votre maximum par projet</b><p>Solde : 20 € · maximum par projet : 50 €. Ajoutez au moins 30 € pour recevoir jusqu'à 5 🧱 (soit 50 €) sur le prochain projet.</p></div></div>
+  <div class="alert-a"><button class="btn btn-primary">Ajouter de l'argent</button></div></div>`;
 const delaiNews = `<div class="alert-i"><span style="display:inline-flex;margin-top:1px">${ICON_INFO('#13273E',16)}</span><div style="flex:1"><b>Le délai de confirmation change</b><p>Vous confirmez désormais vos bricks jusqu'à 1 h avant l'ouverture de la collecte. <u data-go="R2:delai">En savoir plus</u></p></div><span class="x" onclick="this.closest('.alert-i').remove()" title="Fermer">×</span></div>`;
-const lowNote = n => `<div class="note note-o">${ICON_WALLET.replace('width="18" height="18"','width="16" height="16"')}<span>Il manque <b>${n} €</b> sur votre solde</span><span class="lnk" style="margin-left:auto">Ajouter</span></div>`;
-const pendingLow = pendingBlock.replace('<div class="card-acts"><button class="btn btn-ghost" data-go="F3c:sheet">Refuser</button><button class="btn btn-primary" data-go="F3c:done">Confirmer 5', lowNote(30)+'<div class="card-acts"><button class="btn btn-ghost" data-go="F3c:sheet">Refuser</button><button class="btn btn-primary" data-go="F3c:done">Confirmer 5').replace('<div class="card-acts"><button class="btn btn-ghost" data-go="F3c:sheet">Refuser</button><button class="btn btn-primary" data-go="F3c:done">Confirmer 4', lowNote(20)+'<div class="card-acts"><button class="btn btn-ghost" data-go="F3c:sheet">Refuser</button><button class="btn btn-primary" data-go="F3c:done">Confirmer 4');
 const iaScreen = st => {
   const sh = NEW_SHEETS[st]||'';
   if (st==='jamais') return `<div class="scr-wrap scroll">${screen(`${cStrip.replace(' investissent automatiquement, comme vous',' investissent déjà automatiquement').replace(' data-go="R2:com"','')}${heroLite}${storyBlock}${safeBlock}${commFeed}<div class="links">${['Questions fréquentes'].map(t=>`<div>${t}${CHEV_R}</div>`).join('')}</div>`)}${stickyCta}</div>`;
   if (st==='pause') return `<div class="scr-wrap">${screen(`${cStrip.replace(', comme vous','').replace(' data-go="R2:com"','')}${delaiNews}${pauseBanner}${feedBlock}${critBlock(false,true,true)}${linksBlock()}`)}</div>`;
   if (st==='rien') return `<div class="scr-wrap">${screen(`${cStrip}${delaiNews}${firstBlock}${tipsBlock(matchCard(),tipVir())}${commFeed}${critBlock(false,false)}<div class="links">${['Historique des configurations','Questions fréquentes'].map(t=>`<div>${t}${CHEV_R}</div>`).join('')}</div>`)}</div>`;
-  if (st==='solde') return `<div class="scr-wrap">${screen(`${cStrip}${soldeAlert}${pendingLow}${feedBlock}${critBlock(false,true,false,true)}${linksBlock()}`)}</div>`;
+  if (st==='solde') return `<div class="scr-wrap">${screen(`${cStrip}${soldeAlert}${emptyBlock}${feedBlock}${critBlock()}${linksBlock()}`)}</div>`;
   return `<div class="scr-wrap${sh?' clip':''}">${screen(`${cStrip}${delaiNews}${st==='vide'?emptyBlock:pendingBlock}${st==='vide'?tipsBlock(matchCard(),tipVir()):tipsBlock(tipVir())}${feedBlock}${critBlock()}${linksBlock()}`)}${sh}</div>`;
 };
 const refIa = st => {
@@ -937,7 +959,7 @@ const pushScreen = st => `<div class="lock">
   <div class="push"><div class="push-h">${BRICKS_LOGO}<span>BRICKS</span><em>maintenant</em></div><b>${PUSH[st][0]}</b><p>${PUSH[st][1]}</p></div>
   <div class="lock-hint">Au clic : ${st==='warn'?'écran Investissements automatiques, bricks en attente':'écran « Mis en pause par Bricks »'}</div>
 </div>`;
-const EXPIRED = [['Immeuble Dax','4 bricks','28/10'],['Maison Eperon Réunion','5 bricks','03/11'],['Rénovation maison Sainte Marie La Hume','5 bricks','11/11']];
+const EXPIRED = [['Immeuble Dax','4 🧱','28/10'],['Maison Eperon Réunion','5 🧱','03/11'],['Rénovation maison Sainte Marie La Hume','5 🧱','11/11']];
 const mailBlock = `<div class="mail">
   <div class="mail-meta"><div><span>De</span> Bricks &lt;noreply@bricks.co&gt;</div><div><span>Objet</span> <b>Votre investissement automatique est en pause</b></div></div>
   <div class="mail-bd">
@@ -948,14 +970,13 @@ const mailBlock = `<div class="mail">
     <div class="mail-box"><b>Rien n'est perdu</b><span>Vos critères sont conservés et votre solde n'a pas été débité.</span></div>
     <div class="mail-list"><div class="mail-lh">Projets non confirmés</div>${EXPIRED.map(([p,b,d])=>`<div><span>${p}</span><em>${b} · expiré le ${d}</em></div>`).join('')}</div>
     <button class="btn btn-grad" style="width:100%;height:46px">Réactiver mon investissement automatique</button>
-    <p class="mail-s">Pour ne plus manquer un projet, activez les notifications de l'app Bricks. Vous pouvez aussi ajuster vos critères à tout moment.</p>
+    <p class="mail-s">Vous pouvez ajuster vos critères à tout moment.</p>
     <div class="mail-ft">Vous recevez cet email car vous avez activé l'investissement automatique sur Bricks.</div>
   </div></div>`;
 const autoPauseBanner = `<div class="pause-w"><div class="pause"><div class="pause-ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="#13273E"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg></div>
   <div style="flex:1"><b>Investissement automatique en pause</b><p>Vous n'avez pas confirmé vos bricks sur vos 3 derniers projets. Vos critères sont conservés.</p></div></div>
-  <button class="btn btn-grad" style="width:100%;height:44px;margin-top:12px">Réactiver</button>
-  <div class="pause-lk">Activer les notifications pour ne plus rien manquer</div></div>`;
-const expiredBlock = `<div><div class="h3s">Projets non confirmés</div><div class="feed">${EXPIRED.map(([p,b,d])=>`<div><div style="min-width:0"><div class="t">${p}</div><div class="m">Expiré le ${d} · bricks libérées</div></div><div class="you">Vous<b>${b.replace(' bricks',' 🧱')}</b></div></div>`).join('')}</div></div>`;
+  <button class="btn btn-grad" style="width:100%;height:44px;margin-top:12px">Réactiver</button></div>`;
+const expiredBlock = `<div><div class="h3s">Projets non confirmés</div><div class="feed">${EXPIRED.map(([p,b,d])=>`<div><div style="min-width:0"><div class="t">${p}</div><div class="m">Expiré le ${d} · bricks libérées</div></div><div class="you"><b>${b.replace(' bricks',' 🧱')}</b></div></div>`).join('')}</div></div>`;
 const autoPauseScreen = () => `<div class="scr-wrap">${screen(`${cStrip.replace(', comme vous','').replace(' data-go="R2:com"','')}${autoPauseBanner}${expiredBlock}${critBlock(false,true,true)}${linksBlock()}`)}</div>`;
 const state={BO:'auto',B:'todo',F3c:'todo',R0:'card',R2:'card',P:'warn'};
 function render(){
@@ -1014,7 +1035,7 @@ const dCardOpen = s => `<div class="dc" data-go="DF:${{auto:'open',reinv:'reinv'
 const dCardSoon = s => `<div class="dc" data-go="DF:${s==='done'?'done':'todo'}"><div style="zoom:.782"><div class="img">${countdown}<div class="patch"></div></div></div>
   <div class="dc-b"><div class="row"><div><div class="name">Immeuble Gare - Nevers</div><div class="date">Le 5 novembre à 12h30</div></div><div class="cal">${ICON_CAL}</div></div>${bricksers.replace('ont déjà investi en automatique','ont investi en auto')}
   ${s==='todo' ? `${cdLine('1j et 34min','DF:delai')}<div class="card-acts"><button class="btn btn-ghost" data-go="DF:sheet">Refuser</button><button class="btn btn-primary" data-go="DF:done">Confirmer 5 🧱 (50 €)</button></div>`
-    : iaBox('green','5 bricks confirmées <span class="a-sub">(soit 50 €)</span>','',ICON_CHECK('#08744D',20))}</div></div>`;
+    : iaBox('green','5 🧱 investies <span class="a-sub">(soit 50 €)</span>')}</div></div>`;
 const dkListing = () => `<div class="dk">${dkNav()}<div class="dk-seg"><div><span class="on">En cours</span><span>Prochainement</span><span>Passés</span></div></div>
   <div class="dk-sec"><div class="dk-h">Collecte en cours <span class="count o">1</span></div><div class="dk-grid">${dCardOpen(state.DBO)}</div></div>
   <div class="dk-sec white"><div class="dk-h">Prochainement <span class="count">2</span></div><div class="dk-grid">${dCardSoon('todo')}${dCardSoon('done')}</div></div></div>`;
@@ -1027,14 +1048,14 @@ const dpStats = s => s.startsWith('closed')
   : `<div class="dp-amt"><b>3 890 490 €</b><span>/ 5 000 000 €</span></div><div class="prog"><i style="width:78%"></i></div><div class="dp-st"><b>77,81 % financé</b><span>${ICON_AUTO('#76818B',12)} 27,59 % financé automatiquement</span><span style="margin-top:4px">${memo3(AV.slice(0,3))} <b style="font-size:12px">26 357</b> investisseurs</span></div>`;
 const dpAct = s => ({
   todo: `${cdLine('3j, 12h et 24min','DF:delai')}<div class="card-acts"><button class="btn btn-ghost" data-go="DF:sheet">Refuser</button><button class="btn btn-primary" data-go="DF:done">Confirmer 5 🧱 (50 €)</button></div>`,
-  refused: `${iaBox('neutral','5 bricks refusées <span class="a-sub">(soit 50 €)</span>')}<button class="btn btn-primary">Rappel d'ouverture</button>`,
-  done: `${iaBox('green','5 bricks confirmées <span class="a-sub">(soit 50 €)</span>','',ICON_CHECK('#08744D',20))}<button class="btn btn-primary">Rappel d'ouverture</button>`,
-  open: `${holdBox('5 bricks investies sur ce projet <span class="a-sub">(soit 50 €)</span>', "via l'investissement automatique")}<button class="btn btn-primary">Réinvestir</button>`,
-  reinv: `${holdBox('8 bricks investies sur ce projet <span class="a-sub">(soit 80 €)</span>', "dont 5 via l'investissement automatique")}<button class="btn btn-primary">Réinvestir</button>`,
-  reinvManual: `${holdBox('3 bricks investies sur ce projet <span class="a-sub">(soit 30 €)</span>')}<button class="btn btn-primary">Réinvestir</button>`,
-  closed: `<div class="cd-a cd-green">${ICON_CHECK('#08744D',14)}<span class="cd-t"><b style="color:var(--navy)">8 bricks</b> (soit 80 €), dont 5 via</span>${AUTO_TAG}</div><button class="btn btn-primary">Suivre le projet</button>`,
-  closedAuto: `<div class="cd-a cd-green">${ICON_CHECK('#08744D',14)}<span class="cd-t"><b style="color:var(--navy)">5 bricks</b> (soit 50 €) via</span>${AUTO_TAG}</div><button class="btn btn-primary">Suivre le projet</button>`,
-  closedManual: `<div class="cd-a cd-green">${ICON_CHECK('#08744D',14)}<span class="cd-t"><b style="color:var(--navy)">3 bricks</b> (soit 30 €) investies sur ce projet</span></div><button class="btn btn-primary">Suivre le projet</button>`,
+  refused: `${iaBox('neutral','5 🧱 refusées <span class="a-sub">(soit 50 €)</span>')}<button class="btn btn-primary">Rappel d'ouverture</button>`,
+  done: `${iaBox('green','5 🧱 investies <span class="a-sub">(soit 50 €)</span>','',ICON_CHECK('#08744D',18))}<button class="btn btn-primary">Rappel d'ouverture</button>`,
+  open: `${holdBox('5 🧱 investies <span class="a-sub">(soit 50 €)</span>', true)}<button class="btn btn-primary">Réinvestir</button>`,
+  reinv: `${holdBox(`8 🧱 investies <span class="a-sub">(soit 80 €), dont <span class="a-ic">${ICON_AUTO(SIG_C.orange,12)}</span>5</span>`)}<button class="btn btn-primary">Réinvestir</button>`,
+  reinvManual: `${holdBox('3 🧱 investies <span class="a-sub">(soit 30 €)</span>')}<button class="btn btn-primary">Réinvestir</button>`,
+  closed: `${holdBox(`8 🧱 investies <span class="a-sub">(soit 80 €), dont <span class="a-ic">${ICON_AUTO(SIG_C.orange,12)}</span>5</span>`, false, false)}<button class="btn btn-primary">Suivre le projet</button>`,
+  closedAuto: `${holdBox('5 🧱 investies <span class="a-sub">(soit 50 €)</span>', true, false)}<button class="btn btn-primary">Suivre le projet</button>`,
+  closedManual: `${holdBox('3 🧱 investies <span class="a-sub">(soit 30 €)</span>', false, false)}<button class="btn btn-primary">Suivre le projet</button>`,
 })[s==='sheet'||s==='delai'?'todo':s];
 const dkFiche = s => {
   const pre = PRE.includes(s), closed = s.startsWith('closed');
@@ -1064,7 +1085,7 @@ const dkIa = st => {
   if (st==='jamais') body = `${cStrip.replace(' investissent automatiquement, comme vous',' investissent déjà automatiquement')}${card(heroLite)}${card(storyBlock)}${card(safeBlock)}${card(commFeed)}`;
   else if (st==='pause') body = `${cStrip.replace(', comme vous','')}${delaiNews}${card(pauseBanner)}${card(feedBlock)}${card(critBlock(false,true,true)+linksBlock())}`;
   else if (st==='rien') body = `${cStrip}${delaiNews}${card(firstBlock)}${card(tipsBlock(matchCard(),tipVir()))}${card(commFeed)}${card(critBlock(false,false))}`;
-  else if (st==='solde') body = `${cStrip}${soldeAlert}${card(pendingLow,'pend')}${card(feedBlock)}${card(critBlock(false,true,false,true)+linksBlock())}`;
+  else if (st==='solde') body = `${cStrip}${soldeAlert}${card(emptyBlock)}${card(feedBlock)}${card(critBlock()+linksBlock())}`;
   else body = `${cStrip}${delaiNews}${st==='vide'?card(emptyBlock):card(pendingBlock,'pend')}${card(st==='vide'?tipsBlock(matchCard(),tipVir()):tipsBlock(tipVir()))}${card(feedBlock)}${card(critBlock()+linksBlock())}`;
   return `<div class="dk">${dkNav('Accueil')}<div class="dk-subnav">Investissement automatique</div><div class="dk-ia"><h1>Investissement automatique</h1>${dk(body)}</div>${dk(sh)}</div>`;
 };
@@ -1140,7 +1161,9 @@ render();
 <script>
 (() => {
   const KEY = 'invest-auto-annotations';
+  const SEED = [];
   let notes = JSON.parse(localStorage.getItem(KEY) || '[]');
+  { const ids = new Set(notes.map(n => n.id)); notes = SEED.filter(n => !ids.has(n.id)).concat(notes); }
   let on = false, pop = null;
   const save = () => localStorage.setItem(KEY, JSON.stringify(notes));
   const anchors = () => [...document.querySelectorAll('.wrap:not(#comments) .col, .wrap:not(#comments) .why-col')];
@@ -1224,7 +1247,8 @@ render();
     const r = a.getBoundingClientRect();
     openPop(e.clientX, e.clientY, a, Math.round(e.clientX - r.left), Math.round(e.clientY - r.top));
   }, true);
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closePop(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') { closePop(); document.querySelector('.annot-pop.view')?.remove(); } });
+  addEventListener('scroll', () => document.querySelector('.annot-pop.view')?.remove(), {passive:true});
 
   const see = id => {
     const n = notes.find(x => x.id === id); if (!n) return;
@@ -1239,7 +1263,18 @@ render();
   });
   document.addEventListener('click', e => {
     const p = e.target.closest('.wrap:not(#comments) .annot-pin');
-    if (p) document.querySelector(`.c-item[data-id="${p.dataset.id}"]`)?.scrollIntoView({behavior:'smooth', block:'center'});
+    if (!p) { if (!e.target.closest('.annot-pop')) document.querySelector('.annot-pop.view')?.remove(); return; }
+    const n = notes.find(x => x.id === p.dataset.id); if (!n) return;
+    if (n.st && state[n.st.v] !== n.st.s) go(n.st.v, n.st.s, false);
+    document.querySelector('.annot-pop.view')?.remove();
+    const pin = document.querySelector(`.wrap:not(#comments) .annot-pin[data-id="${n.id}"]`) || p, r = pin.getBoundingClientRect();
+    const v = document.createElement('div');
+    v.className = 'annot-pop view';
+    v.style.left = Math.min(r.right + 8, innerWidth - 320) + 'px';
+    v.style.top = Math.max(12, Math.min(r.top - 8, innerHeight - 220)) + 'px';
+    v.innerHTML = `<div class="ctx"><b style="color:var(--navy)">${esc(n.author)}</b>${n.st ? ' · état « ' + esc(n.st.name) + ' »' : ''}<span class="x" style="float:right;cursor:pointer;font-size:18px;line-height:1">×</span></div><div class="c-text" style="color:var(--navy)">${esc(n.text)}</div>`;
+    v.querySelector('.x').onclick = () => v.remove();
+    document.body.appendChild(v);
   });
   document.getElementById('c-export').addEventListener('click', () => {
     const a = document.createElement('a');
