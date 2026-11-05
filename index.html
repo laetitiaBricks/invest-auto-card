@@ -1,0 +1,1263 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Investissement automatique à confirmer · card et fiche produit</title>
+<style>
+  :root{
+    /* Tokens uimmo (storybook.bricks.co, Tokens) */
+    --navy:#13273E;        /* defaultHeading */
+    --grey:#76818B;        /* defaultText */
+    --orange:#EC5223;      /* brandText / brandBackground500 */
+    --orange-400:#F07141;  /* brandBackground400 */
+    --orange-soft:#FDE6D7; /* brandBackground100 */
+    --orange-tint:#FEF4EE; /* brandBackground50 */
+    --red:#EC5223;         /* brandText */
+    --bg:#F9F5F1;          /* appBackground */
+    --surface:#FAF9F8;     /* neutralBackground50 */
+    --neutral-100:#F5F3F2; /* neutralBackground100 */
+    --neutral-400:#C7C7C7; /* neutralBackground400 */
+    --line:#ECEAE8;        /* nonInteractiveBorder */
+    --border:#D8D9D7;      /* interactive-border · gray-warm-300 */
+    --disabled-bg:#E8EBEC; /* disabled-background · gray-200 */
+    --disabled-text:#89949E; /* disabled-text · gray-600 */
+    --shiny-text:#BB7B07;  /* shiny-text · amber-600 */
+    --green:#08744D;       /* successText */
+    --green-soft:#EDFCF4;  /* successBackground50 */
+    --green-100:#D2F9E2;   /* successBackground100 */
+    --green-600:#0A915D;   /* successBackground600 */
+    --shadow-xs:0 1px 4px rgba(0,0,0,.04); --shadow-sm:0 2px 8px rgba(0,0,0,.04); --shadow-md:0 2px 8px rgba(0,0,0,.06); --shadow-lg:0 2px 12px rgba(0,0,0,.08);
+  }
+  /* Typographie uimmo : Inter Bold (titres) et Inter Regular (texte), sur l'échelle 10 à 56 px */
+  .phone,.fiche,.scr-wrap{font-weight:400}
+  .f-title{font-size:24px!important;line-height:31px;font-weight:700!important}
+  .sec-h,.bs h3,.hero h4{font-size:20px!important;line-height:26.2px!important;font-weight:700!important}
+  .h3s,.ia-h{font-size:18px!important;line-height:23.8px;font-weight:700!important}
+  .amt{font-size:16px!important;line-height:21.4px;font-weight:700!important}
+  .name,.pc-t,.strip-t{font-size:14px;line-height:18.9px;font-weight:700}
+  .bs p,.empty p,.f-meta,.hero p{line-height:20.9px}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--navy);background:#2b2b2b}
+  .warn{background:var(--orange);color:#fff;text-align:center;font-weight:700;letter-spacing:.08em;padding:10px;font-size:13px}
+  .wrap{max-width:1800px;margin:0 auto;padding:32px 24px 80px}
+  h1{color:#fff;font-size:28px;margin:0 0 6px}
+  .sub{color:#c9c9c9;margin:0 0 8px;font-size:15px;line-height:1.5}
+  .line-title{color:#fff;font-size:22px;margin:48px 0 4px;display:flex;align-items:center;gap:10px}
+  .line-title .n{width:30px;height:30px;border-radius:50%;background:var(--orange);display:grid;place-items:center;font-size:15px}
+  .line-sub{color:#bbb;font-size:14px;margin:0 0 24px}
+  .cols{display:flex;flex-wrap:wrap;gap:40px;justify-content:center;align-items:flex-start}
+  .col{width:393px}
+  .col.ref{opacity:.92}
+  .lock{width:393px;height:852px;border-radius:32px;overflow:hidden;background:linear-gradient(160deg,#3B5A7A 0%,#1B2B40 55%,#EC5223 140%);color:#fff;padding:0 12px;box-sizing:border-box;position:relative}
+  .lock-sb{display:flex;justify-content:space-between;padding:16px 16px 0;font-size:15px;font-weight:600}
+  .lock-date{text-align:center;margin-top:46px;font-size:18px;font-weight:500;opacity:.9}
+  .lock-time{text-align:center;font-size:88px;font-weight:700;line-height:1;letter-spacing:-2px;margin-bottom:40px}
+  .push{background:rgba(255,255,255,.82);backdrop-filter:blur(20px);color:#111;border-radius:22px;padding:12px 14px;font-size:14px;line-height:1.35}
+  .push-h{display:flex;align-items:center;gap:8px;font-size:12px;color:#555;margin-bottom:4px}
+  .push-h em{margin-left:auto;font-style:normal}
+  .push b{display:block;font-size:15px}.push p{margin:2px 0 0}
+  .logo-b{width:22px;height:22px;border-radius:6px;background:var(--orange);display:inline-grid;place-items:center;flex:none}
+  .lock-hint{position:absolute;left:24px;right:24px;bottom:40px;text-align:center;font-size:12px;opacity:.75}
+  .mail{width:393px;border-radius:24px;overflow:hidden;background:#fff;color:var(--navy)}
+  .mail-meta{background:#F2F2F2;padding:14px 18px;font-size:12px;display:flex;flex-direction:column;gap:4px;color:#333}
+  .mail-meta span{display:inline-block;width:44px;color:#888}
+  .mail-bd{padding:24px 24px 20px;font-size:14px;line-height:1.55}
+  .mail-logo{display:flex;align-items:center;gap:8px;font-size:16px;margin-bottom:18px}
+  .mail-bd h3{font-size:21px;line-height:1.3;margin:0 0 14px}
+  .mail-bd p{margin:0 0 12px;color:#333}
+  .mail-box{background:var(--green-soft,#EDFCF4);border-radius:12px;padding:12px 14px;margin:4px 0 16px;display:flex;flex-direction:column;gap:2px}
+  .mail-box b{color:#08744D}.mail-box span{font-size:13px;color:#333}
+  .mail-list{border:1px solid var(--line);border-radius:12px;margin-bottom:18px;font-size:13px}
+  .mail-list>div{display:flex;flex-direction:column;padding:8px 14px;border-top:1px solid var(--line)}
+  .mail-list>div em{font-style:normal;color:var(--grey);font-size:12px}
+  .mail-list .mail-lh{border-top:0;font-weight:700;font-size:12px;color:var(--grey);text-transform:uppercase;letter-spacing:.04em}
+  .mail-s{font-size:13px!important;color:var(--grey)!important;margin-top:14px!important}
+  .mail-ft{border-top:1px solid var(--line);padding-top:12px;font-size:11px;color:#999}
+  .pause-lk{text-align:center;font-size:13px;font-weight:600;text-decoration:underline;margin-top:10px}
+  .why-col{width:330px;position:sticky;top:24px;background:#353535;border:1px solid #444;border-radius:20px;padding:22px 22px 18px;color:#eee}
+  .why-col h2{font-size:17px;margin:0 0 12px;color:#fff}
+  .why-col h3{font-size:13px;margin:18px 0 8px;color:var(--orange);text-transform:uppercase;letter-spacing:.05em}
+  .why-col ul{margin:0;padding:0 0 0 18px;display:flex;flex-direction:column;gap:10px;font-size:13.5px;line-height:1.5;color:#ccc}
+  .why-col b{color:#fff;font-weight:600}
+  .why-col ul.todo{gap:6px;font-size:13px;color:#aaa}
+  .col.ref h2::after{content:" · référence";color:#999;font-weight:500}
+  .col h2,.dcol h2{color:#fff;font-size:20px;margin:0 0 4px}
+  .dcol.ref h2::after{content:" · référence";color:#999;font-weight:500}
+  .col p.lbl{color:#bbb;font-size:13px;margin:0 0 12px;min-height:36px;line-height:1.45}
+  .toggle{display:inline-flex;flex-wrap:wrap;background:rgba(255,255,255,.12);border-radius:999px;padding:3px;margin-bottom:12px}
+  .toggle button{border:0;background:transparent;color:#ddd;font:600 12px Inter,sans-serif;padding:6px 12px;border-radius:999px;cursor:pointer}
+  .toggle button.on{background:#fff;color:var(--navy)}
+  .spacer{height:41px}
+
+  .phone{width:393px;background:var(--bg);border-radius:32px;overflow:hidden}
+  .phone.list-scroll{height:780px;overflow-y:auto;scrollbar-width:none}
+  .sheet{background:#fff;border-radius:32px 32px 0 0;margin-top:12px;padding:32px 20px 32px}
+  .sec-h{display:flex;align-items:center;gap:8px;font-size:20px;font-weight:700;margin-bottom:20px}
+  .count{font-size:12px;font-weight:700;background:var(--neutral-100);border-radius:999px;padding:2px 8px}
+  .ref-img{width:393px;border-radius:32px;display:block;background:#fff}
+  .ref-fiche{position:relative;width:393px;height:869px;border-radius:32px;overflow:hidden;background:url(actuel-fiche.png) top/393px auto no-repeat #fff}
+  .ref-fiche::after{content:"";position:absolute;left:0;right:0;bottom:0;height:118px;background:url(actuel-fiche.png) bottom/393px auto no-repeat}
+
+  /* card */
+  .card{width:353px;background:#fff;border:1px solid var(--line);border-radius:24px;overflow:hidden}
+  .img{position:relative;height:160px;background:url(img.png) center/cover}
+  .cd{position:absolute;left:66px;top:45px;width:221px;height:73px;border-radius:999px;background:rgba(30,40,52,.88);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;color:#fff}
+  .cd div{width:58px;text-align:center}
+  .cd strong{display:block;font-size:24px;font-weight:700;line-height:1.2}
+  .cd span{font-size:10px;font-weight:400;opacity:.8}
+  .cd i{width:1px;height:20px;background:rgba(255,255,255,.25)}
+  .patch{position:absolute;left:205px;top:118px;width:148px;height:42px;background:url(img.png) 0 -118px/353px 160px no-repeat;transform:scaleX(-1)}
+  .tl{position:absolute;left:10px;top:10px}
+  .chip{background:#fff;border:1px solid var(--line);border-radius:999px;height:28px;padding:0 10px 0 8px;display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:700;white-space:nowrap}
+  .chip span{color:var(--orange)}
+  .chip i{width:1px;height:12px;background:var(--line);margin:0 2px}
+  .body{padding:16px;display:flex;flex-direction:column;gap:16px}
+  .row{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+  .name{font-size:14px;font-weight:700}
+  .date{font-size:14px;font-weight:700;color:var(--orange);margin-top:2px}
+  .cal{width:40px;height:36px;border:1px solid var(--border);border-radius:8px;display:grid;place-items:center;flex:none}
+  .bricksers{display:flex;align-items:center;gap:8px;font-size:14px}
+  .memo{display:flex}
+  .memo span{width:24px;height:24px;border-radius:50%;border:2px solid #fff;margin-left:-10px}
+  .memo span:first-child{margin-left:0;background:#BEF0C6}.memo span:nth-child(2){background:#FFD9A2}.memo span:nth-child(3){background:#C5ECFD}
+  .bricksers b{font-weight:700}.bricksers em{font-style:normal;color:var(--grey);font-weight:400}
+
+  .btn{border:0;border-radius:12px;font:700 14px Inter,sans-serif;height:44px;padding:0 16px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:6px;white-space:nowrap}
+  .btn-primary{background:var(--orange);color:#fff}
+  .btn-outline{background:#fff;color:var(--navy);border:1px solid var(--border)}
+  .btn-ghost{background:transparent;color:var(--navy)}
+
+  .a-sub{font-size:12px;font-weight:400;color:var(--grey)}
+
+  .strip{border-top:1px solid var(--orange-soft);background:var(--orange-tint);padding:12px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+  .strip.done{background:var(--green-soft);border-color:var(--green-100)}
+  .strip .btn{height:40px;padding:0 16px;font-size:14px;border-radius:12px;flex:none}
+  .strip-t{font-size:14px;font-weight:700;line-height:1.3}
+  .card-ia{padding:0 16px 16px;display:grid;gap:12px}
+  .card-acts{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:center}
+  .card-acts .btn{height:48px;font-size:14px;border-radius:12px}
+  .card-acts .btn-ghost{padding:0 12px}
+  .ia-box{border-radius:12px;padding:10px 12px;display:flex;align-items:center;justify-content:space-between;gap:12px;background:var(--orange-tint)}
+  .ia-box.green{background:var(--green-soft)}
+  .ia-box.neutral{background:var(--neutral-100)}
+  .ia-box .strip-t a,.ia-box .go{color:inherit;text-decoration:none}
+  .strip-k{display:flex;align-items:center;gap:4px;font-size:12px;line-height:16.5px;font-weight:700;margin-bottom:2px;white-space:nowrap}
+  .strip-s{font-size:12px;font-weight:400;color:var(--grey);margin-top:2px}
+  /* écran communauté */
+  .scr{width:393px;background:var(--bg);border-radius:32px;overflow:hidden}
+  .scr-sb{display:flex;justify-content:space-between;padding:16px 24px 0;font-size:14px;font-weight:700}
+  .scr-hd{display:grid;grid-template-columns:24px 1fr 24px;align-items:center;padding:16px 20px 12px;font-size:16px;font-weight:700;text-align:center}
+  .scr-bd{background:#fff;border-radius:24px 24px 0 0;padding:24px 20px 24px;display:flex;flex-direction:column;gap:24px}
+  .h3s{font-size:18px;font-weight:700;display:flex;align-items:center;gap:6px;margin:0 0 12px}
+  .empty{border:1px solid var(--line);border-radius:16px;padding:12px;display:flex;gap:12px;align-items:flex-start}
+  .empty b{font-size:14px}.empty p{margin:4px 0 0;font-size:12px;color:var(--grey);line-height:1.45}
+  .bell{width:32px;height:32px;border-radius:50%;background:var(--orange-tint);display:grid;place-items:center;flex:none}
+  .crit-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+  .crit-h .h3s{margin:0}
+  .badge-on{background:var(--green-600);color:#fff;font-size:12px;font-weight:700;border-radius:6px;padding:2px 6px;letter-spacing:.02em}
+  .dots{width:40px;height:40px;border-radius:50%;border:1px solid var(--border);display:grid;place-items:center;font-weight:700;letter-spacing:1px}
+  .crit{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .crit>div{background:var(--neutral-100);border-radius:16px;padding:12px;min-height:112px;display:flex;flex-direction:column;justify-content:space-between}
+  .crit b{font-size:16px;display:block}.crit span{font-size:12px;color:var(--grey)}
+  .crit .tr{font-size:12px;color:var(--grey);margin-top:6px;padding-top:6px;border-top:1px solid var(--line)}
+  .crit .tr em{font-style:normal;font-weight:700;color:var(--navy)}
+  .meta{display:flex;flex-direction:column;gap:6px;font-size:12px;color:var(--grey)}
+  .links>div{border-top:1px solid var(--line);padding:16px 0;display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:14px}
+  .com{background:var(--navy);color:#fff;border-radius:24px;padding:16px}
+  .com .av{display:flex;margin-bottom:12px}
+  .com .av span{width:30px;height:30px;border-radius:50%;border:2px solid var(--navy);margin-left:-8px;display:grid;place-items:center;font-size:12px;font-weight:700;color:var(--navy)}
+  .com .av span:first-child{margin-left:0}
+  .com .big{font-size:20px;font-weight:700;line-height:1.2}
+  .com .lead{font-size:14px;opacity:.85;margin-top:4px;line-height:1.4}
+  .com .stats{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:16px}
+  .com .stats div{background:rgba(255,255,255,.08);border-radius:12px;padding:10px 12px;font-size:12px;opacity:.95;line-height:1.35}
+  .com .stats b{display:block;font-size:16px}
+  .exp{background:var(--neutral-100);border-radius:24px;padding:16px}
+  .exp h4{margin:0 0 4px;font-size:16px}
+  .exp .lead{font-size:12px;color:var(--grey);margin:0 0 12px;line-height:1.45}
+  .rr{background:#fff;border-radius:16px;padding:12px 10px;display:flex;justify-content:space-around;margin-bottom:12px}
+  .deal>div{display:flex;flex-direction:column;align-items:center;gap:6px;font-size:12px;color:var(--grey)}
+  .deal .p{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:700}
+  .deal .p.me{outline:2px solid var(--orange);outline-offset:2px}
+  .deal .bk{font-size:12px;letter-spacing:-2px}
+  .steps{display:flex;flex-direction:column;gap:10px}
+  .steps>div{display:flex;gap:10px;font-size:12px;line-height:1.45}
+  .steps i{font-style:normal;width:22px;height:22px;border-radius:50%;background:var(--navy);color:#fff;display:grid;place-items:center;font-size:12px;font-weight:700;flex:none}
+  .feed{display:flex;flex-direction:column;gap:8px}
+  .feed>div{display:flex;gap:12px;align-items:center;border:1px solid var(--line);border-radius:16px;padding:10px}
+  .th{width:56px;height:56px;border-radius:12px;flex:none;background:url(prod-ia.png) 0 0/268px auto no-repeat}
+  .feed .t{font-size:14px;font-weight:700}
+  .feed .m{font-size:12px;color:var(--grey);margin-top:2px;display:flex;align-items:center;gap:6px}
+  .feed .you{margin-left:auto;text-align:right;font-size:12px;color:var(--grey);flex:none}
+  .feed .you b{display:block;font-size:14px;color:var(--navy)}
+  .sec-sub{font-size:12px;color:var(--grey);margin:-6px 0 12px}
+
+  .cstrip{display:flex;align-items:center;gap:12px;background:var(--neutral-100);border-radius:16px;padding:12px 12px;font-size:12px;line-height:1.4}
+  .cstrip .memo span{width:24px;height:24px}
+  .cstrip b{font-weight:700}
+  .cstrip svg:last-child{margin-left:auto;flex:none}
+  .rep{display:inline-flex;align-items:center;gap:4px;background:var(--orange-tint);color:var(--orange);font-size:12px;font-weight:700;border-radius:6px;padding:2px 6px;margin-top:4px}
+  .tip{display:flex;gap:10px;align-items:flex-start;background:var(--orange-tint);border:1px solid var(--orange-soft);border-radius:16px;padding:12px 12px;margin-top:10px;font-size:12px;line-height:1.45}
+  .tip b{display:block;font-size:12px}
+  .tip .why{color:var(--navy);margin-top:6px}
+  .feed .tag{display:inline-block;background:var(--orange-tint);color:var(--orange);font-size:12px;font-weight:700;border-radius:6px;padding:0px 6px;margin-top:4px}
+  .scr-wrap{position:relative;border-radius:32px;overflow:hidden;width:393px}
+  .scr-wrap.clip{height:860px}
+
+  /* fiche */
+  .fiche{position:relative;width:393px;height:869px;border-radius:32px;overflow:hidden;background:#fff}
+  .f-photo{height:330px;background:url(fiche.png) top/393px auto no-repeat}
+  .f-body{position:relative;margin-top:-12px;background:#fff;border-radius:24px 24px 0 0;padding:24px 20px 0;display:flex;flex-direction:column;gap:16px}
+  .f-chiprow{display:flex;justify-content:center}
+  .f-photo{position:relative}
+  .f-back{position:absolute;left:2px;top:44px;width:44px;height:44px;border-radius:50%;cursor:pointer}
+  .f-back:hover{box-shadow:0 0 0 3px rgba(236,81,35,.6)}
+  [data-go]{cursor:pointer}
+  .pc-proj[data-go]:hover,.feed>[data-go]:hover{background:var(--surface);border-radius:12px}
+  .card[data-go]:hover{box-shadow:0 0 0 3px rgba(236,81,35,.45)}
+  @keyframes flash{0%{box-shadow:0 0 0 0 rgba(236,81,35,.9)}100%{box-shadow:0 0 0 18px rgba(236,81,35,0)}}
+  .flash>*{animation:flash 1s ease-out 2}
+  .owned{display:flex;align-items:center;gap:10px;background:var(--bg);border:1px solid var(--line);border-radius:16px;padding:8px 12px 8px 8px;font-size:12px}
+  .owned-n{display:inline-flex;align-items:center;gap:2px;white-space:nowrap;flex:none;background:#fff;border:1px solid var(--line);border-radius:8px;padding:4px 8px;font-weight:700;font-size:12px}
+  .owned small{display:flex;align-items:center;gap:4px;font-size:12px;color:var(--grey);margin-top:2px}
+  .f-title{font-size:24px;font-weight:700;text-align:center}
+  .f-meta{font-size:14px;color:var(--grey);text-align:center;line-height:1.6}
+  .f-int{display:flex;justify-content:center}
+  .f-kpi{border:1px solid var(--line);border-radius:16px;display:grid;grid-template-columns:1fr 1fr;padding:12px 0}
+  .f-kpi div{padding:0 16px;font-size:12px;color:var(--grey);display:flex;align-items:center;gap:8px}
+  .f-kpi svg{flex:none}.f-kpi .kpi-i{margin-left:auto}
+  .f-kpi div+div{border-left:1px solid var(--line)}
+  .f-kpi strong{display:block;font-size:16px;color:var(--navy);margin-top:2px}
+  .f-score{background:var(--surface);border-radius:12px;padding:12px;text-align:center;font-size:14px;font-weight:700}
+  .f-score span{color:var(--shiny-text)}
+
+  .f-bar{position:absolute;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--line);padding:16px 20px 32px;display:flex;flex-direction:column;gap:12px}
+  .f-bar.one{flex-direction:row;align-items:center;justify-content:space-between}
+  .f-bar .acts{display:grid;grid-template-columns:1fr 1.6fr;gap:10px}
+  .f-bar .btn{height:50px;font-size:14px}
+  .dl{display:flex;align-items:center;justify-content:center;gap:6px;font-size:12px;font-weight:700;color:var(--red)}
+  .ok{display:flex;align-items:center;gap:6px;font-size:14px;font-weight:700;color:var(--green)}
+  .muted{font-size:12px;color:var(--grey)}
+  .amt{font-size:16px;font-weight:700}
+  .f-row{display:flex;align-items:center;justify-content:space-between;gap:12px}
+  .src{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:400;color:var(--navy)}
+  .sum{display:flex;align-items:center;gap:10px}
+  .sum .ico{width:36px;height:36px;border-radius:50%;background:var(--orange-tint);display:grid;place-items:center;flex:none}
+  .sum .ico.green{background:var(--green-soft)}
+  .sum .ico.neutral{background:var(--neutral-100)}
+  .btn-disabled{background:var(--disabled-bg);color:var(--disabled-text);cursor:default}
+  .chev-c{width:28px;height:28px;border-radius:50%;border:1px solid var(--border);display:grid;place-items:center;flex:none}
+  .prog{height:4px;border-radius:2px;background:var(--neutral-100);margin-top:8px;max-width:160px}
+  .prog i{display:block;height:100%;border-radius:2px;background:var(--orange)}
+  .btn-2l{flex-direction:column;gap:0px;line-height:1.15}
+  .btn-2l small{font-size:12px;font-weight:400;opacity:.9}
+
+  .dim{position:absolute;inset:0;background:rgba(136,158,176,.6)}
+  .bs{position:absolute;left:0;right:0;bottom:0;background:#fff;border-radius:24px 24px 0 0;padding:12px 20px 32px}
+  .bs .handle{width:36px;height:4px;border-radius:2px;background:var(--border);margin:0 auto 24px}
+  .bs h3{margin:0 0 8px;font-size:20px}
+  .bs p{margin:0 0 24px;font-size:14px;line-height:1.5;color:var(--grey)}
+  .bs .acts{display:flex;flex-direction:column;gap:10px}
+  .bs .btn{height:50px;font-size:14px;width:100%}
+  /* écran investissements automatiques */
+  .ref-ia{position:relative;overflow:hidden;width:393px;height:600px;border-radius:32px;background:url(prod-ia.png) 0 -270px/393px auto no-repeat #fff}
+  .ia{position:relative;width:393px;height:600px;border-radius:32px;overflow:hidden;background:#fff;padding:20px}
+  .ia-h{display:flex;align-items:center;gap:6px;font-size:18px;font-weight:700;margin:0 10px 16px}
+  .pc{background:var(--neutral-100);border-radius:16px;margin-bottom:16px}
+  .pc-top{display:flex;align-items:center;justify-content:center;gap:4px;font-size:12px;font-weight:400;color:var(--grey);height:37px}
+  .pc-in{background:#fff;border:1px solid var(--line);border-radius:16px;padding:12px;box-shadow:var(--shadow-sm)}
+  .pc-proj{display:flex;gap:12px;align-items:center}
+  .pc-img{width:82px;height:82px;border-radius:12px;flex:none;background:url(prod-ia.png) 0 0/393px auto no-repeat}
+  .pc-t{display:flex;justify-content:space-between;gap:8px;font-size:14px;font-weight:700;line-height:1.35}
+  .pc-chips{display:flex;gap:4px;margin-top:10px}
+  .pc-chips span{border:1px solid var(--border);border-radius:8px;height:28px;padding:0 8px;display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:400}
+  .pc-sep{height:1px;background:var(--line);margin:12px 0}
+  .hero{background:var(--orange-tint);border-radius:16px;padding:16px}
+  .hero-ic{width:44px;height:44px;border-radius:50%;background:#fff;display:grid;place-items:center;margin-bottom:12px}
+  .hero-h{display:flex;align-items:center;gap:12px}
+  .hero-h .hero-ic{margin:0;flex:none}
+  .hero h4{margin:0;font-size:18px;line-height:1.3;font-weight:700}
+  .hero p{margin:8px 0 0;font-size:14px;color:var(--grey);line-height:1.45}
+  .hero-s{text-align:center;font-size:12px;color:var(--grey);margin-top:8px}
+  .scr-wrap.scroll{height:852px}
+  .scroll .scr{height:100%;display:flex;flex-direction:column}
+  .scroll .scr-bd{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding-bottom:100px;scrollbar-width:thin;scrollbar-color:var(--border) transparent}
+  .sticky-cta{position:absolute;left:0;right:0;bottom:0;background:#fff;padding:12px 20px 24px;box-shadow:var(--shadow-lg);transform:translateY(100%);transition:transform .25s ease}
+  .sticky-cta.on{transform:none}
+  .bnf-band{background:var(--bg);margin:0 -20px;padding:20px 0 20px}
+  .bnf-band .h3s{padding:0 20px}
+  .bnf{display:flex;gap:8px;overflow-x:auto;padding:0 20px;scrollbar-width:none;scroll-snap-type:x mandatory}
+  .bnf>div{flex:0 0 260px;background:#fff;border-radius:24px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;scroll-snap-align:center;min-height:330px}
+  .bnf-tx{padding:20px 20px 0;display:flex;flex-direction:column;gap:8px}
+  .bnf-ic span{width:36px!important;height:36px!important;background:var(--neutral-400)!important}
+  .bnf b{font-size:18px;line-height:1.3;margin-top:8px}.bnf-tx>span{font-size:14px;color:var(--grey);line-height:1.45}
+  .bnf-ill{height:130px;display:flex;align-items:flex-end;justify-content:center}
+  .ill-gauge{position:relative;width:200px;height:110px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding-bottom:12px}
+  .ill-gauge .arc{position:absolute;top:10px;left:0;width:200px;height:200px;border-radius:50%;border:16px solid var(--line);border-top-color:var(--orange);border-left-color:var(--orange);transform:rotate(-45deg);clip-path:inset(0 0 50% 0)}
+  .ill-gauge b{font-size:20px}.ill-gauge span{font-size:12px;color:var(--grey)}
+  .step-n{font-size:12px!important;font-weight:700;color:var(--orange)!important;text-transform:uppercase;letter-spacing:.04em}
+  .bnf-tx .step-n+b{margin-top:0}
+  .dots-row{display:flex;justify-content:center;gap:6px;margin-top:12px}
+  .dots-row i{width:6px;height:6px;border-radius:4px;background:var(--border)}.dots-row i.on{width:18px;background:var(--navy)}
+  .ill-rules{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:0 16px 16px;width:100%}
+  .ill-rules>span{display:grid;grid-template-columns:auto 1fr;column-gap:6px;align-items:center;background:var(--bg);border-radius:12px;padding:6px 8px}
+  .ill-rules>span>span{grid-row:span 2;width:22px!important;height:22px!important}
+  .ill-rules svg{width:12px;height:12px}
+  .ill-rules b{font-size:12px!important;margin:0!important}.ill-rules em{font-style:normal;font-size:10px;color:var(--grey)}
+  .ill-turn{display:flex;flex-direction:column;align-items:center;gap:6px;padding-bottom:16px;font-size:12px;color:var(--grey)}
+  .ill-turn .memo span{width:30px!important;height:30px!important;margin-left:-10px!important;border-width:2px!important}
+  .ill-you{display:flex;align-items:center;gap:8px;background:var(--orange-tint);color:var(--navy);border-radius:12px;padding:6px 12px;font-size:12px}
+  .ill-you b{font-size:14px}
+  .ill-confirm{width:100%;margin:0 16px 16px;background:var(--orange-tint);border-radius:16px;padding:12px;display:flex;flex-direction:column;gap:10px;font-size:12px}
+  .ill-confirm .btn{height:36px;font-size:12px;border-radius:8px}
+  .ill-confirm{background:#fff;border:1px solid var(--line)}
+  .ill-cd{text-align:center;color:var(--grey);font-size:11px}
+  .ill-acts{display:grid;grid-template-columns:auto 1fr;gap:8px}.ill-acts .btn-ghost{padding:0 10px}
+  .ill-chips{display:flex;flex-direction:column;gap:8px;align-items:center;padding-bottom:20px}
+  .ill-chips span{display:flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:12px;padding:6px 12px;font-size:12px;font-weight:700;background:#fff;opacity:.5}
+  .ill-chips span.pick{opacity:1;border-color:var(--orange);box-shadow:0 4px 12px rgba(236,81,35,.15);transform:scale(1.08)}
+  .how{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+  .how>div{display:flex;flex-direction:column;gap:6px;font-size:12px;line-height:1.35;background:var(--surface);border-radius:12px;padding:10px}
+  .how i{font-style:normal;width:22px;height:22px;border-radius:50%;background:var(--navy);color:#fff;display:grid;place-items:center;font-size:12px;font-weight:700}
+  .ok-list em{font-style:normal;color:var(--grey)}
+  .ok-list{display:flex;flex-direction:column;gap:10px}
+  .ok-list>div{display:flex;gap:10px;font-size:12px;line-height:1.45}
+  .pause-w{background:var(--orange-tint);border-radius:16px;padding:12px}
+  .pause{display:flex;gap:12px;align-items:flex-start}
+  .pause b{font-size:14px}.pause p{margin:4px 0 0;font-size:12px;color:var(--grey);line-height:1.45}
+  .pause-ic{width:34px;height:34px;border-radius:50%;background:#fff;display:grid;place-items:center;flex:none}
+  .badge-off{background:#76818B}
+  .crit-off .crit{opacity:.55}
+  .fair-ex{background:var(--neutral-100);border-radius:16px;padding:12px;margin-bottom:24px}
+  .fair-ex-h{font-size:12px;color:var(--grey);text-align:center;margin-bottom:10px}
+  .fair-ex-g{display:grid;grid-template-columns:1.4fr repeat(3,1fr) 1fr;row-gap:6px;align-items:center;font-size:12px}
+  .fair-ex-g em{font-style:normal;text-align:center;color:var(--grey);font-size:11px}
+  .fair-ex-g em:has(b),.fair-ex-g em b{color:var(--navy);font-size:12px}
+  .fair-ex-n{display:flex;align-items:center;gap:6px;font-weight:600}
+  .fair-ex-n i{width:18px;height:18px;border-radius:50%;flex:none}
+  .fair-ex-n.me{color:var(--orange)}
+  .fair-ex-0{color:#C4CAD0}
+  .fair-ex-f{font-size:12px;color:var(--grey);text-align:center;margin-top:10px}
+  .quiet{display:flex;gap:12px;align-items:center;padding:4px 0}
+  .quiet-ic{width:36px;height:36px;border-radius:50%;background:var(--neutral-100);display:grid;place-items:center;flex:none}
+  .quiet b{font-size:14px}.quiet p{margin:2px 0 0;font-size:12px;color:var(--grey);line-height:1.45}
+  .match{display:flex;gap:12px;align-items:center;background:var(--orange-tint);border-radius:16px;padding:12px 14px;cursor:pointer}
+  .match>div{flex:1;min-width:0}
+  .match-ic{width:36px;height:36px;border-radius:50%;background:#fff;display:grid;place-items:center;flex:none}
+  .match-k{display:block;font-size:11px;font-weight:700;color:var(--orange);margin-bottom:2px}
+  .match b{font-size:14px}.match p{margin:2px 0 0;font-size:12px;color:var(--grey);line-height:1.45}
+  .btn-ghost-o{width:100%;height:40px;border-radius:10px;background:#fff;border:1px solid #D8D9D7;font-size:13px;font-weight:700;color:var(--navy)}
+  .cd-a{display:flex;align-items:center;justify-content:center;gap:6px;height:32px;border-radius:10px;background:var(--neutral-100);font-size:12px;color:var(--grey);white-space:nowrap}
+  .cd-a b{display:inline-flex;align-items:center;gap:4px;color:var(--orange);font-weight:700}
+  .cd-a.cd-green{background:var(--green-soft);box-shadow:inset 0 0 0 1px var(--green-100)}
+  .cd-t{display:inline-flex;align-items:center;gap:4px}.cd-i{display:inline-flex;cursor:pointer}
+  .pc-ia{display:grid;gap:12px}
+  .pc-ia .note{margin:0}
+  .empty.empty-st{flex-direction:column;align-items:stretch;gap:0;padding:0}
+  .empty-row,.empty-tip{display:flex;gap:12px;align-items:flex-start;padding:12px}
+  .empty-row>div:last-child,.empty-tip>div{flex:1;min-width:0}
+  .empty-tip{border-top:1px solid var(--line)}
+  .empty-tip>svg{flex:none;width:32px;height:32px;padding:8px;border-radius:50%;background:var(--neutral-100)}
+  .empty-tip b{font-size:14px}.empty-tip p{margin:4px 0 0;font-size:12px;color:var(--grey);line-height:1.45}
+  .pc-amt{display:flex;align-items:center;gap:8px;font-size:14px;margin-bottom:12px;white-space:nowrap}
+  .pc-acts{display:grid;grid-template-columns:83px 1fr;gap:12px}
+  .pc-acts .btn{height:38px;font-size:12px;border-radius:8px}
+  .btn-grad{background:linear-gradient(90deg,var(--orange-400),var(--orange));color:#fff}
+  .why{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:700;color:var(--grey);text-decoration:underline;text-underline-offset:2px;white-space:nowrap}
+  .note{display:flex;gap:10px;align-items:center;background:var(--surface);border-radius:12px;padding:10px 12px;margin-bottom:12px;font-size:12px;line-height:1.4}
+  .note b{font-weight:700}
+  .note .why{margin-left:auto}
+
+  .desk{background:#fff;border-radius:24px;padding:32px 40px;margin-top:12px;display:grid;grid-template-columns:repeat(3,353px);gap:24px;justify-content:start}
+  .ghost{border:1px dashed var(--border);border-radius:24px;background:var(--surface);display:grid;place-items:center;color:var(--grey);font-size:12px;min-height:200px}
+
+  /* onglets */
+  .tabs{display:flex;gap:8px;margin:20px 0 4px}
+  .tabs button{border:1px solid #555;background:#333;color:#ddd;font:700 16px Inter,sans-serif;padding:12px 28px;border-radius:14px;cursor:pointer}
+  .tabs button.on{background:#fff;color:var(--navy);border-color:#fff}
+  /* desktop */
+  .dcols{display:flex;gap:32px;justify-content:center;align-items:flex-start;flex-wrap:wrap}
+  .dcol{width:670px;position:relative}
+  .dcol .spacer{height:41px}
+  .dshot{width:670px;border-radius:16px;display:block;background:#fff}
+  .dk{width:960px;zoom:.6979;background:var(--bg);border-radius:20px;overflow:hidden;position:relative;font-weight:400}
+  .dk-nav{height:58px;display:flex;align-items:center;justify-content:space-between;padding:0 30px;background:#fff;border-bottom:1px solid var(--line)}
+  .dk-logo{font-weight:800;font-size:17px;letter-spacing:.02em;display:flex;align-items:center;gap:6px}.dk-logo i{width:14px;height:14px;background:var(--orange);border-radius:3px}
+  .dk-menu{display:flex;gap:34px;font-size:11px;color:var(--grey)}.dk-menu span{display:flex;flex-direction:column;align-items:center;gap:4px}.dk-menu span::before{content:"";width:18px;height:18px;border:1.6px solid currentColor;border-radius:5px}.dk-menu .on{color:var(--navy);font-weight:700}
+  .dk-bal{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700}.dk-bal b{border:1px solid var(--line);border-radius:999px;padding:6px 6px 6px 12px;display:flex;align-items:center;gap:8px}.dk-bal b i{width:26px;height:26px;border-radius:50%;background:var(--orange)}.dk-bal em{width:30px;height:30px;border-radius:50%;background:var(--navy);color:#fff;font-style:normal;font-size:11px;display:grid;place-items:center}
+  .dk-seg{display:flex;justify-content:center;padding:14px 0 0}.dk-seg div{display:flex;background:#fff;border-radius:999px;padding:4px;box-shadow:var(--shadow-sm);font-size:13px;font-weight:700}.dk-seg span{padding:8px 12px;border-radius:999px}.dk-seg .on{background:var(--navy);color:#fff}
+  .dk-sec{padding:28px 48px 36px}.dk-sec.white{background:#fff;border-radius:28px 28px 0 0}
+  .dk-h{font-size:22px;font-weight:700;display:flex;align-items:center;gap:10px;margin-bottom:18px}.dk-h .count.o{background:var(--orange-soft);color:var(--orange)}
+  .dk-grid{display:grid;grid-template-columns:repeat(3,276px);gap:18px;align-items:start}
+  .dc{background:#fff;border-radius:20px;overflow:hidden;box-shadow:var(--shadow-md);border:1px solid var(--line)}
+  .dc-img{height:150px;position:relative;background:url(desk-g1.png) center/cover}
+  .dc-inv{position:absolute;left:8px;top:8px;background:#fff;border-radius:999px;padding:3px 8px 3px 4px;display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700}.dc-inv .memo span{width:18px;height:18px;margin-left:-7px}
+  .dc-img .chip{position:absolute;right:8px;bottom:8px;border:0;gap:4px}
+  .dc-b{padding:12px;display:flex;flex-direction:column;gap:10px}
+  .dc-t{font-size:15px;font-weight:700;text-align:center}
+  .dc-kpi{border:1px solid var(--line);border-radius:12px;display:grid;grid-template-columns:1fr 1fr;padding:8px 10px;font-size:11px;color:var(--grey);gap:8px}.dc-kpi b{display:block;color:var(--navy);font-size:13px}
+  .dc-row{display:flex;justify-content:space-between;align-items:center;gap:10px}.dc-row .btn{height:40px;padding:0 18px}
+  .dc-amt b{font-size:14px;display:block}.dc-amt span{font-size:11px;color:var(--grey)}
+  .dc .prog{max-width:none;margin:0;height:6px;border-radius:3px}
+  .dc .card-acts .btn{height:42px;font-size:13px}
+  .dk-top{display:flex;justify-content:space-between;padding:18px 30px 0}.dk-btn{border:1px solid var(--border);background:#fff;border-radius:10px;height:34px;padding:0 14px;font:600 13px Inter,sans-serif;display:inline-flex;align-items:center;gap:6px}
+  .dk-gal{display:grid;grid-template-columns:595px 1fr;grid-template-rows:190px 190px;gap:6px;padding:14px 30px 0}
+  .dk-gal div{border-radius:6px;background:url(desk-g1.png) center/cover}.dk-gal .g1{grid-row:1/3;border-radius:20px 6px 6px 20px}.dk-gal .g2{background-image:url(desk-g2.png);border-top-right-radius:20px}.dk-gal .g3{background-image:url(desk-g3.png);border-bottom-right-radius:20px}
+  .dk-main{display:grid;grid-template-columns:1fr 310px;gap:40px;padding:24px 30px 40px;align-items:start}
+  .dk-left{display:flex;flex-direction:column;gap:14px}
+  .dk-title{font-size:28px;font-weight:700;display:flex;align-items:center;gap:12px}
+  .dk-meta{font-size:13px;color:var(--grey)}
+  .dk-left .f-kpi{background:#fff}.dk-left .f-score{background:var(--orange-tint)}
+  .dk-left .f-int{justify-content:flex-start}
+  .dk-porteur{display:flex;align-items:center;gap:12px;font-size:13px;font-weight:700;padding-top:6px}.dk-porteur i{width:40px;height:40px;border-radius:50%;background:var(--neutral-100)}.dk-porteur span{display:block;font-weight:400;color:var(--grey);font-size:11px}
+  .dk-panel{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--shadow-md)}
+  .dp-in{padding:16px;display:flex;flex-direction:column;gap:12px}
+  .dp-amt{display:flex;justify-content:space-between;align-items:baseline}.dp-amt b{font-size:20px}.dp-amt span{font-size:12px;color:var(--grey)}
+  .dk-panel .prog{max-width:none;margin:0;height:8px;border-radius:4px}
+  .dp-st{font-size:12px;color:var(--grey);display:flex;flex-direction:column;gap:4px}.dp-st b{color:var(--navy);font-size:13px}.dp-st span{display:flex;align-items:center;gap:4px}
+  .dk-panel .btn{height:46px;width:100%}
+  .dk-panel .card-acts .btn{width:auto}
+  .dp-ft{background:var(--surface);border-top:1px solid var(--line);padding:12px 16px;font-size:11px;color:var(--grey);display:flex;flex-direction:column;gap:8px}.dp-ft .sim{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--navy)}.dp-ft .sim .dk-btn{height:30px;font-size:12px}
+  .dk .dim{position:absolute;inset:0;z-index:5}
+  .dk .bs{z-index:6;left:50%;top:50%;right:auto;bottom:auto;transform:translate(-50%,-50%);width:440px;border-radius:20px;padding:28px}
+  .dk .bs .handle{display:none}
+  .dk .bs .acts{flex-direction:row-reverse}.dk .bs .btn{width:auto;flex:1}
+  .dk-ia{width:770px;margin:0 auto;padding:10px 0 40px;display:flex;flex-direction:column;gap:16px}
+  .dk-subnav{height:42px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:center;position:relative;font-size:14px;font-weight:700}.dk-subnav::before{content:"←";position:absolute;left:24px;font-weight:400}
+  .dk-ia h1{font-size:28px;margin:22px 0 4px;color:var(--navy)}
+  .dk-card{background:#fff;border-radius:20px;padding:22px 24px;display:flex;flex-direction:column;gap:20px}
+  .dk-card.pend>div{display:grid;grid-template-columns:1fr 1fr;gap:16px}.dk-card.pend .h3s{grid-column:1/-1;margin:0}.dk-card.pend .pc{margin:0}
+  .dk .crit{grid-template-columns:repeat(4,1fr)}
+  .dk .bnf-band{margin:0;background:transparent;padding:0}.dk .bnf-band .h3s{padding:0}
+  .dk .bnf{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;padding:0;scrollbar-width:none}.dk .bnf>div{flex:0 0 100%;scroll-snap-align:start;min-width:0;background:var(--bg);min-height:0;display:grid;grid-template-columns:1fr 260px;align-items:center;gap:16px;padding-right:16px}.dk .bnf-tx{padding:20px}.dk .bnf-ill{height:120px;align-items:center}
+  .dk .dots-row{align-items:center;gap:8px;margin-top:2px}.dk .dots-row .arr{display:grid}
+  .dots-row .arr{display:none;place-items:center;width:32px;height:32px;border-radius:50%;border:1px solid var(--line);background:#fff;cursor:pointer;padding:0;margin:0 6px}
+  .alert-o{background:var(--orange-tint);border:1px solid var(--orange-soft);border-radius:16px;padding:12px}
+  .alert-h{display:flex;gap:10px;align-items:flex-start;flex:1}.alert-h b{font-size:14px;line-height:1.35;display:block}.alert-h p{font-size:12px;color:var(--grey);margin:2px 0 0;line-height:1.45}
+  .alert-ic{width:32px;height:32px;border-radius:50%;background:#fff;display:grid;place-items:center;flex:none}
+  .alert-a .btn{width:100%;height:44px;margin-top:12px}.alert-l{display:block;text-align:center;font-size:12px;font-weight:700;color:var(--navy);text-decoration:underline;margin-top:10px;cursor:pointer}
+  .dk .alert-o{display:flex;align-items:center;gap:16px;padding:14px 16px}.dk .alert-a{display:flex;flex-direction:row-reverse;align-items:center;gap:16px}.dk .alert-a .btn{width:auto;margin:0;padding:0 18px;white-space:nowrap}.dk .alert-l{margin:0}
+  .alert-i{display:flex;gap:10px;align-items:flex-start;background:var(--neutral-100);border-radius:16px;padding:12px;font-size:12px;line-height:1.45}.alert-i b{font-size:13px}.alert-i p{margin:2px 0 0;color:var(--grey)}.alert-i u{color:var(--navy);font-weight:700;cursor:pointer}.alert-i .x{font-size:18px;color:var(--grey);cursor:pointer;line-height:1;padding:0 2px}
+  .tips{display:flex;flex-direction:column;gap:8px;margin-top:12px}.dk .tips{display:grid;grid-template-columns:repeat(auto-fit,minmax(0,1fr));margin-top:0}.dk .tips .match{height:100%}
+  .badge-warn{background:var(--orange);margin-left:4px}.lnk{color:var(--navy);font-weight:700;text-decoration:underline;cursor:pointer}.note-o{background:var(--orange-tint)}
+  .dk .hero .btn{width:auto!important;padding:0 28px}
+  .dk .match,.dk .quiet{max-width:none}
+  .dnote{color:#bbb;font-size:13px;margin:6px 0 0}
+  .dk .ill-confirm,.dk .ill-rules{zoom:.8}
+</style>
+</head>
+<body>
+<div class="warn">MAQUETTE, PAS LE VRAI RENDU</div>
+<div class="wrap">
+  <h1>Investissement automatique à confirmer</h1>
+  <p class="sub">Card retenue pour le listing, fiche avec le footer 3c, et écran Investissements automatiques. La version actuelle est toujours à gauche pour comparer.</p>
+  <div class="tabs"><button class="on" data-tab="m">Mobile</button><button data-tab="d">Desktop</button></div>
+<div id="tab-m">
+
+  <h2 class="line-title"><span class="n">1</span> Listing · en cours et prochainement</h2>
+  <div class="cols">
+    <div class="col ref">
+      <h2>Actuel</h2>
+      <div class="spacer" style="height:120px"></div>
+      <div class="phone list-scroll"><div class="sheet">
+        <div class="sec-h">En cours <span class="count">3</span></div><div id="BOref"></div>
+        <img src="actuel-card.png" alt="Card actuelle" style="width:calc(100% + 40px);margin:16px -20px 0;display:block;clip-path:inset(0 16px)">
+      </div></div>
+      <p class="muted" style="font-size:12px;margin-top:8px">La card « En cours » est reconstituée d'après la card actuelle et le footer de la fiche, à remplacer par une capture prod.</p>
+    </div>
+    <div class="col">
+      <h2>Listing retenu</h2>
+      <div class="toggle" data-v="BO"><button class="on" data-s="auto">En cours · auto</button><button data-s="reinv">Auto + réinvesti</button><button data-s="manual">Sans auto</button><button data-s="none">Pas investi</button></div>
+      <div class="phone list-scroll"><div class="sheet">
+        <div class="sec-h">En cours <span class="count">3</span></div><div id="BO"></div>
+        <div class="sec-h" style="margin-top:32px">Prochainement <span class="count">4</span></div><div id="B" style="display:grid;gap:16px"></div>
+      </div></div>
+    </div>
+    <aside class="why-col">
+      <h2>Ce qu'on a fait, et pourquoi</h2>
+      <p class="muted" style="margin:0 0 6px;font-weight:700">En cours</p>
+      <ul><li><b>La même ligne que le footer de la fiche</b> : montant collecté et barre à gauche, l'action à droite.</li><li><b>« Réinvestir » dès qu'on a des bricks sur le projet</b>, « Investir » sinon. Le bouton dit où on en est.</li><li><b>Vos bricks dans un tag sur la photo</b>, comme en prod : le total d'abord, puis la part invest auto si elle existe (« 8 🧱 | dont ⚡5 »). Tout en auto : « ⚡5 🧱 ». Sans auto : « 3 🧱 ». La card reste légère, le détail est dans la fiche.</li><li><b>Plus de compte à rebours sur la photo</b> : la collecte est ouverte, « Collecte en cours » passe sous le nom.</li></ul>
+      <p class="muted" style="margin:12px 0 6px;font-weight:700">Prochainement</p>
+      <ul><li><b>Le même bloc que le footer de la fiche</b> : un bandeau gris « Invest auto · Expire dans… ⓘ », le même que sur l'écran Investissements automatiques, puis « Refuser » et « Confirmer 5 🧱 (50 €) ». On retrouve la même chose du listing à la fiche.</li><li><b>Le montant est dans le bouton</b> : le bandeau ne porte que le délai, le bouton a toute la largeur et n'est plus coupé.</li><li><b>Une seule unité, la brick</b>, avec son prix entre parenthèses, comme partout ailleurs.</li><li><b>La photo ne garde que le compte à rebours</b> : toute l'info invest auto est en bas de la card.</li><li><b>« 860 ont déjà investi en automatique »</b> remplace « intéressés » : une preuve sociale liée à la feature.</li><li><b>On confirme en un clic depuis le listing</b> : l'encart passe en vert « confirmées ». Un clic sur la card ouvre la fiche pour en savoir plus.</li></ul>
+    </aside>
+  </div>
+
+  <h2 class="line-title"><span class="n">2</span> Fiche produit · footer 3c</h2>
+  <div class="cols">
+    <div class="col ref">
+      <h2>Actuel</h2>
+      <div class="spacer"></div>
+      <div class="ref-fiche"></div>
+    </div>
+    <div class="col">
+      <h2>Fiche retenue · footer 3c</h2>
+      <div class="toggle" data-v="F3c"><button class="on" data-s="todo">À confirmer</button><button data-s="sheet">Refuser</button><button data-s="refused">Refusé</button><button data-s="done">Confirmé</button><button data-s="open">Ouverture</button><button data-s="reinv">Réinvesti</button><button data-s="reinvManual">Investi · sans invest auto</button><button data-s="closed">Terminée · auto + réinvesti</button><button data-s="closedAuto">Terminée · auto seul</button><button data-s="closedManual">Terminée · sans invest auto</button></div>
+      <div id="F3c"></div>
+    </div>
+    <aside class="why-col">
+      <h2>Ce qu'on a fait, et pourquoi</h2>
+      <ul><li><b>L'info est à un seul endroit</b> : le footer, toujours visible. L'étiquette du haut est supprimée.</li><li><b>Même structure dans tous les états</b> : l'encart de vos bricks, puis la ligne de collecte de la prod, le montant à gauche et l'action à droite. Avant l'ouverture : « 774 000 € à collecter » et « Rappel d'ouverture », pour être alerté et investir à la main. Le calendrier passe à côté du nom du projet, comme sur la card du listing.</li><li><b>« Refuser » en texte</b> : possible, mais secondaire. « Confirmer » reste l'action principale.</li><li><b>Le montant est dans le bouton</b> : « Confirmer 5 🧱 (50 €) », comme en prod. Au-dessus, un bandeau gris « Invest auto · Expire dans… ⓘ », le même que sur la card et l'écran Investissements automatiques. Le i ouvre la bottom sheet du délai.</li><li><b>Le refus passe par une bottom sheet</b> : on évite les erreurs, on explique que les bricks sont libérées et qu'on peut toujours investir à l'ouverture.</li><li><b>Une signature unique pour l'invest auto</b> : un encart teinté avec l'icône et « Investissement automatique » en en-tête, identique sur la card et dans les états avant l'ouverture. Orange à confirmer, gris refusé, vert confirmé. Une fois investi, l'icône invest auto reste dans la sous-ligne.</li><li><b>Le personnel est séparé du commun</b> : vos bricks sont dans l'encart ; l'ouverture de la collecte, la même pour tous, passe sous le titre, comme sur la card. Le footer ne garde que l'encart et l'action, collés.</li><li><b>Une fois investi, l'encart devient « mes bricks sur ce projet »</b> : le total, avec « dont 5 via l'investissement automatique » si on a réinvesti à la main. Il remplace la barre grise du haut et devient le seul accès au détail de l'investissement (chevron).</li><li><b>Collecte terminée, un seul chemin</b> : « Collecte terminée », commun à tous, passe sous le titre. L'encart devient un bandeau vert qui s'adapte : « 8 bricks (soit 80 €), dont 5 via Invest auto », « 5 bricks (soit 50 €) via Invest auto » ou « 3 bricks (soit 30 €) investies sur ce projet », toujours dans la couleur de vos bricks, mais fin et sans chevron. Dessous, la même ligne que dans les autres états : montant collecté et barre à gauche, un seul bouton à droite, « Suivre le projet ».</li><li><b>L'encart est toujours au même endroit</b> : dans le footer, au-dessus du bouton, y compris une fois la collecte ouverte (« 5 bricks investies sur ce projet », puis « Réinvestir »), jusqu'à la fin de la collecte où il devient un bandeau.</li></ul>
+    </aside>
+  </div>
+
+  <h2 class="line-title"><span class="n">3</span> Écran Investissements automatiques</h2>
+  <div class="cols">
+    <div class="col ref">
+      <h2>Actuel</h2>
+      <div class="toggle" data-v="R0"><button class="on" data-s="card">En attente</button><button data-s="vide">Rien en attente</button><button data-s="jamais">Jamais activé</button><button data-s="delai">i expiration</button><button data-s="sheet">Répartition équitable</button></div>
+      <div id="R0"></div>
+    </div>
+    <div class="col">
+      <h2>Proposition</h2>
+      <div class="toggle" data-v="R2"><button class="on" data-s="card">En attente</button><button data-s="solde">Solde insuffisant</button><button data-s="vide">Rien en attente · avec historique</button><button data-s="rien">Rien en attente · sans historique</button><button data-s="pause">En pause</button><button data-s="jamais">Jamais activé</button></div>
+      <div id="R2"></div>
+    </div>
+    <aside class="why-col">
+      <h2>Ce qu'on a fait, et pourquoi</h2>
+      <ul><li><b>Le collectif d'abord</b> : la ligne communauté en haut rappelle qu'on n'est pas seul, d'où le partage des bricks.</li><li><b>Les cartes en attente reprennent la DA de la card et de la fiche</b> : le compte à rebours au-dessus de la carte comme aujourd'hui, puis « Refuser » et « Confirmer 5 🧱 (50 €) ».</li><li><b>« Répartition équitable » devient un nom qu'on retient</b> : une icône balance et une ligne courte sur la carte (le nombre de bricks est déjà dans le bouton), une seule définition en bottom sheet, et la même icône partout où le montant a été ajusté.</li><li><b>Des bricks partout, et « Maximum par projet »</b> au lieu de « Montant » : on comprend que c'est un plafond.</li><li><b>Vos derniers investissements</b> : vos bricks et la date d'investissement, comme un historique.</li><li><b>Rien en attente, un seul état</b> : avec historique, on montre ses derniers investissements ; sans historique, l'activité de la communauté prend leur place. Même section « En attente de confirmation ». L'état vide est une simple ligne d'info, sans encart, car il n'appelle aucune action. Le conseil devient une carte courte et cliquable, à part, qui mène aux critères.</li><li><b>La ligne communauté explique le partage</b> : « Vous investissez à plusieurs », en 3 étapes, jusqu'à la répartition équitable.</li><li><b>Chaque état a son rôle</b> : sans historique (on montre que la feature tourne), en pause (réactiver en 1 clic), jamais activé (une histoire en 4 étapes, de la réassurance et un bouton toujours visible).</li><li><b>Les bottom sheets d'info sont réécrites</b> : plus courtes, « libérées pour d'autres investisseurs ».</li><li><b>Un seul bandeau à la fois, par ordre d'urgence, toujours sous la ligne communauté</b> : le solde insuffisant passe avant l'annonce du nouveau délai. Aujourd'hui, trois encarts s'empilent avant le contenu.</li><li><b>Solde insuffisant</b> : un encart orange clair dit combien il manque (« Il manque 70 € sur votre solde Bricks »), avec « Ajouter de l'argent ». Sur chaque carte, « Il manque 30 € sur votre solde · Ajouter » ; le bouton « Confirmer » ne change pas. Le tag « Solde insuffisant » reste sur les critères.</li><li><b>Le virement automatique n'a plus son propre bandeau</b> : solde insuffisant, c'est un lien dans l'encart ; solde suffisant, c'est un conseil dans la section « Conseils ». Pour ceux qui n'ont jamais activé, une ligne dans « Investissez en toute sérénité ».</li><li><b>Les conseils sortent de « En attente de confirmation »</b> : « Recevez des bricks plus souvent » et le virement automatique sont regroupés dans une section « Conseils », juste sous les attentes.</li><li><b>Le nouveau délai est une annonce temporaire</b> : un bandeau gris qu'on peut fermer, en haut de tous les états des utilisateurs déjà actifs, pendant quelques semaines. Seul le solde insuffisant passe devant. Jamais en « Jamais activé » : un nouvel utilisateur n'a pas de changement à comprendre.</li></ul>
+    </aside>
+  </div>
+
+  <h2 class="line-title"><span class="n">4</span> Pause automatique · profil inactif</h2>
+  <div class="cols">
+    <div class="col">
+      <h2>Push</h2>
+      <div class="toggle" data-v="P"><button class="on" data-s="warn">Après la 2e expiration</button><button data-s="pause">Au moment de la pause</button></div>
+      <div id="P"></div>
+    </div>
+    <div class="col">
+      <h2>Email · au moment de la pause</h2>
+      <div class="spacer"></div>
+      <div id="MAIL"></div>
+    </div>
+    <div class="col">
+      <h2>Écran · mis en pause par Bricks</h2>
+      <div class="spacer"></div>
+      <div id="R4"></div>
+    </div>
+    <aside class="why-col">
+      <h2>Ce qu'on a fait, et pourquoi</h2>
+      <ul><li><b>On prévient avant de couper</b> : un push après la 2e expiration laisse une chance de réagir.</li><li><b>Une pause, pas une désactivation</b> : critères et historique conservés, on réactive en un clic depuis le push, l'email ou l'écran.</li><li><b>On dit pourquoi, sans reproche</b> : « vous n'avez pas confirmé vos bricks sur vos 3 derniers projets », avec la liste des projets concernés.</li><li><b>On rassure sur l'argent</b> : « Rien n'est perdu », le solde n'a pas été débité.</li><li><b>Le collectif justifie la pause</b> : les bricks non confirmées reviennent à d'autres investisseurs.</li><li><b>On traite la cause</b> : lien pour activer les notifications, souvent à l'origine des oublis.</li><li><b>L'email porte le message</b> : si les push sont désactivés, c'est le seul canal qui arrive.</li></ul>
+    </aside>
+  </div>
+
+</div>
+<div id="tab-d" hidden>
+  <h2 class="line-title"><span class="n">1</span> Listing · en cours et prochainement</h2>
+  <div class="dcols">
+    <div class="dcol ref">
+      <h2>Actuel</h2>
+      <div class="spacer" style="height:79px"></div>
+      <img class="dshot" src="desk-actuel-listing.png" alt="Listing desktop actuel">
+      <p class="dnote">Capture prod du 05/11. Aucun projet « Prochainement » en ce moment : la card prochainement n'existe pas encore en desktop.</p>
+    </div>
+    <div class="dcol">
+      <h2>Listing retenu</h2>
+      <div class="toggle" data-v="DBO"><button data-s="auto">En cours · auto</button><button class="on" data-s="reinv">Auto + réinvesti</button><button data-s="manual">Sans auto</button><button data-s="none">Pas investi</button></div>
+      <div id="DL"></div>
+    </div>
+    <aside class="why-col">
+      <h2>Ce qu'on a fait, et pourquoi</h2>
+      <ul><li><b>La card en cours de la prod, en gardant sa structure</b> : investisseurs, KPI, barre, montant et bouton. On change seulement le tag et le bouton.</li><li><b>Le tag de bricks sur la photo</b>, comme en mobile : « 8 🧱 | dont ⚡5 », « ⚡5 🧱 » ou « 3 🧱 ».</li><li><b>« Réinvestir » si on a déjà des bricks</b>, « Investir » sinon. En prod, on lit « Investir » même avec des bricks.</li><li><b>La card prochainement reprend la card mobile</b> : compte à rebours sur la photo, date et calendrier à côté du nom, « 860 ont investi en auto », bandeau « Invest auto · Expire dans… », puis « Refuser » et « Confirmer 5 🧱 (50 €) ».</li><li><b>Même grille que la prod</b> : en cours en haut, prochainement en dessous.</li><li><b>Données de la Villa Jasmine Leaf</b>, le projet en collecte en prod aujourd'hui, pour comparer à l'identique.</li></ul>
+    </aside>
+  </div>
+
+  <h2 class="line-title"><span class="n">2</span> Fiche produit · panneau de droite</h2>
+  <div class="dcols">
+    <div class="dcol ref">
+      <h2>Actuel</h2>
+      <div class="toggle" data-v="DFref"><button class="on" data-s="open">En collecte</button><button data-s="closed">Collecte terminée</button></div>
+      <div id="DFref"></div>
+      <p class="dnote">Captures prod du 05/11. Pas de projet avant ouverture en ce moment, donc pas de capture de l'état « à confirmer » en desktop.</p>
+    </div>
+    <div class="dcol">
+      <h2>Fiche retenue</h2>
+      <div class="toggle" data-v="DF"><button class="on" data-s="todo">À confirmer</button><button data-s="sheet">Refuser</button><button data-s="refused">Refusé</button><button data-s="done">Confirmé</button><button data-s="open">Ouverture</button><button data-s="reinv">Réinvesti</button><button data-s="reinvManual">Investi · sans invest auto</button><button data-s="closed">Terminée · auto + réinvesti</button><button data-s="closedAuto">Terminée · auto seul</button><button data-s="closedManual">Terminée · sans invest auto</button></div>
+      <div id="DF"></div>
+    </div>
+    <aside class="why-col">
+      <h2>Ce qu'on a fait, et pourquoi</h2>
+      <ul><li><b>Le panneau de droite joue le rôle du footer mobile</b> : la collecte en haut, puis l'encart de vos bricks, puis une seule action.</li><li><b>L'étiquette « 1 🧱 10 € investis sur ce projet » au-dessus du titre est supprimée</b> : vos bricks sont dans l'encart du panneau, à côté de l'action.</li><li><b>Avant l'ouverture</b> : « 5 000 000 € à collecter », le bandeau « Invest auto · Expire dans… ⓘ », puis « Refuser » et « Confirmer 5 🧱 (50 €) ». Le calendrier et « Ouverture le 5 novembre à 12h30 » passent à côté du titre.</li><li><b>Refusé et confirmé</b> : l'encart gris ou vert, puis « Rappel d'ouverture » en orange.</li><li><b>Pendant la collecte</b> : l'encart vert « 8 bricks investies sur ce projet » avec l'icône invest auto, puis « Réinvestir ».</li><li><b>Collecte terminée</b> : le bandeau vert, puis « Suivre le projet ». En prod, on garde aujourd'hui un « Investir maintenant » grisé qui ne mène nulle part.</li><li><b>Le refus et le délai passent par une modale centrée</b>, la version desktop de la bottom sheet, avec le même texte.</li></ul>
+    </aside>
+  </div>
+
+  <h2 class="line-title"><span class="n">3</span> Écran Investissements automatiques</h2>
+  <div class="dcols">
+    <div class="dcol ref">
+      <h2>Actuel</h2>
+      <div class="spacer"></div>
+      <img class="dshot" src="desk-actuel-ia.png" alt="Investissement automatique desktop actuel">
+      <p class="dnote">Capture prod du 05/11, compte de Laetitia : rien en attente, solde insuffisant.</p>
+    </div>
+    <div class="dcol">
+      <h2>Proposition</h2>
+      <div class="toggle" data-v="DR"><button class="on" data-s="card">En attente</button><button data-s="solde">Solde insuffisant</button><button data-s="vide">Rien en attente · avec historique</button><button data-s="rien">Rien en attente · sans historique</button><button data-s="pause">En pause</button><button data-s="jamais">Jamais activé</button></div>
+      <div id="DR"></div>
+    </div>
+    <aside class="why-col">
+      <h2>Ce qu'on a fait, et pourquoi</h2>
+      <ul><li><b>Les mêmes blocs que la proposition mobile</b>, dans la colonne centrale de la prod : ligne communauté, en attente de confirmation, derniers investissements, critères.</li><li><b>Les cartes en attente côte à côte</b> : le compte à rebours au-dessus, puis « Refuser » et « Confirmer 5 🧱 (50 €) ».</li><li><b>Les critères sur une ligne</b> : « Maximum par projet » en bricks, limite mensuelle, rendement, horizon.</li><li><b>« Jamais activé »</b> : un carrousel, une étape à la fois en pleine largeur, le texte à gauche et l'illustration à droite, avec des flèches et des points.</li><li><b>Les bandeaux suivent la même règle qu'en mobile</b> : un seul à la fois, le solde insuffisant en ligne avec son bouton et le lien vers le virement automatique.</li><li><b>Les bottom sheets deviennent des modales centrées</b>, avec le même texte.</li></ul>
+    </aside>
+  </div>
+
+  <h2 class="line-title"><span class="n">4</span> Pause automatique · profil inactif</h2>
+  <p class="dnote">Pas de version desktop dédiée : le push est mobile, l'email est le même partout. Voir l'onglet Mobile.</p>
+</div>
+</div>
+
+<script>
+const ICON_AUTO = (c='currentColor',s=16)=>`<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="${c}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 1-15.5 6.2"/><path d="M3 12a9 9 0 0 1 15.5-6.2"/><path d="M18.5 2.5v3.3h-3.3"/><path d="M5.5 21.5v-3.3h3.3"/><path d="m13 7-3 5h4l-3 5"/></svg>`;
+const ICON_CHECK = (c='currentColor',s=16)=>`<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="${c}" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>`;
+const ICON_X = (c='currentColor',s=16)=>`<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="${c}" stroke-width="2.4" stroke-linecap="round"><path d="M7 7l10 10M17 7 7 17"/></svg>`;
+const ICON_CHEV = (c='currentColor',s=20)=>`<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="${c}" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>`;
+const ICON_CLOCK = (c='currentColor',s=13)=>`<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="${c}" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>`;
+const ICON_CAL = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#13273E" stroke-width="1.6" stroke-linecap="round"><rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M8 3v4M16 3v4M3.5 10h17"/><circle cx="17" cy="17" r="3.2" fill="#fff"/><path d="M17 15.6v2.8M15.6 17h2.8"/></svg>`;
+
+const RETRACT = "Rétractation possible jusqu'au lun. 9 nov.";
+const RETRACT_SHORT = "Rétractable jusqu'au 9 nov.";
+const countdown = `<div class="cd"><div><strong>01</strong><span>jour</span></div><i></i><div><strong>01</strong><span>heure</span></div><i></i><div><strong>34</strong><span>min</span></div></div>`;
+const bricksers = `<div class="bricksers"><div class="memo"><span></span><span></span><span></span></div><b>860</b><em>ont déjà investi en automatique</em></div>`;
+const tag = (s, extra='') => `<div class="chip">${ICON_AUTO('#EC5223',14)}<span>Investissement automatique</span><i></i>5 🧱${extra}${s==='done'?ICON_CHECK('#08744D',13):''}</div>`;
+
+const cardHead = `<div class="row"><div><div class="name">Immeuble Gare - Nevers</div><div class="date">Le 5 novembre à 12h30</div></div><div class="cal">${ICON_CAL}</div></div>`;
+const SIG_C = {orange:'#EC5223', green:'#08744D', neutral:'#76818B'};
+const SIG = tone => `<div class="strip-k" style="color:${SIG_C[tone]}">${ICON_AUTO(SIG_C[tone],14)}<span>Investissement automatique</span></div>`;
+const iaBox = (tone, title, sub='', right='') => `<div class="ia-box ${tone==='orange'?'':tone}"><div style="min-width:0">${SIG(tone)}<div class="strip-t">${title}</div>${sub?`<div class="strip-s">${sub}</div>`:''}</div>${right}</div>`;
+const cdLine = (t='3j, 12h et 24min', go='F3c:delai') => `<div class="cd-a"><b>${ICON_AUTO('#EC5223',13)}Invest auto</b><span>·</span><span class="cd-t">Expire dans ${t}<span class="cd-i" data-go="${go}">${ICON_INFO('#13273E',14)}</span></span></div>`;
+const chipAuto = `<div class="chip">${ICON_AUTO('#EC5223',14)}<span>Investissement automatique</span></div>`;
+function cardB(s){
+  const strip = s==='todo'
+    ? `<div class="card-ia">${cdLine('1j et 34min')}
+      <div class="card-acts"><button class="btn btn-ghost" data-go="F3c:sheet">Refuser</button><button class="btn btn-primary" data-go="F3c:done">Confirmer 5 🧱 (50 €)</button></div></div>`
+    : `<div class="card-ia">${iaBox('green', '5 bricks confirmées <span class="a-sub">(soit 50 €)</span>', '', ICON_CHECK('#08744D',20))}</div>`;
+  return `<div class="card" data-go="F3c:${s==='done'?'done':'todo'}"><div class="img">${countdown}<div class="patch"></div></div>
+    <div class="body">${cardHead}${bricksers}</div>${strip}</div>`;
+}
+const openStats = `<div style="flex:1;min-width:0"><div class="f-row" style="gap:8px;justify-content:flex-start"><span class="amt" style="white-space:nowrap">263 160 €</span><span class="muted" style="white-space:nowrap">25,0 %</span></div><div class="prog" style="max-width:none;margin-top:6px"><i style="width:25%"></i></div></div>`;
+const openHead = `<div><div class="name">Maison Eperon Réunion</div><div class="date" style="color:var(--green)">Collecte en cours</div></div>`;
+function cardOpen(s){
+  const A = ICON_AUTO('#EC5223',13);
+  const tagIn = {auto:`${A}5 🧱`, reinv:`8 🧱<i></i><span style="color:var(--grey);font-weight:400">dont</span>${A}5`, manual:'3 🧱'}[s];
+  const tagB = tagIn ? `<span class="chip" style="position:absolute;right:10px;bottom:10px;border:0;gap:4px">${tagIn}</span>` : '';
+  const btn = s==='none' ? 'Investir' : 'Réinvestir';
+  return `<div class="card"${s==='none'?'':` data-go="F3c:${{auto:'open',reinv:'reinv',manual:'reinvManual'}[s]}"`}><div class="img" style="background:url(fiche.png) 0 -100px/353px auto">${tagB}</div>
+    <div class="body">${openHead}${BRICKSERS_OPEN}</div>
+    <div class="card-ia"><div class="f-row">${openStats}<button class="btn btn-primary" style="height:48px;padding:0 20px">${btn}</button></div></div></div>`;
+}
+const cardOpenRef = `<div class="card"><div class="img" style="background:url(fiche.png) 0 -100px/353px auto"><span class="chip" style="position:absolute;right:10px;bottom:10px;border:0">10 🧱</span></div>
+  <div class="body"><div class="row"><div><div class="name">Maison Eperon Réunion</div><div class="muted" style="margin-top:2px">263 160 € collectés · 25,0 %</div><div class="prog" style="max-width:none;width:200px"><i style="width:25%"></i></div></div></div>
+  <div class="bricksers"><div class="memo"><span></span><span></span><span></span></div><b>1 234</b><em>intéressés</em></div></div></div>`;
+const ICON_UP = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#13273E" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 15 6-6 6 6"/></svg>`;
+
+const BRICKSERS_OPEN = `<div class="bricksers"><div class="memo"><span></span><span></span><span></span></div><b>1 234</b><em>ont investi · 860 en auto</em></div>`;
+const ficheContent = `
+  <div class="f-title">Maison Eperon Réunion</div>
+  <div class="f-meta">📍 Saint-Paul · 774 000 € · Marchand de biens<br>Garanties : 150 % ›</div>
+  <div class="f-int">${bricksers}</div>
+  <div class="f-kpi"><div><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#13273E" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="m7 15 3.5-3.5 2.5 2.5L17 9"/><path d="M13.5 9H17v3.5"/></svg><span>Rendement<strong>10 % /an</strong></span><svg class="kpi-i" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#76818B" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg></div><div>${ICON_CAL}<span>Horizon<strong>1 an 6 mois</strong></span></div></div>
+  <div class="f-score">Score Bricks : <span>Équilibré</span> ›</div>`;
+
+const sheet = `<div class="dim"></div><div class="bs"><div class="handle"></div>
+  <h3>Refuser ces 5 bricks <span class="a-sub" style="font-size:16px">(soit 50 €)</span></h3>
+  <p>Elles seront libérées pour d'autres investisseurs.<br><br>Vous pourrez toujours investir sur ce projet à l'ouverture de la collecte, dans la limite des bricks disponibles.</p>
+  <div class="acts"><button class="btn btn-primary" data-go="F3c:refused">Refuser</button><button class="btn btn-ghost" data-go="F3c:todo">Annuler</button></div></div>`;
+
+const confirmBtn = (style='') => `<button class="btn btn-primary btn-2l" data-go="F3c:done" style="height:54px;${style}">Confirmer<small>avant jeu. 5 nov. à 11 h 30</small></button>`;
+const refuseLink = `<button class="btn btn-ghost" style="height:50px;padding:0 8px">Refuser</button>`;
+
+const summary = (icon, tone, title, sub, right='') => `<div class="f-row">
+  <div class="sum"><div class="ico ${tone}">${icon}</div><div><div class="amt">${title}</div><div class="muted">${sub}</div></div></div>${right}</div>`;
+const ICON_CAL_SM = ICON_CAL.replace('width="20" height="20"','width="18" height="18"');
+
+const FOOTER = {
+  todo: `<div class="f-bar">
+    ${summary(ICON_AUTO('#EC5223',18), '', '5 bricks attribuées <span class="a-sub">(soit 50 €)</span>', 'par votre investissement automatique', refuseLink)}
+    ${confirmBtn('width:100%')}
+  </div>`,
+  refused: `<div class="f-bar">
+    ${summary(ICON_CAL_SM, 'neutral', 'Jeu. 5 nov. à 12 h 30', 'Ouverture de la collecte')}
+    <button class="btn btn-outline" style="height:54px;width:100%">Me le rappeler</button>
+  </div>`,
+  done: `<div class="f-bar">
+    ${summary(ICON_CHECK('#08744D',18), 'green', '5 bricks confirmées <span class="a-sub">(soit 50 €)</span>', RETRACT_SHORT)}
+    <div class="f-row">
+      <div><div class="muted">Ouverture de la collecte</div><div class="amt" style="margin-top:2px">Jeu. 5 nov. à 12 h 30</div></div>
+      <button class="btn btn-disabled" style="height:54px;padding:0 24px">Réinvestir</button>
+    </div>
+  </div>`,
+  open: `<div class="f-bar">
+    <div class="f-row">
+      <div style="flex:1;min-width:0"><div class="f-row" style="gap:8px"><span class="amt">263 160 €</span><span style="display:flex;align-items:center;gap:8px"><span class="muted">25,0 %</span><span class="chev-c">${ICON_UP}</span></span></div><div class="prog" style="max-width:none;margin-top:6px"><i style="width:25%"></i></div></div>
+      <button class="btn btn-primary" style="height:54px;padding:0 24px">Réinvestir</button>
+    </div>
+  </div>`,
+};
+FOOTER.sheet = FOOTER.todo;
+const collecte = right => `<div class="f-row">
+      <div><div class="muted">Ouverture de la collecte</div><div class="amt" style="margin-top:2px">Jeu. 5 nov. à 12 h 30</div></div>${right}</div>`;
+const preOpen = `<div class="f-row">
+      <div style="flex:1;min-width:0"><div class="f-row" style="gap:8px"><span class="amt" style="white-space:nowrap">774 000 €</span><span class="muted" style="white-space:nowrap">à collecter</span></div><div class="prog" style="max-width:none;margin-top:6px"><i style="width:0"></i></div></div>
+      <button class="btn btn-primary" style="height:54px;padding:0 16px;white-space:nowrap">Rappel d'ouverture</button>
+    </div>`;
+const FOOTER_C = {...FOOTER,
+  get todo(){ return `<div class="f-bar">
+    ${cdLine()}
+    <div style="display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:center"><button class="btn btn-ghost" data-go="F3c:sheet" style="height:54px;padding:0 12px">Refuser</button><button class="btn btn-primary" data-go="F3c:done" style="height:54px">Confirmer 5 🧱 (50 €)</button></div>
+  </div>`; },
+  get sheet(){ return this.todo; },
+  get delai(){ return this.todo; },
+  refused: `<div class="f-bar">
+    ${iaBox('neutral', '5 bricks refusées <span class="a-sub">(soit 50 €)</span>')}
+    ${preOpen}
+  </div>`,
+  done: `<div class="f-bar">
+    ${iaBox('green', '5 bricks confirmées <span class="a-sub">(soit 50 €)</span>', '', ICON_CHECK('#08744D',20))}
+    ${preOpen}
+  </div>`,
+};
+const holdBox = (title, sub='') => `<div class="ia-box green"><div style="min-width:0"><div class="strip-t">${title}</div>${sub?`<div class="strip-s" style="display:flex;align-items:center;gap:4px">${ICON_AUTO('#EC5223',13)} ${sub}</div>`:''}</div>${ICON_CHEV('#08744D',20)}</div>`;
+FOOTER_C.open = FOOTER.open.replace('<div class="f-bar">', `<div class="f-bar">
+    ${holdBox('5 bricks investies sur ce projet <span class="a-sub">(soit 50 €)</span>', "via l'investissement automatique")}`);
+FOOTER_C.reinvManual = FOOTER.open.replace('<div class="f-bar">', `<div class="f-bar">
+    ${holdBox('8 bricks investies sur ce projet <span class="a-sub">(soit 80 €)</span>')}`);
+FOOTER_C.reinv = FOOTER.open.replace('<div class="f-bar">', `<div class="f-bar">
+    ${holdBox('8 bricks investies sur ce projet <span class="a-sub">(soit 80 €)</span>', "dont 5 via l'investissement automatique")}`);
+const closedStats = `<div style="flex:1;min-width:0"><div class="f-row" style="gap:8px"><span class="amt">774 000 €</span><span style="display:flex;align-items:center;gap:8px"><span class="muted">100 %</span><span class="chev-c">${ICON_UP}</span></span></div><div class="prog" style="max-width:none;margin-top:6px"><i style="width:100%;background:var(--green-600)"></i></div></div>`;
+const closedFooter = line => `<div class="f-bar">
+    <div class="cd-a cd-green">${ICON_CHECK('#08744D',14)}${line}</div>
+    <div class="f-row">${closedStats}
+      <button class="btn btn-primary" style="height:54px;padding:0 18px;white-space:nowrap">Suivre le projet</button>
+    </div>
+  </div>`;
+const AUTO_TAG = `<b>${ICON_AUTO('#EC5223',13)}Invest auto</b>`;
+FOOTER_C.closed = closedFooter(`<span class="cd-t"><b style="color:var(--navy)">8 bricks</b> (soit 80 €), dont 5 via</span>${AUTO_TAG}`);
+FOOTER_C.closedAuto = closedFooter(`<span class="cd-t"><b style="color:var(--navy)">5 bricks</b> (soit 50 €) via</span>${AUTO_TAG}`);
+FOOTER_C.closedManual = closedFooter(`<span class="cd-t"><b style="color:var(--navy)">3 bricks</b> (soit 30 €) investies sur ce projet</span>`);
+
+function fiche(s, F=FOOTER){
+  const owned = '';
+  return `<div class="fiche"><div class="f-photo"><a class="f-back" data-go="B:${s==='done'||s==='open'||s==='reinv'||s.startsWith('closed')?'done':'todo'}" title="Retour au listing"></a></div>
+    <div class="f-body">${owned}${s.startsWith('closed') ? ficheContent.replace(bricksers, BRICKSERS_OPEN).replace('</div>', `</div><div class="date" style="text-align:center;margin:2px 0 4px;color:#08744D;display:flex;align-items:center;justify-content:center;gap:4px">${ICON_CHECK('#08744D',14)}Collecte terminée</div>`) : ['open','reinv','reinvManual'].includes(s) ? ficheContent.replace(bricksers, BRICKSERS_OPEN) : ['todo','sheet','delai','refused','done'].includes(s) ? ficheContent.replace('<div class="f-title">Maison Eperon Réunion</div>', `<div class="f-title" style="display:flex;align-items:center;justify-content:center;gap:10px">Maison Eperon Réunion<span class="cal" title="Ajouter à mon calendrier">${ICON_CAL}</span></div>`).replace('</div>', '</div><div class="date" style="text-align:center;margin:2px 0 4px">Ouverture le 5 novembre à 12h30</div>') : ficheContent}</div>${F[s]}${s==='sheet'?sheet:s==='delai'?NEW_DELAI:''}</div>`;
+}
+
+const ICON_INFO = (c='#76818B',s=14)=>`<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="${c}" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>`;
+const ICON_ARROW = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#13273E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:2px"><path d="m9 6 6 6-6 6"/></svg>`;
+const ICON_TREND = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#13273E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="m7 15 3.5-3.5 2.5 2.5L17 9"/></svg>`;
+const ICON_CAL_XS = ICON_CAL.replace('width="20" height="20"','width="14" height="14"');
+const ICON_USERS = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#13273E" stroke-width="1.8" stroke-linecap="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.6-3.4 3.2-5.5 6.5-5.5s5.9 2.1 6.5 5.5"/><path d="M16 4.6a3.5 3.5 0 0 1 0 6.8M18 14.8c1.9.7 3.2 2.5 3.5 5.2"/></svg>`;
+
+const pCard = ({deadline, title, img, rate, years, bricks, extra=''}) => `<div class="pc">
+  <div class="pc-top">${deadline} <span data-go="R2:delai" style="display:inline-flex">${ICON_INFO('#13273E',15)}</span></div>
+  <div class="pc-in">
+    <div class="pc-proj" data-go="F3c:todo"><div class="pc-img" style="background-position:${img}"></div>
+      <div style="flex:1;min-width:0"><div class="pc-t"><span>${title}</span>${ICON_ARROW}</div>
+      <div class="pc-chips"><span>${ICON_TREND} ${rate}</span><span>${ICON_CAL_XS} ${years}</span></div></div></div>
+    <div class="pc-sep"></div>
+    <div class="pc-ia">${extra}
+    <div class="card-acts"><button class="btn btn-ghost" data-go="F3c:sheet">Refuser</button><button class="btn btn-primary" data-go="F3c:done">Confirmer ${bricks} 🧱 (${bricks*10} €)</button></div></div>
+  </div></div>`;
+
+const cardSainte = pCard({deadline:'Expire dans 3j, 12h et 24min.', title:'Rénovation maison Sainte Marie La Hume', img:'-36px -393px', rate:'11,00 %', years:'2 ans', bricks:5});
+const ICON_SCALE = (c='#13273E', s=18) => `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="${c}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><path d="M12 3v18M7 21h10M5 7h14"/><path d="m5 7-3 6a3 3 0 0 0 6 0z"/><path d="m19 7-3 6a3 3 0 0 0 6 0z"/></svg>`;
+const repTag = `<span class="rep">${ICON_SCALE('#EC5223',12)}Répartition équitable</span>`;
+const R_EXTRA = {
+  R2: `<div class="note">${ICON_SCALE('#13273E',16)}<span><b>Répartition équitable appliquée</b></span><span data-go="R2:sheet" style="display:inline-flex;margin-left:auto;cursor:pointer">${ICON_INFO('#13273E',15)}</span></div>`,
+};
+const DEAL = [['Camille',3,'#BEF0C6'],['Léo',3,'#C5ECFD'],['Vous',2,'#FFD9A2'],['Inès',2,'#F9C9D4']];
+const dealIll = `<div class="fair-ex"><div class="fair-ex-h"><b>Exemple</b> : 10 bricks à distribuer, 4 investisseurs qui en veulent 5 chacun</div>
+  <div class="fair-ex-g"><span></span><em>1er tour</em><em>2e tour</em><em>3e tour</em><em>Reçu</em>
+  ${DEAL.map(([n,k,c])=>`<span class="fair-ex-n${n==='Vous'?' me':''}"><i style="background:${c}"></i>${n}</span>${[1,2,3].map(t=>`<em>${t<=k?'🧱':'<span class="fair-ex-0">–</span>'}</em>`).join('')}<em><b>${k}</b> sur 5</em>`).join('')}</div>
+  <div class="fair-ex-f">Au 3e tour, il ne reste que 2 bricks : la distribution s'arrête.</div></div>`;
+const whySheet = `<div class="dim"></div><div class="bs"><div class="handle"></div>
+  <h3 style="display:flex;align-items:center;gap:8px">${ICON_SCALE('#EC5223',22)}Répartition équitable</h3>
+  <p style="margin-bottom:16px">Comme dans un jeu de cartes, les bricks d'un projet sont distribuées une par une, à tour de rôle, entre les investisseurs dont les critères correspondent.<br><br>Quand il n'y a pas assez de bricks pour tout le monde, la distribution s'arrête en cours de route : vous pouvez en recevoir moins que votre maximum.</p>
+  ${dealIll}
+  <div class="acts"><button class="btn btn-primary">J'ai compris</button></div></div>`;
+const bsheet = (title, body, btn=true) => `<div class="dim"></div><div class="bs"><div class="handle"></div><h3>${title}</h3><p>${body}</p>${btn?'<div class="acts"><button class="btn btn-primary">J\'ai compris</button></div>':''}</div>`;
+const OLD = {
+  delai: bsheet('Délai de confirmation', "Confirmez votre investissement avant le temps imparti. Passé ce délai, les bricks seront libérées pour d’autres investisseurs et l’argent vous sera restitué.", false),
+  sheet: bsheet('Répartition équitable', "Afin que tous les investisseurs puissent obtenir des bricks via l’investissement automatique, les bricks sont distribuées à la manière d’un jeu de carte, à raison de une brick par investisseur, jusqu’à ce qu’il n’y ait plus de bricks disponible à distribuer.<br>Il est donc possible que vous n’ayez pas la somme souhaitée si beaucoup d’investisseurs ont demandé des bricks sur un même bien.", false),
+};
+const NEW_DELAI = bsheet('Délai de confirmation', "Il vous reste 3 j, 12 h et 24 min pour confirmer.<br><br>Passé ce délai, vos bricks sont libérées et remises dans la collecte, disponibles pour tous à son ouverture.");
+const AV = ['#BEF0C6','#FFD9A2','#C5ECFD','#F9C9D4'];
+const ICON_BELL = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#EC5223" stroke-width="2" stroke-linecap="round"><path d="M6 16V11a6 6 0 1 1 12 0v5l1.5 2h-15z"/><path d="M10 20a2 2 0 0 0 4 0"/></svg>`;
+const CHEV_R = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#13273E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>`;
+const scrTop = `<div class="scr-sb"><span>9:41</span><span>●●● 32</span></div>
+  <div class="scr-hd"><span>←</span><span>Investissement automatique</span><span></span></div>`;
+const matchCard = () => `<div class="match"><span class="match-ic">${ICON_TREND.replace('width="14" height="14"','width="18" height="18"')}</span>
+  <div><span class="match-k">Conseil</span><b>Recevez des bricks plus souvent</b><p>Élargissez votre rendement minimum ou votre horizon.</p></div>${CHEV_R}</div>`;
+const quietEmpty = (t, d) => `<div class="quiet"><span class="quiet-ic">${ICON_CLOCK('#76818B',18)}</span><div><b>${t}</b><p>${d}</p></div></div>`;
+const emptyBlock = `<div><div class="h3s">En attente de confirmation</div>
+  ${quietEmpty('Aucun investissement en attente', "Vous serez notifié dès qu'un nouveau projet correspond à vos critères.")}</div>`;
+const ci = d => `<span style="width:28px;height:28px;border-radius:50%;background:#13273E;display:grid;place-items:center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${d}</svg></span>`;
+const CI = [ci('<rect x="3" y="6" width="18" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/>'), ci('<path d="M4 9h13l-3-3M20 15H7l3 3"/>'), ci('<path d="m6 18 12-12"/><circle cx="7" cy="7" r="1.5"/><circle cx="17" cy="17" r="1.5"/>'), ci('<rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/>')];
+const CRIT = [['50 €','Maximum par projet','240 €'],['Pas de limite','Limite mensuelle','Pas de limite'],['10 %','Rendement minimum','9 %'],['3 à 7 ans','Horizon souhaité','2 à 5 ans']];
+const critBlock = (trend=false, hist=true, paused=false, low=false) => `<div${paused?' class="crit-off"':''}><div class="crit-h"><div class="h3s">Mes critères ${paused?'<span class="badge-on badge-off">EN PAUSE</span>':'<span class="badge-on">ACTIF</span>'}${low?'<span class="badge-on badge-warn">SOLDE INSUFFISANT</span>':''}</div><div class="dots">···</div></div>
+  <div class="crit">${CRIT.map(([v,l,t],i)=>`<div><div>${CI[i]}</div><div><b>${v}</b><span>${l}</span>${trend?`<div class="tr">Communauté : <em>${t}</em></div>`:''}</div></div>`).join('')}</div>
+  <div class="meta" style="margin-top:14px">${hist?`<span>${ICON_AUTO('#76818B',14)} 12 investissements depuis le 21/12/2023</span>`:`<span>${ICON_AUTO('#76818B',14)} Actif depuis le 04/11/2026</span>`}<span>Approvisionné depuis : Solde Bricks</span></div></div>`;
+const linksBlock = (first='Comment ça marche ?') => `<div class="links">${[first,'Historique des configurations','Questions fréquentes'].map(t=>`<div>${t}${CHEV_R}</div>`).join('')}</div>`;
+const screen = body => `<div class="scr">${scrTop}<div class="scr-bd">${body}</div></div>`;
+
+const avatars = (n=4) => AV.slice(0,n).map((c,i)=>`<span style="background:${c}"></span>`).join('');
+
+const memo3 = cs => `<span class="memo" style="display:flex">${cs.map(c=>`<span style="width:16px;height:16px;border-width:1.5px;margin-left:-6px;background:${c}"></span>`).join('')}</span>`;
+const cStrip = `<div class="cstrip" data-go="R2:com"><span class="memo" style="display:flex">${AV.slice(0,3).map((c,i)=>`<span style="background:${c};margin-left:${i?-10:0}px"></span>`).join('')}</span><span><b>2 340 investisseurs</b> investissent automatiquement, comme vous</span>${CHEV_R}</div>`;
+const feedBlock = `<div><div class="crit-h"><div class="h3s">Vos derniers investissements</div><span class="why">Voir plus</span></div>
+  <div class="feed">
+    <div data-go="F3c:open"><div class="th" style="background:url(img.png) center/cover"></div><div style="min-width:0"><div class="t">Immeuble Gare - Nevers</div><div class="m">${ICON_CAL_XS} Investi le 28/10/2026</div></div><div class="you">Vous<b>5 🧱</b></div></div>
+    <div data-go="F3c:open"><div class="th" style="background:url(fiche.png) center 18%/260% auto"></div><div style="min-width:0"><div class="t">Maison Eperon Réunion</div><div class="m">${ICON_CAL_XS} Investi le 21/10/2026</div></div><div class="you">Vous<b style="display:flex;align-items:center;gap:4px;justify-content:flex-end">${ICON_SCALE('#EC5223',14)}4 🧱</b></div></div>
+  </div></div>`;
+const pendingBlock = `<div><div class="h3s">En attente de confirmation</div>${cardSainte}
+  ${pCard({deadline:'Expire dans 3j, 12h et 24min.', title:'Immeuble Dax', img:'-36px -632px', rate:'10,00 %', years:'3 ans', bricks:4, extra:R_EXTRA.R2})}</div>`;
+const shareSheet = bsheet('Vous investissez à plusieurs', "Quand un projet correspond à vos critères, il correspond souvent à ceux d'autres investisseurs. Les bricks sont alors distribuées une par une à chaque investisseur, à tour de rôle, jusqu'à épuisement.<br><br>Sur un projet très demandé, vous pouvez donc recevoir moins que votre montant maximum.");
+const firstBlock = `<div><div class="h3s">En attente de confirmation</div>
+  ${quietEmpty('Aucun investissement en attente', "Vous serez notifié dès qu'un nouveau projet correspond à vos critères.")}</div>`;
+const howBlock = `<div><div class="h3s">Comment ça se passe</div><div class="steps">
+  <div><i>1</i><span>Un nouveau projet est mis en ligne et correspond à vos critères.</span></div>
+  <div><i>2</i><span>Des bricks vous sont attribuées, à tour de rôle avec les autres investisseurs qui ont les mêmes critères.</span></div>
+  <div><i>3</i><span>Vous avez jusqu'à 1 h avant l'ouverture de la collecte pour les confirmer.</span></div></div></div>`;
+const commFeed = `<div><div class="crit-h"><div class="h3s">Récemment investis par la communauté</div></div>
+  <div class="feed">
+    <div><div class="th" style="background:url(img.png) center/cover"></div><div style="min-width:0"><div class="t">Immeuble Gare - Nevers</div><div class="m">${memo3(['#BEF0C6','#FFD9A2','#C5ECFD'])}1 240 investisseurs</div></div><div class="you">11,00 %<b>2 ans</b></div></div>
+    <div><div class="th" style="background:url(fiche.png) center 18%/260% auto"></div><div style="min-width:0"><div class="t">Maison Eperon Réunion</div><div class="m">${memo3(['#F9C9D4','#BEF0C6','#FFD9A2'])}2 105 investisseurs</div>${repTag}</div><div class="you">10,00 %<b>3 ans</b></div></div>
+  </div></div>`;
+const pauseBanner = `<div class="pause-w"><div class="pause"><div class="pause-ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="#13273E"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg></div>
+  <div style="flex:1"><b>Investissement automatique en pause</b><p>Depuis le 28/10/2026. Vous ne recevez plus de bricks sur les nouveaux projets.</p></div></div>
+  <button class="btn btn-grad" style="width:100%;height:44px;margin-top:12px" data-go="R2:card">Réactiver</button></div>`;
+const OK_I = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#08744D" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:1px"><path d="m5 12 5 5 9-10"/></svg>`;
+const heroBlock = `<div class="hero">
+  <div class="hero-ic">${ICON_AUTO('#EC5223',22)}</div>
+  <h4>Investissez sur les projets qui vous correspondent, sans les guetter</h4>
+  <p>Définissez vos critères une fois. Dès qu'un nouveau projet y correspond, des bricks vous sont attribuées.</p>
+  <button class="btn btn-grad" style="width:100%;height:46px;margin-top:14px">Configurer mes critères</button>
+  <div class="hero-s">2 minutes · Modifiable ou en pause à tout moment</div></div>`;
+const reassureBlock = `<div><div class="h3s">Vous gardez la main</div><div class="ok-list">
+  <div>${OK_I}<span>Vous confirmez chaque investissement, rien n'est signé sans vous.</span></div>
+  <div>${OK_I}<span>Uniquement depuis votre solde Bricks, jamais votre carte bancaire.</span></div>
+  <div>${OK_I}<span>Aucun frais en plus de l'investissement classique.</span></div>
+  <div>${OK_I}<span>Concerne les projets publiés après l'activation.</span></div></div></div>`;
+const heroLite = `<div class="hero">
+  <div class="hero-h"><div class="hero-ic">${ICON_AUTO('#EC5223',22)}</div><h4>Ne manquez plus une opportunité d'investir</h4></div>
+  <p>Configurez vos critères en quelques clics et laissez l'investissement automatique diversifier votre portefeuille, projet après projet.</p>
+  <button class="btn btn-grad hero-cta" data-go="R2:rien" style="width:100%;height:46px;margin-top:14px">Configurer mes critères</button>
+  <div class="hero-s">2 minutes · Modifiable ou en pause à tout moment</div></div>`;
+const ILL = [
+  `<img src="ill-1.png" alt="" style="width:100%;display:block">`,
+  `<div class="ill-gauge"><div class="arc"></div><b>200 €</b><span>par mois, ou sans limite</span></div>`,
+  `<div class="ill-chips"><span class="pick">${ICON_TREND} 10 % et +</span><span>${ICON_TREND} 8 %</span><span>${ICON_TREND} 9 %</span></div>`,
+  `<div class="ill-chips"><span>${ICON_CAL_XS} 1 an</span><span class="pick">${ICON_CAL_XS} 2 à 5 ans</span><span>${ICON_CAL_XS} 7 ans</span></div>`,
+];
+const BENEFITS = [
+  ['Fixez votre maximum par projet', "Vous recevez des bricks jusqu'à ce montant. Avec la répartition équitable, il peut être ajusté."],
+  ['Mettez-vous des limites (ou pas)', 'Investissez sur un maximum de projets, ou fixez une limite mensuelle.'],
+  ['Au taux qui vous convient', 'Uniquement des projets au rendement minimum que vous choisissez.'],
+  ['Aligné à votre stratégie', 'Court terme pour réinvestir vite, ou long terme : choisissez votre horizon.'],
+];
+const benefitsBlock = `<div class="bnf-band"><div class="h3s">Vos critères, vos règles</div>
+  <div class="bnf">${BENEFITS.map(([t,d],i)=>`<div><div class="bnf-tx"><div class="bnf-ic">${CI[i]}</div><b>${t}</b><span>${d}</span></div><div class="bnf-ill">${ILL[i]}</div></div>`).join('')}</div></div>`;
+const howLite = `<div><div class="h3s">Comment ça marche</div><div class="how">
+  <div><i>1</i><span>Un nouveau projet correspond à vos critères</span></div>
+  <div><i>2</i><span>Des bricks vous sont attribuées, jusqu'à votre maximum</span></div>
+  <div><i>3</i><span>Vous confirmez jusqu'à 1 h avant l'ouverture</span></div></div></div>`;
+const STEPS = [
+  ['Vous fixez vos règles', 'Votre maximum par projet, le rendement et la durée qui vous conviennent. Une limite mensuelle si vous le souhaitez.',
+    `<div class="ill-rules"><span>${CI[0]}<b>50 €</b><em>max. par projet</em></span><span>${CI[2]}<b>10 % et +</b><em>rendement</em></span><span>${CI[3]}<b>2 à 5 ans</b><em>durée</em></span><span>${CI[1]}<b>Aucune</b><em>limite mensuelle</em></span></div>`],
+  ['Un nouveau projet est publié', "S'il respecte 100 % de vos critères, il est retenu. Sinon, il est écarté.",
+    `<img src="ill-1.png" alt="" style="width:100%;display:block">`],
+  ['Des bricks vous sont attribuées', "Jusqu'à votre maximum, à tour de rôle avec les autres investisseurs : c'est la répartition équitable. S'il y a peu de bricks, le montant peut être ajusté.",
+    `<div class="ill-turn">${memo3(['#BEF0C6','#FFD9A2','#C5ECFD'])}<div class="ill-you">Vous<b>5 🧱</b></div><span>+ 1 240 investisseurs</span></div>`],
+  ['Vous confirmez avant l\'ouverture', "Vous avez jusqu'à 1 h avant l'ouverture de la collecte pour confirmer. Rien n'est investi sans votre accord : sans réponse, les bricks sont remises dans la collecte.",
+    `<div class="ill-confirm"><div class="ill-cd">Expire dans 3j, 12h et 24min.</div><div class="ill-acts"><button class="btn btn-ghost">Refuser</button><button class="btn btn-primary">Confirmer 5 🧱 (50 €)</button></div></div>`],
+];
+const storyBlock = `<div class="bnf-band"><div class="h3s">Comment ça marche</div>
+  <div class="bnf">${STEPS.map(([t,d,ill],i)=>`<div><div class="bnf-tx"><span class="step-n">Étape ${i+1} sur ${STEPS.length}</span><b>${t}</b><span>${d}</span></div><div class="bnf-ill">${ill}</div></div>`).join('')}</div>
+  <div class="dots-row"><button class="arr" data-dir="-1">${CHEV_R.replace('<svg','<svg style="transform:rotate(180deg)"')}</button>${STEPS.map((_,i)=>`<i${i?'':' class="on"'}></i>`).join('')}<button class="arr" data-dir="1">${CHEV_R}</button></div></div>`;
+const SAFE = [
+  ['Vous validez chaque investissement', "Rien n'est signé sans vous. Sans réponse 1 h avant l'ouverture, les bricks sont remises dans la collecte."],
+  ['Vous investissez uniquement sur les nouveaux projets', 'Les projets déjà en collecte ou prochainement ne sont pas concernés.'],
+  ['Vous payez avec votre solde Bricks, sans frais en plus', 'Jamais votre carte bancaire. Solde insuffisant ? Second essai le lendemain à 16 h. Programmez un virement automatique depuis votre banque pour ne jamais en manquer.'],
+  ['Vous gardez 4 jours pour vous rétracter', "Après l'achat, vous pouvez annuler et être remboursé."],
+];
+const safeBlock = `<div><div class="h3s">Investissez en toute sérénité</div><div class="ok-list">
+  ${SAFE.map(([t,d])=>`<div>${OK_I}<span><b>${t}</b><br><em>${d}</em></span></div>`).join('')}</div></div>`;
+const stickyCta = `<div class="sticky-cta"><button class="btn btn-grad" data-go="R2:rien" style="width:100%;height:48px">Configurer mes critères</button></div>`;
+document.addEventListener('scroll', e => {
+  const bd = e.target;
+  if (bd instanceof Element && bd.matches('.bnf')) {
+    const i = Math.round(bd.scrollLeft / (bd.scrollWidth / bd.children.length));
+    bd.nextElementSibling?.querySelectorAll('i').forEach((d,k)=>d.classList.toggle('on', k===i));
+    return;
+  }
+  if (!(bd instanceof Element) || !bd.matches('.scroll .scr-bd')) return;
+  const cta = bd.querySelector('.hero-cta'), bar = bd.parentElement.parentElement.querySelector('.sticky-cta');
+  if (!cta || !bar) return;
+  bar.classList.toggle('on', cta.getBoundingClientRect().bottom < bd.getBoundingClientRect().top);
+}, true);
+const comSheet = `<div class="dim"></div><div class="bs"><div class="handle"></div>
+  <h3>Vous investissez à plusieurs</h3>
+  <p style="margin-bottom:16px">Quand un nouveau projet correspond à vos critères, il correspond souvent à ceux d'autres investisseurs. Les bricks sont alors partagées entre vous.</p>
+  <div class="steps" style="margin-bottom:24px">
+    <div><i>1</i><span>Les bricks sont distribuées une par une, à chaque investisseur, à tour de rôle.</span></div>
+    <div><i>2</i><span>Chacun en reçoit dans la limite de ses critères (maximum par projet, limite mensuelle) et de son solde Bricks.</span></div>
+    <div><i>3</i><span>S'il y a plus de demandes que de bricks disponibles, vous pouvez en recevoir moins que votre maximum. C'est la <b>répartition équitable</b>, signalée par ${ICON_SCALE('#EC5223',14).replace('style="flex:none"','style="vertical-align:-2px"')}.</span></div></div>
+  <div class="acts"><button class="btn btn-primary">J'ai compris</button></div></div>`;
+const NEW_SHEETS = {delai:NEW_DELAI, sheet:whySheet, com:comSheet};
+const tipVir = () => `<div class="match"><span class="match-ic">${ICON_WALLET}</span>
+  <div><span class="match-k">Conseil</span><b>Gardez votre solde approvisionné</b><p>Programmez un virement automatique depuis votre banque pour ne jamais manquer un investissement.</p></div>${CHEV_R}</div>`;
+const tipsBlock = (...t) => `<div><div class="h3s">Conseils</div><div class="tips">${t.join('').replaceAll('<span class="match-k">Conseil</span>','')}</div></div>`;
+const ICON_WALLET = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#EC5223" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h14a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a1 1 0 0 1-1-1z"/><path d="M4 7V6a2 2 0 0 1 2-2h10v3"/><path d="M16 13.5h.01"/></svg>`;
+const soldeAlert = `<div class="alert-o"><div class="alert-h"><span class="alert-ic">${ICON_WALLET}</span><div><b>Il manque 70 € sur votre solde Bricks</b><p>pour confirmer vos 2 investissements en attente. Solde actuel : 20 €.</p></div></div>
+  <div class="alert-a"><button class="btn btn-primary">Ajouter de l'argent</button><a class="alert-l">Programmer un virement automatique</a></div></div>`;
+const delaiNews = `<div class="alert-i"><span style="display:inline-flex;margin-top:1px">${ICON_INFO('#13273E',16)}</span><div style="flex:1"><b>Le délai de confirmation change</b><p>Vous confirmez désormais vos bricks jusqu'à 1 h avant l'ouverture de la collecte. <u data-go="R2:delai">En savoir plus</u></p></div><span class="x" onclick="this.closest('.alert-i').remove()" title="Fermer">×</span></div>`;
+const lowNote = n => `<div class="note note-o">${ICON_WALLET.replace('width="18" height="18"','width="16" height="16"')}<span>Il manque <b>${n} €</b> sur votre solde</span><span class="lnk" style="margin-left:auto">Ajouter</span></div>`;
+const pendingLow = pendingBlock.replace('<div class="card-acts"><button class="btn btn-ghost" data-go="F3c:sheet">Refuser</button><button class="btn btn-primary" data-go="F3c:done">Confirmer 5', lowNote(30)+'<div class="card-acts"><button class="btn btn-ghost" data-go="F3c:sheet">Refuser</button><button class="btn btn-primary" data-go="F3c:done">Confirmer 5').replace('<div class="card-acts"><button class="btn btn-ghost" data-go="F3c:sheet">Refuser</button><button class="btn btn-primary" data-go="F3c:done">Confirmer 4', lowNote(20)+'<div class="card-acts"><button class="btn btn-ghost" data-go="F3c:sheet">Refuser</button><button class="btn btn-primary" data-go="F3c:done">Confirmer 4');
+const iaScreen = st => {
+  const sh = NEW_SHEETS[st]||'';
+  if (st==='jamais') return `<div class="scr-wrap scroll">${screen(`${cStrip.replace(' investissent automatiquement, comme vous',' investissent déjà automatiquement').replace(' data-go="R2:com"','')}${heroLite}${storyBlock}${safeBlock}${commFeed}<div class="links">${['Questions fréquentes'].map(t=>`<div>${t}${CHEV_R}</div>`).join('')}</div>`)}${stickyCta}</div>`;
+  if (st==='pause') return `<div class="scr-wrap">${screen(`${cStrip.replace(', comme vous','').replace(' data-go="R2:com"','')}${delaiNews}${pauseBanner}${feedBlock}${critBlock(false,true,true)}${linksBlock()}`)}</div>`;
+  if (st==='rien') return `<div class="scr-wrap">${screen(`${cStrip}${delaiNews}${firstBlock}${tipsBlock(matchCard(),tipVir())}${commFeed}${critBlock(false,false)}<div class="links">${['Historique des configurations','Questions fréquentes'].map(t=>`<div>${t}${CHEV_R}</div>`).join('')}</div>`)}</div>`;
+  if (st==='solde') return `<div class="scr-wrap">${screen(`${cStrip}${soldeAlert}${pendingLow}${feedBlock}${critBlock(false,true,false,true)}${linksBlock()}`)}</div>`;
+  return `<div class="scr-wrap${sh?' clip':''}">${screen(`${cStrip}${delaiNews}${st==='vide'?emptyBlock:pendingBlock}${st==='vide'?tipsBlock(matchCard(),tipVir()):tipsBlock(tipVir())}${feedBlock}${critBlock()}${linksBlock()}`)}${sh}</div>`;
+};
+const refIa = st => {
+  const img = st==='vide' ? 'actuel-ia-vide.png' : st==='jamais' ? 'actuel-ia-lp.png' : 'prod-ia.png';
+  const sh = OLD[st]||'';
+  return `<div class="scr-wrap${sh?' clip':''}"><img class="ref-img" src="${img}" alt="Écran actuel" style="background:var(--bg);border-radius:0">${sh}</div>`;
+};
+
+const BRICKS_LOGO = `<span class="logo-b">${ICON_AUTO('#fff',14)}</span>`;
+const PUSH = {
+  warn: ['2 investissements automatiques manqués', "Vous n'avez pas confirmé vos bricks sur vos 2 derniers projets. Si vous ne confirmez pas le prochain, votre investissement automatique sera mis en pause."],
+  pause: ['Investissement automatique en pause', "Vous n'avez pas confirmé vos bricks sur vos 3 derniers projets. Vos critères sont conservés : réactivez en un clic."],
+};
+const pushScreen = st => `<div class="lock">
+  <div class="lock-sb"><span>9:41</span><span>●●● 32</span></div>
+  <div class="lock-date">${st==='warn'?'Mardi 3 novembre':'Mercredi 11 novembre'}</div><div class="lock-time">9:41</div>
+  <div class="push"><div class="push-h">${BRICKS_LOGO}<span>BRICKS</span><em>maintenant</em></div><b>${PUSH[st][0]}</b><p>${PUSH[st][1]}</p></div>
+  <div class="lock-hint">Au clic : ${st==='warn'?'écran Investissements automatiques, bricks en attente':'écran « Mis en pause par Bricks »'}</div>
+</div>`;
+const EXPIRED = [['Immeuble Dax','4 bricks','28/10'],['Maison Eperon Réunion','5 bricks','03/11'],['Rénovation maison Sainte Marie La Hume','5 bricks','11/11']];
+const mailBlock = `<div class="mail">
+  <div class="mail-meta"><div><span>De</span> Bricks &lt;noreply@bricks.co&gt;</div><div><span>Objet</span> <b>Votre investissement automatique est en pause</b></div></div>
+  <div class="mail-bd">
+    <div class="mail-logo">${BRICKS_LOGO}<b>Bricks</b></div>
+    <h3>Votre investissement automatique est en pause</h3>
+    <p>Bonjour Camille,</p>
+    <p>Vous n'avez pas confirmé vos bricks sur vos 3 derniers projets avant l'ouverture de leur collecte. Pour ne pas réserver des bricks qui pourraient revenir à d'autres investisseurs, nous avons mis votre investissement automatique en pause.</p>
+    <div class="mail-box"><b>Rien n'est perdu</b><span>Vos critères sont conservés et votre solde n'a pas été débité.</span></div>
+    <div class="mail-list"><div class="mail-lh">Projets non confirmés</div>${EXPIRED.map(([p,b,d])=>`<div><span>${p}</span><em>${b} · expiré le ${d}</em></div>`).join('')}</div>
+    <button class="btn btn-grad" style="width:100%;height:46px">Réactiver mon investissement automatique</button>
+    <p class="mail-s">Pour ne plus manquer un projet, activez les notifications de l'app Bricks. Vous pouvez aussi ajuster vos critères à tout moment.</p>
+    <div class="mail-ft">Vous recevez cet email car vous avez activé l'investissement automatique sur Bricks.</div>
+  </div></div>`;
+const autoPauseBanner = `<div class="pause-w"><div class="pause"><div class="pause-ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="#13273E"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg></div>
+  <div style="flex:1"><b>Investissement automatique en pause</b><p>Vous n'avez pas confirmé vos bricks sur vos 3 derniers projets. Vos critères sont conservés.</p></div></div>
+  <button class="btn btn-grad" style="width:100%;height:44px;margin-top:12px">Réactiver</button>
+  <div class="pause-lk">Activer les notifications pour ne plus rien manquer</div></div>`;
+const expiredBlock = `<div><div class="h3s">Projets non confirmés</div><div class="feed">${EXPIRED.map(([p,b,d])=>`<div><div style="min-width:0"><div class="t">${p}</div><div class="m">Expiré le ${d} · bricks libérées</div></div><div class="you">Vous<b>${b.replace(' bricks',' 🧱')}</b></div></div>`).join('')}</div></div>`;
+const autoPauseScreen = () => `<div class="scr-wrap">${screen(`${cStrip.replace(', comme vous','').replace(' data-go="R2:com"','')}${autoPauseBanner}${expiredBlock}${critBlock(false,true,true)}${linksBlock()}`)}</div>`;
+const state={BO:'auto',B:'todo',F3c:'todo',R0:'card',R2:'card',P:'warn'};
+function render(){
+  P.innerHTML=pushScreen(state.P);
+  MAIL.innerHTML=mailBlock;
+  R4.innerHTML=autoPauseScreen();
+  B.innerHTML=cardB('todo')+cardB('done');
+  BO.innerHTML=cardOpen(state.BO);
+  BOref.innerHTML=cardOpenRef;
+  F3c.innerHTML=fiche(state.F3c, FOOTER_C);
+  R0.innerHTML=refIa(state.R0);
+  R2.innerHTML=iaScreen(state.R2);
+}
+function go(v, s, move=true){
+  const set = (k, val) => { state[k] = val; document.querySelectorAll(`.toggle[data-v="${k}"] button`).forEach(x=>x.classList.toggle('on', x.dataset.s===val)); };
+  set(v, s);
+  if (v==='F3c' && !['sheet','delai','closedManual','reinvManual'].includes(s)) set('B', s==='done'||s==='open'||s==='reinv'||s.startsWith('closed') ? 'done' : 'todo');
+  if (v==='B') set('F3c', s);
+  render();
+  if (!move) return;
+  const el = document.getElementById(v);
+  el.scrollIntoView({behavior:'smooth', block:'center'});
+  el.classList.remove('flash'); void el.offsetWidth; el.classList.add('flash');
+}
+document.addEventListener('click', e => {
+  const row = e.target.closest('#R0, #R2');
+  if (row && e.target.closest('.dim, .bs .btn')) { go(row.id, 'card', false); return; }
+  const t = e.target.closest('[data-go]');
+  if (!t) return;
+  const btn = e.target.closest('button');
+  if (btn && btn !== t && !btn.contains(t)) return;
+  const [v, s] = t.dataset.go.split(':');
+  go(v, s, !t.closest('#'+v));
+});
+document.querySelectorAll('.toggle').forEach(t=>t.addEventListener('click',e=>{
+  const b=e.target.closest('button'); if(!b) return;
+  document.querySelectorAll(`.toggle[data-v="${t.dataset.v}"] button`).forEach(x=>x.classList.toggle('on',x.dataset.s===b.dataset.s));
+  state[t.dataset.v]=b.dataset.s; render();
+}));
+render();
+
+const DK_MAP = {R2:'DR', F3c:'DF', B:'DB', BO:'DBO'};
+const dk = h => h.replace(/data-go="(R2|F3c|BO|B):/g, (m,k)=>`data-go="${DK_MAP[k]}:`);
+const dkNav = (on='Projets') => `<div class="dk-nav"><div class="dk-logo"><i></i>BRICKS.co</div><div class="dk-menu">${['Accueil','Projets','Marketplace','Suivi'].map(t=>`<span class="${t===on?'on':''}">${t}</span>`).join('')}</div><div class="dk-bal"><b>20,00 €<i></i></b><em>LC</em></div></div>`;
+const dkInv = n => `<span class="dc-inv"><span class="memo" style="display:flex">${AV.slice(0,3).map((c,i)=>`<span style="background:${c};margin-left:${i?-7:0}px"></span>`).join('')}</span>${n}</span>`;
+const dkTag = s => {
+  const A = ICON_AUTO('#EC5223',13);
+  const t = {auto:`${A}5 🧱`, reinv:`8 🧱<i></i><span style="color:var(--grey);font-weight:400">dont</span>${A}5`, manual:'3 🧱'}[s];
+  return t ? `<span class="chip">${t}</span>` : '';
+};
+const dkKpi = (r='10,00 % /an', h='1 an et 6 mois') => `<div class="dc-kpi"><div>Rendement<b>${r}</b></div><div>Horizon<b>${h}</b></div></div>`;
+const dCardOpen = s => `<div class="dc" data-go="DF:${{auto:'open',reinv:'reinv',manual:'reinvManual',none:'open'}[s]}"><div class="dc-img">${dkInv('26 357')}${dkTag(s)}</div>
+  <div class="dc-b"><div class="dc-t">Villa Jasmine Leaf – Al Barari Dubaï 🇦🇪</div>${dkKpi()}
+  <div class="prog"><i style="width:78%"></i></div>
+  <div class="dc-row"><div class="dc-amt"><b>3 890 490 €</b><span>/ 5 000 000 €</span></div><button class="btn btn-primary">${s==='none'?'Investir':'Réinvestir'}</button></div></div></div>`;
+const dCardSoon = s => `<div class="dc" data-go="DF:${s==='done'?'done':'todo'}"><div style="zoom:.782"><div class="img">${countdown}<div class="patch"></div></div></div>
+  <div class="dc-b"><div class="row"><div><div class="name">Immeuble Gare - Nevers</div><div class="date">Le 5 novembre à 12h30</div></div><div class="cal">${ICON_CAL}</div></div>${bricksers.replace('ont déjà investi en automatique','ont investi en auto')}
+  ${s==='todo' ? `${cdLine('1j et 34min','DF:delai')}<div class="card-acts"><button class="btn btn-ghost" data-go="DF:sheet">Refuser</button><button class="btn btn-primary" data-go="DF:done">Confirmer 5 🧱 (50 €)</button></div>`
+    : iaBox('green','5 bricks confirmées <span class="a-sub">(soit 50 €)</span>','',ICON_CHECK('#08744D',20))}</div></div>`;
+const dkListing = () => `<div class="dk">${dkNav()}<div class="dk-seg"><div><span class="on">En cours</span><span>Prochainement</span><span>Passés</span></div></div>
+  <div class="dk-sec"><div class="dk-h">Collecte en cours <span class="count o">1</span></div><div class="dk-grid">${dCardOpen(state.DBO)}</div></div>
+  <div class="dk-sec white"><div class="dk-h">Prochainement <span class="count">2</span></div><div class="dk-grid">${dCardSoon('todo')}${dCardSoon('done')}</div></div></div>`;
+
+const PRE = ['todo','sheet','delai','refused','done'];
+const dpStats = s => s.startsWith('closed')
+  ? `<div class="dp-amt"><b>5 000 000 €</b><span>/ 5 000 000 €</span></div><div class="prog"><i style="width:100%;background:var(--green-600)"></i></div><div class="dp-st"><b>100 % financé</b><span>${ICON_AUTO('#76818B',12)} 27,59 % financé automatiquement</span><span style="margin-top:4px">${memo3(AV.slice(0,3))} <b style="font-size:12px">26 357</b> investisseurs</span></div>`
+  : PRE.includes(s)
+  ? `<div class="dp-amt"><b>5 000 000 €</b><span>à collecter</span></div><div class="prog"><i style="width:0"></i></div>`
+  : `<div class="dp-amt"><b>3 890 490 €</b><span>/ 5 000 000 €</span></div><div class="prog"><i style="width:78%"></i></div><div class="dp-st"><b>77,81 % financé</b><span>${ICON_AUTO('#76818B',12)} 27,59 % financé automatiquement</span><span style="margin-top:4px">${memo3(AV.slice(0,3))} <b style="font-size:12px">26 357</b> investisseurs</span></div>`;
+const dpAct = s => ({
+  todo: `${cdLine('3j, 12h et 24min','DF:delai')}<div class="card-acts"><button class="btn btn-ghost" data-go="DF:sheet">Refuser</button><button class="btn btn-primary" data-go="DF:done">Confirmer 5 🧱 (50 €)</button></div>`,
+  refused: `${iaBox('neutral','5 bricks refusées <span class="a-sub">(soit 50 €)</span>')}<button class="btn btn-primary">Rappel d'ouverture</button>`,
+  done: `${iaBox('green','5 bricks confirmées <span class="a-sub">(soit 50 €)</span>','',ICON_CHECK('#08744D',20))}<button class="btn btn-primary">Rappel d'ouverture</button>`,
+  open: `${holdBox('5 bricks investies sur ce projet <span class="a-sub">(soit 50 €)</span>', "via l'investissement automatique")}<button class="btn btn-primary">Réinvestir</button>`,
+  reinv: `${holdBox('8 bricks investies sur ce projet <span class="a-sub">(soit 80 €)</span>', "dont 5 via l'investissement automatique")}<button class="btn btn-primary">Réinvestir</button>`,
+  reinvManual: `${holdBox('3 bricks investies sur ce projet <span class="a-sub">(soit 30 €)</span>')}<button class="btn btn-primary">Réinvestir</button>`,
+  closed: `<div class="cd-a cd-green">${ICON_CHECK('#08744D',14)}<span class="cd-t"><b style="color:var(--navy)">8 bricks</b> (soit 80 €), dont 5 via</span>${AUTO_TAG}</div><button class="btn btn-primary">Suivre le projet</button>`,
+  closedAuto: `<div class="cd-a cd-green">${ICON_CHECK('#08744D',14)}<span class="cd-t"><b style="color:var(--navy)">5 bricks</b> (soit 50 €) via</span>${AUTO_TAG}</div><button class="btn btn-primary">Suivre le projet</button>`,
+  closedManual: `<div class="cd-a cd-green">${ICON_CHECK('#08744D',14)}<span class="cd-t"><b style="color:var(--navy)">3 bricks</b> (soit 30 €) investies sur ce projet</span></div><button class="btn btn-primary">Suivre le projet</button>`,
+})[s==='sheet'||s==='delai'?'todo':s];
+const dkFiche = s => {
+  const pre = PRE.includes(s), closed = s.startsWith('closed');
+  const sub = pre ? `<div class="date" style="margin:-6px 0 0">Ouverture le 5 novembre à 12h30</div>`
+    : closed ? `<div class="date" style="margin:-6px 0 0;color:var(--green);display:flex;align-items:center;gap:4px">${ICON_CHECK('#08744D',14)}Collecte terminée</div>` : '';
+  const modal = s==='sheet' ? dk(sheet) : s==='delai' ? NEW_DELAI : '';
+  return `<div class="dk">${dkNav()}<div class="dk-top"><span class="dk-btn">‹ Retour</span><span class="dk-btn">Partager</span></div>
+  <div class="dk-gal"><div class="g1"></div><div class="g2"></div><div class="g3"></div></div>
+  <div class="dk-main"><div class="dk-left">
+    <div class="dk-title">Villa Jasmine Leaf – Al Barari Dubaï 🇦🇪${pre?`<span class="cal" title="Ajouter à mon calendrier">${ICON_CAL}</span>`:''}</div>${sub}
+    <div class="dk-meta">📍 Dubaï · 5 000 000 € · Marchand de biens · Garanties : 278 % ›</div>
+    <div class="f-int">${pre ? bricksers : BRICKSERS_OPEN.replace('1 234','26 357').replace('860 en auto','7 270 en auto')}</div>
+    <div class="f-kpi"><div>${ICON_TREND.replace('width="14" height="14"','width="20" height="20"')}<span>Rendement<strong>10,00 % /an</strong></span></div><div>${ICON_CAL}<span>Horizon<strong>1 an et 6 mois</strong></span></div></div>
+    <div class="f-score">Score Bricks : <span>Équilibré</span> ›</div>
+    <div class="dk-porteur"><i></i><div>Richard ESTEVE (Personne Physique) ›<span>1er projet sur Bricks</span></div></div>
+  </div>
+  <div class="dk-panel"><div class="dp-in">${dpStats(s)}${dpAct(s)}</div>
+    <div class="dp-ft"><div class="sim"><span>Investissez <b>1 000 €</b> pour gagner<br><b>150 €</b> en 1 an et 6 mois</span><span class="dk-btn">Simuler</span></div><span>Période de collecte du 05/11/2026 à 12h30 au 10/12/2026 à 12h30 maximum.</span></div></div>
+  </div>${modal}</div>`;
+};
+const dkFicheRef = s => `<img class="dshot" src="${s==='closed'?'desk-actuel-fiche-terminee.png':'desk-actuel-fiche.png'}" alt="Fiche desktop actuelle">`;
+
+const dkIa = st => {
+  const sh = {delai:NEW_DELAI, sheet:whySheet, com:comSheet}[st]||'';
+  const card = (h, cls='') => `<div class="dk-card ${cls}">${h}</div>`;
+  let body;
+  if (st==='jamais') body = `${cStrip.replace(' investissent automatiquement, comme vous',' investissent déjà automatiquement')}${card(heroLite)}${card(storyBlock)}${card(safeBlock)}${card(commFeed)}`;
+  else if (st==='pause') body = `${cStrip.replace(', comme vous','')}${delaiNews}${card(pauseBanner)}${card(feedBlock)}${card(critBlock(false,true,true)+linksBlock())}`;
+  else if (st==='rien') body = `${cStrip}${delaiNews}${card(firstBlock)}${card(tipsBlock(matchCard(),tipVir()))}${card(commFeed)}${card(critBlock(false,false))}`;
+  else if (st==='solde') body = `${cStrip}${soldeAlert}${card(pendingLow,'pend')}${card(feedBlock)}${card(critBlock(false,true,false,true)+linksBlock())}`;
+  else body = `${cStrip}${delaiNews}${st==='vide'?card(emptyBlock):card(pendingBlock,'pend')}${card(st==='vide'?tipsBlock(matchCard(),tipVir()):tipsBlock(tipVir()))}${card(feedBlock)}${card(critBlock()+linksBlock())}`;
+  return `<div class="dk">${dkNav('Accueil')}<div class="dk-subnav">Investissement automatique</div><div class="dk-ia"><h1>Investissement automatique</h1>${dk(body)}</div>${dk(sh)}</div>`;
+};
+
+Object.assign(state, {DBO:'reinv', DB:'todo', DF:'todo', DFref:'open', DR:'card'});
+const renderMobile = render;
+render = () => {
+  renderMobile();
+  DL.innerHTML = dkListing();
+  DF.innerHTML = dkFiche(state.DF);
+  DFref.innerHTML = dkFicheRef(state.DFref);
+  DR.innerHTML = dkIa(state.DR);
+};
+document.addEventListener('click', e => {
+  const host = e.target.closest('#DF, #DR');
+  if (!host || !e.target.closest('.dim, .bs .btn') || e.target.closest('[data-go]')) return;
+  go(host.id, host.id==='DF' ? 'todo' : 'card', false);
+});
+document.addEventListener('click', e => {
+  const a = e.target.closest('.dots-row .arr');
+  if (!a) return;
+  const bnf = a.closest('.bnf-band').querySelector('.bnf');
+  bnf.scrollBy({left: +a.dataset.dir * bnf.clientWidth, behavior:'smooth'});
+});
+document.querySelectorAll('.tabs button').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('.tabs button').forEach(x => x.classList.toggle('on', x===b));
+  document.getElementById('tab-m').hidden = b.dataset.tab!=='m';
+  document.getElementById('tab-d').hidden = b.dataset.tab!=='d';
+}));
+render();
+
+</script>
+
+<style>
+  .col{position:relative}
+  #annot-toggle{position:fixed;right:24px;bottom:24px;z-index:50;border:0;border-radius:999px;padding:12px 20px;font:600 14px Inter,sans-serif;background:#fff;color:var(--navy);box-shadow:0 6px 20px rgba(0,0,0,.35);cursor:pointer}
+  body.annot #annot-toggle{background:var(--orange);color:#fff}
+  body.annot .wrap:not(#comments) *{cursor:crosshair!important}
+  .annot-hint{position:fixed;left:50%;top:44px;transform:translateX(-50%);z-index:50;background:var(--orange);color:#fff;font-size:13px;font-weight:600;padding:8px 16px;border-radius:999px;display:none}
+  body.annot .annot-hint{display:block}
+  .annot-pin{position:absolute;z-index:20;width:26px;height:26px;margin:-13px 0 0 -13px;border-radius:50% 50% 50% 0;background:var(--orange);color:#fff;font:700 12px Inter,sans-serif;display:grid;place-items:center;box-shadow:0 2px 8px rgba(0,0,0,.4);cursor:pointer;border:2px solid #fff}
+  .annot-pin.off{opacity:.35}
+  .annot-pin.hl{animation:flash 1s ease-out 2}
+  .annot-pop{position:fixed;z-index:60;width:300px;background:#fff;border-radius:16px;padding:16px;box-shadow:0 12px 40px rgba(0,0,0,.45);color:var(--navy);font-size:13px}
+  .annot-pop .ctx{color:var(--grey);font-size:12px;margin-bottom:10px}
+  .annot-pop input,.annot-pop textarea{width:100%;box-sizing:border-box;border:1px solid var(--line);border-radius:10px;padding:8px 10px;font:14px Inter,sans-serif;color:var(--navy);margin-bottom:8px}
+  .annot-pop textarea{height:90px;resize:vertical}
+  .annot-pop .acts{display:flex;justify-content:flex-end;gap:8px}
+  .annot-pop .btn{height:36px;padding:0 14px;font-size:13px;border-radius:8px}
+  #comments{border-top:1px solid #444;margin-top:40px;color:#eee}
+  #comments h2{font-size:22px;color:#fff;margin:0 0 4px}
+  #comments .c-sub{color:#999;font-size:13px;margin:0 0 16px}
+  .c-actions{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+  .c-actions button,.c-actions label{border:1px solid #555;background:#333;color:#eee;border-radius:8px;padding:8px 14px;font:600 13px Inter,sans-serif;cursor:pointer}
+  #c-list{display:flex;flex-direction:column;gap:10px}
+  .c-item{display:grid;grid-template-columns:34px 1fr auto;gap:14px;align-items:start;background:#353535;border:1px solid #444;border-radius:14px;padding:14px 16px}
+  .c-item .annot-pin{position:static;margin:0}
+  .c-meta{font-size:12px;color:#999;margin-bottom:4px}
+  .c-meta b{color:#fff}
+  .c-text{font-size:14px;line-height:1.5;color:#ddd;white-space:pre-wrap}
+  .c-btns{display:flex;gap:6px}
+  .c-btns button{border:1px solid #555;background:transparent;color:#ccc;border-radius:8px;padding:6px 10px;font:600 12px Inter,sans-serif;cursor:pointer}
+  .c-empty{color:#888;font-size:14px}
+</style>
+<button id="annot-toggle">Annoter</button>
+<div class="annot-hint">Mode annotation : cliquez sur un élément pour laisser un commentaire</div>
+<section class="wrap" id="comments">
+  <h2>Commentaires</h2>
+  <p class="c-sub">Activez « Annoter » en bas à droite, cliquez sur un écran, écrivez, validez. « Voir » remet l'écran dans l'état commenté.</p>
+  <div class="c-actions"><button id="c-export">Exporter les commentaires</button><label>Importer un fichier<input id="c-import" type="file" accept=".json" hidden></label><button id="c-clear">Tout effacer</button></div>
+  <div id="c-list"></div>
+</section>
+<script>
+(() => {
+  const KEY = 'invest-auto-annotations';
+  let notes = JSON.parse(localStorage.getItem(KEY) || '[]');
+  let on = false, pop = null;
+  const save = () => localStorage.setItem(KEY, JSON.stringify(notes));
+  const anchors = () => [...document.querySelectorAll('.wrap:not(#comments) .col, .wrap:not(#comments) .why-col')];
+  const esc = t => t.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const label = a => {
+    let h = a.closest('.cols')?.previousElementSibling;
+    while (h && !h.classList.contains('line-title')) h = h.previousElementSibling;
+    return [h?.textContent.trim().replace(/^\d+\s*/, ''), a.querySelector('h2')?.textContent.trim()].filter(Boolean).join(' · ');
+  };
+  const stateOf = a => {
+    const tg = a.querySelector('.toggle');
+    if (!tg) return null;
+    const v = tg.dataset.v, s = state[v];
+    return {v, s, name: tg.querySelector(`[data-s="${s}"]`)?.textContent || s};
+  };
+
+  function renderPins(){
+    document.querySelectorAll('.wrap:not(#comments) .annot-pin').forEach(p => p.remove());
+    const as = anchors();
+    notes.forEach((n, i) => {
+      const a = as[n.a]; if (!a) return;
+      const p = document.createElement('div');
+      const same = !n.st || state[n.st.v] === n.st.s;
+      p.className = 'annot-pin' + (same ? '' : ' off');
+      p.style.left = n.x + 'px'; p.style.top = n.y + 'px';
+      p.textContent = i + 1; p.title = `${n.author} : ${n.text}`; p.dataset.id = n.id;
+      a.appendChild(p);
+    });
+  }
+  function renderList(){
+    const el = document.getElementById('c-list');
+    if (!notes.length) { el.innerHTML = '<div class="c-empty">Aucun commentaire pour l\'instant.</div>'; return; }
+    el.innerHTML = notes.map((n, i) => `<div class="c-item" data-id="${n.id}">
+      <div class="annot-pin">${i + 1}</div>
+      <div><div class="c-meta"><b>${esc(n.author)}</b> · ${new Date(n.date).toLocaleString('fr-FR', {dateStyle:'short', timeStyle:'short'})} · ${esc(n.label)}${n.st ? ' · état « ' + esc(n.st.name) + ' »' : ''}</div>
+      <div class="c-text">${esc(n.text)}</div></div>
+      <div class="c-btns"><button data-act="see">Voir</button><button data-act="del">Supprimer</button></div></div>`).join('');
+  }
+  const refresh = () => { renderPins(); renderList(); };
+  const _render = render;
+  render = function(){ _render(); renderPins(); };
+
+  function closePop(){ pop?.remove(); pop = null; }
+  function openPop(x, y, a, ax, ay){
+    closePop();
+    const st = stateOf(a);
+    pop = document.createElement('div');
+    pop.className = 'annot-pop';
+    pop.style.left = Math.min(x + 12, innerWidth - 320) + 'px';
+    pop.style.top = Math.min(y + 12, innerHeight - 260) + 'px';
+    pop.innerHTML = `<div class="ctx">${esc(label(a))}${st ? ' · état « ' + esc(st.name) + ' »' : ''}</div>
+      <input placeholder="Votre prénom" value="${esc(localStorage.getItem('annot-name') || '')}">
+      <textarea placeholder="Votre commentaire"></textarea>
+      <div class="acts"><button class="btn btn-ghost" data-act="cancel">Annuler</button><button class="btn btn-primary" data-act="ok">Valider</button></div>`;
+    document.body.appendChild(pop);
+    const [nameI, textI] = [pop.querySelector('input'), pop.querySelector('textarea')];
+    (nameI.value ? textI : nameI).focus();
+    pop.addEventListener('click', e => {
+      const act = e.target.dataset.act;
+      if (act === 'cancel') closePop();
+      if (act === 'ok') {
+        const text = textI.value.trim(), author = nameI.value.trim() || 'Anonyme';
+        if (!text) { textI.focus(); return; }
+        localStorage.setItem('annot-name', author);
+        notes.push({id: Date.now().toString(36), a: anchors().indexOf(a), x: ax, y: ay, label: label(a), st, author, text, date: new Date().toISOString()});
+        save(); closePop(); refresh();
+      }
+    });
+  }
+
+  document.getElementById('annot-toggle').addEventListener('click', () => {
+    on = !on; document.body.classList.toggle('annot', on);
+    document.getElementById('annot-toggle').textContent = on ? 'Terminer l\'annotation' : 'Annoter';
+    if (!on) closePop();
+  });
+  document.addEventListener('click', e => {
+    if (!on || e.target.closest('#annot-toggle, #comments, .annot-pop, .annot-pin')) return;
+    e.preventDefault(); e.stopPropagation();
+    const a = e.target.closest('.col, .why-col');
+    if (!a) { closePop(); return; }
+    const r = a.getBoundingClientRect();
+    openPop(e.clientX, e.clientY, a, Math.round(e.clientX - r.left), Math.round(e.clientY - r.top));
+  }, true);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closePop(); });
+
+  const see = id => {
+    const n = notes.find(x => x.id === id); if (!n) return;
+    if (n.st && state[n.st.v] !== n.st.s) go(n.st.v, n.st.s, false);
+    const p = document.querySelector(`.wrap:not(#comments) .annot-pin[data-id="${id}"]`);
+    if (p) { p.scrollIntoView({behavior:'smooth', block:'center'}); p.classList.remove('hl'); void p.offsetWidth; p.classList.add('hl'); }
+  };
+  document.getElementById('c-list').addEventListener('click', e => {
+    const id = e.target.closest('.c-item')?.dataset.id, act = e.target.dataset.act;
+    if (act === 'see') see(id);
+    if (act === 'del' && confirm('Supprimer ce commentaire ?')) { notes = notes.filter(n => n.id !== id); save(); refresh(); }
+  });
+  document.addEventListener('click', e => {
+    const p = e.target.closest('.wrap:not(#comments) .annot-pin');
+    if (p) document.querySelector(`.c-item[data-id="${p.dataset.id}"]`)?.scrollIntoView({behavior:'smooth', block:'center'});
+  });
+  document.getElementById('c-export').addEventListener('click', () => {
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([JSON.stringify(notes, null, 2)], {type:'application/json'}));
+    a.download = `commentaires-invest-auto-${new Date().toISOString().slice(0,10)}.json`;
+    a.click();
+  });
+  document.getElementById('c-import').addEventListener('change', async e => {
+    const f = e.target.files[0]; if (!f) return;
+    const ids = new Set(notes.map(n => n.id));
+    notes = notes.concat(JSON.parse(await f.text()).filter(n => !ids.has(n.id)));
+    save(); refresh(); e.target.value = '';
+  });
+  document.getElementById('c-clear').addEventListener('click', () => {
+    if (notes.length && confirm('Effacer tous les commentaires ?')) { notes = []; save(); refresh(); }
+  });
+  refresh();
+})();
+</script>
+</body>
+</html>
