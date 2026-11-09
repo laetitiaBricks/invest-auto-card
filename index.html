@@ -97,6 +97,9 @@
   .count{font-size:12px;font-weight:700;background:var(--neutral-100);border-radius:999px;padding:2px 8px}
   .ref-img{width:393px;border-radius:32px;display:block;background:#fff}
   .ref-fiche{position:relative;width:393px;height:869px;border-radius:32px;overflow:hidden;background:url(actuel-fiche.png) top/393px auto no-repeat #fff}
+  .pf{position:relative;width:393px;height:869px;border-radius:32px;overflow:hidden;background:#fff}
+  .pf>i{position:absolute;left:0;width:393px;background-size:393px auto;background-repeat:no-repeat}
+  .pf-cap{width:393px;margin:10px 0 0;font-size:12px;line-height:1.45;color:#bbb}
   .ref-fiche::after{content:"";position:absolute;left:0;right:0;bottom:0;height:118px;background:url(actuel-fiche.png) bottom/393px auto no-repeat}
 
   /* card */
@@ -121,6 +124,7 @@
   .memo{display:flex}
   .memo span{width:24px;height:24px;border-radius:50%;border:2px solid #fff;margin-left:-10px}
   .memo span:first-child{margin-left:0;background:#BEF0C6}.memo span:nth-child(2){background:#FFD9A2}.memo span:nth-child(3){background:#C5ECFD}
+  .na-l{color:var(--orange);font-weight:700;white-space:nowrap;cursor:pointer}
   .bricksers b{font-weight:700}.bricksers em{font-style:normal;color:var(--grey);font-weight:400}
 
   .btn{border:0;border-radius:12px;font:700 14px Inter,sans-serif;height:44px;padding:0 16px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:6px;white-space:nowrap}
@@ -264,6 +268,16 @@
   .chev-c{width:28px;height:28px;border-radius:50%;border:1px solid var(--border);display:grid;place-items:center;flex:none}
   .prog{height:4px;border-radius:2px;background:var(--neutral-100);margin-top:8px;max-width:160px}
   .prog i{display:block;height:100%;border-radius:2px;background:var(--orange)}
+  .cdo{flex:1;min-width:0;display:flex;align-items:center;justify-content:space-around;border:1px solid var(--border);border-radius:999px;padding:8px 10px 8px 18px}
+  .cdo>div{display:flex;flex-direction:column;align-items:center;line-height:1.1}.cdo b{font-size:20px;font-weight:700}.cdo>div span{font-size:11px;color:var(--grey);margin-top:2px}
+  .cal-c{width:48px;height:48px;border-radius:50%;border:1px solid var(--border);background:#fff;display:grid;place-items:center;flex:none;padding:0;cursor:pointer}
+  .pre-bar .pre-ai{margin:0;font-weight:500;color:var(--navy)}.pre-bar .pre-ai b{color:var(--orange);font-weight:700}
+  .pre-bar .prog{max-width:none;margin-top:6px}
+  .cdo-sep{width:1px;align-self:stretch;margin:2px 0;background:var(--border)}
+  .cdo .cdo-ai span{color:var(--orange)}
+  .ph-ai{position:absolute;left:16px;bottom:30px;display:flex;align-items:center;gap:5px;padding:6px 10px;border-radius:999px;background:#fff;color:var(--navy);font-size:12px;box-shadow:0 2px 8px rgba(0,0,0,.15);z-index:2}.ph-ai b{color:var(--orange)}
+  .body-ai{display:flex;align-items:center;justify-content:center;gap:5px;margin-top:6px;font-size:13px;color:var(--navy)}.body-ai b{color:var(--orange)}
+  .pre-ai{display:flex;align-items:center;gap:5px;margin-top:6px;font-size:12px;font-weight:600;color:var(--orange);white-space:nowrap}
   .btn-2l{flex-direction:column;gap:0px;line-height:1.15}
   .btn-2l small{font-size:12px;font-weight:400;opacity:.9}
 
@@ -459,13 +473,76 @@
   .dk .match,.dk .quiet{max-width:none}
   .dnote{color:#bbb;font-size:13px;margin:6px 0 0}
   .dk .ill-confirm,.dk .ill-rules{zoom:.8}
+
+  /* ===== Home · invest auto ===== */
+  .href{width:390px;margin:0 auto;background:#F9F5F1;border-radius:32px;overflow:hidden;position:relative}
+  .href .seg{width:390px;background-size:390px auto;background-repeat:no-repeat}
+  .href .scroll{height:672px;overflow-y:auto;scrollbar-width:none}
+  .href img{display:block;width:390px}
+  .href-tag{position:absolute;left:12px;right:12px;bottom:68px;background:var(--navy);color:#fff;border-radius:12px;padding:10px 12px;font-size:12px;line-height:1.4;box-shadow:var(--shadow-lg)}
+  .hm{width:393px;height:780px;background:linear-gradient(#fff 0,#F9F5F1 200px);border-radius:32px;overflow:hidden;display:flex;flex-direction:column;color:var(--navy);font-family:Inter,sans-serif}
+  .hm-top{display:flex;justify-content:space-between;align-items:center;padding:14px 20px 6px}
+  .hm-av{width:40px;height:40px;border-radius:50%;background:var(--navy);color:#fff;display:grid;place-items:center;font-weight:700;font-size:14px}
+  .hm-bal{display:flex;align-items:center;gap:8px;border:1px solid var(--line);background:#fff;border-radius:999px;padding:3px 3px 3px 12px;font-weight:700;font-size:14px}
+  .hm-bal i{width:30px;height:30px;border-radius:50%;background:var(--orange);color:#fff;display:grid;place-items:center;font-style:normal;font-size:18px}
+  .hm-body>*{flex:none}
+  .hm-body{flex:1;overflow-y:auto;scrollbar-width:none;padding:10px 20px 20px;display:flex;flex-direction:column;gap:20px}
+  .hm-hi h3{font-size:24px;margin:0 0 6px}
+  .hm-hi p{margin:0;color:var(--grey);font-size:15px;font-weight:600;line-height:1.4}
+  .hm-hi p b{color:var(--navy)}
+  .hm-car{display:flex;gap:12px;overflow-x:auto;scrollbar-width:none;margin:0 -20px;padding:2px 20px}
+  .hm-pc{flex:none;width:200px;height:228px;border-radius:20px;background:#fff;overflow:hidden;box-shadow:var(--shadow-sm);display:flex;flex-direction:column}
+  .hm-pc .im{height:132px;background-size:cover;background-position:center;position:relative}
+  .hm-pc .tg{position:absolute;left:8px;top:8px;border-radius:999px;padding:3px 9px;font-size:11px;font-weight:700;background:#FFE7D2;color:var(--orange)}
+  .hm-pc .tg.todo{background:var(--orange);color:#fff}
+  .hm-pc .tg.g{background:#DDF7E8;color:var(--green)}
+  .hm-pc .bd{padding:10px 12px;display:flex;flex-direction:column;gap:6px;flex:1}
+  .hm-pc .nm{font-weight:700;font-size:13px;line-height:1.3}
+  .hm-pc .mt{font-size:12px;color:var(--grey)}
+  .hm-pc .pg{height:4px;border-radius:2px;background:#EEE;margin-top:auto}.hm-pc .pg i{display:block;height:100%;border-radius:2px;background:var(--orange)}
+  .hm-pc .ai{display:flex;align-items:center;gap:5px;font-size:11.5px;font-weight:600;color:var(--orange)}
+  .hm-pc .ai.off{color:var(--grey)}
+  .hm-pc.promo{background:linear-gradient(160deg,#FFF1E6,#FDE6D7);padding:16px;gap:8px;justify-content:space-between}
+  .hm-pc.promo .ic{width:44px;height:44px;border-radius:50%;background:#fff;display:grid;place-items:center}
+  .hm-pc.promo b{font-size:15px;line-height:1.3}
+  .hm-pc.promo p{margin:0;font-size:12.5px;color:var(--grey);line-height:1.4}
+  .hm-pc.promo .lk{color:var(--orange);font-weight:700;font-size:13px;display:flex;align-items:center;gap:2px}
+  .hm-card{background:#fff;border-radius:20px;padding:16px;box-shadow:var(--shadow-xs)}
+  .hm-card h4{margin:0 0 4px;font-size:15px}.hm-card p{margin:0;color:var(--grey);font-size:13px}
+  .hm-rev{background:linear-gradient(100deg,#fff 40%,#FDE1D0);border:3px solid #fff}
+  .hm-rev .lk{color:var(--orange);font-size:12px;font-weight:700;margin-top:10px}
+  .hm-fade{opacity:.45}
+  .hm-tab{display:flex;justify-content:space-around;border-top:1px solid var(--line);background:#fff;padding:8px 0 14px;font-size:11px;color:var(--grey)}
+  .hm-tab span{display:flex;flex-direction:column;align-items:center;gap:4px}.hm-tab span i{width:22px;height:22px;border-radius:6px;border:2px solid currentColor}
+  .hm-tab .on{color:var(--navy);font-weight:700}.hm-tab .on i{background:var(--navy)}
+  .hm-st{display:flex;align-items:center;gap:8px;background:#fff;border-radius:16px;padding:12px;box-shadow:var(--shadow-xs);margin-top:12px}
+  .hm-st .ic{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;flex:none;background:var(--orange-tint)}
+  .hm-st .ic.grey{background:#EEF0F1}
+  .hm-st .tx{flex:1;min-width:0}.hm-st .tx b{display:block;font-size:14px}.hm-st .tx span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.hm-st .tx b{line-height:1.3}.hm-st .tx span{display:block;font-size:12.5px;color:var(--grey)}
+  .hm-st .cta{color:var(--orange);font-weight:700;font-size:13px;display:flex;align-items:center;gap:2px;white-space:nowrap}
+  .hm-st .hmcd{font-style:normal;font-variant-numeric:tabular-nums;color:var(--orange)}
+  .hm-st .bdg{background:var(--orange);color:#fff;border-radius:999px;min-width:20px;height:20px;display:grid;place-items:center;font-size:11px;font-weight:700;padding:0 6px}
+  .hm-hero{position:relative;border-radius:20px;padding:18px;background:linear-gradient(150deg,#FFF4EC 0,#FDE3D2 100%);display:flex;flex-direction:column;gap:10px}
+  .hm-hero.grey{background:linear-gradient(150deg,#F7F7F6,#ECEDEE)}
+  .hm-hero .x{position:absolute;right:14px;top:12px;color:var(--grey);font-size:18px}
+  .hm-hero .ic{width:44px;height:44px;border-radius:50%;background:#fff;display:grid;place-items:center}
+  .hm-hero b{font-size:17px;line-height:1.3;padding-right:20px}
+  .hm-hero p{margin:0;font-size:13.5px;color:#4A5866;line-height:1.45}
+  .hm-hero .proof{display:flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;color:var(--navy);background:rgba(255,255,255,.7);border-radius:10px;padding:8px 10px}
+  .hm-hero .thumbs{display:flex;gap:6px}.hm-hero .thumbs i{width:44px;height:44px;border-radius:10px;background-size:cover;background-position:center;opacity:.85}
+  .hm-hero .acts{display:flex;gap:8px;align-items:center}
+  .hm-hero .bt{height:44px;border-radius:12px;background:var(--orange);color:#fff;font-weight:700;font-size:14px;display:grid;place-items:center;flex:1}
+  .hm-hero .bt2{height:44px;padding:0 10px;color:var(--navy);font-weight:700;font-size:13px;display:grid;place-items:center}
+  .pitch{width:393px;box-sizing:border-box;background:#353535;border:1px solid #444;border-radius:20px;padding:16px 18px;color:#ccc;font-size:13px;line-height:1.5;margin-top:14px}
+  .pitch b{color:#fff}.pitch p{margin:0 0 8px}.pitch p:last-child{margin:0}
+  .pitch .k{display:inline-block;min-width:52px;color:#999;font-weight:700}
 </style>
 </head>
 <body>
 <div class="warn">MAQUETTE, PAS LE VRAI RENDU</div>
 <div class="wrap">
   <h1>Investissement automatique à confirmer</h1>
-  <p class="sub">Card retenue pour le listing, fiche avec le footer 3c, et écran Investissements automatiques. La version actuelle est toujours à gauche pour comparer.</p>
+  <p class="sub">Card retenue pour le listing, fiche avec le footer 3c, écran Investissements automatiques et home. La version actuelle est toujours à gauche pour comparer.</p>
   <div class="tabs"><button class="on" data-tab="m">Mobile</button><button data-tab="d">Desktop</button></div>
 <div id="tab-m">
 
@@ -493,7 +570,7 @@
       <p class="muted" style="margin:0 0 6px;font-weight:700">En cours</p>
       <ul><li><b>La même ligne que le footer de la fiche</b> : montant collecté et barre à gauche, l'action à droite.</li><li><b>« Réinvestir » dès qu'on a des bricks sur le projet</b>, « Investir » sinon. Le bouton dit où on en est.</li><li><b>Vos bricks dans un tag sur la photo</b>, comme en prod : le total d'abord, puis la part invest auto si elle existe (« 8 🧱 | dont ⚡5 »). Tout en auto : « ⚡5 🧱 ». Sans auto : « 3 🧱 ». La card reste légère, le détail est dans la fiche.</li><li><b>Plus de compte à rebours sur la photo</b> : la collecte est ouverte, « Collecte en cours » passe sous le nom.</li></ul>
       <p class="muted" style="margin:12px 0 6px;font-weight:700">Prochainement</p>
-      <ul><li><b>Le même bloc que le footer de la fiche</b> : un bandeau gris « Invest auto · Expire dans… ⓘ », le même que sur l'écran Investissements automatiques, puis « Refuser » et « Confirmer 5 🧱 (50 €) ». On retrouve la même chose du listing à la fiche.</li><li><b>Le montant est dans le bouton</b> : le bandeau ne porte que le délai, le bouton a toute la largeur et n'est plus coupé.</li><li><b>Une seule unité, la brick</b>, avec son prix entre parenthèses, comme partout ailleurs.</li><li><b>La photo ne garde que le compte à rebours</b> : toute l'info invest auto est en bas de la card.</li><li><b>« 860 ont déjà investi en automatique »</b> remplace « intéressés » : une preuve sociale liée à la feature.</li><li><b>On confirme en un clic depuis le listing</b> : l'encart passe en vert « 5 🧱 investies (soit 50 €) », le même que sur la fiche. Un clic sur la card ouvre la fiche pour en savoir plus.</li></ul>
+      <ul><li><b>Le même bloc que le footer de la fiche</b> : un bandeau gris « Invest auto · Expire dans… ⓘ », le même que sur l'écran Investissements automatiques, puis « Refuser » et « Confirmer 5 🧱 (50 €) ». On retrouve la même chose du listing à la fiche.</li><li><b>Le montant est dans le bouton</b> : le bandeau ne porte que le délai, le bouton a toute la largeur et n'est plus coupé.</li><li><b>Une seule unité, la brick</b>, avec son prix entre parenthèses, comme partout ailleurs.</li><li><b>La photo ne garde que le compte à rebours</b> : toute l'info invest auto est en bas de la card.</li><li><b>« 26 400 y ont accès en priorité »</b> remplace « intéressés » : le nombre d'investisseurs auto qui entrent dans l'attribution du projet, confirmés ou non. Un gros chiffre dès l'attribution, centré sur les personnes et sur l'avantage de l'invest auto, l'accès avant l'ouverture : il donne envie d'activer à ceux qui ne l'ont pas. Ordre de grandeur : environ 26 000 par projet sur les 10 derniers tours.</li><li><b>On confirme en un clic depuis le listing</b> : l'encart passe en vert « 5 🧱 investies (soit 50 €) », le même que sur la fiche. Un clic sur la card ouvre la fiche pour en savoir plus.</li></ul>
     </aside>
   </div>
 
@@ -501,17 +578,18 @@
   <div class="cols">
     <div class="col ref">
       <h2>Actuel</h2>
-      <div class="spacer"></div>
-      <div class="ref-fiche"></div>
+      <div class="toggle" data-v="F3cref"><button data-s="na">Sans invest auto</button><button class="on" data-s="pending">Bricks à valider</button><button data-s="done">Validé</button><button data-s="open">Collecte ouverte</button><button data-s="obj">Objectif atteint</button><button data-s="fin">Financé</button></div>
+      <div id="F3cref"></div>
     </div>
     <div class="col">
       <h2>Fiche retenue · footer 3c</h2>
-      <div class="toggle" data-v="F3c"><button class="on" data-s="todo">À confirmer</button><button data-s="sheet">Refuser</button><button data-s="refused">Refusé</button><button data-s="done">Confirmé</button><button data-s="open">Ouverture</button><button data-s="reinv">Réinvesti</button><button data-s="reinvManual">Investi · sans invest auto</button><button data-s="closed">Terminée · auto + réinvesti</button><button data-s="closedAuto">Terminée · auto seul</button><button data-s="closedManual">Terminée · sans invest auto</button></div>
+      <div class="toggle" data-v="F3c"><button data-s="naA">Sans invest auto</button><button class="on" data-s="todo">À confirmer</button><button data-s="sheet">Refuser</button><button data-s="refused">Refusé</button><button data-s="done">Confirmé</button><button data-s="open">Ouverture</button><button data-s="reinv">Réinvesti</button><button data-s="reinvManual">Investi · sans invest auto</button><button data-s="closed">Terminée · auto + réinvesti</button><button data-s="closedAuto">Terminée · auto seul</button><button data-s="closedManual">Terminée · sans invest auto</button></div>
+      <div class="toggle" data-v="PF" id="PFT" style="margin-top:-4px"><button class="on" data-s="cd">Dans le compteur</button><button data-s="photo">Sur la photo</button><button data-s="body">Dans la fiche</button></div>
       <div id="F3c"></div>
     </div>
     <aside class="why-col">
       <h2>Ce qu'on a fait, et pourquoi</h2>
-      <ul><li><b>L'info est à un seul endroit</b> : le footer, toujours visible. L'étiquette du haut est supprimée.</li><li><b>Même structure dans tous les états</b> : l'encart de vos bricks, puis la ligne de collecte de la prod, le montant à gauche et l'action à droite. Avant l'ouverture : « 774 000 € à collecter » et « Rappel d'ouverture », pour être alerté et investir à la main. Le calendrier passe à côté du nom du projet, comme sur la card du listing.</li><li><b>« Refuser » en texte</b> : possible, mais secondaire. « Confirmer » reste l'action principale.</li><li><b>Le montant est dans le bouton</b> : « Confirmer 5 🧱 (50 €) », comme en prod. Au-dessus, un bandeau gris « Invest auto · Expire dans… ⓘ », le même que sur la card et l'écran Investissements automatiques. Le i ouvre la bottom sheet du délai.</li><li><b>Le bandeau se cache au scroll</b> : dans tous les états, le bandeau au-dessus de l'action (vert, gris ou « Expire dans… ») se replie quand on descend dans la fiche et revient dès qu'on remonte. La collecte et le bouton restent visibles.</li><li><b>Le footer sticky reste léger</b> : une fois refusé, il ne garde que la collecte et « Rappel d'ouverture ». Une fois confirmé, l'encart vert tient sur une ligne, puis la collecte et « Rappel d'ouverture ».</li><li><b>Le refus passe par une bottom sheet</b> : on évite les erreurs, on explique que les bricks sont libérées et qu'on peut toujours investir à l'ouverture.</li><li><b>Un seul encart vert, partout</b> : même hauteur, même texte « X 🧱 investies (soit Y €) », du listing à la collecte terminée. Le ✓ avant l'ouverture, le chevron pendant la collecte, rien une fois terminée. Un encart teinté sur une seule ligne, l'icône invest auto à gauche à la place du texte « Investissement automatique », identique sur la card, la fiche et en desktop. Gris refusé, vert confirmé ou investi, avec le chevron quand l'encart mène au détail.</li><li><b>Le personnel est séparé du commun</b> : vos bricks sont dans l'encart ; l'ouverture de la collecte, la même pour tous, passe sous le titre, comme sur la card. Le footer ne garde que l'encart et l'action, collés.</li><li><b>Une fois investi, l'encart devient « mes bricks sur ce projet »</b> : le total, avec « dont ⚡5 » si on a réinvesti à la main, comme le tag du listing, et sans icône à gauche dès qu'une partie a été investie à la main. Il remplace la barre grise du haut et devient le seul accès au détail de l'investissement (chevron).</li><li><b>Collecte terminée, un seul chemin</b> : « Collecte terminée », commun à tous, passe sous le titre. L'encart vert reste le même que pendant la collecte, sans le chevron. Dessous, la même ligne que dans les autres états : montant collecté et barre à gauche, un seul bouton à droite, « Suivre le projet ».</li><li><b>L'encart est toujours au même endroit</b> : dans le footer, au-dessus du bouton, y compris une fois la collecte ouverte (« 5 🧱 investies (soit 50 €) », puis « Réinvestir »), jusqu'à la fin de la collecte où il devient un bandeau.</li></ul>
+      <ul><li><b>L'info est à un seul endroit</b> : le footer, toujours visible. L'étiquette du haut est supprimée.</li><li><b>Même structure dans tous les états</b> : l'encart de vos bricks, puis la ligne de collecte de la prod, le montant à gauche et l'action à droite. Avant l'ouverture, on repart du footer de la prod : le compte à rebours jusqu'à l'ouverture, la flèche qui ouvre le détail de la collecte et le bouton rond « Ajouter au calendrier ». On y ajoute le % déjà financé (trois placements à trancher, voir plus bas). Le calendrier passe à côté du nom du projet, comme sur la card du listing.</li><li><b>La collecte se remplit avant l'ouverture</b> : « 27 % déjà financé », trois placements à trancher : dans la pastille du compte à rebours, comme un quatrième bloc après jours, heures et minutes ; en badge sur la photo, à côté du « 1/10 » ; ou sur une ligne sous « 26 400 y ont accès en priorité ». Le footer reste alors celui de la prod. On voit le projet partir sans soi. La prod calcule déjà ce chiffre (bricks achetées en auto ÷ bricks du projet) et l'affiche dans le détail de la collecte, « 27 % financé automatiquement » : on le remonte dans le footer. Reste un seuil d'affichage à fixer.</li><li><b>Sans invest auto, un lien pour activer</b> : « Activer › » au bout de la ligne « 26 400 y ont accès en priorité ». On relie le chiffre à l'action. Le lien ouvre une bottom sheet qui précise que ce projet-ci n'est plus concerné : seuls les projets publiés après l'activation le sont.</li><li><b>« Refuser » en texte</b> : possible, mais secondaire. « Confirmer » reste l'action principale.</li><li><b>Le montant est dans le bouton</b> : « Confirmer 5 🧱 (50 €) », comme en prod. Au-dessus, un bandeau gris « Invest auto · Expire dans… ⓘ », le même que sur la card et l'écran Investissements automatiques. Le i ouvre la bottom sheet du délai.</li><li><b>Le bandeau se cache au scroll</b> : dans tous les états, le bandeau au-dessus de l'action (vert, gris ou « Expire dans… ») se replie quand on descend dans la fiche et revient dès qu'on remonte. La collecte et le bouton restent visibles.</li><li><b>Le footer sticky reste léger</b> : une fois refusé, il ne garde que le compte à rebours et le calendrier. Une fois confirmé, l'encart vert tient sur une ligne, puis le compte à rebours et le calendrier.</li><li><b>Le refus passe par une bottom sheet</b> : on évite les erreurs, on explique que les bricks sont libérées et qu'on peut toujours investir à l'ouverture.</li><li><b>Un seul encart vert, partout</b> : même hauteur, même texte « X 🧱 investies (soit Y €) », du listing à la collecte terminée. Le ✓ avant l'ouverture, le chevron pendant la collecte, rien une fois terminée. Un encart teinté sur une seule ligne, l'icône invest auto à gauche à la place du texte « Investissement automatique », identique sur la card, la fiche et en desktop. Gris refusé, vert confirmé ou investi, avec le chevron quand l'encart mène au détail.</li><li><b>Le personnel est séparé du commun</b> : vos bricks sont dans l'encart ; l'ouverture de la collecte, la même pour tous, passe sous le titre, comme sur la card. Le footer ne garde que l'encart et l'action, collés.</li><li><b>Une fois investi, l'encart devient « mes bricks sur ce projet »</b> : le total, avec « dont ⚡5 » si on a réinvesti à la main, comme le tag du listing, et sans icône à gauche dès qu'une partie a été investie à la main. Il remplace la barre grise du haut et devient le seul accès au détail de l'investissement (chevron).</li><li><b>Collecte terminée, un seul chemin</b> : « Collecte terminée », commun à tous, passe sous le titre. L'encart vert reste le même que pendant la collecte, sans le chevron. Dessous, la même ligne que dans les autres états : montant collecté et barre à gauche, un seul bouton à droite, « Suivre le projet ».</li><li><b>L'encart est toujours au même endroit</b> : dans le footer, au-dessus du bouton, y compris une fois la collecte ouverte (« 5 🧱 investies (soit 50 €) », puis « Réinvestir »), jusqu'à la fin de la collecte où il devient un bandeau.</li></ul>
     </aside>
   </div>
 
@@ -533,7 +611,37 @@
     </aside>
   </div>
 
-  <h2 class="line-title"><span class="n">4</span> Pause automatique · profil inactif</h2>
+  <h2 class="line-title"><span class="n">4</span> Home · donner envie d'activer ou de réactiver</h2>
+  <div class="cols">
+    <div class="col ref">
+      <h2>Actuel</h2>
+      <div class="spacer"></div>
+      <div class="href">
+        <div class="seg" style="height:64px;background-image:url(home-0.png);background-position:0 0"></div>
+        <div class="scroll">
+          <div class="seg" style="height:401px;background-image:url(home-0.png);background-position:0 -64px"></div>
+          <img src="home-1.png?b=2" alt=""><img src="home-2.png?b=2" alt=""><img src="home-3.png?b=2" alt=""><img src="home-4.png?b=2" alt=""><img src="home-5.png?b=2" alt="">
+        </div>
+        <div class="seg" style="height:55px;background-image:url(home-0.png);background-position:0 -465px"></div>
+        <div class="href-tag">L'invest auto n'apparaît qu'en bas de la home, après environ 4 écrans de scroll, avec le même texte pour tous.</div>
+      </div>
+      <p class="muted" style="font-size:12px;margin-top:8px">Capture prod du 09/11, compte de Laetitia. Faites défiler l'écran.</p>
+    </div>
+    <div class="col">
+      <h2>Proposition retenue</h2>
+      <div class="toggle" data-v="H4"><button class="on" data-s="jamais">Jamais activé</button><button data-s="pause">En pause</button><button data-s="actif">Actif · à confirmer</button></div>
+      <div id="H4"></div>
+      <div class="pitch"><p><b>Une ligne sous le patrimoine</b>, toujours au-dessus de la ligne de flottaison, qui change selon l'état. Elle s'insère sans rien pousser.</p><p><span class="k">Jamais</span>« Investissez avant l'ouverture », « Ne ratez plus les prochains projets », Activer.</p><p><span class="k">Pause</span>« Les projets partent sans vous », « Investissement auto en pause », Réactiver.</p><p><span class="k">Actif</span>compte à rebours « Plus que 3 j 01:02:15 », « 10 🧱 (soit 100 €) à confirmer », pastille 2. Sans bricks à confirmer, la ligne disparaît.</p><p><span class="k">Card</span>« Déjà 85 % financé automatiquement » sur la card « Collecte à venir » ; en actif, le tag « À confirmer » et l'action « Confirmez 5 🧱 (soit 50 €) » : on voit tout de suite que rien n'est encore validé.</p></div>
+    </div>
+    <aside class="why-col">
+      <h2>Ce qu'on a constaté</h2>
+      <ul><li><b>Un seul point d'entrée, tout en bas</b> : la carte « Investissez automatiquement » arrive après le solde boosté, environ 4 écrans de scroll, avec le même texte pour tous.</li><li><b>Le bloc promo du haut ne se cible pas</b> : une seule annonce active, la même pour tout le monde.</li><li><b>Des chiffres en dur qui divergent</b> : 60 000 utilisateurs sur l'écran Projets, 40 000 dans Mon compte. Sur 5 semaines, 45 193 investisseurs ont eu au moins une réservation auto.</li><li><b>La cible pause est grosse</b> : avec un seuil à 3, 15 807 investisseurs pausés en 5 semaines. La home doit porter la réactivation.</li></ul>
+      <h2 style="margin-top:18px">À valider avant le dev</h2>
+      <ul><li><b>Le « 85 % financé » ne compte que les investissements auto confirmés</b>, pas les bricks réservées en attente : chez Bricks « réservé » veut dire « à valider », un investisseur lit « financé ». On ne l'affiche qu'au-dessus d'un seuil, par exemple 50 %, pour ne pas promettre un FOMO qui n'existe pas. À vérifier avec la data : ce chiffre est-il calculable avant l'ouverture ?</li><li><b>Le compte à rebours se cale sur le délai le plus court</b> (ouverture du premier projet moins 1 h). Sous 24 h, il n'affiche plus que les heures, minutes et secondes.</li><li><b>Le statut du plan</b> (actif, en pause, jamais activé) doit être exposé à l'app : l'écran invest auto est aujourd'hui une page web intégrée.</li></ul>
+    </aside>
+  </div>
+
+  <h2 class="line-title"><span class="n">5</span> Pause automatique · profil inactif</h2>
   <div class="cols">
     <div class="col">
       <h2>Push</h2>
@@ -573,7 +681,7 @@
     </div>
     <aside class="why-col">
       <h2>Ce qu'on a fait, et pourquoi</h2>
-      <ul><li><b>La card en cours de la prod, en gardant sa structure</b> : investisseurs, KPI, barre, montant et bouton. On change seulement le tag et le bouton.</li><li><b>Le tag de bricks sur la photo</b>, comme en mobile : « 8 🧱 | dont ⚡5 », « ⚡5 🧱 » ou « 3 🧱 ».</li><li><b>« Réinvestir » si on a déjà des bricks</b>, « Investir » sinon. En prod, on lit « Investir » même avec des bricks.</li><li><b>La card prochainement reprend la card mobile</b> : compte à rebours sur la photo, date et calendrier à côté du nom, « 860 ont investi en auto », bandeau « Invest auto · Expire dans… », puis « Refuser » et « Confirmer 5 🧱 (50 €) ».</li><li><b>Même grille que la prod</b> : en cours en haut, prochainement en dessous.</li><li><b>Données de la Villa Jasmine Leaf</b>, le projet en collecte en prod aujourd'hui, pour comparer à l'identique.</li></ul>
+      <ul><li><b>La card en cours de la prod, en gardant sa structure</b> : investisseurs, KPI, barre, montant et bouton. On change seulement le tag et le bouton.</li><li><b>Le tag de bricks sur la photo</b>, comme en mobile : « 8 🧱 | dont ⚡5 », « ⚡5 🧱 » ou « 3 🧱 ».</li><li><b>« Réinvestir » si on a déjà des bricks</b>, « Investir » sinon. En prod, on lit « Investir » même avec des bricks.</li><li><b>La card prochainement reprend la card mobile</b> : compte à rebours sur la photo, date et calendrier à côté du nom, « 26 400 y ont accès en priorité », bandeau « Invest auto · Expire dans… », puis « Refuser » et « Confirmer 5 🧱 (50 €) ».</li><li><b>Même grille que la prod</b> : en cours en haut, prochainement en dessous.</li><li><b>Données de la Villa Jasmine Leaf</b>, le projet en collecte en prod aujourd'hui, pour comparer à l'identique.</li></ul>
     </aside>
   </div>
 
@@ -592,7 +700,7 @@
     </div>
     <aside class="why-col">
       <h2>Ce qu'on a fait, et pourquoi</h2>
-      <ul><li><b>Le panneau de droite joue le rôle du footer mobile</b> : la collecte en haut, puis l'encart de vos bricks, puis une seule action.</li><li><b>L'étiquette « 1 🧱 10 € investis sur ce projet » au-dessus du titre est supprimée</b> : vos bricks sont dans l'encart du panneau, à côté de l'action.</li><li><b>Avant l'ouverture</b> : « 5 000 000 € à collecter », le bandeau « Invest auto · Expire dans… ⓘ », puis « Refuser » et « Confirmer 5 🧱 (50 €) ». Le calendrier et « Ouverture le 5 novembre à 12h30 » passent à côté du titre.</li><li><b>Refusé et confirmé</b> : l'encart gris ou vert sur une ligne, puis « Rappel d'ouverture » en orange.</li><li><b>Pendant la collecte</b> : l'encart vert sur une ligne, « 8 🧱 investies (soit 80 €), dont ⚡5 » et le chevron : l'icône remplace « bricks » pour tenir sur une ligne, puis « Réinvestir ».</li><li><b>Collecte terminée</b> : le bandeau vert, puis « Suivre le projet ». En prod, on garde aujourd'hui un « Investir maintenant » grisé qui ne mène nulle part.</li><li><b>Le refus et le délai passent par une modale centrée</b>, la version desktop de la bottom sheet, avec le même texte.</li></ul>
+      <ul><li><b>Le panneau de droite joue le rôle du footer mobile</b> : la collecte en haut, puis l'encart de vos bricks, puis une seule action.</li><li><b>L'étiquette « 1 🧱 10 € investis sur ce projet » au-dessus du titre est supprimée</b> : vos bricks sont dans l'encart du panneau, à côté de l'action.</li><li><b>Avant l'ouverture</b> : « 5 000 000 € à collecter », le bandeau « Invest auto · Expire dans… ⓘ », puis « Refuser » et « Confirmer 5 🧱 (50 €) ». Le calendrier et « Ouverture le 5 novembre à 12h30 » passent à côté du titre.</li><li><b>La barre se remplit avant l'ouverture</b> : « Déjà 27 % financé automatiquement » sous la barre, comme en mobile.</li><li><b>Refusé et confirmé</b> : l'encart gris ou vert sur une ligne, puis « Rappel d'ouverture » en orange.</li><li><b>Pendant la collecte</b> : l'encart vert sur une ligne, « 8 🧱 investies (soit 80 €), dont ⚡5 » et le chevron : l'icône remplace « bricks » pour tenir sur une ligne, puis « Réinvestir ».</li><li><b>Collecte terminée</b> : le bandeau vert, puis « Suivre le projet ». En prod, on garde aujourd'hui un « Investir maintenant » grisé qui ne mène nulle part.</li><li><b>Le refus et le délai passent par une modale centrée</b>, la version desktop de la bottom sheet, avec le même texte.</li></ul>
     </aside>
   </div>
 
@@ -631,7 +739,7 @@ const ICON_CAL = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" st
 const RETRACT = "Rétractation possible jusqu'au lun. 9 nov.";
 const RETRACT_SHORT = "Rétractable jusqu'au 9 nov.";
 const countdown = `<div class="cd"><div><strong>01</strong><span>jour</span></div><i></i><div><strong>01</strong><span>heure</span></div><i></i><div><strong>34</strong><span>min</span></div></div>`;
-const bricksers = `<div class="bricksers"><div class="memo"><span></span><span></span><span></span></div><b>860</b><em>ont déjà investi en automatique</em></div>`;
+const bricksers = `<div class="bricksers"><div class="memo"><span></span><span></span><span></span></div><b style="display:inline-flex;align-items:center;gap:4px">${ICON_AUTO('#EC5223',14)}26 400</b><em>y ont accès en priorité</em></div>`;
 const tag = (s, extra='') => `<div class="chip">${ICON_AUTO('#EC5223',14)}<span>Investissement automatique</span><i></i>5 🧱${extra}${s==='done'?ICON_CHECK('#08744D',13):''}</div>`;
 
 const cardHead = `<div class="row"><div><div class="name">Immeuble Gare - Nevers</div><div class="date">Le 5 novembre à 12h30</div></div><div class="cal">${ICON_CAL}</div></div>`;
@@ -709,10 +817,25 @@ const FOOTER = {
 FOOTER.sheet = FOOTER.todo;
 const collecte = right => `<div class="f-row">
       <div><div class="muted">Ouverture de la collecte</div><div class="amt" style="margin-top:2px">Jeu. 5 nov. à 12 h 30</div></div>${right}</div>`;
-const preOpen = `<div class="f-row">
-      <div style="flex:1;min-width:0"><div class="f-row" style="gap:8px"><span class="amt" style="white-space:nowrap">774 000 €</span><span class="muted" style="white-space:nowrap">à collecter</span></div><div class="prog" style="max-width:none;margin-top:6px"><i style="width:0"></i></div></div>
-      <button class="btn btn-primary" style="height:54px;padding:0 16px;white-space:nowrap">Rappel d'ouverture</button>
-    </div>`;
+const CDO = `<div class="cdo"><div><b>03</b><span>jours</span></div><div><b>13</b><span>heures</span></div><div><b>24</b><span>min</span></div><span class="chev-c">${ICON_UP}</span></div>`;
+const CAL_C = `<button class="cal-c" aria-label="Ajouter au calendrier" title="Ajouter au calendrier">${ICON_CAL}</button>`;
+const CDO_AI = CDO.replace(`<span class="chev-c">`, `<i class="cdo-sep"></i><div class="cdo-ai"><b>27 %</b><span>déjà financé</span></div><span class="chev-c">`);
+const AI_TXT = `${ICON_AUTO('#EC5223',13)}<b>27 %</b> déjà financé`;
+const preOpenF = () => `<div class="f-row" style="gap:12px">${state.PF==='cd' ? CDO_AI : CDO}${CAL_C}</div>`;
+const withAI = (s, html) => {
+  if (!['refused','done',...NA].includes(s)) return html;
+  if (state.PF==='photo') return html.replace('<div class="f-photo">', `<div class="f-photo"><div class="ph-ai">${AI_TXT}</div>`);
+  if (state.PF==='body') return html.replace(/(<div class="bricksers">.*?y ont accès en priorité.*?<\/em><\/div>)/, `<div style="display:flex;flex-direction:column;align-items:center">$1<div class="body-ai">${AI_TXT}</div></div>`);
+  return html;
+};
+const fbarPre = inner => `<div class="f-bar">${inner}</div>`;
+const NA = ['naA','naSheet'];
+let naFrom = 'naA';
+const naLine = (link=false) => `<div class="bricksers"><div class="memo"><span></span><span></span><span></span></div><b style="display:inline-flex;align-items:center;gap:4px">${ICON_AUTO('#EC5223',14)}26 400</b><em>y ont accès en priorité${link?` · <span class="na-l" data-go="F3c:naSheet">Activer ›</span>`:''}</em></div>`;
+const naSheet = () => `<div class="dim"></div><div class="bs"><div class="handle"></div>
+  <h3>Accédez en priorité aux prochains projets</h3>
+  <p>Avec l'investissement automatique, des bricks vous sont attribuées avant l'ouverture de la collecte, selon vos critères. Vous les confirmez ensuite jusqu'à 1 h avant l'ouverture.<br><br>Ce projet-ci n'est plus concerné : l'investissement automatique s'applique aux projets publiés après son activation.</p>
+  <div class="acts"><button class="btn btn-primary">Activer l'investissement automatique</button><button class="btn btn-ghost" data-go="F3c:${naFrom}">Plus tard</button></div></div>`;
 const FOOTER_C = {...FOOTER,
   get todo(){ return `<div class="f-bar">
     ${cdLine()}
@@ -720,13 +843,10 @@ const FOOTER_C = {...FOOTER,
   </div>`; },
   get sheet(){ return this.todo; },
   get delai(){ return this.todo; },
-  refused: `<div class="f-bar">
-    ${preOpen}
-  </div>`,
-  done: `<div class="f-bar">
-    ${iaBox('green', '5 🧱 investies <span class="a-sub">(soit 50 €)</span>', '', ICON_CHECK('#08744D',18))}
-    ${preOpen}
-  </div>`,
+  get refused(){ return fbarPre(preOpenF()); },
+  get done(){ return fbarPre(`${iaBox('green', '5 🧱 investies <span class="a-sub">(soit 50 €)</span>', '', ICON_CHECK('#08744D',18))}${preOpenF()}`); },
+  get naA(){ return fbarPre(preOpenF()); },
+  get naSheet(){ return this[naFrom]; },
 };
 const holdBox = (title, auto=false, chev=true) => `<div class="ia-box ia-1 green"><div class="ia-l">${auto?ICON_AUTO(SIG_C.orange,16):''}<div class="strip-t">${title}</div></div>${chev?ICON_CHEV('#08744D',20):''}</div>`;
 FOOTER_C.open = FOOTER.open.replace('<div class="f-bar">', `<div class="f-bar">
@@ -758,11 +878,12 @@ document.addEventListener('scroll', e => {
   f.dataset.y = y;
 }, true);
 
-function fiche(s, F=FOOTER){
+function fiche(s, F=FOOTER){ return F===FOOTER_C ? withAI(s, ficheRaw(s, F)) : ficheRaw(s, F); }
+function ficheRaw(s, F=FOOTER){
   const owned = '';
-  const scrolly = F===FOOTER_C && !['sheet','delai'].includes(s);
+  const scrolly = F===FOOTER_C && !['sheet','delai','naSheet'].includes(s);
   return `<div class="fiche${scrolly?' scrolly':''}"><div class="f-photo"><a class="f-back" data-go="B:${s.startsWith('done')||s==='open'||s==='reinv'||s.startsWith('closed')?'done':'todo'}" title="Retour au listing"></a></div>
-    <div class="f-body">${owned}${s.startsWith('closed') ? ficheContent.replace(bricksers, BRICKSERS_OPEN).replace('</div>', `</div><div class="date" style="text-align:center;margin:2px 0 4px;color:#08744D;display:flex;align-items:center;justify-content:center;gap:4px">${ICON_CHECK('#08744D',14)}Collecte terminée</div>`) : ['open','reinv','reinvManual'].includes(s) ? ficheContent.replace(bricksers, BRICKSERS_OPEN) : ['todo','sheet','delai','refused','done'].includes(s) ? ficheContent.replace('<div class="f-title">Maison Eperon Réunion</div>', `<div class="f-title" style="display:flex;align-items:center;justify-content:center;gap:10px">Maison Eperon Réunion<span class="cal" title="Ajouter à mon calendrier">${ICON_CAL}</span></div>`).replace('</div>', '</div><div class="date" style="text-align:center;margin:2px 0 4px">Ouverture le 5 novembre à 12h30</div>') : ficheContent}${scrolly?FICHE_MORE:''}</div>${F[s]}${s==='sheet'?sheet:s==='delai'?NEW_DELAI:''}</div>`;
+    <div class="f-body">${owned}${s.startsWith('closed') ? ficheContent.replace(bricksers, BRICKSERS_OPEN).replace('</div>', `</div><div class="date" style="text-align:center;margin:2px 0 4px;color:#08744D;display:flex;align-items:center;justify-content:center;gap:4px">${ICON_CHECK('#08744D',14)}Collecte terminée</div>`) : ['open','reinv','reinvManual'].includes(s) ? ficheContent.replace(bricksers, BRICKSERS_OPEN) : ['todo','sheet','delai','refused','done',...NA].includes(s) ? (NA.includes(s) ? ficheContent.replace(bricksers, naLine(true)) : ficheContent).replace('<div class="f-title">Maison Eperon Réunion</div>', `<div class="f-title" style="display:flex;align-items:center;justify-content:center;gap:10px">Maison Eperon Réunion<span class="cal" title="Ajouter à mon calendrier">${ICON_CAL}</span></div>`).replace('</div>', '</div><div class="date" style="text-align:center;margin:2px 0 4px">Ouverture le 5 novembre à 12h30</div>') : ficheContent}${scrolly?FICHE_MORE:''}</div>${F[s]}${s==='sheet'?sheet:s==='delai'?NEW_DELAI:s==='naSheet'?naSheet():''}</div>`;
 }
 
 const ICON_INFO = (c='#76818B',s=14)=>`<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="${c}" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>`;
@@ -978,7 +1099,56 @@ const autoPauseBanner = `<div class="pause-w"><div class="pause"><div class="pau
   <button class="btn btn-grad" style="width:100%;height:44px;margin-top:12px">Réactiver</button></div>`;
 const expiredBlock = `<div><div class="h3s">Projets non confirmés</div><div class="feed">${EXPIRED.map(([p,b,d])=>`<div><div style="min-width:0"><div class="t">${p}</div><div class="m">Expiré le ${d} · bricks libérées</div></div><div class="you"><b>${b.replace(' bricks',' 🧱')}</b></div></div>`).join('')}</div></div>`;
 const autoPauseScreen = () => `<div class="scr-wrap">${screen(`${cStrip.replace(', comme vous','').replace(' data-go="R2:com"','')}${autoPauseBanner}${expiredBlock}${critBlock(false,true,true)}${linksBlock()}`)}</div>`;
-const state={BO:'auto',B:'todo',F3c:'todo',R0:'card',R2:'card',P:'warn'};
+
+const PAUSE_IC = (c='#13273E',s=16)=>`<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="${c}"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>`;
+const hmPC = (img, tag, name, meta, pct, extra='', green=false) => `<div class="hm-pc"><div class="im" style="background-image:url(${img})"><span class="tg${green?' g':''}${tag==='À confirmer'?' todo':''}">${tag}</span></div><div class="bd"><div class="nm">${name}</div><div class="mt">${meta}</div>${extra}<div class="pg"><i style="width:${pct}%"></i></div></div></div>`;
+const hmProjects = (first='', up={}) => `<div class="hm-car">${first}
+  ${hmPC('desk-g2.png', up.tag||'Collecte à venir','Division Louis Vitet Dieppe', up.meta||"Aujourd'hui à 12h30",0, up.line||'')}
+  ${hmPC('desk-g1.png','Collecte en cours','Villa Jasmine Leaf – Al Barari Dubaï 🇦🇪','86 %',86)}
+  ${hmPC('desk-g3.png','Objectif atteint',"Maison et Terrain Chalais L'Haÿ-les-Roses",'100 %',100,'',true)}</div>`;
+const hmShell = (afterHi='', first='', up={}) => `<div class="hm"><div class="hm-top"><div class="hm-av">LC</div><div class="hm-bal">20,00 €<i>+</i></div></div>
+  <div class="hm-body">
+    <div class="hm-hi"><h3>Bonjour Laetitia ! 👋</h3><p>Votre patrimoine : <b>1 050,00 €</b> avec <b>3</b> 🧱 sur <b>3</b> projets.</p>${afterHi.startsWith('<div class="hm-st')?afterHi:''}</div>
+    ${afterHi.startsWith('<div class="hm-st')?'':afterHi}
+    ${hmProjects(first, up)}
+    <div class="hm-card hm-rev"><h4>Revenus Octobre : versement le 09</h4><p>Au lieu du 8 habituellement</p><div class="lk">Suivre mes revenus ›</div></div>
+    <div class="hm-card hm-fade"><h4>Journal d'actualités</h4><p>Aucune actualité pour le moment</p></div>
+    <div class="hm-card hm-fade"><h4>Patrimoine</h4><p>1 050,00 € · Valeur de votre compte</p></div>
+  </div>
+  <div class="hm-tab"><span class="on"><i></i>Accueil</span><span><i></i>Projets</span><span><i></i>Marketplace</span><span><i></i>Suivi</span></div></div>`;
+const CD_END = (() => { const d = new Date('2026-11-12T11:30:00'); return d > Date.now() ? d.getTime() : Date.now() + ((2*24+14)*60+32)*60000; })();
+const cdTxt = () => { let t = Math.max(0, Math.floor((CD_END - Date.now())/1000)); const j = Math.floor(t/86400); t %= 86400;
+  const p = n => String(n).padStart(2,'0'), hms = `${p(Math.floor(t/3600))}:${p(Math.floor(t%3600/60))}:${p(t%60)}`;
+  return j ? `${j} j ${hms}` : hms; };
+const cdEl = () => `<em class="hmcd">${cdTxt()}</em>`;
+setInterval(() => document.querySelectorAll('.hmcd').forEach(e => e.textContent = cdTxt()), 1000);
+const WORD = {
+  w0:{jamais:["Investissez avant l'ouverture","Ne ratez plus les prochains projets","Activer"], pause:["Les projets partent sans vous","Investissement auto en pause","Réactiver"], actif:[`Plus que ${cdEl()}`,"10 🧱 (soit 100 €) à confirmer"], up:"Déjà 85 % financé automatiquement", mine:"Confirmez 5 🧱 (soit 50 €)"}
+};
+const aiL = t => `<div class="ai">${ICON_AUTO('#EC5223',12)} ${t}</div>`;
+const UP_AUTO = aiL("85 % réservé avant l'ouverture");
+const UP_TODO = {tag:`À confirmer`, meta:'Le 12 novembre à 12h30', line:aiL('5 🧱 réservées pour vous')};
+const hmStrip = (icon, grey, t, sub, cta) => `<div class="hm-st"><div class="ic${grey?' grey':''}">${icon}</div><div class="tx"><b>${t}</b><span>${sub}</span></div><div class="cta">${cta}${ICON_CHEV('#EC5223',16)}</div></div>`;
+const ST_TODO = hmStrip(ICON_AUTO('#EC5223',18), false, '2 projets à confirmer', 'Avant le 12 novembre à 11h30', '<span class="bdg">2</span>');
+const homeA = (st, w='w0') => { const W = WORD[w], [t, sub, cta] = W[st];
+  const strip = st==='actif' ? hmStrip(ICON_AUTO('#EC5223',18), false, t, sub, '<span class="bdg">2</span>')
+    : hmStrip(st==='pause' ? PAUSE_IC('#13273E',16) : ICON_AUTO('#EC5223',18), st==='pause', t, sub, cta);
+  return hmShell(strip, '', st==='actif' ? {tag:'À confirmer', meta:'Le 12 novembre à 12h30', line:aiL(W.mine)} : {line:aiL(W.up)}); };
+const state={F3cref:'pending',PF:'cd',BO:'auto',B:'todo',F3c:'todo',R0:'card',R2:'card',P:'warn',H4:'jamais'};
+const prodShot = (a, b, f) => { const t = 520 - f, m = 332; return `<div class="pf" style="height:${520+m}px"><i style="top:0;height:${t}px;background-image:url(${a})"></i><i style="top:${t}px;height:${m}px;background-image:url(${b});background-position:0 -${t-m}px"></i><i style="top:${t+m}px;height:${f}px;background-image:url(${a});background-position:0 -${t}px"></i></div>`; };
+const DIEPPE = 'actuel-fiche-avant.png';
+const withBlock = (img, top, h) => { const a = 317 + h, b = a + 86; return `<div class="pf" style="height:852px"><i style="top:0;height:317px;background-image:url(${DIEPPE})"></i><i style="top:317px;height:${h}px;background-image:url(${img});background-position:0 -${top}px"></i><i style="top:${a}px;height:86px;background-image:url(${DIEPPE});background-position:0 -317px"></i><i style="top:${b}px;height:${699-b}px;background-image:url(${DIEPPE});background-position:0 -434px"></i><i style="top:699px;height:153px;background-image:url(${DIEPPE});background-position:0 -699px"></i></div>`; };
+const REF_F = {
+  na: [`<div class="pf" style="height:852px;background:url(${DIEPPE}) top/393px auto no-repeat"></div>`, "Prod, avant l'ouverture (Division Louis Vitet Dieppe) : compte à rebours, flèche vers le détail de la collecte, « Ajouter au calendrier » et « 12 071 intéressés ». Rien ne parle de l'invest auto. C'est aussi la fiche qu'on retrouve après un refus : le bloc disparaît, sans trace du refus."],
+  pending: [withBlock('sb-header-pending.png', 140, 132), "Prod, bricks attribuées en auto (bloc du Storybook posé sur la fiche Dieppe, en prod depuis le 5 octobre, PR #6519) : « 10 🧱 100 € ont été attribué via l'investissement automatiquement », « Valider mon investissement › » qui ouvre l'écran Investissements automatiques, et le délai avant annulation. La ligne « intéressés » disparaît dès qu'on a des bricks. Le footer ne change pas : ni confirmer ni refuser depuis la fiche."],
+  done: [withBlock('sb-header-invested.png', 140, 64), "Prod après validation (bloc du Storybook) : « 10 🧱 100 € investis sur ce projet › », plus de ligne « intéressés ». Le footer reste le même : compte à rebours et calendrier."],
+  open: ['<div class="ref-fiche"></div>', "Prod, collecte ouverte avec des bricks : « 100 € investis sur ce projet › » en haut, puis dans le footer le montant collecté, le % de remplissage, la flèche, la barre et « Investir »."],
+  obj: [prodShot('prod-obj-a.png','prod-obj-b.png',79), "Prod, « Objectif atteint » (17 Appartements Les Pavillons-sous-Bois) : le même footer qu'en collecte, à 100,0 %, barre verte, « Investir » grisé."],
+  fin: [prodShot('prod-fin-a.png','prod-fin-b.png',57), "Prod, « Financé » (Boulangeries Kermabon & Karmador Pessac) : le nombre de Bricksers qui ont investi, le badge « Financé » et la flèche. Plus de montant ni de barre."],
+};
+const ficheRef = k => { const [img, cap] = REF_F[k]; return img + `<p class="pf-cap">${cap}</p>`; };
+const refOf = s => s.startsWith('closed') ? (state.F3cref==='fin' ? 'fin' : 'obj') : ['open','reinv','reinvManual'].includes(s) ? 'open' : (s.startsWith('na') || s==='refused') ? 'na' : s==='done' ? 'done' : 'pending';
+const syncRef = s => { state.F3cref = refOf(s); document.querySelectorAll('.toggle[data-v="F3cref"] button').forEach(x=>x.classList.toggle('on', x.dataset.s===state.F3cref)); };
 function render(){
   P.innerHTML=pushScreen(state.P);
   MAIL.innerHTML=mailBlock;
@@ -987,13 +1157,17 @@ function render(){
   BO.innerHTML=cardOpen(state.BO);
   BOref.innerHTML=cardOpenRef;
   F3c.innerHTML=fiche(state.F3c, FOOTER_C);
+  F3cref.innerHTML=ficheRef(state.F3cref);
+  PFT.style.display=['refused','done',...NA].includes(state.F3c)?'':'none';
   R0.innerHTML=refIa(state.R0);
   R2.innerHTML=iaScreen(state.R2);
+  H4.innerHTML=homeA(state.H4);
 }
 function go(v, s, move=true){
   const set = (k, val) => { state[k] = val; document.querySelectorAll(`.toggle[data-v="${k}"] button`).forEach(x=>x.classList.toggle('on', x.dataset.s===val)); };
-  set(v, s);
-  if (v==='F3c' && !['sheet','delai','closedManual','reinvManual'].includes(s)) set('B', s==='done'||s==='open'||s==='reinv'||s.startsWith('closed') ? 'done' : 'todo');
+    set(v, s);
+  if (v==='F3c') syncRef(s);
+  if (v==='F3c' && !['sheet','delai','closedManual','reinvManual',...NA].includes(s)) set('B', s==='done'||s==='open'||s==='reinv'||s.startsWith('closed') ? 'done' : 'todo');
   if (v==='B') set('F3c', s);
   render();
   if (!move) return;
@@ -1014,7 +1188,7 @@ document.addEventListener('click', e => {
 document.querySelectorAll('.toggle').forEach(t=>t.addEventListener('click',e=>{
   const b=e.target.closest('button'); if(!b) return;
   document.querySelectorAll(`.toggle[data-v="${t.dataset.v}"] button`).forEach(x=>x.classList.toggle('on',x.dataset.s===b.dataset.s));
-  state[t.dataset.v]=b.dataset.s; render();
+  state[t.dataset.v]=b.dataset.s; if (t.dataset.v==='F3c') syncRef(b.dataset.s); render();
 }));
 render();
 
@@ -1033,7 +1207,7 @@ const dCardOpen = s => `<div class="dc" data-go="DF:${{auto:'open',reinv:'reinv'
   <div class="prog"><i style="width:78%"></i></div>
   <div class="dc-row"><div class="dc-amt"><b>3 890 490 €</b><span>/ 5 000 000 €</span></div><button class="btn btn-primary">${s==='none'?'Investir':'Réinvestir'}</button></div></div></div>`;
 const dCardSoon = s => `<div class="dc" data-go="DF:${s==='done'?'done':'todo'}"><div style="zoom:.782"><div class="img">${countdown}<div class="patch"></div></div></div>
-  <div class="dc-b"><div class="row"><div><div class="name">Immeuble Gare - Nevers</div><div class="date">Le 5 novembre à 12h30</div></div><div class="cal">${ICON_CAL}</div></div>${bricksers.replace('ont déjà investi en automatique','ont investi en auto')}
+  <div class="dc-b"><div class="row"><div><div class="name">Immeuble Gare - Nevers</div><div class="date">Le 5 novembre à 12h30</div></div><div class="cal">${ICON_CAL}</div></div>${bricksers}
   ${s==='todo' ? `${cdLine('1j et 34min','DF:delai')}<div class="card-acts"><button class="btn btn-ghost" data-go="DF:sheet">Refuser</button><button class="btn btn-primary" data-go="DF:done">Confirmer 5 🧱 (50 €)</button></div>`
     : iaBox('green','5 🧱 investies <span class="a-sub">(soit 50 €)</span>')}</div></div>`;
 const dkListing = () => `<div class="dk">${dkNav()}<div class="dk-seg"><div><span class="on">En cours</span><span>Prochainement</span><span>Passés</span></div></div>
@@ -1044,7 +1218,7 @@ const PRE = ['todo','sheet','delai','refused','done'];
 const dpStats = s => s.startsWith('closed')
   ? `<div class="dp-amt"><b>5 000 000 €</b><span>/ 5 000 000 €</span></div><div class="prog"><i style="width:100%;background:var(--green-600)"></i></div><div class="dp-st"><b>100 % financé</b><span>${ICON_AUTO('#76818B',12)} 27,59 % financé automatiquement</span><span style="margin-top:4px">${memo3(AV.slice(0,3))} <b style="font-size:12px">26 357</b> investisseurs</span></div>`
   : PRE.includes(s)
-  ? `<div class="dp-amt"><b>5 000 000 €</b><span>à collecter</span></div><div class="prog"><i style="width:0"></i></div>`
+  ? `<div class="dp-amt"><b>5 000 000 €</b><span>à collecter</span></div><div class="prog"><i style="width:27%"></i></div><div class="pre-ai" style="margin-top:8px;font-size:13px">${ICON_AUTO('#EC5223',14)} Déjà 27 % financé automatiquement</div>`
   : `<div class="dp-amt"><b>3 890 490 €</b><span>/ 5 000 000 €</span></div><div class="prog"><i style="width:78%"></i></div><div class="dp-st"><b>77,81 % financé</b><span>${ICON_AUTO('#76818B',12)} 27,59 % financé automatiquement</span><span style="margin-top:4px">${memo3(AV.slice(0,3))} <b style="font-size:12px">26 357</b> investisseurs</span></div>`;
 const dpAct = s => ({
   todo: `${cdLine('3j, 12h et 24min','DF:delai')}<div class="card-acts"><button class="btn btn-ghost" data-go="DF:sheet">Refuser</button><button class="btn btn-primary" data-go="DF:done">Confirmer 5 🧱 (50 €)</button></div>`,
@@ -1160,7 +1334,7 @@ render();
 </section>
 <script>
 (() => {
-  const KEY = 'invest-auto-annotations';
+  const KEY = 'invest-auto-annotations-v2';
   const SEED = [];
   let notes = JSON.parse(localStorage.getItem(KEY) || '[]');
   { const ids = new Set(notes.map(n => n.id)); notes = SEED.filter(n => !ids.has(n.id)).concat(notes); }
