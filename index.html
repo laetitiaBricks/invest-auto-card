@@ -1694,7 +1694,7 @@ document.addEventListener('click', e => {
     seedFill();
     const dieppe = PROJ.find(p => p.name === STATIC_HOME[0]);
     if (mode !== 'none' && matches(dieppe, app.crit)) app.ann.push(dieppe);
-    ui = {stack: ['ia'], sheet: null, fresh: false, heroPlayed: false, bravoPlayed: true, rvPlayed: false, dotSeen: 0, toast: null, homePlayed: false, flow: null, retract: null, add: {amount: 100},
+    ui = {stack: ['home'], sheet: null, fresh: false, heroPlayed: false, bravoPlayed: true, rvPlayed: false, dotSeen: 0, toast: null, homePlayed: false, flow: null, retract: null, add: {amount: 100},
       how: mode === 'plan' || mode === 'revoked' ? 'plan' : 'mandat', simOpen: false, bnfReset: false, mo: 0, story: 0, offOpen: false, revBy: 'list'};
     sim = simFrom(mode === 'none' ? CRIT_NEW : app.crit);
     if (mode === 'none') Object.assign(sim, {rate: [...PROF.equi.rate], hor: [...HZ.moyen.hor], limit: 0});
