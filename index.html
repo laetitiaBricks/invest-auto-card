@@ -599,6 +599,144 @@
   .nj-was b{color:var(--navy)}
   .nj-vol{font-size:11px;font-weight:700;color:var(--grey);line-height:1.4}
   .nj-note{color:#bbb;font-size:12.5px;line-height:1.5;margin:12px 0 0;max-width:1100px}
+  /* Parcours invest auto · nouvelle version alignée sur Uimmo (Storybook) : stepper en traits sur toutes les étapes, RadioCard, BottomCTA,
+     NumberInputWithControllers, Helper, ListItem groupés, Switch, fiches avec HeaderSheet. Poids natifs : titres 600, texte 500. */
+  #CX .scr.v2{background:#fff}
+  #CX .v2-hd{display:grid;grid-template-columns:40px 1fr 40px;align-items:center;gap:12px;padding:12px 12px 8px;min-height:48px}
+  #CX .v2-bk,#CX .v2-x{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.8);border:1px solid var(--border);color:#1C3C5E;box-sizing:border-box}
+  #CX .v2-seg{display:flex;gap:8px}
+  #CX .v2-seg i{flex:1;height:6px;border-radius:6px;background:var(--neutral-100);box-shadow:inset 0 1px 2px rgba(0,0,0,.04);transition:background .2s ease-in-out}
+  #CX .v2-seg i.on{background:var(--orange-400)}
+  #CX .scroll .scr-bd.v2-bd{border-radius:0;padding:8px 20px 140px;gap:0;display:block}
+  #CX .v2-top{margin:16px 0 24px}
+  #CX .v2-top .v2-help{margin-bottom:16px}
+  #CX .v2-t{font-size:24px;line-height:31px;font-weight:600;letter-spacing:-.2px;margin:0;color:var(--navy)}
+  #CX .v2-s{font-size:14px;line-height:20.9px;font-weight:500;color:var(--grey);margin:8px 0 0}
+  #CX .v2-gap{margin-top:24px}
+  /* Helper */
+  #CX .v2-help{display:flex;gap:8px;align-items:flex-start;padding:8px;border-radius:16px;border:2px solid #fff}
+  #CX .v2-help.lg{gap:12px;padding:16px 12px}
+  #CX .v2-help>svg{flex:none}
+  #CX .v2-help b{display:block;font-size:14px;line-height:18.9px;font-weight:600;letter-spacing:-.2px}
+  #CX .v2-help.lg b{font-size:16px;line-height:21.4px}
+  #CX .v2-help span{display:block;font-size:12px;line-height:16.5px;font-weight:600;color:var(--navy)}
+  #CX .v2-help.lg span{font-size:14px;line-height:18.9px}
+  #CX .v2-help b+span{margin-top:4px}
+  #CX .v2-help.pending{background:#FEF4EE;color:#F07141}#CX .v2-help.pending b{color:#EC5223}
+  #CX .v2-help.info{background:#F0F7FC;color:#1D5187}#CX .v2-help.info b{color:#1D5187}
+  #CX .v2-help.neutral{background:#FAF9F8;color:#13273E}#CX .v2-help.neutral span{color:#76818B}
+  /* RadioCard */
+  #CX .v2-list{display:flex;flex-direction:column;gap:12px}
+  #CX .v2-opt{display:flex;align-items:center;gap:8px;padding:12px 16px;border:1px solid var(--border);border-radius:16px;background:#fff;transition:background .2s ease-in-out,border-color .2s ease-in-out}
+  #CX .v2-opt.on{border-color:var(--navy);box-shadow:inset 0 0 0 1px var(--navy);background:var(--surface)}
+  #CX .v2-rd{width:20px;height:20px;border-radius:50%;border:1px solid var(--border);background:#fff;flex:none;box-sizing:border-box;display:grid;place-items:center}
+  #CX .v2-opt.on .v2-rd::after{content:"";width:10px;height:10px;border-radius:50%;background:var(--navy)}
+  #CX .v2-ot{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+  #CX .v2-ot b{font-size:14px;line-height:18.9px;font-weight:600;letter-spacing:-.2px;color:var(--navy)}
+  #CX .v2-ot>span{font-size:12px;line-height:18.5px;font-weight:500;color:var(--grey)}
+  #CX .v2-ot>.v2-otr{display:flex;justify-content:space-between;align-items:center;gap:8px}
+  #CX .v2-otr>b{white-space:nowrap}
+  #CX .v2-tl{display:flex;align-items:center;gap:8px;min-width:0}
+  #CX .v2-ico{display:inline-grid;place-items:center;width:20px;height:20px;font-size:16px;line-height:1;color:var(--navy);flex:none}
+  #CX .v2-ico.l{width:24px;height:24px}
+  #CX .v2-mt{display:flex;align-items:flex-end;gap:2px;height:14px;width:16px}
+  #CX .v2-mt i{flex:1;border-radius:1px;background:var(--border)}
+  #CX .v2-mt i:nth-child(1){height:45%}#CX .v2-mt i:nth-child(2){height:72%}#CX .v2-mt i:nth-child(3){height:100%}
+  #CX .v2-mt.l1 i:nth-child(1),#CX .v2-mt.l2 i:nth-child(-n+2),#CX .v2-mt.l3 i{background:var(--orange-400)}
+  #CX .v2-tk{position:relative;display:block;height:6px;border-radius:6px;background:var(--neutral-100);box-shadow:inset 0 1px 2px rgba(0,0,0,.04);margin-top:8px}
+  #CX .v2-tk i{position:absolute;top:0;bottom:0;border-radius:6px;background:linear-gradient(90deg,#F07141,#EC5223)}
+  #CX .v2-tk i.open{background:linear-gradient(90deg,#F07141 55%,rgba(240,113,65,.15))}
+  #CX .v2-ax{display:flex;font-size:10px;line-height:16.1px;font-weight:500;color:var(--grey);margin-top:4px;padding:0 17px 0 45px}
+  #CX .v2-ax span{flex:1}#CX .v2-ax span:nth-child(2){text-align:center}#CX .v2-ax span:last-child{text-align:right}
+  #CX .v2-badge{display:inline-flex;align-items:center;height:22px;padding:0 8px;border-radius:999px;border:1px solid #F9CAAF;background:#FDE6D7;color:#EC5223;font-style:normal;font-size:12px;font-weight:500;white-space:nowrap}
+  #CX .v2-ok{list-style:none;margin:6px 0 0;padding:0;display:flex;flex-direction:column;gap:4px}
+  #CX .v2-ok li{display:flex;gap:6px;align-items:center;font-size:14px;line-height:20.9px;font-weight:500;color:var(--navy)}
+  #CX .v2-ok svg{flex:none}
+  /* Bouton texte souligné, mentions */
+  #CX .v2-links{display:flex;gap:20px;margin:16px 0 0;flex-wrap:wrap}
+  #CX .v2-lnk{font-size:14px;line-height:18.9px;font-weight:600;color:var(--navy);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+  #CX .v2-legal{font-size:12px;line-height:18.5px;font-weight:500;color:var(--grey);margin:20px 0 0}
+  #CX .v2-adv{margin-top:16px}
+  /* NumberInputWithControllers + UnderlineTextInput lg */
+  #CX .v2-amt{display:flex;align-items:center;justify-content:center;gap:20px;margin:8px 0 0}
+  #CX .v2-pm{width:52px;height:52px;border-radius:8px;border:0;background:#fff;display:grid;place-items:center;color:var(--navy);cursor:pointer;flex:none;padding:0}
+  #CX .v2-pm:disabled{color:var(--disabled-text);cursor:default}
+  #CX .v2-ul{display:flex;align-items:baseline;justify-content:center;gap:4px;width:180px;border-bottom:1px solid var(--border);padding:4px 0 2px;transition:border-color .2s ease-in-out}
+  #CX .v2-ul:focus-within{border-color:var(--orange-400)}
+  #CX .v2-ul input{border:0;outline:0;background:none;font:600 40px/50.4px Inter,sans-serif;letter-spacing:-.2px;color:var(--navy);text-align:right;padding:0;font-variant-numeric:tabular-nums;min-width:1ch}
+  #CX .v2-ul>span{font:600 24px/31px Inter,sans-serif;color:var(--disabled-text)}
+  #CX .v2-cnt{flex-direction:column;align-items:center;gap:0}
+  #CX .v2-cnt b{font:600 40px/50.4px Inter,sans-serif;letter-spacing:-.2px;color:var(--navy)}
+  #CX .v2-cnt>span{font:500 14px/20.9px Inter,sans-serif;color:var(--grey)}
+  #CX .v2-cnt.off b{color:var(--disabled-text)}
+  #CX .v2-amt-s{text-align:center;font-size:14px;line-height:20.9px;font-weight:500;color:var(--navy);margin:8px 0 0;min-height:21px}
+  #CX .v2-hint{display:flex;justify-content:center;align-items:center;gap:4px;font-size:12px;line-height:18.5px;font-weight:500;color:var(--disabled-text);margin:4px 0 0}
+  #CX .v2-hint.al{color:#D72746;justify-content:flex-start}
+  #CX .v2-hint svg{flex:none}
+  /* AutocompleteButton / FilterButton */
+  #CX .v2-chips{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;margin:24px 0 0}
+  #CX .v2-chip{position:relative;height:36px;padding:0 12px;border-radius:999px;border:1px solid var(--border);background:#fff;display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:600;color:var(--navy);box-sizing:border-box}
+  #CX .v2-chip.on{background:var(--surface);border:1.5px solid var(--navy);padding:0 11.5px}
+  #CX .v2-chip em{font-style:normal;height:18px;display:inline-flex;align-items:center;padding:0 6px;border-radius:999px;border:1px solid #D2F9E2;background:#D2F9E2;color:#08744D;font-size:10px;font-weight:500;white-space:nowrap}
+  #CX .v2-bd .cx-warn{margin-top:16px}
+  /* ListItem groupés */
+  #CX .v2-card{border:1px solid var(--line);border-radius:16px;background:#fff;overflow:hidden}
+  #CX .v2-row{display:flex;align-items:center;gap:12px;min-height:48px;padding:12px;box-sizing:border-box}
+  #CX .v2-row+.v2-row,#CX .v2-li+.v2-li{border-top:1px solid var(--line)}
+  #CX .v2-row>b{flex:1;min-width:0;font-size:14px;line-height:18.9px;font-weight:600;letter-spacing:-.2px;color:var(--navy)}
+  #CX .v2-row>span:not(.v2-ico):not(.v2-ot):not(.v2-th){flex:none;max-width:60%;text-align:right;font-size:14px;line-height:20.9px;font-weight:500;color:var(--grey)}
+  #CX .v2-chev{flex:none;color:var(--navy)}
+  #CX .v2-add{font-style:normal;color:var(--orange)}
+  #CX .v2-li{display:flex;gap:12px;align-items:flex-start;padding:12px}
+  #CX .v2-sec{font-size:16px;line-height:21.4px;font-weight:600;letter-spacing:-.2px;color:var(--navy);margin:32px 0 12px}
+  /* Switch sm, piste primaire */
+  #CX .v2-sw{width:40px;height:24px;border-radius:12px;background:var(--neutral-400);position:relative;transition:background .2s ease-in-out;flex:none}
+  #CX .v2-sw::after{content:"";position:absolute;top:2px;left:2px;width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.2);transition:transform .2s ease-in-out}
+  #CX .v2-sw.on{background:var(--orange-400)}#CX .v2-sw.on::after{transform:translateX(16px)}
+  /* Tab pill light (contrôle segmenté) */
+  #CX .v2-segc{display:flex;gap:6px;padding:2px;border-radius:999px;background:var(--neutral-100);border:1px solid var(--line)}
+  #CX .v2-segc span{flex:1;min-height:36px;border-radius:999px;padding:0 12px;display:grid;place-items:center;font-size:14px;font-weight:600;color:var(--grey);transition:background .2s ease-in-out}
+  #CX .v2-segc span.on{background:#fff;color:var(--navy);box-shadow:var(--shadow-md)}
+  #CX .v2-sum2{text-align:center;margin:24px 0}
+  #CX .v2-sum2 b{display:block;font-size:40px;line-height:50.4px;font-weight:600;letter-spacing:-.2px;color:var(--navy)}
+  #CX .v2-sum2 span{display:block;font-size:14px;line-height:20.9px;font-weight:500;color:var(--grey);margin-top:4px;padding:0 12px}
+  /* Checkbox md */
+  #CX .v2-consent{margin:20px 0 12px}
+  #CX .v2-consent .md-check{font-size:14px;line-height:20.9px;font-weight:500;color:var(--navy)}
+  #CX .v2-consent .md-check i,#CX .v2-consent .md-check i.off{width:20px;height:20px;border-radius:4px;background:#fff;border:2px solid var(--navy);box-sizing:border-box}
+  #CX .v2-consent .md-check i.off{border-width:1px}
+  #CX .v2-consent .md-check i svg{stroke:var(--navy)}
+  #CX .v2-bd .cx-pci,#CX .v2-in .cx-pci{font-size:12px;line-height:18.5px;color:var(--grey)}
+  /* CheckboxCard */
+  #CX .v2-ck{display:flex;align-items:center;gap:16px;padding:16px;border-radius:16px;border:1px solid var(--line);background:var(--surface)}
+  #CX .v2-ck b{font-size:14px;line-height:18.9px;font-weight:600;color:var(--navy)}
+  #CX .v2-cb{width:20px;height:20px;border-radius:4px;border:1px solid var(--navy);background:#fff;display:grid;place-items:center;flex:none;box-sizing:border-box}
+  #CX .v2-cb.on{border-width:2px}
+  /* BottomCTA : bouton primaire plein, taille xl */
+  #CX .sticky-cta.v2-cta{padding:12px 24px 24px;border-top:1px solid var(--line);box-shadow:none;background:#fff}
+  #CX .v2-cta .btn,#CX .bs .v2-acts .btn{height:52px!important;border-radius:8px;font-size:16px;font-weight:600;letter-spacing:-.2px}
+  #CX .v2-cta .btn-grad,#CX .bs .v2-acts .btn-grad{background:linear-gradient(to top right,#F07141,#EC5223);color:#F5F3F2}
+  #CX .v2-cta .btn-disabled{background:var(--disabled-bg);color:var(--disabled-text)}
+  #CX .bs .v2-acts{margin-top:20px}
+  /* Fiches : HandleBar + HeaderSheet */
+  #CX .bs:has(.v2-shh){padding-top:0}
+  #CX .bs:has(.v2-shh) .handle{width:32px;height:4px;border-radius:24px;background:var(--border);margin:12px auto 8px}
+  #CX .v2-shh{display:grid;grid-template-columns:24px 1fr 24px;align-items:center;gap:8px;padding:16px 20px;margin:0 -20px 16px;border-bottom:1px solid var(--line)}
+  #CX .v2-shh b{grid-column:2;text-align:center;font-size:16px;line-height:21.4px;font-weight:600;letter-spacing:-.2px}
+  #CX .v2-shx{display:grid;place-items:center;color:var(--navy)}
+  #CX .bs:has(.v2-shh) p{font-size:14px;line-height:20.9px;font-weight:500;margin:0 0 16px}
+  #CX .v2-cmp{padding:16px 0;border-top:1px solid var(--line)}
+  #CX .v2-cmp-h{display:flex;align-items:center;gap:8px}
+  #CX .v2-cmp-h b{font-size:14px;font-weight:600}
+  #CX .v2-cmp-h b:first-of-type{flex:1}
+  #CX .bs .v2-cmp p{margin:6px 0 8px;font-size:12px;line-height:18.5px}
+  #CX .bs .v2-list{margin-bottom:8px}
+  #CX .v2-in .v2-top{margin-top:0}
+  #CX .v2-amt-s.v2-sub{color:var(--grey);padding:0 12px}
+  #CX .cx-mkt{height:100%;display:flex;flex-direction:column;background:var(--bg)}
+  #CX .cx-mkt .scr-bd{display:block;border-radius:32px 32px 0 0;margin-top:12px;padding:32px 20px 110px}
+  #CX .cx-tabb{position:absolute;left:0;right:0;bottom:0}
+  .cx-sel{font:inherit;font-size:12px;padding:6px 8px;border-radius:8px;border:1px solid rgba(255,255,255,.25);background:#3a3a3a;color:#fff;max-width:100%}
 </style>
 </head>
 <body>
@@ -614,6 +752,9 @@
       <h3>Scénario <button class="cx-lk" data-p="fold">Replier</button></h3>
       <div id="CXVER"></div>
       <div class="toggle" data-v="CXM"><button class="on" data-s="none">Sans invest auto</button><button data-s="plan">Invest auto sans mandat</button><button data-s="mandat">Avec mandat</button><button class="cx-more-only" data-s="revoked">Révoqué</button><button class="cx-more-only" data-s="off">Désactivé</button></div>
+      <div class="cx-row"><span>Parcours</span><span class="cx-bals" data-k="sv"><button class="on" data-p="sv:2">Nouvelle version</button><button data-p="sv:1">Actuelle</button></span></div>
+      <div class="cx-row cx-row-v"><span>Fiche projet · moment de la collecte</span><select id="CXMK" class="cx-sel" aria-label="Moment de la collecte"><option value="naA">Sans invest auto</option><option value="todo" selected>À confirmer</option><option value="sheet">Refuser (fiche)</option><option value="refused">Refusé</option><option value="done">Confirmé</option><option value="open">Ouverture</option><option value="reinv">Réinvesti</option><option value="reinvManual">Investi · sans invest auto</option><option value="closed">Objectif atteint · auto + réinvesti</option><option value="closedAuto">Objectif atteint · auto seul</option><option value="closedManual">Objectif atteint · sans invest auto</option><option value="closedFin">Financé</option></select></div>
+      <div class="cx-row cx-row-v"><span>Listing · carte en cours</span><span class="cx-bals" data-k="bo"><button class="on" data-p="bo:auto">Auto</button><button data-p="bo:reinv">Auto + réinvesti</button><button data-p="bo:manual">Sans auto</button><button data-p="bo:none">Pas investi</button></span></div>
       <div id="CXROWS"></div>
       <button class="cx-new" data-p="new">+ Nouveau projet publié</button>
       <div class="cx-log" id="CXLOG"></div>
@@ -857,14 +998,33 @@ const cdTxt = () => { let t = Math.max(0, Math.floor((CD_END - Date.now())/1000)
 setInterval(() => document.querySelectorAll('.hmcd').forEach(e => e.textContent = cdTxt()), 1000);
 const aiL = t => `<div class="ai">${ICON_AUTO('#EC5223',12)} ${t}</div>`;
 const hmStrip = (icon, grey, t, sub, cta) => `<div class="hm-st"><div class="ic${grey?' grey':''}">${icon}</div><div class="tx"><b>${t}</b><span>${sub}</span></div><div class="cta">${cta}${ICON_CHEV('#EC5223',16)}</div></div>`;
-const state = {PF:'cd'};
+const state = {PF:'cd', BO:'auto', F3c:'todo'};
+// Listing and product page sections, restored under the clickable journey: every collection moment, driven by their toggles.
+const listSoon = s => cardB({at: ` data-go="F3c:${s === 'done' ? 'done' : 'todo'}"`, cd: countdown(['1', '00', '34']), name: 'Immeuble Gare - Nevers', date: 'Le 5 novembre à 12h30',
+  strip: `<div class="card-ia">${s === 'todo' ? `${cdLine('1j et 34min')}${cardActs(' data-go="F3c:sheet"', ' data-go="F3c:done"')}` : iaBox('green', '5 🧱 investies <span class="a-sub">(soit 50 €)</span>', '', ICON_CHECK('#08744D', 18))}</div>`});
+const listOpen = s => { const A = ICON_AUTO('#EC5223', 13), go = s === 'none' ? '' : ` data-go="F3c:${{auto: 'open', reinv: 'reinv', manual: 'reinvManual'}[s]}"`;
+  const tag = {auto: `${A}5 🧱`, reinv: `8 🧱<i></i><span style="color:var(--grey);font-weight:400">dont</span>${A}5`, manual: '3 🧱'}[s] || '';
+  return cardOpen({at: go, img: 'background:url(fiche.png) 0 -100px/353px auto', tag, name: 'Maison Eperon Réunion', sub: 'Collecte en cours', rate: '10,00 % /an', hor: '1 an et 6 mois',
+    ia: `${openStats(34)}<div class="f-row">${openAmt('263 160 €', '34,0 %')}<button class="btn btn-primary"${go} style="height:48px;padding:0 20px">${s === 'none' ? 'Investir' : 'Réinvestir'}</button></div>`}); };
 // Hook wrapped by the concept: it restarts the scenario when the CXM toggle changes.
-function render(){}
+function render(){
+  const B = document.getElementById('LB'); if (!B) return;
+  B.innerHTML = listSoon('todo') + listSoon('done');
+  document.getElementById('LBO').innerHTML = listOpen(state.BO);
+  document.getElementById('F3c').innerHTML = fiche(state.F3c, FOOTER_C);
+  document.getElementById('PFT').style.display = ['refused', 'done', ...NA].includes(state.F3c) ? '' : 'none';
+}
 function go(v, s){
   state[v] = s;
   document.querySelectorAll(`.toggle[data-v="${v}"] button`).forEach(x=>x.classList.toggle('on', x.dataset.s===s));
   render();
 }
+// Clicks inside the restored sections (cards, Refuser/Confirmer, sheets) move the product page between moments.
+document.addEventListener('click', e => {
+  const t = e.target.closest('#tab-l [data-go]');
+  if (t) { const [v, s] = t.dataset.go.split(':'); if (v === 'F3c') { go('F3c', s); if (!t.closest('#F3c')) document.getElementById('F3c').scrollIntoView({behavior: 'smooth', block: 'center'}); } return; }
+  if (e.target.closest('#F3c .dim')) go('F3c', 'todo');
+});
 document.querySelectorAll('.toggle').forEach(t=>t.addEventListener('click',e=>{
   const b=e.target.closest('button'); if(!b) return;
   go(t.dataset.v, b.dataset.s);
@@ -2824,6 +2984,7 @@ document.addEventListener('click', e => {
       .replace('<div class="hm-av">LC</div>', `<div class="cx-avp"${A('sheet:drawer')} role="button" aria-label="Menu${n ? `, ${n} en attente` : ''}"><span class="av">CM</span><span class="mn">${ILI(IP.menu, 18)}</span>${cnt}${isl}</div>`)
       .replace('<div class="hm-bal">20,00 €<i>+</i></div>', `<div class="hm-bal">${eur2(app.balance)}<i${A('topup')}>+</i></div>`)
       .replace('<span><i></i>Suivi</span>', `<span${A('go:list')} role="button"><i></i>Suivi</span>`)
+      .replace('<span><i></i>Projets</span>', `<span${A('go:mkt')} role="button"><i></i>Projets</span>`)
       .replace('Bonjour Laetitia', 'Bonjour Camille')
       .replace(/<p>Votre patrimoine.*?<\/p>/, `<p>${hi}</p>`)
       .replace(/<div class="hm-card hm-rev">.*?<div class="lk">.*?<\/div><\/div>/s, '')
@@ -3084,6 +3245,221 @@ document.addEventListener('click', e => {
     reset: () => start(app.mode),
   };
 
+  // Invest auto setup, new version aligned on Uimmo (Storybook): one segmented "dashes" stepper on every step,
+  // RadioCard-style choices that only select (the BottomCTA moves on), NumberInputWithControllers, Helper callouts, grouped ListItems.
+  // Toggled from the Scénario panel; the current screens stay untouched behind ver.s === '1'.
+  ver.s = ver.s || '2';
+  // iconsax glyphs used by Uimmo: ArrowLeft, Close, ArrowRight2, Minus, Add, ICircle (Bold), Tick.
+  const V2I = {
+    back: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9.57 5.93 3.5 12l6.07 6.07M20.5 12H3.67"/></svg>',
+    close: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="m7 7 10 10M17 7 7 17"/></svg>',
+    chev: '<svg class="v2-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m8.9 4.08 6.52 6.52c.77.77.77 2.03 0 2.8L8.9 19.92"/></svg>',
+    minus: '<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 12h12"/></svg>',
+    add: '<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 12h12M12 18V6"/></svg>',
+    info: s => `<svg width="${s}" height="${s}" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="currentColor"/><path d="M12 11v5" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="8" r="1.1" fill="#fff"/></svg>`,
+    tick: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0A915D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>',
+    check: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#13273E" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>',
+  };
+  const V2_N = {mode: 1, crit: 2, crit2: 3, geo: 4, amount: 5, limits: 6, alim: 7, alimcard: 7};
+  const V2_NEXT = {crit: 'crit2', crit2: 'geo', geo: 'amount', amount: 'limits'};
+  const v2after = scr => { const f = ui.flow; if (f.fromRecap) { f.fromRecap = false; ui.stack.pop(); } else go(V2_NEXT[scr]); };
+  // Same dashes on every step of the setup: done and current steps are filled.
+  const v2frame = (scr, body, cta = '') => { const t = ui.flow.mandat ? (ui.flow.edit ? 7 : 8) : 6, n = scr === 'engage' ? t : V2_N[scr];
+    return `<div class="scr v2">${SB}<div class="v2-hd"><span class="v2-bk"${A('back')} role="button" aria-label="Retour">${V2I.back}</span>
+      <div class="v2-seg" role="progressbar" aria-label="Étape ${n} sur ${t}" aria-valuenow="${n}" aria-valuemin="1" aria-valuemax="${t}">${Array.from({length: t}, (_, i) => `<i${i < n ? ' class="on"' : ''}></i>`).join('')}</div>
+      <span class="v2-x"${A('v2close')} role="button" aria-label="Quitter">${V2I.close}</span></div><div class="scr-bd v2-bd">${body}</div></div>${cta}`; };
+  // Helper (Uimmo): pending, info, neutral; md or lg.
+  const v2help = (v, t, d, lg) => `<div class="v2-help ${v}${lg ? ' lg' : ''}">${V2I.info(lg ? 24 : 20)}<div>${t ? `<b>${t}</b>` : ''}${d ? `<span>${d}</span>` : ''}</div></div>`;
+  const v2head = (t, s, note) => `<div class="v2-top">${note ? v2help('pending', '', note) : ''}<h2 class="v2-t">${t}</h2>${s ? `<p class="v2-s">${s}</p>` : ''}</div>`;
+  // BottomCTA: primary plain, size xl.
+  const v2grad = (t, a, off) => grad(t, a, off).replace('sticky-cta on', 'sticky-cta on v2-cta');
+  // Choosing only selects: the CTA stays visible and moves on, disabled until there is an answer.
+  const v2cta = (scr, ok) => v2grad(ui.flow.fromRecap ? 'Valider' : 'Continuer', `v2go:${scr}`, !ok);
+  // RadioCard: radio first, then title and description.
+  const v2opt = ({on, a, data = '', ic = '', t, tr = '', s = '', extra = ''}) => `<div class="v2-opt${on ? ' on' : ''}"${A(a)}${data} role="radio" aria-checked="${!!on}"><span class="v2-rd" aria-hidden="true"></span>
+    <span class="v2-ot"><span class="v2-otr"><span class="v2-tl">${ic ? `<span class="v2-ico" aria-hidden="true">${ic}</span>` : ''}<b>${t}</b></span>${tr ? `<b class="num">${tr}</b>` : ''}</span>${s ? `<span>${s}</span>` : ''}${extra}</span></div>`;
+  const v2row = (k, v, a) => `<div class="v2-row"${a ? `${A(a)} role="button"` : ''}><b>${k}</b><span>${v}</span>${a ? V2I.chev : ''}</div>`;
+  const v2sheet = (title, body) => sheet(`<div class="v2-shh"><b>${title}</b><span class="v2-shx"${A('close')} role="button" aria-label="Fermer">${V2I.close}</span></div>${body}`);
+  const v2meter = l => `<span class="v2-mt l${l}"><i></i><i></i><i></i></span>`;
+  const V2_RK = {prudent: [1, 'Rendement visé modéré, risque plus faible'], equi: [2, 'Un compromis entre rendement visé et risque'], dyn: [3, 'Rendement visé plus haut, risque plus élevé']};
+  const V2_GEO = [['fr', '🇫🇷', 'France', 'Uniquement des projets en France'], ['eu', '🇪🇺', 'France et Europe', 'Les projets en France et ailleurs en Europe'], ['all', '🌍', 'Tous les pays', "Y compris hors d'Europe, comme Dubaï"]];
+  const V2_MING = [[0, 'Aucun minimum'], [500_000, 'Dès 500 000 €'], [1_000_000, 'Dès 1 M€']];
+  const cap1 = s => s[0].toUpperCase() + s.slice(1);
+  const v2note = f => f.edit && f.mandat ? "Vos critères font partie du mandat : les changer, c'est signer un nouveau mandat. L'actuel reste actif d'ici là."
+    : f.u === 'sim' ? 'Les critères testés sont repris.' : f.u === 'sug' ? `${f.sug} est présélectionné.` : '';
+  const v2stepper = (minus, plus, minusOff, label) => `<div class="v2-amt"><button class="v2-pm"${A(minus)} aria-label="Moins"${minusOff ? ' disabled' : ''}>${V2I.minus}</button>${label}<button class="v2-pm"${A(plus)} aria-label="Plus">${V2I.add}</button></div>`;
+
+  // Auto top-up: one sentence, a few editable rows and the consent, instead of five rows of chips.
+  const FD_OPTS = {amt: [50, 100, 200].map(v => [v, eur(v)]), day: [1, 5, 10, 15, 25].map(v => [v, `Le ${v} du mois`]), thr: [10, 20, 50].map(v => [v, eur(v)]), cap: [100, 200, 300, 500].map(v => [v, `${eur(v)} par mois`])};
+  const FD_T = {amt: ['Montant rechargé', 'Ajouté à votre Solde Bricks à chaque recharge.'], day: ['Jour de la recharge', 'Bricks recharge votre Solde Bricks ce jour-là, chaque mois.'],
+    thr: ['Seuil', 'Bricks recharge dès que votre Solde Bricks passe sous ce montant.'], cap: ['Plafond mensuel', 'Le total débité sur votre carte dans le mois ne dépasse jamais ce montant.']};
+  // Paid once a month, the cap is the amount itself: asking for it would be a question with only one sensible answer.
+  const v2fdNorm = d => { if (d.mode === 'month') d.cap = d.amt; else if (d.cap < d.amt) d.cap = d.amt; };
+  // The top-up amount is typed like the amount per project (NumberInputWithControllers), with suggestions underneath.
+  const v2fund = d => { v2fdNorm(d); const m = d.mode === 'month', raw = d.raw ?? String(d.amt);
+    const seg = `<div class="v2-segc" role="radiogroup" aria-label="Quand recharger">${[['month', 'Chaque mois'], ['low', 'Sous un seuil']].map(([k, t]) => `<span class="${d.mode === k ? 'on' : ''}"${A(`v2fdm:${k}`)} role="radio" aria-checked="${d.mode === k}">${t}</span>`).join('')}</div>`;
+    const input = `<label class="v2-ul"><input id="CXFDAMT" inputmode="numeric" autocomplete="off" value="${raw}" style="width:${Math.max(raw.length, 1) + 0.1}ch" aria-label="Montant rechargé, en euros"><span>€</span></label>`;
+    const amt = `<div class="v2-gap">${v2stepper('v2fdb:-1', 'v2fdb:1', d.amt <= 10, input)}</div>
+      <p class="v2-amt-s v2-sub">${d.amt < 10 ? '' : m ? `ajoutés le ${d.day} de chaque mois` : `ajoutés dès que votre solde passe sous ${eur(d.thr)}, jusqu'à ${eur(d.cap)} par mois`}</p>
+      ${d.amt < 10 ? `<p class="v2-hint al" style="justify-content:center">${V2I.info(16)}<span>Minimum 10 €.</span></p>` : ''}
+      <div class="v2-chips">${[50, 100, 200].map(v => `<span class="v2-chip${d.amt === v ? ' on' : ''}"${A(`v2fda:${v}`)} role="button">${v} €</span>`).join('')}</div>`;
+    const rows = `<div class="v2-card v2-gap">${m ? v2row(FD_T.day[0], `Le ${d.day} du mois`, 'v2fdk:day') : `${v2row(FD_T.thr[0], `Sous ${eur(d.thr)}`, 'v2fdk:thr')}${v2row(FD_T.cap[0], `${eur(d.cap)} par mois`, 'v2fdk:cap')}`}
+      ${v2row('Carte', fund.card ? cardShort() : '<em class="v2-add">Ajouter une carte</em>', 'sheet:card')}</div>`;
+    return `${seg}${amt}${rows}<div class="v2-consent">${checkBox(d.ok, 'fd-ok', `J'autorise Bricks à débiter ma carte, jusqu'à ${eur(d.cap).replace(' €', ' €')} par mois. Je peux arrêter à tout moment.`)}</div>${PCI}`; };
+  const v2fundOk = d => d.ok && fund.card && d.amt >= 10 && d.amt <= d.cap;
+  // Typed amounts can exceed the usual caps: the cap list always offers the amount itself and its double.
+  const v2capOpts = d => [...new Set([100, 200, 300, 500, d.amt, d.amt * 2])].filter(v => v >= d.amt).sort((a, b) => a - b).map(v => [v, `${eur(v)} par mois`]);
+  const v2fdSet = (d, v) => { d.amt = v; d.raw = String(v); d.ok = false; v2fdNorm(d); };
+  const V2_FEED = {card: [CARD_P, 'Recharge auto par carte', 'Chaque mois ou quand le solde baisse, dans un plafond que vous fixez'],
+    vir: ['<path d="M3 10h18M5 10v8M9.7 10v8M14.3 10v8M19 10v8M3 20h18M12 3l9 5H3z"/>', 'Virement permanent', 'Programmé depuis votre banque, sans frais'],
+    self: ['<path d="M12 5v14M5 12h14"/>', 'Je recharge moi-même', "Vous ajoutez de l'argent quand vous le souhaitez"]};
+
+  const V2 = {
+    mode: () => { const f = ui.flow;
+      const card = (on, a, t, badge, items) => `<div class="v2-opt${on ? ' on' : ''}"${A(a)} role="radio" aria-checked="${on}"><span class="v2-rd" aria-hidden="true"></span><span class="v2-ot"><span class="v2-otr"><b>${t}</b>${badge ? `<em class="v2-badge">${badge}</em>` : ''}</span><ul class="v2-ok">${items.map(x => `<li>${V2I.tick}<span>${x}</span></li>`).join('')}</ul></span></div>`;
+      return v2frame('mode', `${v2head('Comment voulez-vous investir ?', f.u === 'jamais' ? "Vous pourrez changer d'avis à tout moment." : 'Continuez à confirmer chaque projet, ou laissez Bricks investir pour vous.')}
+        <div class="v2-list" role="radiogroup" aria-label="Mode d'investissement">${card(f.mandat, 'pick:mandat', 'Avec mandat', 'Recommandé', ['Investi pour vous', 'Servi en premier'])}${card(!f.mandat, 'pick:plan', 'Sans mandat', '', ['Vous validez chaque projet', 'Servi après les mandats'])}</div>`, v2grad('Continuer', 'step:crit')); },
+    crit: () => { const f = ui.flow, c = f.crit; if (c.rate[1] == null) c.rate[1] = 12; const r = riskOf(c);
+      if (f.advR === undefined) f.advR = f.u !== 'jamais' && !r;
+      const list = `<div class="v2-list" role="radiogroup" aria-label="Niveau de risque">${Object.entries(PROF).map(([id, p]) => v2opt({on: id === r, a: `v2r:${id}`, data: ` data-risk="${id}"`,
+        ic: v2meter(V2_RK[id][0]), t: p.t, tr: `${p.rate[0]} à ${p.rate[1]} %`, s: V2_RK[id][1]})).join('')}</div>`;
+      return v2frame('crit', `${v2head('Quel niveau de risque acceptez‑vous ?', 'Plus le rendement visé est haut, plus le risque de perte l’est aussi.', v2note(f))}${list}
+        ${f.advR ? `<div class="v2-adv">${slider({src: 'flow', k: 'rate', label: 'Rendement visé', vals: c.rate, why: WHY.rate})}</div>` : ''}
+        <div class="v2-links"><span class="v2-lnk"${A('sheet:v2rk')} role="button">Comparer les niveaux</span><span class="v2-lnk"${A('v2adv:R')} role="button" aria-expanded="${!!f.advR}">${f.advR ? 'Masquer le réglage' : 'Régler moi-même'}</span></div>
+        <p class="v2-legal">Le rendement visé n'est pas garanti. Risque de perte en capital.</p>`, v2cta('crit', !!r || f.advR)); },
+    crit2: () => { const f = ui.flow, c = f.crit, h = hzOf(c);
+      if (f.advH === undefined) f.advH = f.u !== 'jamais' && !h;
+      const track = ([lo, hi]) => `<span class="v2-tk" aria-hidden="true"><i${hi >= 10 ? ' class="open"' : ''} style="left:${lo * 10}%;width:${(Math.min(hi, 10) - lo) * 10}%"></i></span>`;
+      const list = `<div class="v2-list" role="radiogroup" aria-label="Durée">${Object.entries(HZ).map(([id, z]) => v2opt({on: id === h, a: `v2h:${id}`, data: ` data-hz="${id}"`,
+        t: z.t, tr: cap1(z.s), extra: track(z.hor)})).join('')}</div><div class="v2-ax" aria-hidden="true"><span>0</span><span>5 ans</span><span>10 ans</span></div>`;
+      return v2frame('crit2', `${v2head('Combien de temps votre argent peut-il rester investi ?', "Il reste investi jusqu'au remboursement de chaque projet. Plus la durée est courte, plus il vous revient vite.")}${list}
+        ${f.advH ? `<div class="v2-adv">${slider({src: 'flow', k: 'hor', label: 'Durée', vals: c.hor, why: ''})}</div>` : ''}
+        <div class="v2-links"><span class="v2-lnk"${A('v2adv:H')} role="button" aria-expanded="${!!f.advH}">${f.advH ? 'Masquer le réglage' : 'Régler moi-même'}</span></div>`, v2cta('crit2', !!h || f.advH)); },
+    geo: () => { const c = ui.flow.crit, g = c.geo || 'all';
+      const list = `<div class="v2-list" role="radiogroup" aria-label="Localisation">${V2_GEO.map(([v, ic, t, s]) => v2opt({on: g === v, a: `v2g:${v}`, ic, t, s})).join('')}</div>`;
+      return v2frame('geo', `${v2head('Où voulez-vous investir ?', 'Bricks ne retient que les projets situés dans cette zone.')}${list}`, v2cta('geo', true)); },
+    amount: () => { const f = ui.flow, c = f.crit, raw = +f.amt || 0, reasons = riskReasons(c.max), hint = amountHint(raw, c.max);
+      const blocked = c.max < 10 || (reasons.length > 0 && !f.riskOk);
+      const chips = AMOUNTS.map(v => `<span class="v2-chip${raw === v ? ' on' : ''}"${A(`max:${v}`)} role="button">${v} €${v === 50 ? '<em>Le plus choisi</em>' : ''}</span>`).join('');
+      const input = `<label class="v2-ul"><input id="CXAMT" inputmode="numeric" autocomplete="off" value="${f.amt}" style="width:${Math.max(f.amt.length, 1) + 0.1}ch" aria-label="Montant maximum par projet, en euros"><span>€</span></label>`;
+      return v2frame('amount', `${v2head('Combien investir par projet, au maximum ?', "Sur chaque projet qui correspond, Bricks investit jusqu'à ce montant, selon l'argent disponible sur votre Solde Bricks.")}
+        ${v2stepper('bump:-1', 'bump:1', c.max <= 10, input)}
+        <p class="v2-amt-s">${c.max >= 10 ? `= ${c.max / BRICK_EUROS} 🧱` : ''}</p>${hint ? `<p class="v2-hint">${V2I.info(16)}<span>${hint}</span></p>` : ''}
+        <div class="v2-chips">${chips}</div>
+        <div class="v2-gap">${v2help('pending', 'À savoir',"Un petit montant sur beaucoup de projets limite l'impact si l'un se passe mal.")}</div>
+        ${reasons.length ? warnBox(reasons, c, f.riskOk) : ''}`, v2grad(f.fromRecap ? 'Valider' : 'Continuer', 'v2go:amount', blocked)); },
+    limits: () => { const f = ui.flow, c = f.crit, m = c.month || 0; f.fromRecap = false;
+      const label = f.mandat ? 'Continuer' : f.edit ? 'Enregistrer' : "Activer l'invest auto";
+      const sum = m ? v2help('pending', `Jusqu'à ${eur(c.max * m)} investis par mois`, `${eur(c.max)} par projet × ${plural(m, 'projet')}`)
+        : v2help('pending', 'Pas de plafond mensuel', "Le total dépend de l'argent sur votre Solde Bricks.");
+      const count = `<label class="v2-ul v2-cnt${m ? '' : ' off'}"><b class="num">${m || '∞'}</b><span>${m === 1 ? 'projet par mois' : 'projets par mois'}</span></label>`;
+      return v2frame('limits', `${v2head('Combien de projets par mois, au maximum ?', 'Vous gardez la main sur ce qui part de votre Solde Bricks chaque mois.')}
+        ${v2stepper('v2m:-1', 'v2m:1', m === 1, count)}
+        <div class="v2-card v2-gap"><div class="v2-row"${A('v2m:0')} role="switch" aria-checked="${!m}"><b>Sans limite par mois</b><i class="v2-sw${m ? '' : ' on'}"></i></div></div>
+        <div class="v2-gap">${sum}</div>
+        <h3 class="v2-sec">Filtres facultatifs</h3><div class="v2-card">${v2row('Types de projets', ptShort(c), 'sheet:v2ty')}${v2row("Taille minimum d'un projet", V2_MING.find(([v]) => v === (c.minGoal || 0))[1], 'sheet:v2ming')}</div>`, v2grad(label, f.mandat ? (f.edit ? 'step:engage' : 'step:alim') : 'activate')); },
+    alim: () => { const f = ui.flow, k = f.feed;
+      const list = `<div class="v2-list" role="radiogroup" aria-label="Alimentation">${Object.entries(V2_FEED).map(([v, [ic, t, s]]) => v2opt({on: k === v, a: `feed:${v}`, ic: ILI(ic, 20), t, s})).join('')}</div>`;
+      return v2frame('alim', `${v2head('Comment alimenter votre Solde Bricks ?', "L'invest auto investit avec cet argent. Vous pourrez changer de mode à tout moment.")}${list}`, v2grad('Continuer', 'v2alim', !k)); },
+    alimcard: () => { const f = ui.flow; if (!f.fd) f.fd = fundDraft(); ui.fd = f.fd;
+      return v2frame('alimcard', `${v2head('Votre recharge auto', "Votre Solde Bricks est rechargé par carte, pour que l'invest auto puisse investir quand un projet correspond.")}${v2fund(f.fd)}`, v2grad('Continuer', 'step:engage', !v2fundOk(f.fd))); },
+    engage: () => { const f = ui.flow, c = f.crit;
+      const it = (ic, t, d) => `<div class="v2-li"><span class="v2-ico l" aria-hidden="true">${ic}</span><span class="v2-ot"><b>${t}</b><span>${d}</span></span></div>`;
+      return v2frame('engage', `${v2head('Ce que Bricks fera en votre nom', 'Avec le mandat, Bricks investit pour vous sans vous demander de confirmer chaque projet.')}
+        <div class="v2-card">${it(ICON_AUTO('currentColor', 24), 'Investit dans vos critères', `${geoTxt(c)}, jusqu'à ${maxLine(c)}`)}
+        ${it(ILI(IP.undo, 24), '4 jours pour vous rétracter', 'Après chaque investissement')}${it(ILI(IP.x, 24), 'Révocable à tout moment', 'En un clic')}</div>
+        <div class="v2-card v2-gap"><div class="v2-row" role="button"><span class="v2-ico l" aria-hidden="true">${ILI(IP.doc, 24)}</span><b>Lire le mandat complet (PDF)</b>${V2I.chev}</div></div>
+        <div class="v2-consent">${checkBox(f.check, 'check', "J'ai compris que Bricks investira en mon nom, sans me demander de confirmer chaque projet.")}</div>`, v2grad('Continuer', 'sheet:sign', !f.check)); },
+  };
+  Object.keys(V2).forEach(k => { const v1 = STEP[k]; STEP[k] = () => ver.s === '2' ? V2[k]() : v1(); });
+
+  Object.assign(SHEETS, {
+    v2rk: () => v2sheet('Les 3 niveaux de risque', `<p>Plus le rendement visé est haut, plus le risque de retard et de perte en capital l'est aussi.</p>
+      ${Object.entries(PROF).map(([id, p]) => `<div class="v2-cmp"><div class="v2-cmp-h"><span class="v2-ico">${v2meter(V2_RK[id][0])}</span><b>${p.t}</b><b class="num">${span2('rate', p.rate)}</b></div><p>${p.who}</p>
+        <ul class="rk-l">${p.pros.map(t => `<li class="y"><i aria-hidden="true">✓</i>${t}</li>`).join('')}${p.cons.map(t => `<li class="n"><i aria-hidden="true">△</i>${t}</li>`).join('')}</ul></div>`).join('')}
+      <p class="rk-legal" style="margin:12px 0 0">Le rendement visé n'est pas garanti. Risque de perte en capital.</p>`),
+    v2fd: () => { const k = ui.v2fdK, d = ui.fd;
+      return v2sheet(FD_T[k][0], `<p>${FD_T[k][1]}</p><div class="v2-list">${(k === 'cap' ? v2capOpts(d) : FD_OPTS[k]).map(([v, t]) => v2opt({on: d[k] === v, a: `v2fd:${k}:${v}`, t})).join('')}</div>`); },
+    v2ming: () => { const cur = ui.flow.crit.minGoal || 0;
+      return v2sheet("Taille minimum d'un projet", `<p>Le montant que le projet cherche à financer. Gardez « Aucun minimum » pour ne rien exclure.</p>
+        <div class="v2-list">${V2_MING.map(([v, t]) => v2opt({on: cur === v, a: `v2mg:${v}`, t})).join('')}</div>`); },
+    // CheckboxCard: the container stays the same, only the checkbox changes.
+    v2ty: () => { const f = ui.flow, c = f.crit;
+      return v2sheet('Types de projets', `<p>Plus vous gardez de types, plus vos investissements sont variés.</p>
+        <div class="v2-list">${PTYPES.map(([k, t]) => { const on = c.types.includes(k); return `<div class="v2-ck"${A(`rtype:${k}`)} role="checkbox" aria-checked="${on}"><span class="v2-cb${on ? ' on' : ''}">${on ? V2I.check : ''}</span><b>${t}</b></div>`; }).join('')}</div>
+        ${f.tyWarn ? `<p class="v2-hint al">${V2I.info(16)}<span>Gardez au moins un type de projet.</span></p>` : ''}<div class="acts v2-acts">${btn('btn-grad', 'Valider', 'close')}</div>`); },
+  });
+
+  const types1 = ACT.types;
+  Object.assign(ACT, {
+    v2r: v => { const f = ui.flow; f.crit.rate = [...PROF[v].rate]; f.advR = false; },
+    v2h: v => { const f = ui.flow; f.crit.hor = [...HZ[v].hor]; f.advH = false; },
+    v2g: v => { ui.flow.crit.geo = v; },
+    v2adv: k => { ui.flow[`adv${k}`] = !ui.flow[`adv${k}`]; },
+    v2go: scr => v2after(scr),
+    v2edit: scr => { ui.flow.fromRecap = true; go(scr); },
+    v2m: v => { const f = ui.flow, c = f.crit, d = +v;
+      if (!d) { if (c.month) { f.lastMonth = c.month; c.month = null; } else c.month = f.lastMonth || 5; return; }
+      c.month = c.month ? Math.min(20, Math.max(1, c.month + d)) : f.lastMonth || 5; },
+    v2mg: v => { ui.flow.crit.minGoal = +v || null; ui.sheet = null; },
+    v2close: () => { toIa(); },
+    v2alim: () => { const f = ui.flow; if (f.feed !== 'card') { go('engage'); return; } if (!f.fd) f.fd = fundDraft(); ui.fd = f.fd; go('alimcard'); },
+    v2fdk: k => { ui.v2fdK = k; openSheet('v2fd'); },
+    v2fd: v => { const [k, x] = v.split(':'), d = ui.fd; d[k] = +x; d.ok = false; ui.sheet = null; },
+    v2fdm: m => { const d = ui.fd; if (d.mode === m) return; d.mode = m; d.ok = false; if (m === 'low') d.cap = Math.max(200, d.amt * 2); },
+    v2fda: v => v2fdSet(ui.fd, +v),
+    v2fdb: s => v2fdSet(ui.fd, Math.max(10, floor10(ui.fd.amt) + +s * 10)),
+    types: () => { if (ver.s !== '2') return types1(); newFlow('plan', app.mode === 'mandat', app.crit, true); go('limits'); openSheet('v2ty'); },
+  });
+  document.addEventListener('input', e => {
+    if (e.target.id !== 'CXFDAMT' || annotating() || !ui.fd) return;
+    const d = ui.fd, s = e.target.value.replace(/\D/g, '').replace(/^0+/, '').slice(0, 5);
+    d.raw = s; d.amt = +s || 0; d.ok = false; v2fdNorm(d);
+    paint();
+    const el = document.getElementById('CXFDAMT'); el.focus(); el.setSelectionRange(s.length, s.length);
+  });
+  // Signing sheet in the same components; the perimeter line is gone, it repeated what the mandate already says.
+  const sign1 = SHEETS.sign;
+  SHEETS.sign = () => { if (ver.s !== '2') return sign1(); const c = ui.flow.crit, r = riskOf(c);
+    return v2sheet('Signer votre mandat', `<div class="v2-card">${v2row('Vos critères', `${r ? PROF[r].t : 'Personnalisé'} · ${eur(c.max)} par projet`, 'step:crit')}${v2row('Rétractation', '4 jours')}${v2row('Durée', 'Sans limite, révocable')}</div>
+      <div class="v2-card v2-gap"><div class="v2-row" role="button"><span class="v2-ico l" aria-hidden="true">${ILI(IP.doc, 24)}</span><b>Lire le mandat complet (PDF)</b>${V2I.chev}</div></div>
+      <p class="v2-s" style="text-align:center;margin:20px 0 0">Pour signer, nous vous envoyons un code par SMS au 06&nbsp;••&nbsp;••&nbsp;••&nbsp;42.</p>
+      <div class="acts v2-acts">${btn('btn-grad', 'Recevoir mon code par SMS', 'sheet:code')}</div><p class="v2-legal" style="text-align:center;margin-top:12px">Investir comporte des risques de perte en capital et d'illiquidité.</p>`); };
+  // Projects tab of the bottom bar: the listing, then the product page at every collection moment (state.F3c, also set from the Scénario panel).
+  const mkLink = h => h.replace(/ data-go="F3c:([^"]*)"/g, (_, s) => A(`mk:${s}`)).replace(/ data-go="B:[^"]*"/g, A('back')).replace(/ data-go="[^"]*"/g, '')
+    .replace(/<div class="dim"><\/div>/g, `<div class="dim"${A('mk:todo')}></div>`);
+  const MK_TAB = `<div class="hm-tab cx-tabb"><span${A('tabhome')} role="button"><i></i>Accueil</span><span class="on"><i></i>Projets</span><span><i></i>Marketplace</span><span${A('go:list')} role="button"><i></i>Suivi</span></div>`;
+  SUB.mkt = () => `<div class="scr cx-mkt">${SB}<div class="scr-bd"><div class="sec-h">En cours <span class="count">3</span></div>${mkLink(listOpen(state.BO))}
+    <div class="sec-h" style="margin-top:32px">Prochainement <span class="count">4</span></div><div style="display:grid;gap:16px">${mkLink(listSoon('todo') + listSoon('done'))}</div></div></div>${MK_TAB}`;
+  // Every green "investies" box on the product page gets its chevron and opens the project tracking.
+  const mkTrack = h => h.replace(/<div class="ia-box ia-1 green"><div class="ia-l">(.*?)<div class="strip-t">(.*?)<\/div><\/div>(.*?)<\/div>/g,
+    (_, ic, t) => `<div class="ia-box ia-1 green"${A('mkp')} role="button" aria-label="Voir le suivi du projet"><div class="ia-l">${ic}<div class="strip-t">${t}</div></div>${ICON_CHEV('#08744D', 20)}</div>`);
+  SUB.mkf = () => mkTrack(mkLink(fiche(state.F3c, FOOTER_C)));
+  // Demo investment on the product page's project, sized like its green box.
+  SUB.mkp = () => { const s = state.F3c, n = /reinv$|^closed$/.test(s) ? 8 : /Manual/.test(s) ? 3 : 5, p = PROJ[2], {st, body} = pjInv(investment(p, n, 24 * 30, false));
+    return frame('Votre investissement', `<div class="cx-pj">${pjHead(p)}<span class="cx-pj-st ${st[0]}">${st[1]}</span>${body}</div>`); };
+  Object.assign(ACT, {
+    mk: s => { state.F3c = s; if (top() !== 'mkf') go('mkf'); syncMk(); },
+    mkp: () => go('mkp'),
+    tabhome: () => { ui.stack = ['home']; ui.sheet = null; },
+  });
+  const syncMk = () => { const sel = document.getElementById('CXMK'); if (sel) sel.value = state.F3c; panel.querySelectorAll('[data-k="bo"] button').forEach(b => b.classList.toggle('on', b.dataset.p === `bo:${state.BO}`)); };
+  PANEL.bo = v => { state.BO = v; syncMk(); };
+  document.getElementById('CXMK').addEventListener('change', e => { state.F3c = e.target.value; if (top() !== 'mkf') go('mkf'); paint(); });
+
+  const fund1 = SUB.fund, feed1 = SUB.feed;
+  SUB.fund = () => { if (ver.s !== '2' || (fa() && !ui.fdEdit)) return fund1(); const d = ui.fd;
+    return frame('Recharge automatique', `<div class="v2-in">${v2head(ui.fdEdit ? 'Modifier la recharge auto' : 'Rechargez votre Solde Bricks automatiquement', "Par carte, pour que l'invest auto puisse investir quand un projet correspond.")}${v2fund(d)}</div>`,
+      v2grad(ui.fdEdit ? 'Enregistrer' : 'Activer la recharge auto', 'fd-save', !v2fundOk(d))); };
+  SUB.feed = () => { if (ver.s !== '2') return feed1(); const k = ui.feedK, a = fa(), cta = FEED[k];
+    const opts = [...(app.mode === 'mandat' ? [['auto', CARD_P, 'Recharge auto par carte', a ? `Active · ${eur(a.amt)} ${faWhen(a)}` : 'Chaque mois ou quand le solde baisse']] : []),
+      ['card', '<path d="M13 2 4 14h7l-1 8 9-12h-7z"/>', 'Payer par carte maintenant', 'Disponible tout de suite sur votre Solde Bricks'],
+      ['vir', V2_FEED.vir[0], 'Virement depuis ma banque', 'Sans frais, arrive sous 1 à 3 jours ouvrés']];
+    return frame('Alimenter mon Solde Bricks', `<div class="v2-in"><div class="v2-card">${v2row('Solde Bricks', eur2(app.balance))}</div>
+      <div class="v2-list v2-gap" role="radiogroup">${opts.map(([v, ic, t, s]) => v2opt({on: k === v, a: `feedk:${v}`, ic: ILI(ic, 20), t, s})).join('')}</div></div>`,
+      v2grad(cta ? (k === 'auto' && a ? 'Voir ma recharge auto' : cta[0]) : 'Continuer', cta ? cta[1] : '', !cta)); };
+  PANEL.sv = v => { ver.s = v; panel.querySelectorAll('[data-k="sv"] button').forEach(b => b.classList.toggle('on', b.dataset.p === `sv:${v}`)); };
+
   const refreshSim = () => { const r = document.querySelector('#CXSIM .cx-simr'); if (r) r.outerHTML = simResults(); };
   const onRange = inp => {
     const box = inp.closest('.cx-rng'), [src, k] = box.dataset.r.split('-');
@@ -3129,6 +3505,7 @@ document.addEventListener('click', e => {
   const prev = render;
   render = function(){ prev(); if (app && state.CXM && state.CXM !== app.mode) start(state.CXM); };
   start('none');
+  prev();
 })();
 </script>
 
