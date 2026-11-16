@@ -1205,6 +1205,22 @@ document.addEventListener('click', e => {
   #CX .cx-know{display:flex;gap:10px;align-items:flex-start;margin-top:12px;padding:10px 12px;border-radius:12px;background:var(--orange-tint);font-size:12.5px;line-height:1.45;color:var(--navy)}
   #CX .cx-know svg{flex:none;margin-top:1px;color:var(--orange)}#CX .cx-know b{display:block;font-size:12px;color:var(--orange)}
   #CX .cx-fair .lnk{font-weight:700}
+  #CX .cx-pa{position:relative}
+  #CX .cx-pa-x{position:absolute;top:10px;right:10px;z-index:2;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-size:20px;line-height:1;color:#76818B;background:rgba(19,39,62,.06);cursor:pointer}
+  #CX .cx-pa-b{background:linear-gradient(160deg,#22405F,var(--navy) 70%);color:#fff}
+  #CX .cx-pa-b b{color:#fff}#CX .cx-pa-b p{color:rgba(255,255,255,.8)}
+  #CX .cx-pa-b .proof{background:rgba(255,255,255,.12);color:rgba(255,255,255,.92)}
+  #CX .cx-pa-b .cx-pa-ill{padding-right:36px}
+  #CX .cx-pa-b .cx-pa-x{color:#fff;background:rgba(255,255,255,.14)}
+  #CX .pv-n{flex:none;width:26px;height:26px;border-radius:50%;background:var(--navy);color:#fff;display:grid;place-items:center;font-size:12px;font-weight:700}
+  #CX .pv-tiles{display:flex;flex-direction:column;gap:10px}
+  #CX .pv-tile{position:relative;border:1px solid var(--line);border-radius:16px;padding:14px 12px;display:flex;flex-direction:column;gap:8px;cursor:pointer;background:#fff}
+  #CX .pv-tile.on{border-color:var(--navy);box-shadow:inset 0 0 0 1px var(--navy)}
+  #CX .pv-tile>b{font-size:14px;color:var(--navy);line-height:1.25;padding-right:22px}
+  #CX .pv-tile .md-reco{align-self:flex-start;margin-left:0}
+  #CX .pv-tile .md-radio{position:absolute;top:12px;right:12px}#CX .pv-tile.on .md-radio{border:7px solid var(--navy)}
+  #CX .pv-tile ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+  #CX .pv-tile li{display:flex;gap:6px;align-items:flex-start;font-size:12px;line-height:1.35;color:var(--navy)}
   #CX .cx-pa-ill{display:flex;align-items:center;height:48px}
   #CX .cx-pa-ill>i{width:44px;height:44px;box-sizing:border-box;margin-left:-12px;border-radius:12px;border:2px solid #fff;background-size:cover;background-position:center;box-shadow:0 4px 10px rgba(19,39,62,.15)}
   #CX .cx-pa-ill>i:first-child{margin-left:0}
@@ -1469,6 +1485,8 @@ document.addEventListener('click', e => {
   #CX .rk-rg{font-size:13px;font-weight:700;color:var(--navy);white-space:nowrap}#CX .rk-rg small{font-size:11px;font-weight:500;color:var(--grey)}
   #CX .rk-l{display:flex;flex-direction:column;gap:5px;margin:0;padding:0;list-style:none}#CX .rk-l li{display:flex;gap:7px;font-size:12px;font-weight:500;line-height:1.4;color:var(--navy)}
   #CX .rk-l i{flex:none;width:14px;font-style:normal;font-weight:700;text-align:center}#CX .rk-l .y i{color:#0A915D}#CX .rk-l .n i{color:var(--orange)}
+
+  #CX .cx-chips-c{flex-direction:column;align-items:stretch}#CX .cx-chips-c span{text-align:center}
   #CX .rk-rows{display:flex;flex-direction:column;gap:8px}
   #CX .rk-r{display:flex;align-items:flex-start;gap:10px;padding:12px;border:1px solid var(--line);border-radius:14px;background:#fff;cursor:pointer}
   #CX .rk-r.on{border-color:var(--navy);box-shadow:inset 0 0 0 1px var(--navy)}
@@ -1548,7 +1566,12 @@ document.addEventListener('click', e => {
   #CX .rom-stk{display:flex;gap:1px;height:8px;overflow:hidden;border-radius:4px}#CX .rom-stk i{display:block;min-width:2px;background:rgba(19,39,62,.35)}#CX .rom-stk i.x{background:var(--orange)}
   #CX .rom-vr{display:flex;flex-wrap:wrap;gap:6px}#CX .rom-vr span{padding:4px 9px;border-radius:999px;background:var(--neutral-100);font-size:11.5px;font-weight:600;color:var(--navy)}
   #CX .rom-dn{margin:0}
-  #CX .rom-vd{display:flex;gap:6px;margin:2px 0 0;font-size:12px;line-height:1.4;color:var(--navy)}#CX .rom-vd i{flex:none;width:12px;font-style:normal;font-weight:700;text-align:center}#CX .rom-vd.y i{color:#0A915D}#CX .rom-vd.n i{color:var(--orange)}
+  #CX .pf-a{cursor:pointer}#CX .pf-a .rom-fx{align-items:center}#CX .pf-a .rom-fx>div{gap:2px}#CX .pf-a .rom-fx small{font-size:11.5px;font-weight:600;color:var(--grey)}#CX .pf-a .rom-fx>div>b{font-size:14px}
+  #CX .pf-tag{flex:none;display:inline-flex;align-items:center;gap:4px;padding:4px 9px;border-radius:999px;font-style:normal;font-size:11.5px;font-weight:700}#CX .pf-tag i{font-style:normal}
+  #CX .pf-tag.y{background:#E6F6EE;color:#08744D}#CX .pf-tag.n{background:var(--orange-tint);color:var(--orange)}
+  #CX .pf-why{font-size:12px;font-weight:600;color:var(--orange)}#CX .bs .pf-sh-k{display:block;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--grey)}
+  #CX .pf-coach{display:flex;gap:8px;align-items:flex-start;margin:0 0 10px;padding:10px 12px;border-radius:12px;font-size:13px;font-weight:600;line-height:1.4;color:var(--navy)}
+  #CX .pf-coach i{flex:none;font-style:normal;font-weight:700}#CX .pf-coach.y{background:#E6F6EE}#CX .pf-coach.y i{color:#08744D}#CX .pf-coach.n{background:var(--orange-tint)}#CX .pf-coach.n i{color:var(--orange)}
   #CX .rk-amt{margin:0 0 10px}
   #CX .rom-com{display:flex;flex-direction:column;gap:6px}#CX .rom-com>b{font-size:15px;line-height:1.35;color:var(--navy)}
   #CX .rom-com svg{display:block;width:100%;height:auto;margin-top:6px;overflow:visible}#CX .rom-com .ar{fill:rgba(19,39,62,.07)}#CX .rom-com .ln{fill:none;stroke:var(--navy);stroke-width:1.6}
@@ -1564,6 +1587,9 @@ document.addEventListener('click', e => {
   const PROJECTS = [[0,9,15],[0,10,12],[0,9.5,20],[0,8,24],[0,8,20],[0,8,12],[0,9.5,36],[0,8.5,18],[0,10,60],[0,10,20],[0,12.5,9],[1,11,18],[1,8.5,12],[1,9,36],[1,8.5,24],[1,10,20],[1,10,12],[1,8,15],[1,10,20],[1,9,24],[1,9.5,18],[1,10.5,30],[1,9,24],[1,9.5,42],[1,10.5,18],[2,12.5,12],[2,9.5,36],[2,8.5,24],[2,8,30],[2,10.5,24],[2,11,18],[2,10.5,24],[2,10,20],[2,11,48],[2,9.5,30],[2,8,30],[2,10,72],[2,11,18],[2,9,30],[2,7.5,24],[2,8.5,12]];
   // One letter per PROJECTS entry: l logement, c commerce et loisirs, e entreprises.
   const PROJECTS_T = [...'llllcllllelclllllcllllclllelcllllcllellcl'].map(x => ({l: 'log', c: 'com', e: 'ent'})[x]);
+  // Mostly France, a few elsewhere: 4 in Europe, 1 outside Europe (Dubai).
+  const PROJECTS_Z = PROJECTS.map((_, i) => [5, 14, 23, 32].includes(i) ? 'eu' : i === 40 ? 'dxb' : 'fr');
+  const goalOf = i => [350_000, 600_000, 900_000, 1_500_000, 2_500_000][i % 5];
   const MONTHS = ['Août', 'Sept.', 'Oct.'];
   const PUBLISHED = MONTHS.map((_, m) => PROJECTS.filter(([month]) => month === m).length);
   const BAR_MAX = Math.max(...PUBLISHED);
@@ -1577,7 +1603,6 @@ document.addEventListener('click', e => {
   const noGo = h => h.replace(/ data-(go|md)="[^"]*"/g, '').replace(/ data-obj-i(="[^"]*")?/g, '');
   const S = () => `<div class="md-soc">${memo3(['#BEF0C6','#FFD9A2','#C5ECFD'])}<span><b>2 340 investisseurs</b> investissent automatiquement, comme vous</span></div>`;
   const soc = `<div class="cc-soc"><span class="cc-avs"><i></i><i></i><i></i></span><span><b>2 340 investisseurs</b> investissent automatiquement</span></div>`;
-  const risk = `<p class="cc-risk">Investir comporte un risque de perte en capital et d'illiquidité.</p>`;
   const RISK = `<p class="md-risk">Investir comporte des risques de perte en capital et d'illiquidité.</p>`;
   const PAST = `<p class="cc-cap">Données passées, elles ne préjugent pas des projets à venir.</p>`;
   const linkList = items => `<div class="links">${items.map(t => `<div>${t}${CHEV_R}</div>`).join('')}</div>`;
@@ -1627,7 +1652,7 @@ document.addEventListener('click', e => {
   const monthTxt = c => c.month ? `${plural(c.month, 'projet')} par mois` : 'sans limite mensuelle';
   const critSummary = c => `${eur(c.max)} par projet · ${rateTxt(c.rate)} · ${horTxt(c.hor)} · ${monthTxt(c)}`;
   const maxLine = c => `${eur(c.max)} par projet${c.month ? ` · ${monthTxt(c)}` : ''}`;
-  const matches = (p, c) => p.rate >= c.rate[0] && (c.rate[1] == null || p.rate <= c.rate[1]) && p.years >= c.hor[0] && p.years <= c.hor[1] && c.types.includes(ptOf(p));
+  const matches = (p, c) => p.rate >= c.rate[0] && (c.rate[1] == null || p.rate <= c.rate[1]) && p.years >= c.hor[0] && p.years <= c.hor[1] && c.types.includes(ptOf(p)) && geoOk(zoneOf(p), c.geo) && (!c.minGoal || !p.goal || p.goal >= c.minGoal);
   const riskReasons = max => {
     if (profile.averti) return [];
     const r = [];
@@ -1676,9 +1701,9 @@ document.addEventListener('click', e => {
   const attention = () => app.pending.length + (app.mode === 'mandat' ? app.invest.filter(i => i.unseen).length + (starved() ? 1 : 0) : 0);
 
   const simMode = () => app.mode === 'none' ? ui.how : app.mode === 'mandat' ? 'mandat' : 'plan';
-  const simFrom = c => ({rate: [c.rate[0], c.rate[1] ?? 12], hor: [...c.hor], amount: AMOUNTS.includes(c.max) ? c.max : 20, limit: c.month || 0, types: [...c.types]});
+  const simFrom = c => ({rate: [c.rate[0], c.rate[1] ?? 12], hor: [...c.hor], amount: AMOUNTS.includes(c.max) ? c.max : 20, limit: c.month || 0, types: [...c.types], geo: c.geo, minGoal: c.minGoal});
   const simHits = s => {
-    return PROJECTS.filter(([, rate, months], i) => rate >= s.rate[0] && rate <= s.rate[1] && s.hor[0] * 12 <= months && months <= s.hor[1] * 12 && (s.types || PT_ALL).includes(PROJECTS_T[i]));
+    return PROJECTS.filter(([, rate, months], i) => rate >= s.rate[0] && rate <= s.rate[1] && s.hor[0] * 12 <= months && months <= s.hor[1] * 12 && (s.types || PT_ALL).includes(PROJECTS_T[i]) && geoOk(PROJECTS_Z[i], s.geo) && (!s.minGoal || goalOf(i) >= s.minGoal));
   };
   const setToggle = (k, v) => { state[k] = v; document.querySelectorAll(`.toggle[data-v="${k}"] button`).forEach(x => x.classList.toggle('on', x.dataset.s === v)); };
   const setMode = m => { app.mode = m; setToggle('CXM', m); };
@@ -1778,7 +1803,9 @@ document.addEventListener('click', e => {
       <p class="cc-inv cx-sec">${inv}</p></div>`;
   };
   const simBox = () => {
-    if (app.mode !== 'none' && !ui.simOpen) {
+    if (app.mode === 'none' && !ui.simOpen) return `<div class="cc-box" id="CXSIM"><b>Essayez des critères</b><p class="cc-cap">Combien de projets publiés d'août à octobre 2026 vous auraient correspondu ?</p>
+        <button class="btn btn-outline cx-simo" data-cs="open">Essayer</button></div>`;
+    if (!ui.simOpen) {
       const n = simHits(simFrom(app.crit)).length;
       return `<div class="cc-box" id="CXSIM"><b>Et avec d'autres critères ?</b><p class="cc-cap">Avec vos critères actuels, ${plural(n, 'projet')} sur ${PROJECTS.length} publiés d'août à octobre 2026 ${n > 1 ? 'vous auraient' : 'vous aurait'} correspondu.</p>
         <button class="btn btn-outline cx-simo" data-cs="open">Tester d'autres critères</button>${PAST}</div>`;
@@ -1789,7 +1816,7 @@ document.addEventListener('click', e => {
   };
   const SIM_ACTIONS = {
     amount: v => { sim.amount = +v; },
-    open: () => { ui.simOpen = true; sim = simFrom(app.crit); sim.adv = !answered(sim); },
+    open: () => { ui.simOpen = true; if (app.mode !== 'none') sim = simFrom(app.crit); },
     rrisk: v => { sim.rate = [...PROF[v].rate]; },
     rhz: v => { sim.hor = [...HZ[v].hor]; },
     radv: () => { sim.adv = !sim.adv; },
@@ -1804,15 +1831,10 @@ document.addEventListener('click', e => {
 
   const hero = anim => `<div class="cc-land${anim ? ' cx-anim' : ''}">
     <div class="cc-col" aria-hidden="true"><div class="cc-tile t1"></div><div class="cc-tile t2"></div><div class="cc-tile t3"></div>
-      <span class="cc-float f1">${ICON_AUTO('#EC5223', 14)}Exemple : <span class="cx-count">5</span> 🧱 pour vous</span><span class="cc-float f2">${ICON_CHECK('#fff', 20)}</span></div>
+      <span class="cc-float f2">${ICON_CHECK('#fff', 20)}</span></div>
     <div class="cc-lh">Les nouveaux projets viennent à vous</div>
-    <p class="cc-lp">Fixez vos critères une fois. Dès qu'un projet y correspond, deux façons de faire, au choix :</p>
-    <div class="cx-two">
-      <div><i>${ICON_AUTO('#fff', 16)}</i><b>Bricks investit pour vous</b><span>Rien à faire, et vous êtes servi en premier.</span></div>
-      <div><i>${ICON_CHECK('#fff', 16)}</i><b>Vous validez chaque projet</b><span>Des bricks vous sont réservées : vous décidez.</span></div>
-    </div>
-    <p class="cx-two-n">Vous choisissez à l'étape suivante, et changez quand vous voulez.</p>
-    <button class="btn btn-grad cc-cta hero-cta"${A('setup')}>Activer l'invest auto</button>${soc}${risk}</div>`;
+    <p class="cc-lp">Ne passez plus à côté d'une opportunité qui vous correspond.</p>
+    <button class="btn btn-grad cc-cta hero-cta"${A('setup')}>Activer</button>${soc}</div>`;
   const statusLine = (b, s) => `<div class="cx-line"><b>${b}</b><span>· ${s}</span></div>`;
   const rvCard = () => { const anim = !ui.rvPlayed; ui.rvPlayed = true;
     return `<div class="cx-rv${anim ? ' cx-anim' : ''}"><div class="cx-rv-h"><span class="cx-rv-ic">${ICON_CHECK('#08744D', 22)}</span><div><span class="cx-rv-k">Mandat révoqué</span><b>Vous gardez la main</b></div></div>
@@ -1829,6 +1851,7 @@ document.addEventListener('click', e => {
     pct: '<path d="m6 18 12-12"/><circle cx="7" cy="7" r="1.5"/><circle cx="17" cy="17" r="1.5"/>',
     cal: '<rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/>',
     house: '<path d="M3 11 12 4l9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-5h4v5"/>',
+    pin: '<path d="M12 21s7-6.2 7-11a7 7 0 0 0-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/>',
     lock: '<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>',
     check: '<path d="m5 12 5 5 9-10"/>', x: '<path d="M6 6l12 12M18 6 6 18"/>', clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
     bulb: '<path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.5 10.9c.6.4 1 1.1 1 1.8V16h5v-.3c0-.7.4-1.4 1-1.8A6 6 0 0 0 12 3z"/>', menu: '<path d="M4 7h16M4 12h16M4 17h16"/>',
@@ -1887,10 +1910,11 @@ document.addEventListener('click', e => {
   const tipsVir = () => tipsBlock(tipVir().replace('<div class="match">', `<div class="match"${A('sheet:vir')}>`));
   const critTiles = () => {
     const c = app.crit, plan = c.rate[1] == null;
-    const tiles = [[CI[0], eur(c.max), 'Max. par projet'], [CI[1], c.month ? plural(c.month, 'projet') : 'Sans limite', 'Par mois'],
-      [CI[2], plan ? `${c.rate[0]} % et +` : rateTxt(c.rate), plan ? 'Rendement minimum' : 'Rendement brut cible'], [CI[3], horTxt(c.hor).replace(/^j/, 'J'), 'Horizon']];
+    const tiles = [[CI[0], eur(c.max), 'Max. par projet'], [CI[1], c.month ? plural(c.month, 'projet') : 'Sans limite', 'Rythme'],
+      [CI[2], plan ? `${c.rate[0]} % et +` : rateTxt(c.rate), plan ? 'Rendement minimum' : 'Rendement brut cible'], [CI[3], horTxt(c.hor).replace(/^j/, 'J'), 'Horizon'],
+      [ci(IP.pin), geoTxt(c), 'Localisation'], [ci(IP.house), c.minGoal ? `Dès ${eur(c.minGoal)}` : 'Aucune', 'Taille minimum']];
     tiles.push([ci(IP.house), ptShort(c), 'Types de projets', 'w']);
-    return `<div class="cx-ct">${tiles.filter((_, k) => k !== 1).map(([ic, v, l, w]) => `<div${w ? ' class="w"' : ''}>${ic}<div><b>${v}</b><span>${l}</span></div></div>`).join('')}</div>`;
+    return `<div class="cx-ct">${tiles.map(([ic, v, l, w]) => `<div${w ? ' class="w"' : ''}>${ic}<div><b>${v}</b><span>${l}</span></div></div>`).join('')}</div>`;
   };
   const CONFETTI = Array.from({length: 14}, (_, i) => {
     const t = Math.PI * (i / 13), r = 90 + (i % 3) * 30;
@@ -2052,8 +2076,8 @@ document.addEventListener('click', e => {
     if (!plan && app.cardFail) out.push(alertRow('r', ILI(CARD_P, 16), "<b>Recharge refusée par votre banque</b>Votre Solde Bricks n'a pas été rechargé.", 'sheet:card', 'Mettre à jour ma carte'));
     if (!plan && fa() && !fund.card) out.push(alertRow('o', ILI(CARD_P, 16), "<b>Aucune carte enregistrée</b>L'alimentation automatique est suspendue.", 'sheet:card', 'Ajouter'));
     else if (!plan && fa() && fund.exp) out.push(alertRow('o', ILI(CARD_P, 16), `<b>Carte bientôt expirée</b>${cardShort()} expire fin novembre. Mettez-la à jour pour garder l'alimentation automatique.`, 'sheet:card', 'Mettre à jour'));
-    if (plan && b < 10) out.push(alertRow('r', ICON_WALLET, '<b>Solde Bricks vide</b>Aucune brick ne peut vous être réservée.', 'topup', 'Ajouter'));
-    else if (!plan && b >= 10 && b < c.max) out.push(alertRow('o', ICON_WALLET, `<b>Solde bas</b>Votre solde (${eur2(b)}) couvre ${eur(floor10(b))} sur les ${eur(c.max)} prévus par projet.`, 'topup', 'Ajouter'));
+    if (b < 10) out.push(alertRow('r', ICON_WALLET, `<b>Solde Bricks vide</b>${plan ? 'Aucune brick ne peut vous être réservée.' : 'Bricks ne peut plus investir pour vous.'}`, 'topup', 'Ajouter'));
+    else if (!plan && b >= 10 && b < c.max) out.push(alertRow('o', ICON_WALLET, `<b>Solde bas</b>Votre solde (${eur2(b)}) ne couvre pas le maximum de ${eur(c.max)} par projet.`, 'topup', 'Ajouter'));
     if (limitHit()) out.push(alertRow('n', ILI(IP.cal, 16), `<b>Limite du mois atteinte</b>${plural(c.month, 'projet')} par mois, comme prévu. Reprise le ${nextMonth1()}.`));
     return out.join(''); };
   const lateAlert = () => { const lt = lateInv();
@@ -2061,7 +2085,7 @@ document.addEventListener('click', e => {
   const NOTHING = () => `<div class="cx-card cx-none">${ILI(IP.check, 16)}<span>Rien à valider pour l'instant. On vous prévient dès qu'un projet vous est réservé.</span></div>`;
   const topSec = () => { if (isPlan()) return {t: 'À valider', body: app.pending.length ? app.pending.map(pendCardV).join('') : NOTHING(), n: app.pending.length};
     const r = retractable();
-    return r.length ? {t: 'En cours', body: r.map(curCard).join(''), n: 0} : null; };
+    return r.length ? {t: 'En délai de rétractation', body: r.map(curCard).join(''), n: r.length} : null; };
   const community = () => `<div class="cx-com sm">${memo3(['#BEF0C6', '#FFD9A2', '#C5ECFD'])}<span><b>2 340 investisseurs</b> investissent automatiquement</span></div>`;
 
   const cashA = () => { const live = app.invest.filter(i => !repaid(i)), done = app.invest.filter(repaid);
@@ -2078,7 +2102,7 @@ document.addEventListener('click', e => {
     return x ? `Versement du ${fmtD(x.at)} non reçu (${eur2(x.amt)})` : 'Chantier en retard sur le calendrier prévu'; };
   const finRow = ({t, v, sub = '', a = '', cls = ''}) => `<div class="cx-fr${cls ? ` ${cls}` : ''}"${a ? `${A(a)} role="button"` : ''}><div><span>${t}</span>${sub ? `<small>${sub}</small>` : ''}</div><b class="num">${v}</b>${a ? CHEV_R : ''}</div>`;
   const stTxt = () => app.mode === 'revoked' ? ['n', 'Avec validation · mandat révoqué'] : isPlan() ? ['', 'Avec validation'] : starved() ? ['o', 'Mandat en pause · solde vide'] : ['', 'Mandat actif'];
-  const critLine = c => `${eur(c.max)} par projet · ${c.rate[1] == null ? `${c.rate[0]} % et +` : rateTxt(c.rate)} · ${horTxt(c.hor)}${c.types.length < PT_ALL.length ? ` · ${ptNames(c)}` : ''}`;
+  const critLine = c => `${eur(c.max)} par projet · ${c.rate[1] == null ? `${c.rate[0]} % et +` : rateTxt(c.rate)} · ${horTxt(c.hor)}${c.geo ? ` · ${geoTxt(c)}` : ''}${c.types.length < PT_ALL.length ? ` · ${ptNames(c)}` : ''}`;
   const setRow = (a, t, sub, right = CHEV_R) => `<div class="cx-sr"${A(a)} role="button"><div><b>${t}</b>${sub ? `<span>${sub}</span>` : ''}</div>${right}</div>`;
   const settingsRows = () => sec('Réglages', `<div class="cx-card cx-list">${setRow('sheet:crits', 'Mes critères', `${critLine(app.crit)}`)}${setRow('topup', 'Alimentation du compte', fundSub())}
     ${setRow('go:hist', 'Historique', 'Tous les projets, versements et mouvements')}${setRow('sheet:docs', 'Documents', app.mode === 'mandat' ? `Mandat signé le ${app.signedAt} · conditions` : 'Conditions · historique des configurations')}
@@ -2086,7 +2110,7 @@ document.addEventListener('click', e => {
     ${setRow('sheet:menu', app.mode === 'mandat' ? 'Modifier, révoquer ou désactiver' : 'Modifier ou désactiver', '', '<span class="cx-dots" aria-hidden="true">···</span>')}</div>`);
 
   const fairBox = (x, key) => x && x.asked && x.bricks < x.asked ? `<div class="cx-fairl"${A(`fair:${key}`)} role="button" aria-label="Répartition équitable : ${x.bricks} bricks sur ${x.asked}, voir le détail">${ICON_SCALE('#13273E', 16)}<span><b>Répartition équitable</b> · ${x.bricks} 🧱 sur ${x.asked}</span>${CHEV_R}</div>` : '';
-  const curCard = i => `<div class="pc cx-pc" data-cur="${i.id}"${A(`pj:i:${i.id}`)} role="button"><div class="pc-top">${ICON_CLOCK('#76818B', 13)} Rétractable encore ${leftTxt(RETRACT_H - i.ageH)}</div><div class="pc-in">${projHead(i.p)}
+  const curCard = i => `<div class="pc cx-pc" data-cur="${i.id}"${A(`pjv:i:${i.id}`)} role="button"><div class="pc-in">${projHead(i.p)}
     <div class="pc-sep"></div><div class="pc-ia">${iaBox('green', `${i.bricks} 🧱 investies pour vous ${i.card ? `<span class="a-sub cx-sub2">soit ${amountOf(i)} €, ${i.card < amountOf(i) ? `dont ${eur(i.card)} par carte` : 'par carte'}</span>` : `<span class="a-sub">(soit ${amountOf(i)} €)</span>`}`, '', ICON_CHECK('#08744D', 18))}
     ${fairBox(i, `i:${i.id}`)}</div></div></div>`;
   const pendCardV = r => { const amt = r.bricks * BRICK_EUROS;
@@ -2105,9 +2129,8 @@ document.addEventListener('click', e => {
     if (a && app.cardFail) return `<div class="cx-aut z"${A('sheet:card')} role="button"><div><b>Carte refusée par votre banque</b><span>Mettez à jour votre carte pour reprendre les recharges</span></div>${chev}</div>`;
     if (a) return `<div class="cx-aut on"${A('fund')} role="button"><div><b>Recharge auto active · ${eur(a.amt)} ${faWhen(a)}</b>${month ? `<span>${month}</span>` : ''}</div>${chev}</div>`;
     const bar = left ? `<u aria-hidden="true">${Array.from({length: left}, (_, k) => `<i${k < n ? ' class="on"' : ''}></i>`).join('')}</u>` : '';
-    const low = app.balance < app.crit.max;
-    const what = app.balance < 10 ? 'pas assez pour le prochain projet' : low ? `couvre ${eur(floor10(app.balance))} sur les ${eur(app.crit.max)} prévus par projet` : `de quoi investir dans ${plural(n, 'projet')}`;
-    return `<div class="cx-aut${n ? '' : ' z'}" data-aut="${n}"><div><b>Solde Bricks : ${money(app.balance)} · ${what}</b>${month ? `<span>${month}</span>` : ''}${bar}</div>${low ? `<span class="cx-aut-c"${A('topup')} role="button">Alimenter mon compte</span>` : ''}</div>`; };
+    if (!n) return month ? `<div class="cx-aut z" data-aut="0"><div><b>${month}</b></div></div>` : '';
+    return `<div class="cx-aut" data-aut="${n}"><div><b>Avec votre solde, vous pouvez encore investir dans ${plural(n, 'projet')}</b>${month ? `<span>${month}</span>` : ''}${bar}</div></div>`; };
 
   const actSummary = () => { const list = outcomes(null, topIds()).slice(0, 5), all = `<div class="cx-cc cx-cc-all"${A('go:act')} role="button"><span>Voir tout</span>${CHEV_R}</div>`;
     return sec('Activité', list.length ? `<div class="cx-car" data-act="${list.length}">${list.map(ccCard).join('')}${offCc(curM())}${all}</div>`
@@ -2208,21 +2231,20 @@ document.addEventListener('click', e => {
     PROJ.forEach(p => { const at = catAt(p); if (at && phaseOf(at) === 'pre') add(p, at, {e: app.ev.findLastIndex(e => e.t === 'refuse' && e.p === p)}); });
     return [...out.values()].sort((a, b) => a.at - b.at); };
   const liveCard = ({p, list, i}) => { const n = sumBricks(list), at = pubOf(i), open = phaseOf(at) === 'open', late = lateInv() === i, paid = sumOf(list, paidInt), pct = fillPct(at);
-    const ia = late ? lateBox(i)
-      : open ? `${isRet(i) ? retLine(i) : ''}${openStats(pct)}<div class="f-row">${openAmt(eur(Math.round(p.goal * pct / 100)), `${pct} %`)}<button class="btn btn-primary" style="height:48px;padding:0 20px">Réinvestir</button></div>`
+    const ia = open ? `${openStats(pct)}<div class="f-row">${openAmt(eur(Math.round(p.goal * pct / 100)), `${pct} %`)}<button class="btn btn-primary" style="height:48px;padding:0 20px">Réinvestir</button></div>`
       : stBox('green', ICON_CHECK('#08744D', 16), invT(n), paid ? `+ ${eur2(paid)} d'intérêts perçus` : '');
     const img = photoOf(p) || NO_PHOTO;
     return withThumb(cardOpen({at: `${A(`pj:i:${i.id}`)} role="button"`, img, tag: `${ICON_AUTO('#EC5223', 13)}${n} 🧱`, name: p.name, sub: open ? 'Collecte en cours' : 'Projet financé',
       social: open ? BRICKSERS_OPEN : '', rate: `${fmtRate(p.rate)} /an`, hor: fmtYears(p.years), ia}), p); };
   const soonCard = x => { const {p, at, r, i} = x, e = x.e >= 0 ? app.ev[x.e] : null;
     const strip = r ? `<div class="card-ia">${noGo(cdLine(expShort(r.left)))}${cardActs(A(`refask:${r.id}`), A(`confirm:${r.id}`), r.bricks)}</div>`
-      : i ? `<div class="card-ia">${iaBox('green', invT(i.bricks, i.mandat), '', ICON_CHECK('#08744D', 18))}${isRet(i) ? retLine(i) : ''}</div>`
+      : i ? `<div class="card-ia">${iaBox('green', invT(i.bricks, i.mandat), '', ICON_CHECK('#08744D', 18))}</div>`
       : e ? `<div class="card-ia">${iaBox('neutral', `${e.bricks} 🧱 refusées <span class="a-sub">(soit ${eur(e.bricks * BRICK_EUROS)})</span>`)}</div>` : '';
     const key = r ? `r:${r.id}` : i ? `i:${i.id}` : e ? `e:${x.e}` : `p:${PROJ.indexOf(p)}`;
     const img = photoOf(p) || (p.name === NEVERS ? '' : NO_PHOTO);
     return withThumb(cardB({at: `${A(`pj:${key}`)} role="button"`, img, cd: countdown(cdParts(at)), name: p.name, date: openTxt(at), strip}), p); };
   const listSec = (t, cards, empty) => `<div><div class="sec-h">${t} <span class="count">${cards.length}</span></div>${cards.length ? `<div class="cx-lst">${cards.join('')}</div>` : `<p class="cx-cap2" style="margin:0">${empty}</p>`}</div>`;
-  const listScreen = () => frame('Projets', listSec('En cours', liveList().map(liveCard), 'Les projets dans lesquels vous investissez apparaîtront ici.')
+  const listScreen = () => frame('Suivi', listSec('En cours', liveList().map(liveCard), 'Les projets dans lesquels vous investissez apparaîtront ici.')
     + listSec('Prochainement', soonList().map(soonCard), 'Aucun projet à venir pour le moment.'));
 
   const atOf = d => d.r ? d.r.at : d.i ? pubOf(d.i) : d.o ? d.o.src.pub?.at || d.o.at : d.f ? d.f.at : d.at;
@@ -2328,7 +2350,7 @@ document.addEventListener('click', e => {
   const hzHint = c => { const rows = Object.entries(HZ).map(([id, z]) => ({t: z.t, n: hzHits(id, c)})), max = Math.max(...rows.map(x => x.n)), best = rows.filter(x => x.n === max);
     const who = best.length === rows.length ? 'les trois horizons' : best.map(x => x.t).join(' et ');
     return `Le plus de projets : ${who}, ${best[0].n} des ${PROJECTS.length}. Un horizon plus long garde votre argent placé plus longtemps.`; };
-  const rkTxt = (id, c) => `<b>${rkHits(id, c)} des ${PROJECTS.length} derniers projets</b> auraient correspondu`;
+  const rkTxt = (id, c) => `<b>${rkHits(id, c)} des ${PROJECTS.length} projets</b> publiés d'août à octobre 2026 auraient correspondu`;
   const rkGauge = g => `<svg class="rk-g" viewBox="0 0 32 21" aria-hidden="true"><path class="a1" d="M4 18A12 12 0 0 1 10 7.6"/><path class="a2" d="M10 7.6A12 12 0 0 1 22 7.6"/><path class="a3" d="M22 7.6A12 12 0 0 1 28 18"/>
     <path class="nd" d="M16 18V8" transform="rotate(${g} 16 18)"/><circle cx="16" cy="18" r="2.6"/></svg>`;
   const rkRange = p => `<span class="rk-rg"><small>Rendement visé</small> ${span2('rate', p.rate)}</span>`;
@@ -2338,36 +2360,40 @@ document.addEventListener('click', e => {
     return `<ul class="rk-l">${pros.map(t => `<li class="y"><i aria-hidden="true">✓</i>${t}</li>`).join('')}${cons.map(t => `<li class="n"><i aria-hidden="true">△</i>${t}</li>`).join('')}</ul>`; };
   // The selected level is styled through .on, so romSync can follow the sliders without a repaint.
   const rkRows = (c, r) => `<div class="rk-rows" role="radiogroup" aria-label="Niveau de risque" data-rk="R1">${Object.entries(PROF).map(([id, p]) => `<div class="rk-r${id === r ? ' on' : ''}" data-risk="${id}"${A(`rrisk:${id}`)} role="radio" aria-checked="${id === r}">
-    ${rkGauge(p.g)}<div class="rk-m"><div class="rk-t"><b>${p.t}</b>${rkRange(p)}</div><p>${p.who}</p><small data-rkn="${id}">${rkTxt(id, c)}</small><div class="rk-x">${rkList(id, c)}</div></div></div>`).join('')}</div>`;
+    ${rkGauge(p.g)}<div class="rk-m"><div class="rk-t"><b>${p.t}</b></div><p>${span2('rate', p.rate)} · <span data-rkn="${id}">${rkHits(id, c)} vous auraient correspondu</span></p>
+    <span class="lnk rk-d"${A(`rkd:${id}`)} role="button">En savoir plus ›</span></div></div>`).join('')}</div>`;
   const rkCards = (c, r) => `<div class="rk-cards" role="radiogroup" aria-label="Niveau de risque" data-rk="R2">${Object.entries(PROF).map(([id, p]) => `<div class="rk-c${id === r ? ' on' : ''}" data-risk="${id}"${A(`rrisk:${id}`)} role="radio" aria-checked="${id === r}">
     <span class="rk-ck" aria-hidden="true">${ICON_CHECK('#fff', 12)}</span><div class="rk-ch">${rkGauge(p.g)}<b>${p.t}</b></div>${rkRange(p)}<p>${p.who}</p><span class="lnk rk-d"${A(`rkd:${id}`)} role="button">Détails</span></div>`).join('')}</div>`;
-  const romPick = (src, c, adv) => {
+  const romPick = (src, c, adv, part) => {
     const at = v => src === 'sim' ? ` data-cs="${v}"` : A(v), r = riskOf(c), h = hzOf(c);
-    const more = `<span class="lnk rom-adv"${at('radv')} role="button" aria-expanded="${!!adv}">${adv ? 'Masquer les réglages avancés' : 'Réglages avancés ›'}</span>`;
+    const more = src === 'sim' ? '' : `<span class="lnk rom-adv"${at('radv')} role="button" aria-expanded="${!!adv}">${adv ? 'Masquer les réglages avancés' : 'Réglages avancés ›'}</span>`;
     const risk = src === 'sim' ? `<div class="cx-seg rom-seg" role="radiogroup">${Object.entries(PROF).map(([id, p]) => `<span${id === r ? ' class="on"' : ''} data-risk="${id}"${at(`rrisk:${id}`)} role="radio" aria-checked="${id === r}">${p.t}</span>`).join('')}</div>`
-      : `${rkCards(c, r)}<p class="rk-legal">Le rendement visé n'est pas garanti. Risque de perte en capital.</p>
+      : `<p class="cx-hint" style="margin-top:0">Parmi les ${PROJECTS.length} projets publiés d'août à octobre 2026.</p>${rkRows(c, r)}<p class="rk-legal">Le rendement visé n'est pas garanti. Risque de perte en capital.</p>
       <span class="lnk rk-more"${A('sheet:spread')} role="button">Pourquoi diversifier&nbsp;›</span>`;
-    return `<div class="rom-pick" data-rom="P2"><div class="md-lbl">Quel niveau de risque ?</div>${risk}
-      <div class="md-lbl">Horizon de placement</div><div class="cx-seg rom-seg rom-seg2" role="radiogroup">${Object.entries(HZ).map(([id, z]) => `<span${id === h ? ' class="on"' : ''} data-hz="${id}"${at(`rhz:${id}`)} role="radio" aria-checked="${id === h}"><b>${z.t}</b><small>${z.s}</small></span>`).join('')}</div>
+    const showR = part !== 'hz', showH = part !== 'risk';
+    return `<div class="rom-pick" data-rom="P2">${showR ? `<div class="md-lbl">Quel niveau de risque ?</div>${risk}${part === 'risk' ? more : ''}` : ''}${showH ? `
+      ${part === 'hz' ? '' : '<div class="md-lbl">Horizon de placement</div>'}${part === 'hz' ? `<div class="rk-rows" role="radiogroup" aria-label="Horizon">${Object.entries(HZ).map(([id, z]) => `<div class="rk-r${id === h ? ' on' : ''}" data-hz="${id}"${at(`rhz:${id}`)} role="radio" aria-checked="${id === h}"><div class="rk-m"><div class="rk-t"><b>${z.t}</b></div><p>${z.s}</p></div></div>`).join('')}</div>` : `<div class="cx-seg rom-seg rom-seg2" role="radiogroup">${Object.entries(HZ).map(([id, z]) => `<span${id === h ? ' class="on"' : ''} data-hz="${id}"${at(`rhz:${id}`)} role="radio" aria-checked="${id === h}"><b>${z.t}</b><small>${z.s}</small></span>`).join('')}</div>`}
       <p class="cx-hint">${hzHint(c)}</p>
-      <p class="rom-res">${(r && h) || adv ? resLine(c) : 'Répondez aux deux questions pour voir vos critères.'}</p>${more}</div>`; };
+      <p class="rom-res">${(r && h) || adv ? resLine(c) : (part === 'hz' ? 'Choisissez un horizon pour voir vos critères.' : 'Répondez aux deux questions pour voir vos critères.')}</p>${part !== 'risk' ? more : ''}</div>` : ''}</div>`; };
   // Sliders update the DOM in place while dragging, so the picker state is synced here rather than repainted.
   const romSync = (root, c) => { if (!root) return; const r = riskOf(c), h = hzOf(c);
     const set = (sel, key, v) => root.querySelectorAll(sel).forEach(e => { e.classList.toggle('on', e.dataset[key] === v); e.setAttribute('aria-checked', e.dataset[key] === v); });
     set('[data-risk]', 'risk', r); set('[data-hz]', 'hz', h);
-    root.querySelectorAll('[data-rkn]').forEach(e => { e.innerHTML = rkTxt(e.dataset.rkn, c); });
+    root.querySelectorAll('[data-rkn]').forEach(e => { const n = rkHits(e.dataset.rkn, c); e.innerHTML = e.closest('.rk-r') ? `${n} vous auraient correspondu` : rkTxt(e.dataset.rkn, c); });
     const res = root.querySelector('.rom-res'); if (res) res.innerHTML = resLine(c); };
   const romSim = (title, apply) => `<div class="cc-box" id="CXSIM"><b>${title}</b><p class="cc-cap">Répondez à deux questions : combien de projets passés vous auraient correspondu ?</p>
-      ${romPick('sim', sim, sim.adv)}${sim.adv ? `${slider({src: 'sim', k: 'rate', label: 'Rendement brut cible', vals: sim.rate})}${slider({src: 'sim', k: 'hor', label: 'Horizon', vals: sim.hor})}${typeField('sim', sim, sim.tyWarn)}` : ''}
+      ${romPick('sim', sim, false)}
       ${field('Montant maximum par projet', `Jusqu'à ${sim.amount} €`, AMOUNTS.map(v => chip(v === sim.amount, `amount:${v}`, `${v} €`)).join(''))}
       ${simResults()}${apply}${PAST}</div>`;
-  const romCrit = (f, c) => { if (c.rate[1] == null) c.rate[1] = 12;
-    const ok = f.u !== 'jamais' || f.adv || answered(c);
+  const romCrit = (f, c, part) => { if (c.rate[1] == null) c.rate[1] = 12;
+    const ok = f.u !== 'jamais' || f.adv || answered(c), okR = f.u !== 'jamais' || f.adv || !!riskOf(c);
     const sub = f.edit && f.mandat ? "Vos critères font partie du mandat : les changer, c'est signer un nouveau mandat. L'actuel reste actif d'ici là."
-      : f.u === 'jamais' ? 'Deux questions pour régler vos critères. Vous pourrez les ajuster.'
+      : f.u === 'jamais' ? ''
       : f.u === 'sim' ? 'Les critères testés sont repris. Vous pouvez encore les changer.' : f.u === 'sug' ? `${f.sug} est présélectionné. Vous pouvez encore le changer.` : 'Vos critères actuels sont repris. Vous pouvez les changer.';
-    return frame(T, `${stepHead(2, 'Vos critères', sub)}${romPick('flow', c, f.adv)}
-      ${f.adv ? `${slider({src: 'flow', k: 'rate', label: 'Rendement brut cible', vals: c.rate, why: WHY.rate})}${slider({src: 'flow', k: 'hor', label: 'Horizon', vals: c.hor, why: WHY.hor})}${typeField('flow', c, f.tyWarn)}` : ''}`, grad('Continuer', 'step:amount', !ok)); };
+    if (part === 'hz') return frame(T, `${stepHead(3, 'Votre horizon', '')}${romPick('flow', c, f.adv, 'hz')}
+      ${f.adv ? `${slider({src: 'flow', k: 'hor', label: 'Horizon', vals: c.hor, why: WHY.hor})}${typeField('flow', c, f.tyWarn)}` : ''}`, grad('Continuer', 'step:geo', !ok));
+    return frame(T, `${stepHead(2, 'Vos critères', sub)}${romPick('flow', c, f.adv, 'risk')}
+      ${f.adv ? slider({src: 'flow', k: 'rate', label: 'Rendement brut cible', vals: c.rate, why: WHY.rate}) : ''}`, grad('Continuer', 'step:crit2', !okR)); };
 
   const GEO = {'Rénovation maison Sainte Marie La Hume': ['Gujan-Mestras', -1.07, 44.64, 'Maison'], 'Immeuble Dax': ['Dax', -1.05, 43.71, 'Immeuble'],
     'Maison Eperon Réunion': ['La Réunion', null, null, 'Maison'], 'Immeuble Gare - Nevers': ['Nevers', 3.16, 46.99, 'Immeuble'], 'Division Louis Vitet Dieppe': ['Dieppe', 1.08, 49.92, 'Immeuble'],
@@ -2388,8 +2414,9 @@ document.addEventListener('click', e => {
   const pathOf = (vals, w, h) => { const max = Math.max(...vals) || 1, n = vals.length - 1;
     return vals.map((v, k) => `${k ? 'L' : 'M'}${(k / n * w).toFixed(1)} ${(h - v / max * (h - 4)).toFixed(1)}`).join(''); };
   const romPage = top => { const topH = top ? sec(top.t, top.body, top.n ? `<em class="cx-cnt">${top.n}</em>` : '').replace('<section class="cx-sec"', '<section class="cx-sec" id="rom-val"') : '';
-    const head = headBento(), tail = `${actSummary()}${settingsRows()}`;
-    return isPlan() ? `${community()}${topH}${head}${bravoTop()}${alerts()}${lateAlert()}${tail}` : `${community()}${head}${bravoTop()}${alerts()}${topH}${lateAlert()}${tail}`; };
+    if (app.mode === 'mandat') return `${bravoTop()}${community()}${alerts()}${headBento(true)}${factsDash()}${topH}${moreRow('go:list', 'Voir le suivi de mes projets')}${settingsRows()}`;
+    const head = `${headBento()}${factsDash()}`, tail = `${actSummary()}${settingsRows()}`;
+    return isPlan() ? `${bravoTop()}${community()}${topH}${head}${alerts()}${tail}` : `${bravoTop()}${community()}${head}${alerts()}${topH}${tail}`; };
   // Fictional extra projects: a diversified portfolio needs more lines than the seven demo projects.
   const XTRA = [['Résidence Les Acacias - Toulouse', 'Toulouse', 1.44, 43.6, 'Immeuble'], ['Immeuble République - Grenoble', 'Grenoble', 5.72, 45.19, 'Immeuble'],
     ['Maison Les Vignes - Mâcon', 'Mâcon', 4.83, 46.31, 'Maison'], ['Immeuble Saint-Pierre - Caen', 'Caen', -0.37, 49.18, 'Immeuble'],
@@ -2404,12 +2431,15 @@ document.addEventListener('click', e => {
   const DUBAI = {name: 'Résidence Marina - Dubaï', short: 'Résidence Marina', img: PROJ[4].img, rate: 10.5, years: 3};
   GEO[DUBAI.name] = ['Dubaï', null, null, 'Immeuble', 'Émirats arabes unis'];
   const addDubai = () => app.invest.push(investment(DUBAI, 4, 24 * 20, isMandatSeed(app.mode)));
+  const DAX = [['Maison des Arènes - Dax', 'Maison', 8.5, 2], ['Résidence Saint-Vincent - Dax', 'Immeuble', 10.5, 3]].map(([name, kind, rate, years], k) => {
+    GEO[name] = ['Dax', -1.05, 43.71, kind]; return {name, img: PROJ[k + 2].img, th: PROJ[k + 2].th, rate, years}; });
   const PORTS = {
+    one: [['Immeuble Dax', 6], ['Maison des Arènes - Dax', 5], ['Résidence Saint-Vincent - Dax', 4]],
     conc: [['Immeuble Dax', 10], ['Les Terrains de la Porte Neuve', 6], ['Immeuble Gare - Nevers', 4]],
     moy: [['Rénovation maison Sainte Marie La Hume', 3], ['Immeuble Dax', 2], ['Maison Eperon Réunion', 2], ['Division Louis Vitet Dieppe', 2], ...[0, 1, 2, 3, 6, 9].map(k => [XTRA[k].name, 2])],
     div: [...PROJ, ...XTRA].map(p => [p.name, 2]),
   };
-  const projByName = n => PROJ.find(p => p.name === n) || XTRA.find(p => p.name === n);
+  const projByName = n => PROJ.find(p => p.name === n) || XTRA.find(p => p.name === n) || DAX.find(p => p.name === n);
   const loadPort = k => { const m = isMandatSeed(app.mode);
     app.invest = PORTS[k].map(([n, b], j) => investment(projByName(n), b, 24 * (20 + j * 17), m));
     if (app.intl) addDubai();
@@ -2423,6 +2453,13 @@ document.addEventListener('click', e => {
   const FLAG = {France: '🇫🇷', 'Émirats arabes unis': '🇦🇪'};
   const placeOf = p => GEO[p.name][0];
   const ctryOf = p => GEO[p.name][4] || 'France';
+  const EUROPE = ['Espagne', 'Portugal', 'Italie', 'Allemagne', 'Belgique'];
+  const zoneOf = p => { const c = ctryOf(p); return c === 'France' ? 'fr' : EUROPE.includes(c) ? 'eu' : 'dxb'; };
+  // Absent geo means every zone: existing criteria keep their current behaviour.
+  const geoOk = (z, g) => !g || g === 'all' || z === 'fr' || (g === 'eu' && z === 'eu');
+  const GEO_TXT = {fr: 'France', eu: 'France et Europe', all: 'Tous les pays'};
+  const geoTxt = c => GEO_TXT[c.geo] || GEO_TXT.all;
+  const zoneCount = z => PROJECTS_Z.filter(x => x === z).length;
   const tally = ks => [...ks.reduce((m, k) => m.set(k, (m.get(k) || 0) + 1), new Map())].sort((a, b) => b[1] - a[1]);
   // Largest-remainder rounding, so displayed shares always add up to 100 %.
   const shares = vals => { const t = vals.reduce((a, b) => a + b, 0) || 1, raw = vals.map(v => v / t * 100), out = raw.map(Math.floor);
@@ -2454,16 +2491,16 @@ document.addEventListener('click', e => {
   const critHits = c => simHits({rate: [c.rate[0], c.rate[1] ?? 12], hor: c.hor, types: c.types}).length;
   const chv = `<span class="rom-chv" aria-hidden="true">${CHEV_R}</span>`;
   const monthInt = () => Array.from({length: 6}, (_, k) => { const m = curM() - 5 + k; return sumOf(app.invest, i => sumOf(dueC(i).filter(x => mIdx(x.at) === m), x => x.amt)); });
-  const headBento = () => { const gs = projGroups(), sp = spread(gs), d = divOf(), t = d && tierOf(d), s = series(), bars = monthInt(), bMax = Math.max(...bars) || 1, c = app.crit, rk = riskOf(c), hits = critHits(c);
+  const headBento = (lite = false) => { const gs = projGroups(), sp = spread(gs), d = divOf(), t = d && tierOf(d), s = series(), bars = monthInt(), bMax = Math.max(...bars) || 1, c = app.crit, rk = riskOf(c), hits = critHits(c);
     const big = `<div class="cx-hB rom-b rom-big"${A('go:list')} role="button" aria-label="Vos projets">${hTop()}<div class="rom-big-m"><div><small>Vos projets</small>
-      ${gs.length ? `<b class="num">${plural(gs.length, 'projet')}</b><span>${cntTail(sp)}</span>` : '<span>Vos projets apparaîtront ici.</span>'}</div></div>${gs.length ? geoBlock(gs, true) : ''}${autLine(monthStats())}</div>`;
+      ${gs.length ? `<b class="num">${plural(gs.length, 'projet')}</b><span>${cntTail(sp)}</span>` : '<span>Aucun pour le moment</span>'}</div></div>${gs.length ? geoBlock(gs, true) : ''}${autLine(monthStats())}</div>`;
     const spark = s.length > 1 ? (l => `<svg class="rom-bsp" viewBox="0 0 100 26" preserveAspectRatio="none" aria-hidden="true"><path class="ar" d="${l}L100 26L0 26Z"/><path class="ln" d="${l}" vector-effect="non-scaling-stroke"/></svg>`)(pathOf(s.map(x => x.inv), 100, 26)) : '';
     const card = (cls, a, label, v, sub, vis) => `<div class="rom-b${cls}"${A(a)} role="button"><small>${label}</small><b class="num">${v}</b><span>${sub}</span>${chv}<div class="rom-bv">${vis}</div></div>`;
     return `<div class="rom-h3" data-head="H3">${big}
       ${card('', 'track', 'Investi', eur(sumAmt(app.invest)), sinceTxt() || "par l'invest auto", spark)}
-      ${card(' g', 'go:rev', 'Intérêts perçus', eur2(sumOf(app.invest, paidInt)), 'versés sur 6 mois', `<span class="rom-bars">${bars.map(v => `<i style="height:${v ? Math.max(18, v / bMax * 100) : 8}%"${v ? '' : ' class="z"'}></i>`).join('')}</span>`)}
+      ${lite ? '' : card(' g', 'go:rev', 'Intérêts perçus', eur2(sumOf(app.invest, paidInt)), 'versés sur 6 mois', `<span class="rom-bars">${bars.map(v => `<i style="height:${v ? Math.max(18, v / bMax * 100) : 8}%"${v ? '' : ' class="z"'}></i>`).join('')}</span>`)}
       ${card(' g t', 'go:div', 'Diversification', t ? TIERS[t.k].t : '—', !t ? 'Dès votre premier projet' : !t.next ? 'Palier le plus haut' : t.held ? `Un projet pèse > ${TOP_MAX} %` : `Encore ${plural(t.need, 'projet')}<br>→ ${t.next.t}`, t ? miniPath(t) : '')}
-      ${card('', 'edit', 'Vos critères', rk ? PROF[rk].t : 'Personnalisés', `${span2('rate', [c.rate[0], c.rate[1] ?? 12])} · ${horTxt(c.hor)}${c.types.length < PT_ALL.length ? `<br>${ptGap(c)}` : ''}`, `<span class="rom-hb"><span><i style="width:${(hits / PROJECTS.length * 100).toFixed(1)}%"></i></span><em>${hits} projets récents sur ${PROJECTS.length}</em></span>`)}</div>`; };
+      ${lite ? '' : card('', 'edit', 'Vos critères', rk ? PROF[rk].t : 'Personnalisés', `${span2('rate', [c.rate[0], c.rate[1] ?? 12])} · ${horTxt(c.hor)}${c.types.length < PT_ALL.length ? `<br>${ptGap(c)}` : ''}`, `<span class="rom-hb"><span><i style="width:${(hits / PROJECTS.length * 100).toFixed(1)}%"></i></span><em>${hits} projets récents sur ${PROJECTS.length}</em></span>`)}</div>`; };
 
   const DIV_NOTE = `<p class="cx-cap2 rom-dn">La diversification limite l'exposition à un projet, elle ne supprime pas le risque de perte en capital.</p>`;
   // Community spread of project counts per investor: gamma-shaped, median 9 projects.
@@ -2494,24 +2531,24 @@ document.addEventListener('click', e => {
       ${lv(2, 'Des montants équilibrés', `<p>Votre plus gros projet pèse <b class="num">${d.top.pct} %</b> de votre portefeuille${n > 1 ? ` (${d.top.k})` : ''}. Au palier Très diversifié, aucun projet ne dépasse ${TOP_MAX} %.</p><span class="rom-stk" aria-hidden="true">${d.gs.map((x, i) => `<i${i ? '' : ' class="x"'} style="flex:${x.amt}"></i>`).join('')}</span>`)}
       ${lv(3, 'Des projets variés', `<p>Types de projets, régions, durées, porteurs de projet : plus ils varient, moins un même événement touche tous vos projets.</p><span class="rom-vr"><span>${nT > 1 ? `${nT} types de projets` : '1 type de projet'}</span><span>${plural(nR, 'région')}${d.ctry.length > 1 ? ` · ${d.ctry.length} pays` : ''}</span><span>${lo === hi ? yTxt(lo) : `${yTxt(lo)} à ${yTxt(hi)}`}</span></span>`)}</div>`); };
   const pctTxt = n => String(n).replace('.', ',');
-  const verdict = (ok, t) => `<p class="rom-vd ${ok ? 'y' : 'n'}"><i aria-hidden="true">${ok ? '✓' : '△'}</i><span>${t}</span></p>`;
   // Advice stays factual: it reads the portfolio and the past offer, never the expected return.
-  const factsCard = d => { const row = (ic, t, sub) => `<div class="rom-fx"><i>${ILI(ic, 16)}</i><div><b>${t}</b>${sub}</div></div>`;
-    const sh = PTYPES.map(([k, t]) => [k, t, sumOf(d.gs.filter(x => ptOf(x.p) === k), x => x.amt) / d.tot * 100]).filter(x => x[2] > 0).sort((a, b) => b[2] - a[2]);
-    const pc = sh.map(x => Math.round(x[2])); pc[0] += 100 - pc.reduce((a, b) => a + b, 0);
+  const factsOf = d => {
+    const sh = PTYPES.map(([k, t]) => [k, t, sumOf(d.gs.filter(x => ptOf(x.p) === k), x => x.amt)]).filter(x => x[2] > 0).sort((a, b) => b[2] - a[2]);
     const wide = sh.length === 1 && app.crit.types.length < PT_ALL.length && ['mandat', 'plan', 'revoked'].includes(app.mode);
     const nb = d.bands.filter(Boolean).length, offer = k => Math.round(PROJECTS_T.filter(x => x === k).length / PROJECTS_T.length * 100);
-    const rateV = nb > 1 ? verdict(true, `Vos projets couvrent ${nb} fourchettes de rendement visé`) : verdict(false, 'Tous vos projets visent la même fourchette : élargir vos critères diversifierait vos projets');
-    const geoV = d.city > 2 ? verdict(true, `Bien réparti sur ${d.city} villes`) : d.city === 2 ? verdict(false, 'Sur 2 villes seulement : de nouveaux projets répartiraient davantage') : verdict(false, 'Concentré sur une ville : un même événement local toucherait tous vos projets');
-    const typeV = sh.length > 1 ? verdict(true, `${sh.length} types de projets : votre portefeuille ne dépend pas d'un seul secteur`)
-      : wide ? verdict(false, 'Un seul type de projet, choisi dans vos critères : élargir les types rendrait plus de projets éligibles')
-      : verdict(true, `Normal : ${offer(sh[0][0])} % des projets publiés d'août à octobre 2026 sont de ce type`);
-    const typeRow = row('<circle cx="12" cy="12" r="9"/><path d="M12 3v9l6.4 6.4"/>', 'Répartition par type', `<span class="rom-ty" aria-hidden="true">${sh.map(([k], j) => `<i class="pt-${k}" style="flex:${pc[j]}"></i>`).join('')}</span>
-      <span class="rom-tyl">${sh.map(([k, t], j) => `<span><i class="pt-${k}"></i>${pc[j]} % ${low(t)}</span>`).join('')}</span>${typeV}${wide ? `<span class="lnk rom-tyw"${A('types')} role="button">Élargir les types de projets ›</span>` : ''}`);
-    return sec('Votre portefeuille en 3 faits', `<div class="cx-card cx-list">
-      ${row('<path d="M4 19V9M10 19V5M16 19v-7M22 19H2"/>', d.lo === d.hi ? `Vos projets visent tous ${pctTxt(d.lo)} % de rendement brut` : `Vos projets visent tous entre ${pctTxt(d.lo)} et ${pctTxt(d.hi)} % de rendement brut`,
-        `<span class="rom-bd">${['6 à 8 %', '8 à 10 %', '10 à 12 %'].map((l, b) => `<span class="${d.bands[b] ? 'on' : ''}"><b>${l}</b>${plural(d.bands[b], 'projet')}</span>`).join('')}</span>${rateV}`)}
-      ${row(IP.house, `${plural(d.city, 'ville')} · ${d.ctry.length} pays`, `${geoBlock(d.gs, false)}${geoV}`)}${typeRow}</div>`); };
+    return [
+      {id: 'rate', k: 'Rendement visé', mean: 'Vos projets ont tous le même profil de rendement : ils réagiraient de la même façon à un imprévu.', ic: '<path d="M4 19V9M10 19V5M16 19v-7M22 19H2"/>', v: d.lo === d.hi ? `${pctTxt(d.lo)} %` : `${pctTxt(d.lo)} à ${pctTxt(d.hi)} %`, ok: nb > 1,
+        tag: 'Varié', say: nb > 1 ? `${nb} fourchettes de rendement` : 'Une seule fourchette : élargir vos critères diversifierait vos projets'},
+      {id: 'geo', k: 'Localisation', mean: d.city === 2 ? 'Vos projets dépendent de 2 marchés locaux seulement.' : `Vos projets dépendent tous du marché de ${placeOf(d.gs[0].p)}.`, ic: IP.house, v: d.ctry.length > 1 ? `${plural(d.city, 'ville')} · ${d.ctry.length} pays` : plural(d.city, 'ville'), ok: d.city > 2,
+        tag: 'Réparti', say: d.city > 2 ? '' : d.city === 2 ? 'De nouveaux projets répartiraient davantage' : 'Un même événement local toucherait tous vos projets'},
+      {id: 'type', k: 'Types de projets', mean: 'Vos critères limitent vos projets à un seul secteur.', ic: '<circle cx="12" cy="12" r="9"/><path d="M12 3v9l6.4 6.4"/>', v: sh.length > 1 ? `${sh.length} types` : sh[0][1], ok: sh.length > 1 || !wide,
+        tag: sh.length > 1 ? 'Varié' : 'Normal', say: sh.length > 1 ? "Ne dépend pas d'un seul secteur" : wide ? 'Choisi dans vos critères : élargir rendrait plus de projets éligibles' : `${offer(sh[0][0])} % des projets publiés sont de ce type`}]; };
+  const factsDash = () => { const d = divOf(); if (!d) return '';
+    const fs = factsOf(d), weak = fs.filter(f => !f.ok);
+    const mean = weak.length ? weak.map(f => f.mean).join(' ') : "Vos projets varient en rendement, en lieu et en secteur : un imprévu sur l'un ne toucherait pas tous les autres.";
+    const coach = `<p class="pf-coach ${weak.length ? 'n' : 'y'}"><i aria-hidden="true">${weak.length ? '△' : '✓'}</i><span>${mean}</span></p>`;
+    const row = f => `<div class="rom-fx"${f.ok ? '' : `${A(`pf:${f.id}`)} role="button"`}><i>${ILI(f.ic, 16)}</i><div><small>${f.k}</small><b>${f.v}</b>${f.ok ? (f.say ? `<span>${f.say}</span>` : '') : '<span class="lnk pf-why">Pourquoi et comment élargir ›</span>'}</div><em class="pf-tag ${f.ok ? 'y' : 'n'}"><i aria-hidden="true">${f.ok ? '✓' : '△'}</i>${f.ok ? f.tag : 'À élargir'}</em></div>`;
+    return sec('Votre portefeuille en 3 faits', `${coach}<div class="cx-card cx-list pf-a"${A('go:div')} role="button">${fs.map(row).join('')}</div>`); };
   // Listed least risky first, so a coverage tie keeps the safer option.
   const sugs = () => Object.entries(PROF).flatMap(([r, p]) => Object.entries(HZ).map(([h, z]) => ({k: `${r}.${h}`, t: `${p.t} · ${z.t}`, rate: p.rate, hor: z.hor})));
   const sugCrit = (s, c) => ({rate: [...s.rate], hor: [...s.hor], types: c.types});
@@ -2527,7 +2564,7 @@ document.addEventListener('click', e => {
       ${riskier ? '<p>Un rendement visé plus élevé va avec un risque plus élevé.</p>' : ''}${['mandat', 'plan', 'revoked'].includes(app.mode) ? btn('btn-outline', `Choisir ${s.t}`, `rsug:${s.k}`) : ''}</div>`; };
   const divScreen = () => { const d = divOf();
     if (!d) return frame('Diversification', `<p class="cx-cap2">Votre diversification apparaîtra dès votre premier projet.</p>${DIV_NOTE}`);
-    return frame('Diversification', `${tierCard(tierOf(d))}${divCom(d)}${leversCard(d)}${factsCard(d)}${actCard()}${DIV_NOTE}`); };
+    return frame('Diversification', `${tierCard(tierOf(d))}${divCom(d)}${leversCard(d)}${actCard()}${DIV_NOTE}`); };
   SUB.div = divScreen;
   const mainPage = () => { const top = topSec();
     return romPage(top); };
@@ -2545,7 +2582,7 @@ document.addEventListener('click', e => {
     return `${statusLine('Invest auto désactivé', `depuis le ${app.offAt || dmy(now())}`)}${pendingBlock('<p class="cx-cap">Vos réservations en cours restent à confirmer.</p>')}${backBox()}${app.invest.length ? cashA(true) : ''}${retractBlock()}${feedBlock()}${links}`;
   };
 
-  const stepHead = (n, title, sub) => { const total = ui.flow.mandat ? (ui.flow.edit ? 5 : 6) : 3;
+  const stepHead = (n, title, sub) => { const total = ui.flow.mandat ? (ui.flow.edit ? 7 : 8) : 6;
     return `<div><span class="step-n">Étape ${n} sur ${total}</span><div class="prog" style="max-width:none;margin:8px 0 14px"><i style="width:${n / total * 100}%"></i></div>${title ? `<div class="h3s" style="margin:0">${title}</div>` : ''}${sub ? `<p class="md-p">${sub}</p>` : ''}</div>`; };
   const grad = (t, a, off) => `<div class="sticky-cta on"><button class="btn ${off ? 'btn-disabled' : 'btn-grad'}"${off ? '' : A(a)} style="width:100%;height:48px">${t}</button></div>`;
   const pickChips = (opts, pick, act, label) => `<div class="md-chips">${opts.map(o => `<span${o === pick ? ' class="pick"' : ''}${A(`${act}:${o}`)}>${label(o)}</span>`).join('')}</div>`;
@@ -2558,46 +2595,62 @@ document.addEventListener('click', e => {
     ${checkBox(ok, 'risk', "J'ai compris le risque et je confirme ce montant par projet.")}</div>`;
   const STEP = {
     mode: () => { const f = ui.flow, u = f.u;
-      const sub = u === 'jamais' ? "Choisissez d'abord comment vous voulez investir. Vous pourrez changer d'avis à tout moment." : 'Continuez à confirmer chaque projet, ou laissez Bricks investir pour vous.';
-      return frame(T, `${stepHead(1, 'Comment voulez-vous investir ?', sub)}
-      <div style="display:flex;flex-direction:column;gap:12px">
-        <div class="md-opt${f.mandat ? ' on' : ''}"${A('pick:mandat')}><span class="md-radio"></span><div><b>Avec mandat<span class="md-reco">Recommandé</span></b><p>Bricks investit pour vous dans les projets qui respectent vos critères.</p>
-          <div class="ok-list">${okRow('Plus besoin de confirmer chaque projet')}${okRow('Servi en premier', "Avant les investisseurs sans mandat : plus de chances d'obtenir toutes vos bricks.")}${okRow("4 jours pour changer d'avis", 'Après chaque investissement.')}</div></div></div>
-        <div class="md-opt${f.mandat ? '' : ' on'}"${A('pick:plan')}><span class="md-radio"></span><div><b>Sans mandat</b><p>Des bricks vous sont réservées. Vous les confirmez vous-même, jusqu'à 1 h avant l'ouverture de la collecte.</p>
-          <div class="ok-list">${okRow('Vous validez chaque projet')}</div>
-          <p>Servi après les investisseurs avec mandat : sur un projet très demandé, vous pouvez recevoir moins de bricks que prévu.</p></div></div>
-      </div>`, grad('Continuer', 'step:crit')); },
+      const sub = u === 'jamais' ? "Vous pourrez changer d'avis à tout moment." : 'Continuez à confirmer chaque projet, ou laissez Bricks investir pour vous.';
+      const ok = t => `<li>${ICON_CHECK('#0A915D', 12)}<span>${t}</span></li>`;
+      const opts = `<div class="pv-tiles">
+          <div class="pv-tile${f.mandat ? ' on' : ''}"${A('pick:mandat')} role="button"><span class="md-radio"></span><b>Avec mandat</b><span class="md-reco">Recommandé</span><ul>${ok('Investi pour vous')}${ok('Servi en premier')}</ul></div>
+          <div class="pv-tile${f.mandat ? '' : ' on'}"${A('pick:plan')} role="button"><span class="md-radio"></span><b>Sans mandat</b><ul>${ok('Vous validez chaque projet')}${ok('Servi après les mandats')}</ul></div></div>`;
+      return frame(T, `${stepHead(1, 'Comment voulez-vous investir ?', sub)}${opts}`, grad('Continuer', 'step:crit')); },
     crit: () => { const f = ui.flow, c = f.crit;
-      return romCrit(f, c); },
+      return romCrit(f, c, 'risk'); },
+    crit2: () => { const f = ui.flow, c = f.crit;
+      return romCrit(f, c, 'hz'); },
     amount: () => { const f = ui.flow, c = f.crit, raw = +f.amt || 0, reasons = riskReasons(c.max), hint = amountHint(raw, c.max);
       const sub = f.u === 'jamais' ? '' : f.u === 'sim' ? 'Le montant testé est repris. ' : 'Votre montant actuel est repris. ';
       const blocked = c.max < 10 || (reasons.length > 0 && !f.riskOk);
-      const label = f.mandat ? 'Continuer' : f.edit ? 'Enregistrer' : "Activer l'invest auto";
-      return frame(T, `${stepHead(3, '', '')}
+      return frame(T, `${stepHead(5, '', '')}
       <div><div class="h3s rk-amt">Montant maximum par projet</div>
         <div class="cx-amt2"><button class="pm"${A('bump:-1')} aria-label="10 € de moins">−</button><label><input id="CXAMT" inputmode="numeric" autocomplete="off" value="${f.amt}" style="width:${Math.max(f.amt.length, 1) + 0.2}ch" aria-label="Montant par projet, en euros"><span>€</span>${c.max >= 10 ? `<em>= ${c.max / BRICK_EUROS} 🧱</em>` : ''}</label><button class="pm"${A('bump:1')} aria-label="10 € de plus">+</button></div>
         ${hint ? `<p class="cx-hint">${hint}</p>` : ''}${c.max >= 10 ? `<p class="cx-tot rom-upto">${sub}Bricks n'investit jamais plus de ${eur(c.max)} sur un projet. Le total investi dépend de votre Solde Bricks.</p>` : ''}
         ${pickChips(AMOUNTS, raw === c.max ? c.max : null, 'max', v => `${v} €`).replace('class="md-chips"', 'class="md-chips cx-chips-s"')}
         <div class="cx-know">${ILI(IP.bulb, 16)}<span><b>À savoir</b>La plupart des investisseurs choisissent 50 € par projet. Un petit montant sur plusieurs projets limite l'impact si l'un se passe mal.</span></div></div>
       ${reasons.length ? warnBox(reasons, c, f.riskOk) : ''}`,
-      grad(label, f.mandat ? (f.edit ? 'step:engage' : 'step:alim') : 'activate', blocked)); },
+      grad('Continuer', 'step:limits', blocked)); },
+    geo: () => { const c = ui.flow.crit, g = c.geo || 'all', N = PROJECTS.length;
+      const row = (on, v, t, sub) => `<div class="rk-r geo-a${on ? ' on' : ''}"${A(`geo:${v}`)} role="radio" aria-checked="${on}"><div class="rk-m"><div class="rk-t"><b>${t}</b></div><p>${sub}</p></div></div>`;
+      const a = `<div class="rk-rows" role="radiogroup" aria-label="Localisation">
+        ${row(g === 'fr', 'fr', 'France', 'Uniquement les projets en France')}
+        ${row(g === 'eu', 'eu', 'France et Europe', 'La France, plus les projets en Europe')}
+        ${row(g === 'all', 'all', 'Tous les pays', 'Y compris hors Europe, comme Dubaï')}</div>`;
+      return frame(T, `${stepHead(4, 'Où investir ?', `Parmi les ${N} projets publiés d'août à octobre 2026.`)}${a}<p class="cx-hint">Moins de pays, moins de projets éligibles.</p>`, grad('Continuer', 'step:amount')); },
+    limits: () => { const f = ui.flow, c = f.crit, N = PROJECTS.length, over = m => PROJECTS.filter((_, i) => goalOf(i) >= m).length;
+      const chip = (on, a, t) => `<span${on ? ' class="pick"' : ''}${A(a)}>${t}</span>`;
+      const euro = c.month ? `Avec ${eur(c.max)} par projet, cela fait jusqu'à ${eur(c.max * c.month)} par mois.` : 'Aucun plafond : le total dépend de votre Solde Bricks.';
+      const label = f.mandat ? 'Continuer' : f.edit ? 'Enregistrer' : "Activer l'invest auto";
+      return frame(T, `${stepHead(6, 'Vos limites', '')}
+        <div class="md-lbl">Projets par mois</div>
+        <div class="md-chips">${[[1, '1'], [2, '2'], [3, '3'], [5, '5'], [10, '10'], [0, 'Sans limite']].map(([v, t]) => chip((c.month || 0) === v, `rhythm:${v}`, t)).join('')}</div>
+        <p class="cx-hint">${euro}</p>
+        <div class="md-lbl">Taille minimum d'un projet</div>
+        <div class="md-chips cx-chips-c">${[[0, 'Aucun minimum'], [500_000, 'Dès 500 000 €'], [1_000_000, 'Dès 1 M€']].map(([v, t]) => chip((c.minGoal || 0) === v, `ming:${v}`, t)).join('')}</div>
+        <p class="cx-hint">${c.minGoal ? `${over(c.minGoal)} des ${N} projets publiés d'août à octobre 2026 dépassent ce seuil.` : `Les ${N} projets publiés d'août à octobre 2026 restent éligibles.`}</p>`,
+        grad(label, f.mandat ? (f.edit ? 'step:engage' : 'step:alim') : 'activate')); },
     alim: () => { const f = ui.flow, k = f.feed, d = ui.fd;
       const opt = (v, t, sub) => `<div class="md-opt${k === v ? ' on' : ''}"${A(`feed:${v}`)} role="radio" aria-checked="${k === v}"><span class="md-radio"></span><div><b>${t}</b><p>${sub}</p></div></div>${v === 'card' && k === 'card' ? `<div class="cx-feed-x">${fundForm(true)}</div>` : ''}`;
       const ok = k && (k !== 'card' || (d.ok && fund.card && d.amt <= d.cap));
-      return frame(T, `${stepHead(4, 'Comment alimenter votre invest auto ?', "Bricks investit avec votre Solde Bricks. Choisissez comment l'alimenter. Vous pourrez changer à tout moment.")}
+      return frame(T, `${stepHead(7, 'Comment alimenter votre invest auto ?', "Bricks investit avec votre Solde Bricks. Choisissez comment l'alimenter. Vous pourrez changer à tout moment.")}
       <div style="display:flex;flex-direction:column;gap:12px" role="radiogroup">
         ${opt('card', 'Recharger automatiquement mon Solde Bricks', 'Par carte, chaque mois ou quand le solde passe sous un seuil, dans un plafond mensuel.')}
         ${opt('vir', 'Virement permanent depuis ma banque · sans frais', 'Vous programmez un virement mensuel vers votre Solde Bricks, depuis votre banque.')}
         ${opt('self', 'Je recharge moi-même', "Vous ajoutez de l'argent quand vous le souhaitez, par virement ou par carte.")}
       </div>`, grad('Continuer', 'step:engage', !ok)); },
     engage: () => { const f = ui.flow;
-      return frame(T, `${stepHead(f.edit ? 4 : 5, 'Ce que Bricks fera en votre nom')}
+      return frame(T, `${stepHead(f.edit ? 7 : 8, 'Ce que Bricks fera en votre nom')}
       <div class="ok-list">
-        ${okRow('Plus de confirmation à chaque projet', `Dans vos critères, jusqu'à ${maxLine(f.crit)}.`)}
+        ${okRow('Plus de confirmation à chaque projet', `Dans vos critères (${geoTxt(f.crit)}), jusqu'à ${maxLine(f.crit)}.`)}
         ${okRow('Contrats de prêt uniquement', `Types de projets : ${ptNames(f.crit)}.`)}
         ${okRow('4 jours pour vous rétracter', 'Après chaque investissement.')}
         ${okRow('Vous révoquez quand vous voulez', 'En un clic.')}
-        ${okRow('Risque de perte en capital', "Le rendement n'est pas garanti.")}
       </div>
       <div class="md-pdf">${ICON_DOC}Lire le mandat complet (PDF)</div>
       ${checkBox(f.check, 'check', "J'ai compris que Bricks investira en mon nom, sans me demander de confirmer chaque projet.")}`, grad('Continuer', 'sheet:sign', !f.check)); },
@@ -2680,6 +2733,18 @@ document.addEventListener('click', e => {
       return sheet(`<div class="rk-sh-h">${rkGauge(p.g)}<div><h3 style="margin:0">${p.t}</h3>${rkRange(p)}</div></div><p style="margin:10px 0">${p.who}</p>${rkList(id, c)}
       <p class="rk-n">${rkTxt(id, c)}</p><p class="rk-legal">Le rendement visé n'est pas garanti. Risque de perte en capital.</p>
       <div class="acts" style="margin-top:16px">${btn('btn-primary', riskOf(c) === id ? 'Garder ce niveau' : `Choisir ${p.t}`, `rkpick:${id}`)}${btn('btn-ghost', 'Fermer', 'close')}</div>`); },
+    pf: () => { const d = divOf(), k = ui.pfK, step = (n, t, x) => `<div class="rom-lv"><i>${n}</i><div><b>${t}</b><p>${x}</p></div></div>`;
+      const city = placeOf(d.gs[0].p), type = (PTYPES.find(([x]) => x === ptOf(d.gs[0].p)) || PTYPES[0])[1];
+      const P = {
+        geo: {t: 'Répartir vos projets sur plusieurs villes', why: d.city === 2 ? "Vos projets sont sur 2 villes. Un événement local (marché immobilier, retard de chantier, décision d'urbanisme) toucherait une grande partie de votre portefeuille." : `Vos ${plural(d.gs.length, 'projet')} sont à ${city}. Un événement local (marché immobilier, retard de chantier, décision d'urbanisme) les toucherait tous en même temps.`,
+          how: [['Rendez plus de projets éligibles', "L'invest auto ne choisit pas la ville : plus vos critères sont larges, plus vos projets viennent de toute la France."], ['Gardez tous les types de projets', 'Chaque type de projet ouvre des villes différentes.'], ['Laissez le temps agir', 'Chaque nouveau projet publié ailleurs répartit votre portefeuille.']], cta: ['Modifier mes critères', 'edit']},
+        rate: {t: 'Varier les rendements visés', why: `Tous vos projets visent entre ${pctTxt(d.lo)} et ${pctTxt(d.hi)} %. Un même niveau de rendement va souvent avec un même profil de risque : vos projets réagiraient de la même façon à un imprévu.`,
+          how: [['Élargissez la fourchette de rendement', 'Dans vos critères, choisissez un niveau de risque plus large ou réglez la fourchette à la main.'], ['Laissez le temps agir', 'Chaque nouveau projet éligible ajoute un profil différent.']], cta: ['Modifier mes critères', 'edit']},
+        type: {t: 'Ajouter des types de projets', why: `Vos critères ne gardent que le type ${low(type)}. Un événement qui touche ce secteur toucherait tous vos projets.`,
+          how: [['Ajoutez des types de projets', 'Logement, commerce et loisirs, entreprises : chaque type dépend de marchés différents.'], ['Gardez le même maximum par projet', "Votre argent se répartit sur plus de lignes, sans investir plus."]], cta: ['Élargir les types de projets', 'types']}}[k];
+      return sheet(`<h3>${P.t}</h3><b class="pf-sh-k">Pourquoi</b><p style="margin:4px 0 12px">${P.why}</p><b class="pf-sh-k">Comment faire</b>
+      <div class="cx-card cx-list rom-lvs rk-sh">${P.how.map(([t, x], i) => step(i + 1, t, x)).join('')}</div>${DIV_NOTE}
+      <div class="acts" style="margin-top:16px">${btn('btn-primary', P.cta[0], P.cta[1])}${btn('btn-ghost', 'Fermer', 'close')}</div>`); },
     spread: () => { const step = (k, t, d) => `<div class="rom-lv"><i>${k}</i><div><b>${t}</b><p>${d}</p></div></div>`;
       return sheet(`<h3>Pourquoi diversifier</h3>
       <div class="cx-card cx-list rom-lvs rk-sh">${step(1, 'Le nombre de projets', "Avec des montants égaux, un projet qui ne rembourse pas pèse 20 % de votre argent sur 5 projets, 5 % sur 20 projets.")}
@@ -2699,12 +2764,13 @@ document.addEventListener('click', e => {
 
   const CTRL = [[IP.pct, 'Vos critères : rendement et durée'], [IP.eur, 'Votre maximum, par projet et par mois'], [IP.check, 'Avec ou sans validation, révocable à tout moment']];
   const homeHeroA = () => { const anim = !ui.homePlayed; ui.homePlayed = true;
-    return `<div class="hm-hero cx-pa${anim ? ' cx-anim' : ''}"><div class="cx-pa-ill" aria-hidden="true">${['desk-g2', 'desk-g1', 'desk-g3'].map((im, i) => `<i style="background-image:url(${im}.png);--d:${i * .15}s"></i>`).join('')}<span class="cx-pa-ar"></span><span class="cx-pa-w">${ICON_AUTO('#fff', 20)}</span></div>
-    <b>Les nouveaux projets viennent à vous</b>
-    <p>Dès qu'un projet correspond à vos critères, vous passez avant l'ouverture au public.</p>
-    <div class="cx-pa-l">${CTRL.map(([d, t]) => `<div><i>${ILI(d, 14)}</i><span>${d === IP.eur ? 'Votre maximum par projet' : t}</span></div>`).join('')}</div>
-    <div class="proof">${memo3(['#BEF0C6', '#FFD9A2', '#C5ECFD'])}2 340 investisseurs investissent automatiquement</div>
-    <div class="acts"><span class="bt"${A('go:ia')}>Activer</span></div></div>`; };
+    if (ui.paHidden) return '';
+    const close = `<span class="cx-pa-x"${A('pa-x')} role="button" aria-label="Fermer">×</span>`;
+    const proof = `<div class="proof">${memo3(['#BEF0C6', '#FFD9A2', '#C5ECFD'])}2 340 investisseurs investissent automatiquement</div>`;
+    const cta = `<div class="acts"><span class="bt"${A('go:ia')}>Découvrir ›</span></div>`;
+    return `<div class="hm-hero cx-pa cx-pa-b${anim ? ' cx-anim' : ''}">${close}<div class="cx-pa-ill" aria-hidden="true">${['desk-g2', 'desk-g1', 'desk-g3'].map((im, i) => `<i style="background-image:url(${im}.png);--d:${i * .15}s"></i>`).join('')}<span class="cx-pa-ar"></span><span class="cx-pa-w">${ICON_AUTO('#fff', 20)}</span></div>
+      <b>Les nouveaux projets viennent à vous</b><p>Ne passez plus à côté d'une opportunité qui vous correspond.</p>${proof}${cta}</div>`;
+  };
   const strip = (a, icon, t, sub, cta) => hmStrip(icon, false, t, sub, cta).replace('<div class="hm-st">', `<div class="hm-st"${A(a)}>`);
   const ICO = () => ICON_AUTO('#EC5223', 18), ICO_OK = () => ICON_CHECK('#08744D', 18);
   const homeStrip = () => {
@@ -2735,12 +2801,15 @@ document.addEventListener('click', e => {
   const hmImg = p => { const m = /background-position:(-?\d+)px (-?\d+)px/.exec(p.img), k = 200 / 82;
     return m ? `background:url(prod-ia.png) ${Math.round(m[1] * k)}px ${Math.round(m[2] * k)}px/${Math.round(393 * k)}px auto no-repeat` : p.img; };
   const pubCard = ({p, at}) => { const t = projTag(p), open = dmy(new Date(at.getTime() + 2 * 864e5)).slice(0, 5);
-    return `<div class="hm-pc"><div class="im" style="${hmImg(p)}"><span class="tg soon">Collecte à venir</span></div><div class="bd"><div class="nm">${p.name}</div><div class="mt"><span class="when">${ICON_TIMER}Le ${open} à 12h30</span></div>${t ? aiL(t) : ''}<div class="pg"><i style="width:0%"></i></div></div></div>`; };
+    return `<div class="hm-pc"${A(`pj:p:${PROJ.indexOf(p)}`)} role="button"><div class="im" style="${hmImg(p)}"><span class="tg soon">Collecte à venir</span></div><div class="bd"><div class="nm">${p.name}</div><div class="mt"><span class="when">${ICON_TIMER}Le ${open} à 12h30</span></div>${t ? aiL(t) : ''}<div class="pg"><i style="width:0%"></i></div></div></div>`; };
   const tagStatic = h => STATIC_HOME.reduce((out, name) => {
-    const t = projTag(PROJ.find(p => p.name === name)), at = out.indexOf(`<div class="nm">${name}</div>`);
-    if (!t || at < 0) return out;
-    const pg = out.indexOf('<div class="pg">', at);
-    return out.slice(0, pg) + aiL(t) + out.slice(pg);
+    const p = PROJ.find(x => x.name === name), t = projTag(p), at = out.indexOf(`<div class="nm">${name}</div>`);
+    if (at < 0) return out;
+    const r = app.pending.find(x => x.p === p), i = app.invest.find(x => x.p === p), key = r ? `r:${r.id}` : i ? `i:${i.id}` : `p:${PROJ.indexOf(p)}`;
+    const open = out.lastIndexOf('<div class="hm-pc"', at), linked = out.slice(0, open) + `<div class="hm-pc"${A(`pj:${key}`)} role="button"` + out.slice(open + '<div class="hm-pc"'.length);
+    if (!t) return linked;
+    const at2 = linked.indexOf(`<div class="nm">${name}</div>`), pg = linked.indexOf('<div class="pg">', at2);
+    return linked.slice(0, pg) + aiL(t) + linked.slice(pg);
   }, h);
   const homeScreen = () => {
     const live = app.invest.filter(i => !repaid(i)), bricks = sumBricks(live), projects = new Set(live.map(i => i.p.name)).size;
@@ -2754,7 +2823,7 @@ document.addEventListener('click', e => {
     return tagStatic(noGo(hmShell(homeStrip(), app.home.map(pubCard).join(''), {}))
       .replace('<div class="hm-av">LC</div>', `<div class="cx-avp"${A('sheet:drawer')} role="button" aria-label="Menu${n ? `, ${n} en attente` : ''}"><span class="av">CM</span><span class="mn">${ILI(IP.menu, 18)}</span>${cnt}${isl}</div>`)
       .replace('<div class="hm-bal">20,00 €<i>+</i></div>', `<div class="hm-bal">${eur2(app.balance)}<i${A('topup')}>+</i></div>`)
-      .replace('<span><i></i>Projets</span>', `<span${A('go:list')} role="button"><i></i>Projets</span>`)
+      .replace('<span><i></i>Suivi</span>', `<span${A('go:list')} role="button"><i></i>Suivi</span>`)
       .replace('Bonjour Laetitia', 'Bonjour Camille')
       .replace(/<p>Votre patrimoine.*?<\/p>/, `<p>${hi}</p>`)
       .replace(/<div class="hm-card hm-rev">.*?<div class="lk">.*?<\/div><\/div>/s, '')
@@ -2814,8 +2883,8 @@ document.addEventListener('click', e => {
     const pick = (k, cur, opts) => `<span class="cx-bals" data-k="${k}">${opts.map(([v, t]) => `<button data-p="${k}:${v}"${v === cur ? ' class="on"' : ''}>${t}</button>`).join('')}</span>`;
     const yn = (k, on) => pick(k, on ? 1 : 0, [[1, 'Oui'], [0, 'Non']]);
     document.getElementById('CXROWS').innerHTML = rows + bal;
-    document.getElementById('CXVER').innerHTML = '';
-    document.getElementById('CXROM').innerHTML = m !== 'none' ? `<div class="cx-row cx-row-v"><span>Portefeuille</span>${pick('port', app.port, [['conc', 'Premiers pas'], ['moy', 'Diversifié'], ['div', 'Très diversifié']])}</div><div class="cx-row"><span>Projet à l'international</span>${yn('intl', app.intl)}</div>` : '';
+    document.getElementById('CXVER').innerHTML = m !== 'none' && m !== 'off' ? '<button class="cx-sm" data-p="port:one">Exemple : portefeuille sur 1 ville</button>' : '';
+    document.getElementById('CXROM').innerHTML = m !== 'none' ? `<div class="cx-row cx-row-v"><span>Portefeuille</span>${pick('port', app.port, [['one', '1 ville'], ['conc', 'Premiers pas'], ['moy', 'Diversifié'], ['div', 'Très diversifié']])}</div><div class="cx-row"><span>Projet à l'international</span>${yn('intl', app.intl)}</div>` : '';
     document.getElementById('CXFUND').innerHTML = m === 'mandat' ? `<div class="cx-row"><span>Carte enregistrée</span>${yn('card', fund.card)}</div><div class="cx-row"><span>Paiement refusé</span>${yn('decline', fund.decline)}</div>
       <div class="cx-row"><span>Carte bientôt expirée</span>${yn('exp', fund.exp)}</div><div class="cx-acts"><button class="cx-sm" data-p="capfull">Plafond carte du mois atteint</button></div>` : '';
     panel.querySelectorAll('[data-k="patri"] button').forEach(b => b.classList.toggle('on', +b.dataset.p.split(':')[1] === profile.patri));
@@ -2910,7 +2979,7 @@ document.addEventListener('click', e => {
     log(`4 jours plus tard : investissements définitifs${gained ? `, ${eur2(gained)} versés sur le Solde Bricks` : ''}${exp.length ? `, ${plural(exp.length, 'réservation')} expirée${exp.length > 1 ? 's' : ''}` : ''}.`);
   };
 
-  const newFlow = (u, mandat, crit, edit) => { ui.flow = {u, mandat, crit: cloneCrit(crit), amt: String(crit.max), check: false, riskOk: false, edit}; ui.flow.crit.month = null; ui.flow.adv = u !== 'jamais' && !answered(ui.flow.crit); ui.sheet = null; };
+  const newFlow = (u, mandat, crit, edit) => { ui.flow = {u, mandat, crit: cloneCrit(crit), amt: String(crit.max), check: false, riskOk: false, edit}; if (u === 'jamais') { ui.flow.crit.geo = 'eu'; ui.flow.crit.month = 5; } ui.flow.adv = u !== 'jamais' && !answered(ui.flow.crit); ui.sheet = null; };
   const ACT = {
     back: () => { if (ui.stack.length > 1) ui.stack.pop(); else ui.stack = ['home']; ui.sheet = null; },
     go: s => go(s),
@@ -2951,6 +3020,8 @@ document.addEventListener('click', e => {
       app.ev.push({t: 'refuse', p: r.p, at: now(), seq: ++uid, bricks: r.bricks, pub: {got: r.bricks, asked: r.asked || r.bricks, at: r.at}}); if (['proj', 'fiche'].includes(top())) ui.pj = `e:${app.ev.length - 1}`; },
     off: () => { ui.offOpen = !ui.offOpen; },
     pj: k => { ui.pj = k; go('fiche'); },
+    pjv: k => { ui.pj = k; go('proj'); },
+    'pa-x': () => { ui.paHidden = true; },
     pjd: () => go('proj'),
     revby: v => { ui.revBy = v; },
     track: () => { ui.revBy = 'proj'; go('rev'); },
@@ -2970,8 +3041,12 @@ document.addEventListener('click', e => {
     copy: () => { ui.copied = true; },
     rrisk: v => { ui.flow.crit.rate = [...PROF[v].rate]; },
     rkd: k => { ui.rkK = k; openSheet('rk'); },
+    pf: k => { ui.pfK = k; openSheet('pf'); },
     rkpick: v => { ui.flow.crit.rate = [...PROF[v].rate]; ui.sheet = null; },
     rhz: v => { ui.flow.crit.hor = [...HZ[v].hor]; },
+    geo: v => { ui.flow.crit.geo = v; },
+    rhythm: v => { ui.flow.crit.month = +v || null; },
+    ming: v => { ui.flow.crit.minGoal = +v || null; },
     radv: () => { ui.flow.adv = !ui.flow.adv; },
     rtype: k => { pickType(ui.flow.crit, k, ui.flow); },
     rsug: k => { const s = sugs().find(x => x.k === k); newFlow('sug', app.mode === 'mandat', {...app.crit, ...sugCrit(s, app.crit)}, true); ui.flow.sug = s.t; go('crit'); },
@@ -2998,7 +3073,7 @@ document.addEventListener('click', e => {
     busy: v => { profile.busy = v === '1'; },
     rd: v => { ver.d = v; },
     rr: v => { ver.r = v; },
-    port: v => loadPort(v),
+    port: v => { loadPort(v); toIa(); },
     intl: v => { app.intl = v === '1'; app.invest = app.invest.filter(i => i.p !== DUBAI); if (app.intl) addDubai(); log(app.intl ? 'Projet à Dubaï ajouté au portefeuille.' : 'Projet à Dubaï retiré du portefeuille.'); },
     card: v => { fund.card = v === '1'; },
     decline: v => { fund.decline = v === '1'; },
@@ -3134,8 +3209,10 @@ document.addEventListener('click', e => {
 (() => {
   const KEY = 'invest-auto-annotations-ai-v24';
   try { ['v1', 'v2', 'v3', 'v4', 'v5', 'v6', 'v7', 'v8', 'v9', 'v10', 'v11', 'v12', 'v13', 'v14', 'v15', 'v16', 'v17', 'v18', 'v19', 'v20', 'v21', 'v22', 'v23'].forEach(v => localStorage.removeItem(`invest-auto-annotations-ai-${v}`)); } catch {}
+  // Retours vidés à chaque ouverture de la page : on repart d'une liste vide.
+  try { localStorage.removeItem(KEY); } catch {}
   const UI = '.annot-ia-ui';
-  let notes = (() => { try { const v = JSON.parse(localStorage.getItem(KEY) || '[]'); return Array.isArray(v) ? v : []; } catch { return []; } })();
+  let notes = [];
   let on = false, panelOpen = false, pop = null, hoverEl = null, raf = 0, passthrough = false, flash = null;
 
   const save = () => localStorage.setItem(KEY, JSON.stringify(notes));
