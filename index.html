@@ -878,6 +878,7 @@
   #CX .svd-ncb b{font-size:14px;line-height:19px} #CX .svd-ncb p{margin:0;font-size:12.5px;line-height:17px;color:var(--grey);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
   #CX .svd-nmod{display:flex;flex-direction:column;gap:10px;padding-bottom:6px} #CX .svd-nmod p{margin:0;font-size:14px;line-height:21px}
   #CX .svd-nmn{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:6px} #CX .svd-nmn button{height:42px;border-radius:999px;border:1px solid var(--border);background:#fff;font:600 13.5px Inter,sans-serif;color:var(--navy);cursor:pointer} #CX .svd-nmn button:disabled{opacity:.35}
+  .soc-d{display:block;margin-top:2px;font-size:11px;font-weight:400;opacity:.7}
   #CX .pc-risk{margin:10px 0 0;font-size:11.5px;line-height:1.45;color:var(--grey)} #CX .svd-pfh span b{color:var(--navy)} #CX .svd-pfl{margin:8px 0 0;font-size:11.5px;line-height:1.45;color:var(--grey)}
   #CX .svd-pfh{display:flex;flex-direction:column;gap:2px} #CX .svd-pfh span{font-size:12.5px;color:var(--grey)}
   #CX .svd-gh{display:grid;grid-template-columns:1fr 1fr;gap:8px} #CX .svd-gh>div{background:#fff;border:1px solid var(--line);border-radius:16px;padding:10px 12px;display:flex;flex-direction:column} #CX .svd-gh small{font-size:12px;color:var(--grey)} #CX .svd-gh b{font-size:16px}
@@ -2159,8 +2160,8 @@ document.addEventListener('click', e => {
   const btn = (cls, t, a) => `<button class="btn ${cls}"${a ? A(a) : ''}>${t}</button>`;
   const sheet = inner => `<div class="dim" data-a="close"></div><div class="bs"><div class="handle"></div>${inner}</div>`;
   const noGo = h => h.replace(/ data-(go|md)="[^"]*"/g, '').replace(/ data-obj-i(="[^"]*")?/g, '');
-  const S = () => `<div class="md-soc">${memo3(['#BEF0C6','#FFD9A2','#C5ECFD'])}<span><b>2 340 investisseurs</b> investissent automatiquement avec l'autopilote Bricks, comme vous</span></div>`;
-  const soc = `<div class="cc-soc"><span class="cc-avs"><i></i><i></i><i></i></span><span><b>2 340 investisseurs</b> investissent automatiquement avec l'autopilote Bricks</span></div>`;
+  const S = () => `<div class="md-soc">${memo3(['#BEF0C6','#FFD9A2','#C5ECFD'])}<span><b>2 340 investisseurs</b> investissent automatiquement avec l'autopilote Bricks, comme vous<small class="soc-d">Chiffre au 1er novembre 2026</small></span></div>`;
+  const soc = `<div class="cc-soc"><span class="cc-avs"><i></i><i></i><i></i></span><span><b>2 340 investisseurs</b> investissent automatiquement avec l'autopilote Bricks<small class="soc-d">Chiffre au 1er novembre 2026</small></span></div>`;
   const RISK = `<p class="md-risk">Investir comporte des risques de perte en capital et d'illiquidité.</p>`;
   const PAST = `<p class="cc-cap">Données passées, elles ne préjugent pas des projets à venir.</p>`;
   const linkList = items => `<div class="links">${items.map(t => `<div>${t}${CHEV_R}</div>`).join('')}</div>`;
@@ -2640,12 +2641,12 @@ document.addEventListener('click', e => {
     if (limitHit()) out.push(alertRow('n', ILI(IP.cal, 16), `<b>Limite du mois atteinte</b>${plural(c.month, 'projet')} par mois, comme prévu. Reprise le ${nextMonth1()}.`));
     return out.join(''); };
   const lateAlert = () => { const lt = lateInv();
-    return lt ? alertRow('o', ILI(IP.clock, 16), `<b>1 projet en retard</b>${nameOf(lt.p)} · suivi par Bricks`, `pj:i:${lt.id}`, 'Voir') : ''; };
+    return lt ? alertRow('o', ILI(IP.clock, 16), `<b>1 projet en retard</b>${nameOf(lt.p)} · Bricks relance le porteur`, `pj:i:${lt.id}`, 'Voir') : ''; };
   const NOTHING = () => `<div class="cx-card cx-none">${ILI(IP.check, 16)}<span>Rien à valider pour l'instant. On vous prévient dès qu'un projet vous est réservé.</span></div>`;
   const topSec = () => { if (isPlan()) return {t: 'À valider', body: app.pending.length ? app.pending.map(pendCardV).join('') : NOTHING(), n: app.pending.length};
     const r = retractable();
     return r.length ? {t: 'En délai de rétractation', body: r.map(curCard).join(''), n: r.length} : null; };
-  const community = () => `<div class="cx-com sm">${memo3(['#BEF0C6', '#FFD9A2', '#C5ECFD'])}<span><b>2 340 investisseurs</b> investissent automatiquement avec l'autopilote Bricks</span></div>`;
+  const community = () => `<div class="cx-com sm">${memo3(['#BEF0C6', '#FFD9A2', '#C5ECFD'])}<span><b>2 340 investisseurs</b> investissent automatiquement avec l'autopilote Bricks<small class="soc-d">Chiffre au 1er novembre 2026</small></span></div>`;
 
   const cashA = () => { const live = app.invest.filter(i => !repaid(i)), done = app.invest.filter(repaid);
     const parts = [['Investi en cours', sumAmt(live), 'c-inv', plural(live.length, 'projet')], ['Déjà remboursé', sumAmt(done), 'c-rep', done.length ? plural(done.length, 'projet') : ''], ['Disponible sur le Solde Bricks', app.balance, 'c-bal', '']];
@@ -2658,14 +2659,14 @@ document.addEventListener('click', e => {
     const how = isPlan() ? "par l'autopilote" : 'automatiquement';
     return after >= total ? `réinvesti ${how}` : after ? `dont ${eur(after)} réinvestis ${how}` : 'disponible sur votre Solde Bricks'; };
   const lateTxt = i => { const s = schedule(i).filter(x => x.at <= now()), x = s[s.length - 1];
-    return x ? `Versement du ${fmtD(x.at)} non reçu (${eur2(x.amt)})` : 'Chantier en retard sur le calendrier prévu'; };
+    return `${x ? `Versement du ${fmtD(x.at)} non reçu (${eur2(x.amt)})` : 'Chantier en retard sur le calendrier prévu'}. Bricks relance le porteur. Prochaine nouvelle avant le ${fmtD(new Date(now().getTime() + 28 * 864e5)).replace(/\.$/, '')}.`; };
   const finRow = ({t, v, sub = '', a = '', cls = ''}) => `<div class="cx-fr${cls ? ` ${cls}` : ''}"${a ? `${A(a)} role="button"` : ''}><div><span>${t}</span>${sub ? `<small>${sub}</small>` : ''}</div><b class="num">${v}</b>${a ? CHEV_R : ''}</div>`;
   const stTxt = () => app.mode === 'revoked' ? ['n', 'Avec validation · mandat révoqué'] : isPlan() ? ['', 'Avec validation'] : starved() ? ['o', 'Mandat en pause · solde vide'] : ['', 'Mandat actif'];
   const critLine = c => `${eur(c.max)} par projet · ${c.rate[1] == null ? `${c.rate[0]} % et +` : rateTxt(c.rate)} · ${horTxt(c.hor)}${c.geo ? ` · ${geoTxt(c)}` : ''}${c.types.length < PT_ALL.length ? ` · ${ptNames(c)}` : ''}`;
   const setRow = (a, t, sub, right = CHEV_R) => `<div class="cx-sr"${A(a)} role="button"><div><b>${t}</b>${sub ? `<span>${sub}</span>` : ''}</div>${right}</div>`;
   const settingsRows = () => sec('Réglages', `<div class="cx-card cx-list">${pkS.mode === 'v2' ? setRow('go:pkrecap', 'Mes configurations', `${plural(pkS.list.length, 'configuration')} · critères, mode et alimentation`) : setRow('sheet:crits', 'Mes critères', `${critLine(app.crit)}`)}${setRow('topup', 'Alimentation du compte', fundSub())}
     ${setRow('go:hist', 'Historique', 'Tous les projets, versements et mouvements')}${setRow('sheet:docs', 'Documents', app.mode === 'mandat' ? `Mandat signé le ${app.signedAt} · conditions` : 'Conditions · historique des configurations')}
-    ${app.mode === 'revoked' ? setRow('setup', 'Repasser au mandat', 'Bricks investit pour vous, servi en premier') : ''}
+    ${app.mode === 'revoked' ? setRow('setup', 'Repasser au mandat', 'Bricks investit pour vous, prioritaire sur les investisseurs sans mandat') : ''}
     ${setRow('sheet:menu', app.mode === 'mandat' ? 'Modifier, révoquer ou désactiver' : 'Modifier ou désactiver', '', '<span class="cx-dots" aria-hidden="true">···</span>')}</div>`);
 
   const fairBox = (x, key) => x && x.asked && x.bricks < x.asked ? `<div class="cx-fairl"${A(`fair:${key}`)} role="button" aria-label="Répartition équitable : ${x.bricks} bricks sur ${x.asked}, voir le détail">${ICON_SCALE('#13273E', 16)}<span><b>Répartition équitable</b> · ${x.bricks} 🧱 sur ${x.asked}</span>${CHEV_R}</div>` : '';
@@ -2697,12 +2698,12 @@ document.addEventListener('click', e => {
   const incRows = ({late: withLate = true, int: withInt = true} = {}) => { const late = lateInv(), got = sumOf(app.invest, paidInt), back = app.invest.filter(repaid);
     return [withInt && finRow({t: 'Intérêts perçus', v: `+ ${eur2(got)}`, cls: 'g'}),
       finRow({t: 'Capital remboursé', v: eur2(sumAmt(back)), sub: back.length ? `${plural(back.length, 'projet')} · ${reinvTxt(back)}` : "Aucun projet remboursé pour l'instant"}),
-      withLate && finRow(late ? {t: 'Projets en retard', v: '1', sub: 'En retard · suivi par Bricks', a: `pj:i:${late.id}`, cls: 'late'} : {t: 'Projets en retard', v: '0', sub: 'Aucun retard'})].filter(Boolean).join(''); };
+      withLate && finRow(late ? {t: 'Projets en retard', v: '1', sub: 'Bricks relance le porteur', a: `pj:i:${late.id}`, cls: 'late'} : {t: 'Projets en retard', v: '0', sub: 'Aucun retard'})].filter(Boolean).join(''); };
   const byProject = () => { const late = lateInv(), groups = new Map();
     definitive().forEach(i => { const g = groups.get(i.p) || {p: i.p, ids: [], got: 0, n: 0, back: 0, all: 0, late: false};
       g.ids.push(i.id); g.got += paidInt(i); g.n += dueC(i).length; g.all++; if (repaid(i)) g.back += amountOf(i); if (i === late) g.late = true; groups.set(i.p, g); });
     return [...groups.values()].sort((x, y) => y.late - x.late || y.got - x.got); };
-  const projRow = g => { const done = g.back && g.back === sumAmt(app.invest.filter(i => g.ids.includes(i.id))), st = g.late ? ['o', 'En retard · suivi par Bricks'] : done ? ['n', 'Remboursé'] : ['g', 'À jour'];
+  const projRow = g => { const done = g.back && g.back === sumAmt(app.invest.filter(i => g.ids.includes(i.id))), st = g.late ? ['o', 'En retard'] : done ? ['n', 'Remboursé'] : ['g', 'À jour'];
     const sub = [g.n ? plural(g.n, 'versement') : "Aucun versement pour l'instant", g.back ? `capital remboursé ${eur(g.back)}` : ''].filter(Boolean).join(' · ');
     return `<div class="cx-oc" data-oc="proj"${A(`pj:i:${g.ids[0]}`)} role="button">${thumb(g.p)}<div class="cx-oc-b"><b>${nameOf(g.p)}</b><span class="oc-${st[0]}">${st[1]}</span><span class="w">${sub}</span></div>
       <div class="cx-oc-r">${g.got ? `<em class="num plus">+${eur2(g.got)}</em><time>intérêts reçus</time>` : ''}</div>${CHEV_R}</div>`; };
@@ -2715,7 +2716,7 @@ document.addEventListener('click', e => {
   const revScreen = () => { const n0 = now(), late = lateInv();
     const next = app.invest.filter(i => i !== late).flatMap(i => schedule(i).map(x => ({...x, i}))).filter(x => x.at > n0).sort((a, b) => a.at - b.at).slice(0, 5);
     const paid = app.invest.flatMap(i => dueC(i).map(x => ({at: x.at, p: i.p, k: 'int', icon: IP.eur, tone: 'g', st: 'Intérêts versés', amt: `+${eur2(x.amt)}`, key: `i:${i.id}`}))).sort((a, b) => b.at - a.at).slice(0, 8), groups = byProject();
-    const lateSec = late ? sec('Projets en retard', `<div class="cx-card cx-list"><div class="cx-oc" data-oc="late"${A(`pj:i:${late.id}`)} role="button">${thumb(late.p)}<div class="cx-oc-b"><b>${late.p.name}</b><span class="oc-o">En retard · suivi par Bricks</span><span class="w">${lateTxt(late)}</span></div>${CHEV_R}</div></div><p class="cx-cap2" style="margin:0 2px">${LATE_NOTE}</p>`) : '';
+    const lateSec = late ? sec('Projets en retard', `<div class="cx-card cx-list"><div class="cx-oc" data-oc="late"${A(`pj:i:${late.id}`)} role="button">${thumb(late.p)}<div class="cx-oc-b"><b>${late.p.name}</b><span class="oc-o">En retard</span><span class="w">${lateTxt(late)}</span></div>${CHEV_R}</div></div><p class="cx-cap2" style="margin:0 2px">${LATE_NOTE}</p>`) : '';
     return frame('Mes revenus', `<div class="cx-card"><div class="cx-frs">${incRows({late: !late})}</div></div>${lateSec}
       ${sec('Prochains versements', `<div class="cx-card"><div class="cx-nx" style="margin:0"><div class="cx-nx-h"><span>Calendrier</span>${FC}</div>${next.map(x => `<div class="cx-nx-r"${A(`pj:i:${x.i.id}`)} role="button"><time>${fmtD(x.at)}</time><span>${nameOf(x.p)}</span><em class="num">${eur2(x.amt)}</em>${CHEV_R}</div>`).join('') || '<p class="cx-cap2">Aucun versement prévu.</p>'}</div>${INC_NOTE}</div>`)}
       ${paid.length || groups.length ? sec('Versements reçus', `${revSeg()}<div class="cx-card cx-list" data-rv="${ui.revBy}">${ui.revBy === 'proj' ? groups.map(projRow).join('') : paid.map(ocRow).join('') || '<p class="cx-cap2" style="margin:10px 0">Aucun versement reçu pour l\'instant.</p>'}</div>`) : ''}`); };
@@ -2732,7 +2733,7 @@ document.addEventListener('click', e => {
     ${p.rate ? `<div class="pc-chips"><span>${ICON_TREND} ${fmtRate(p.rate)}</span><span>${ICON_CAL_XS} ${fmtYears(p.years)}</span></div>` : ''}</div></div>`;
   const kv = rows => `<div class="mail-list">${rows.map(([k, v]) => `<div><span>${k}</span><b>${v}</b></div>`).join('')}</div>`;
   const pjInv = i => { const late = lateInv() === i, ret = i.mandat && i.ageH < RETRACT_H, part = i.asked && i.bricks < i.asked, nx = late || repaid(i) ? null : schedule(i).find(x => x.at > now());
-    const st = late ? ['o', 'En retard · suivi par Bricks'] : repaid(i) ? ['g', 'Remboursé'] : ret ? ['n', `Collecte en cours · définitif le ${fmtD(defAt(i))}`] : ['g', 'Investi · en cours'];
+    const st = late ? ['o', 'En retard'] : repaid(i) ? ['g', 'Remboursé'] : ret ? ['n', `Collecte en cours · définitif le ${fmtD(defAt(i))}`] : ['g', 'Investi · en cours'];
     const rows = [['Investi le', dmy(dateOf(i))], ['Bricks', `${i.bricks} 🧱${part ? ` sur ${i.asked}` : ''} · ${eur(amountOf(i))}`], ...(i.card ? [['Payé avec', i.card < amountOf(i) ? `Solde Bricks ${eur(amountOf(i) - i.card)} + carte ${eur(i.card)}` : `Carte ${eur(i.card)}`]] : []), ['Intérêts perçus', `+ ${eur2(paidInt(i))}`],
       ...(nx ? [['Prochain versement', `${fmtD(nx.at)} · ${eur2(nx.amt)}<br>${FC}`]] : []), [repaid(i) ? 'Remboursé le' : 'Fin prévue', dmy(maturity(i))]];
     const notes = [late ? `<div class="cx-al o"><span class="ic">${ILI(IP.clock, 16)}</span><div><b>${lateTxt(i)}</b>${LATE_NOTE}</div></div>` : '',
@@ -2766,7 +2767,7 @@ document.addEventListener('click', e => {
   const retTxt = i => `Rétractable jusqu'au ${fmtD(defAt(i))}`;
   const retLine = i => `<div class="cd-a"><b>${ICON_AUTO('#EC5223', 13)}Autopilote</b><span>·</span><span>${retTxt(i)}</span></div>`;
   const stBox = (cls, icon, t, sub = '', a = '') => `<div class="ia-box ia-1 cxf-2 ${cls}"${a ? `${A(a)} role="button"` : ''}><div class="ia-l">${icon}<div class="strip-t">${t}${sub ? `<span class="cxf-sub">${sub}</span>` : ''}</div></div>${a ? ICON_CHEV('#13273E', 18) : ''}</div>`;
-  const lateBox = (i, a = '') => stBox('', ICON_CLOCK('#EC5223', 16), 'En retard · suivi par Bricks', lateTxt(i), a);
+  const lateBox = (i, a = '') => stBox('', ICON_CLOCK('#EC5223', 16), 'En retard', lateTxt(i), a);
   const BIG = {'Division Louis Vitet Dieppe': 'desk-g2.png', 'Les Terrains de la Porte Neuve': 'desk-g1.png', "Maison et Terrain Chalais L'Haÿ-les-Roses": 'desk-g3.png'};
   const EPERON = 'Maison Eperon Réunion', NEVERS = 'Immeuble Gare - Nevers', NO_PHOTO = 'background:#E9E4DE';
   // desk-g3.png has a baked-in « Voir toutes les photos » pill in its bottom fifth: crop it out.
@@ -2838,7 +2839,7 @@ document.addEventListener('click', e => {
       .replace('Ouverture le 5 novembre à 12h30', () => `Ouverture le ${dLong(openAt(at))} à 12h30`)
       .replace('Rendement<strong>10,00 % /an</strong>', () => `Rendement<strong>${p.rate ? `${fmtRate(p.rate)} /an` : '–'}</strong>`).replace('Horizon<strong>1 an et 6 mois</strong>', () => `Horizon<strong>${p.years ? fmtYears(p.years) : '–'}</strong>`);
     if (late || (i && repaid(i))) h = h.replace(`color:#08744D;display:flex;align-items:center;justify-content:center;gap:4px">${ICON_CHECK('#08744D', 14)}Projet financé`,
-      () => late ? `color:var(--orange);display:flex;align-items:center;justify-content:center;gap:4px">${ICON_CLOCK('#EC5223', 14)}En retard · suivi par Bricks` : `color:#08744D;display:flex;align-items:center;justify-content:center;gap:4px">${ICON_CHECK('#08744D', 14)}Projet remboursé`);
+      () => late ? `color:var(--orange);display:flex;align-items:center;justify-content:center;gap:4px">${ICON_CLOCK('#EC5223', 14)}En retard` : `color:#08744D;display:flex;align-items:center;justify-content:center;gap:4px">${ICON_CHECK('#08744D', 14)}Projet remboursé`);
     h = p.name === EPERON ? h.replace(/<a class="f-back"[^>]*><\/a>/, () => `<a class="f-back"${A('back')} role="button" aria-label="Retour"></a>`)
       : h.replace(/<div class="f-photo"><a class="f-back"[^>]*><\/a>/, () => `<div class="f-photo cxf-ph" style="${photoOf(p, true) || NO_PHOTO}">${photoOf(p) ? '' : thumbs(p)}${SB.replace('scr-sb', 'scr-sb cxf-sb')}${BACK}`)
         .replaceAll(EPERON, () => p.name).replace('📍 Saint-Paul · 774 000 € · Marchand de biens<br>Garanties : 150 % ›', () => `📍 ${meta}<br>Garanties ›`);
@@ -3158,7 +3159,7 @@ document.addEventListener('click', e => {
       const sub = u === 'jamais' ? "Vous pourrez changer d'avis à tout moment." : 'Continuez à confirmer chaque projet, ou laissez Bricks investir pour vous.';
       const ok = t => `<li>${ICON_CHECK('#0A915D', 12)}<span>${t}</span></li>`;
       const opts = `<div class="pv-tiles">
-          <div class="pv-tile${f.mandat ? ' on' : ''}"${A('pick:mandat')} role="button"><span class="md-radio"></span><b>Avec mandat</b><span class="md-reco">Recommandé</span><ul>${ok('Investi pour vous')}${ok('Servi en premier')}</ul></div>
+          <div class="pv-tile${f.mandat ? ' on' : ''}"${A('pick:mandat')} role="button"><span class="md-radio"></span><b>Avec mandat</b><span class="md-reco">Recommandé</span><ul>${ok('Investi pour vous')}${ok('Prioritaire sur les investisseurs sans mandat')}</ul></div>
           <div class="pv-tile${f.mandat ? '' : ' on'}"${A('pick:plan')} role="button"><span class="md-radio"></span><b>Sans mandat</b><ul>${ok('Vous validez chaque projet')}${ok('Servi après les mandats')}</ul></div></div>`;
       return frame(T, `${stepHead(1, 'Comment voulez-vous investir ?', sub)}${opts}`, grad('Continuer', 'step:crit')); },
     crit: () => { const f = ui.flow, c = f.crit;
@@ -3284,7 +3285,7 @@ document.addEventListener('click', e => {
     fair: () => sheet(`<h3>Comment les bricks sont réparties</h3>${fairMine()}
       <p style="margin:0">Lorsqu'un projet est très demandé, les bricks disponibles ne suffisent pas à couvrir toutes les demandes.</p>
       <b class="cx-fs-h">1. Les bricks sont d'abord partagées entre les modes</b>${modeSplit()}
-      ${['plan', 'revoked'].includes(app.mode) ? `<p class="cx-opt cx-sp-opt">${ICON_AUTO('#EC5223', 14)}<span class="lnk"${A('setup')}>Passer au mandat pour être servi en premier</span></p>` : ''}
+      ${['plan', 'revoked'].includes(app.mode) ? `<p class="cx-opt cx-sp-opt">${ICON_AUTO('#EC5223', 14)}<span class="lnk"${A('setup')}>Passer au mandat pour être prioritaire sur les investisseurs sans mandat</span></p>` : ''}
       <b class="cx-fs-h">2. Dans chaque part, une distribution tour par tour</b>
       <p style="margin:0 0 10px">À chaque tour, chaque investisseur reçoit 1 brick, dans la limite de son maximum, jusqu'à épuisement des bricks disponibles.</p>
       ${turnsDemo()}<p style="margin:0">La distribution ne dépend ni du montant demandé, ni de l'heure de la demande. Les petites demandes sont servies en totalité, les plus importantes en partie.</p>
@@ -3735,7 +3736,7 @@ document.addEventListener('click', e => {
     mode: () => { const f = ui.flow;
       const card = (on, a, t, badge, items) => `<div class="v2-opt${on ? ' on' : ''}"${A(a)} role="radio" aria-checked="${on}"><span class="v2-rd" aria-hidden="true"></span><span class="v2-ot"><span class="v2-otr"><b>${t}</b>${badge ? `<em class="v2-badge">${badge}</em>` : ''}</span><ul class="v2-ok">${items.map(x => `<li>${V2I.tick}<span>${x}</span></li>`).join('')}</ul></span></div>`;
       return v2frame('mode', `${v2head('Comment voulez-vous investir ?', f.u === 'jamais' ? "Vous pourrez changer d'avis à tout moment." : 'Continuez à confirmer chaque projet, ou laissez Bricks investir pour vous.')}
-        <div class="v2-list" role="radiogroup" aria-label="Mode d'investissement">${card(f.mandat, 'pick:mandat', 'Avec mandat', 'Recommandé', ['Investi pour vous', 'Servi en premier'])}${card(!f.mandat, 'pick:plan', 'Sans mandat', '', ['Vous validez chaque projet', 'Servi après les mandats'])}</div>`, v2grad('Continuer', 'step:crit')); },
+        <div class="v2-list" role="radiogroup" aria-label="Mode d'investissement">${card(f.mandat, 'pick:mandat', 'Avec mandat', 'Recommandé', ['Investi pour vous', 'Prioritaire sur les investisseurs sans mandat'])}${card(!f.mandat, 'pick:plan', 'Sans mandat', '', ['Vous validez chaque projet', 'Servi après les mandats'])}</div>`, v2grad('Continuer', 'step:crit')); },
     crit: () => { const f = ui.flow, c = f.crit; v2insc(f); if (c.rate[1] == null) c.rate[1] = 12; const r = riskOf(c);
       if (f.advR === undefined) f.advR = f.u !== 'jamais' && !r;
       const list = `<div class="v2-list" role="radiogroup" aria-label="Niveau de risque">${Object.entries(PROF).map(([id, p]) => v2opt({on: id === r, a: `v2r:${id}`, data: ` data-risk="${id}"`,
@@ -3855,7 +3856,104 @@ document.addEventListener('click', e => {
     .replace(/<div class="dim"><\/div>/g, `<div class="dim"${A('mk:todo')}></div>`);
   const MK_TAB = `<div class="hm-tab cx-tabb"><span${A('tabhome')} role="button"><i></i>Accueil</span><span class="on"><i></i>Projets</span><span><i></i>Marketplace</span><span${A('go:list')} role="button"><i></i>Suivi</span></div>`;
   SUB.mkt = () => `<div class="scr cx-mkt">${SB}<div class="scr-bd"><div class="sec-h">En cours <span class="count">3</span></div>${mkLink(listOpen(state.BO))}
-    <div class="sec-h" style="margin-top:32px">Prochainement <span class="count">4</span></div><div style="display:grid;gap:16px">${mkLink(listSoon('todo') + listSoon('done'))}</div></div></div>${MK_TAB}`;
+    <div class="sec-h" style="margin-top:32px">Prochainement <span class="count">5</span></div><div style="display:grid;gap:16px">${mkLink(listSoon('todo') + listSoon('done'))}${cpxCard()}</div></div></div>${MK_TAB}`;
+  // ── Bricks Compute (proto du 17/11) : card en fin de « Prochainement » + page dédiée. Chiffres fictifs quand la réunion n'en donne pas. ──
+  document.head.insertAdjacentHTML('beforeend', `<style>
+    .cpx-card{width:353px;background:#fff;border:1px solid var(--line);border-radius:24px;overflow:hidden;cursor:pointer}
+    .cpx-top{background:var(--navy);padding:16px;display:grid;gap:14px}
+    .cpx-badges{display:flex;gap:6px;flex-wrap:wrap}
+    .cpx-b{display:inline-flex;align-items:center;gap:4px;height:24px;padding:0 10px;border-radius:999px;font-size:12px;font-weight:700;background:#ffffff1F;color:#fff}
+    .cpx-b.o{background:#F3EAFC;color:#7B3FC4}.cpx-b.w{background:#FBE9EC;color:#B3203B}
+    .cpx-ct{position:relative;background:#0B1A2B;border-radius:12px;padding:10px;display:grid;grid-template-columns:repeat(8,1fr);gap:6px;overflow:hidden}
+    .cpx-ct:before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,#ffffff14 0 1px,transparent 1px 22px);pointer-events:none}
+    .cpx-rk{display:grid;gap:3px;background:#00000040;border-radius:4px;padding:3px}
+    .cpx-u{height:10px;border-radius:2px;background:#ffffff14;transition:background .25s}
+    .cpx-u.on{background:#F07141;box-shadow:inset -4px 0 0 -1px #7FE0B4}
+    .cpx-ct.sm .cpx-u{height:6px}
+    .cpx-row{display:flex;justify-content:space-between;align-items:flex-end;gap:12px}
+    .cpx-top small{display:block;color:#ffffffB3;font-size:12px}.cpx-top strong{color:#fff;font-size:16px}
+    .cpx-rate{text-align:right;color:#fff}.cpx-rate b{font-size:18px;display:block}.cpx-rate span{font-size:12px;color:#ffffffB3}
+    .cpx-pg{display:grid;gap:12px;padding-bottom:80px}
+    .cpx-hero{background:var(--navy);border-radius:20px;padding:18px 16px;display:grid;gap:14px}
+    .cpx-h1{font-size:22px;font-weight:700;color:#fff;line-height:1.25}.cpx-hero p{color:#ffffffCC;font-size:14px;margin:0;line-height:1.45}
+    .cpx-kpi{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+    .cpx-kpi div{background:#fff;border:1px solid var(--line);border-radius:16px;padding:10px 12px}.cpx-kpi span{font-size:12px;color:var(--grey);display:block}.cpx-kpi b{font-size:16px}
+    .cpx-sec{background:#fff;border:1px solid var(--line);border-radius:20px;padding:16px;display:grid;gap:12px}
+    .cpx-sec h4{margin:0;font-size:17px}.cpx-sec p{margin:0;font-size:13px;color:var(--grey);line-height:1.5}
+    .cpx-leg{display:flex;align-items:center;gap:8px;font-size:13px}.cpx-leg i{width:12px;height:12px;border-radius:3px}.cpx-leg b{margin-left:auto}
+    .cpx-facts{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px}.cpx-facts div{background:#F2F1EF;border-radius:12px;padding:8px}.cpx-facts span{display:block;font-size:11px;color:var(--grey)}.cpx-facts b{font-size:13px}
+    .cpx-sim{justify-self:start;height:36px;padding:0 14px;border-radius:10px;border:1px solid #DBD9D7;background:#fff;font-weight:700;font-size:13px;color:var(--navy);cursor:pointer}
+    .cpx-fl{display:grid;gap:4px}
+    .cpx-st{display:flex;gap:10px;align-items:center;border-radius:14px;padding:10px;background:#F2F1EF}.cpx-st.o{background:#FDE6D7}.cpx-st.d{background:var(--navy);color:#fff}.cpx-st.d p{color:#ffffffB3}
+    .cpx-st em{width:34px;height:34px;border-radius:50%;background:#fff;display:grid;place-items:center;font-style:normal;font-size:16px;flex:none}.cpx-st.d em{background:#ffffff1F}
+    .cpx-st b{font-size:14px;display:block}.cpx-sec .cpx-st p{font-size:12px}
+    .cpx-ar{font-size:12px;color:var(--grey);font-style:italic;padding-left:22px}
+    .cpx-tr{display:grid;grid-template-columns:24px 1fr;gap:10px}
+    .cpx-tr>i{width:24px;height:24px;border-radius:50%;border:2px solid var(--line);display:grid;place-items:center;font-style:normal;font-size:12px;font-weight:700;background:#fff}
+    .cpx-tr.on>i{background:#EC5223;border-color:#EC5223;color:#fff}
+    .cpx-tr>div{background:#F2F1EF;border-radius:12px;padding:10px;display:grid;gap:6px}.cpx-tr.on>div{background:#FDE6D7}
+    .cpx-tr .cpx-row b{font-size:14px}
+    .cpx-bar{display:flex;height:12px;border-radius:999px;overflow:hidden;gap:2px}
+    .cpx-ph{display:grid;grid-template-columns:12px 92px 1fr;gap:8px;align-items:center;font-size:12px;color:var(--grey)}.cpx-ph i{width:12px;height:12px;border-radius:3px}.cpx-ph b{color:var(--navy);font-size:13px}
+    .cpx-li{display:grid;grid-template-columns:20px 1fr;gap:8px;font-size:13px}.cpx-li b{display:block}.cpx-li div span{color:var(--grey);font-size:12px}
+    .cpx-tbc{justify-self:start}
+  </style>`);
+  const cpxUnits = (filled, sm) => { const n = Math.round(filled * 40); let h = '';
+    for (let r = 0; r < 8; r++) { h += '<div class="cpx-rk">'; for (let u = 0; u < 5; u++) h += `<div class="cpx-u${r * 5 + u < n ? ' on' : ''}"></div>`; h += '</div>'; }
+    return `<div class="cpx-ct${sm ? ' sm' : ''}" role="img" aria-label="Container de 8 baies de processeurs, ${Math.round(filled * 100)} % financé">${h}</div>`; };
+  const cpxCard = () => `<div class="cpx-card"${A('mkc')} role="button" aria-label="Voir le projet Bricks Compute"><div class="cpx-top">
+      <div class="cpx-badges"><span class="cpx-b o">Nouveau programme</span><span class="cpx-b">Infrastructure de calcul</span></div>${cpxUnits(0)}
+      <div class="cpx-row"><div><small>Tranche 1 · financer le container n°1</small><strong>Avec Antimatter, en Oregon</strong></div><div class="cpx-rate"><b>9 %</b><span>24 mois</span></div></div></div>
+    <div class="body">${cardHead('Bricks Compute · Tranche 1', 'Le 13 décembre à 12h30')}${bricksers}</div></div>`;
+  const cpx = {fill: 0};
+  const cpxTbc = t => `<span class="cpx-b w cpx-tbc">${t}</span>`;
+  const cpxStep = (ic, t, d, k = '') => `<div class="cpx-st ${k}"><em>${ic}</em><div><b>${t}</b><p>${d}</p></div></div>`;
+  const cpxTr = (n, t, amt, d, on) => `<div class="cpx-tr${on ? ' on' : ''}"><i>${n}</i><div><div class="cpx-row"><b>${t}</b><b>${amt}</b></div><p>${d}</p>${on ? `<span class="cpx-b o" style="justify-self:start">Cette collecte</span>${cpxUnits(cpx.fill, true)}` : ''}</div></div>`;
+  const cpxLi = (ic, t, d) => `<div class="cpx-li"><span>${ic}</span><div><b>${t}</b><span>${d}</span></div></div>`;
+  SUB.mkc = () => { const pc = Math.round(cpx.fill * 100);
+    return frame('Bricks Compute', `<div class="cpx-pg">
+    <div class="cpx-hero"><div class="cpx-badges"><span class="cpx-b o">Nouveau programme</span><span class="cpx-b">Infrastructure de calcul</span><span class="cpx-b">Partenariat Antimatter</span></div>
+      <div class="cpx-h1">Bricks Compute · Tranche 1</div><p>Financez un container de processeurs, loué à des entreprises qui ont besoin de puissance de calcul. Leurs loyers paient vos intérêts.</p>${cpxUnits(cpx.fill)}</div>
+    <div class="cpx-kpi"><div><span>Rendement visé</span><b>9,00 % /an</b></div><div><span>Horizon</span><b>2 ans</b></div><div><span>Objectif de la tranche</span><b>1 200 000 €</b></div><div><span>Ouverture</span><b>13 déc. à 12h30</b></div></div>
+    ${cpxTbc('Taux, objectif et durée fictifs · à arbitrer')}
+    <div class="cpx-sec"><h4>Ce que vous financez</h4><p>Un container équipé de processeurs. Chaque brick achetée finance une part de ses équipements.</p>${cpxUnits(cpx.fill)}
+      <div class="cpx-leg"><i style="background:#F07141"></i>Déjà financé<b>${pc} %</b></div><div class="cpx-leg"><i style="background:#0B1A2B"></i>Reste à financer<b>${100 - pc} %</b></div>
+      <button class="cpx-sim"${A('cpxsim')}>${pc >= 100 ? 'Revenir à l’ouverture' : 'Simuler la collecte ›'}</button>
+      <div class="cpx-facts"><div><span>Prix du container</span><b>≈ 1,2 M€</b></div><div><span>Livraison</span><b>6 à 8 mois</b></div><div><span>Site</span><b>Oregon</b></div></div>
+      ${cpxTbc('Le visuel doit refléter l’usage réel des fonds')}</div>
+    <div class="cpx-sec"><h4>D’où viennent vos intérêts</h4><p>Comme un loyer : le container est loué, et ce loyer paie vos intérêts.</p><div class="cpx-fl">
+      ${cpxStep('👥', 'Vous investissez', 'Dans Bricks Compute, la société du groupe qui porte le programme.', 'o')}<div class="cpx-ar">↓ Bricks Compute achète</div>
+      ${cpxStep('📦', 'Le container et ses processeurs', 'Construits puis exploités par Antimatter dans l’Oregon.', 'd')}<div class="cpx-ar">↓ Antimatter loue la puissance de calcul</div>
+      ${cpxStep('☁️', 'Des clients sous contrat', 'Des entreprises qui ont besoin de calcul. Contrats signés avant la mise en service [à documenter].')}<div class="cpx-ar">↓ Les loyers remontent à Bricks Compute</div>
+      ${cpxStep('💶', 'Vos intérêts, chaque mois', 'Taux fixe, comme sur les autres projets Bricks. Capital remboursé à l’échéance.', 'o')}</div></div>
+    <div class="cpx-sec"><h4>Le programme Bricks Compute</h4><p>Chaque tranche finance un actif différent : vous ne financez jamais deux fois le même container.</p>
+      ${cpxTr(1, 'Container n°1', '1,2 M€', 'Commande du container et de ses équipements.', true)}
+      ${cpxTr(2, 'Le terrain', '≈ 4 M€', 'Achat du site dans l’Oregon, en négociation.')}
+      ${cpxTr(3, 'Containers n°2, n°3…', 'À définir', 'Selon la demande des clients et des investisseurs.')}
+      ${cpxTbc('Ordre terrain / containers à confirmer')}</div>
+    <div class="cpx-sec"><h4>Le calendrier de la tranche 1</h4><p>Le container ne produit rien pendant sa construction. Une réserve constituée sur la collecte paie vos intérêts pendant cette période.</p>
+      <div class="cpx-bar"><i style="flex:1;background:#FBC3A6"></i><i style="flex:7;background:#9CC3E6"></i><i style="flex:16;background:#F07141"></i></div>
+      <div class="cpx-row" style="font-size:11px;color:var(--grey)"><span>Mois 0</span><span>Mois 8</span><span>Mois 24 · échéance</span></div>
+      <div class="cpx-ph"><i style="background:#FBC3A6"></i><b>Collecte</b>Ouverture le 13 décembre</div>
+      <div class="cpx-ph"><i style="background:#9CC3E6"></i><b>Construction</b>6 à 8 mois · intérêts payés par la réserve</div>
+      <div class="cpx-ph"><i style="background:#F07141"></i><b>Exploitation</b>Intérêts payés par les loyers</div>
+      ${cpxTbc('Réserve d’intérêts et durée à confirmer')}</div>
+    <div class="cpx-sec"><h4>L’opérateur : Antimatter</h4><p>Construit et exploite les containers. Partenaire exclusif de Bricks sur ce programme.</p>
+      <div class="cpx-facts"><div><span>Containers en service</span><b>[à compléter]</b></div><div><span>Clients sous contrat</span><b>[à compléter]</b></div><div><span>Depuis</span><b>[à compléter]</b></div></div></div>
+    <div class="cpx-sec"><h4>Ce qui protège votre investissement</h4>
+      ${cpxLi('📦', 'Le container et ses processeurs', 'Des équipements qui se revendent. Leur valeur peut baisser avec le temps.')}
+      ${cpxLi('🔒', 'La réserve d’intérêts', 'Elle couvre la période de construction.')}
+      ${cpxLi('🏞️', 'Le terrain (tranche 2)', 'S’il est acheté, il renforce la valeur détenue par la société.')}
+      ${cpxLi('🛡️', 'Un engagement du groupe Bricks', 'Périmètre et limites en cours d’étude.')}${cpxTbc('Garanties non arbitrées')}</div>
+    <div class="cpx-sec"><h4>Les risques propres à ce projet</h4>
+      ${cpxLi('📉', 'Baisse de la demande en calcul', 'Si le marché de l’IA ralentit, les loyers et la valeur des processeurs peuvent baisser.')}
+      ${cpxLi('⏱️', 'Retard de construction', 'Un retard de livraison décale la mise en service.')}
+      ${cpxLi('🎯', 'Une seule activité', 'Toute la tranche dépend d’un même secteur et d’un même opérateur.')}
+      ${cpxLi('💱', 'Actif aux États-Unis', 'Actifs et loyers en dollars : le taux de change peut jouer.')}</div>
+    <p style="font-size:11px;text-align:center;color:var(--grey);margin:0">Investir comporte des risques de perte en capital et d’illiquidité.</p></div>`,
+    `<div class="sticky-cta on"><button class="btn btn-primary" style="width:100%;height:48px">Être prévenu de l’ouverture</button></div>`); };
+  ACT.mkc = () => go('mkc');
+  ACT.cpxsim = () => { cpx.fill = cpx.fill >= 1 ? 0 : Math.min(1, +(cpx.fill + 0.35).toFixed(2)); };
   // Every green "investies" box on the product page gets its chevron and opens the project tracking.
   const mkTrack = h => h.replace(/<div class="ia-box ia-1 green"><div class="ia-l">(.*?)<div class="strip-t">(.*?)<\/div><\/div>(.*?)<\/div>/g,
     (_, ic, t) => `<div class="ia-box ia-1 green"${A('mkp')} role="button" aria-label="Voir le suivi du projet"><div class="ia-l">${ic}<div class="strip-t">${t}</div></div>${ICON_CHEV('#08744D', 20)}</div>`);
@@ -4299,7 +4397,7 @@ document.addEventListener('click', e => {
       <div class="sv-sum2"><div><small>Revenus reçus</small><b class="g">+${sv2(cv.got)}</b><small>depuis ${svMo(svdFirst, {month: 'long', year: 'numeric'})}</small></div><div><small>Prévu en ${svMo(nm.at, {month: 'long'})}</small><b>+${sv2(nmAmt)}</b><small>${nAt ? `à partir du ${svDay(nAt)}` : ''}</small></div></div></div>`;
     const rev = `<div class="svc-card svd-rv"${A('svdgo:svdrev')} role="button"><div class="svc-ch"><b>Vos revenus</b><span class="svd-lk">Détail et filtres ${ICON_CHEV('#13273E', 14)}</span></div>${cv.svg}
       <div class="svc-proj"><span class="svc-lgd"><i></i>Reçu <i class="d"></i>Estimé</span><span>+${sv2(cv.next12)} attendus sur 12 mois</span></div></div>`;
-    const watch = late.length || part.length ? `<div class="sv-sec"><h3>À surveiller</h3><p class="svd-sub">Rien à faire de votre côté : Bricks suit chaque dossier et vous prévient à chaque étape.</p><div class="sv-card">
+    const watch = late.length || part.length ? `<div class="sv-sec"><h3>À surveiller</h3><p class="svd-sub">Bricks relance les porteurs en retard. Vous êtes prévenu à chaque nouvelle étape.</p><div class="sv-card">
       ${late.length ? `<div class="sv-w"${A('svdgo:svdproj:late')} role="button"><span class="ic o">${ILI(IP.clock, 16)}</span><div><b>${late.length} projets avec un paiement en retard</b><span>${(() => { const capM = svSum(late, p => p.flows.filter(f => f.missed).reduce((a, f) => a + f.cap, 0)); return `${sv2(svcI(svSum(late, p => p.missed)))} d'intérêts${capM ? ` et ${sv0(capM)} de capital` : ''} en attente`; })()}</span></div>${CHEV_R}</div>` : ''}
       ${part.map(p => `<div class="sv-w"${A(`svcp:${p.id}`)} role="button"><span class="ic b">${ILI(IP.undo, 16)}</span><div><b>${p.name} · remboursement partiel</b><span>${sv0(p.capGot)} déjà rendus, ${sv0(p.capLeft)} restant dû</span></div>${CHEV_R}</div>`).join('')}
       </div></div>` : '';
@@ -4430,22 +4528,22 @@ document.addEventListener('click', e => {
     if (trS.later) return `<div class="cx-card tr-mini"${A('trgo')} role="button"><em class="pf-tag n">Nouveau</em><b>Passez au mandat : plus rien à confirmer</b>${CHEV_R}</div>`;
     const row = (ic, t, d) => `<div class="rom-fx"><i>${ic}</i><div><b>${t}</b><span>${d}</span></div></div>`;
     return sec('Passez au mandat', `<p class="cx-cap2 tr-sub">Signez une fois : Bricks investit pour vous dans les projets qui vous correspondent.</p>
-      <div class="cx-card cx-list tr-c">${row(ILI(IP.check, 16), 'Plus rien à confirmer', 'Fini les réservations qui expirent avant l\'ouverture')}${row(ICON_AUTO('currentColor', 16), 'Servi en premier', 'Sur les projets très demandés')}${row(ILI(IP.undo, 16), '4 jours pour vous rétracter', 'Sur chaque projet, révocable en un clic')}
+      <div class="cx-card cx-list tr-c">${row(ILI(IP.check, 16), 'Plus rien à confirmer', 'Fini les réservations qui expirent avant l\'ouverture')}${row(ICON_AUTO('currentColor', 16), 'Prioritaire sur les investisseurs sans mandat', 'Sur les projets très demandés')}${row(ILI(IP.undo, 16), '4 jours pour vous rétracter', 'Sur chaque projet, révocable en un clic')}
         <div class="card-acts tr-ca"><button class="btn btn-ghost"${A('trlater')}>Plus tard</button><button class="btn btn-primary"${A('trgo')}>Passer au mandat</button></div></div>
       <p class="cx-cap2 tr-sub">Rien ne change sans votre accord : sans mandat, vous continuez à confirmer chaque projet.</p>`, '<em class="pf-tag n">Nouveau</em>'); };
-  const trFoot = () => trS.on ? `<div class="tr-ft"${A('trgo')} role="button"><div><b>Nouveau : passez au mandat</b><span>Plus rien à confirmer, servi en premier, 4 jours pour vous rétracter</span></div><span class="tr-fb">Découvrir</span></div>` : '';
+  const trFoot = () => trS.on ? `<div class="tr-ft"${A('trgo')} role="button"><div><b>Nouveau : passez au mandat</b><span>Plus rien à confirmer, prioritaire sur les investisseurs sans mandat, 4 jours pour vous rétracter</span></div><span class="tr-fb">Découvrir</span></div>` : '';
   const trNudge = () => trS.on && app.pending.length ? `<div class="tr-nudge"${A('trgo')} role="button">${ICON_AUTO('#EC5223', 16)}<span>Avec le mandat, ${app.pending.length > 1 ? `ces ${app.pending.length} projets auraient été investis` : 'ce projet aurait été investi'} sans action de votre part.</span><b>Voir</b></div>` : '';
   // Écran d'entrée de la migration : ce qui change, ce qui ne change pas, ce qu'il faut compléter.
   SUB.trmig = () => { const c = app.crit, noMax = c.rate[1] == null, row = (k, v) => `<div><span>${k}</span><b>${v}</b></div>`;
     return frame('Passer au mandat', `<div class="v2-in tr-mig">${v2head('Votre autopilote passe au mandat', 'Vos réglages actuels sont repris. Il reste une ou deux choses à confirmer, puis vous signez.')}
       <div class="v2-card tr-box"><b class="tr-h">Vos réglages actuels</b><div class="pk-kv">${row('Rendement', noMax ? `${c.rate[0]} % et plus` : rateTxt(c.rate))}${row('Durée', horTxt(c.hor))}${row('Par projet', eur(c.max))}${row('Rythme', c.month ? `${c.month} projets / mois` : 'Sans limite')}</div></div>
       ${noMax ? v2help('pending', 'À compléter : un rendement maximum', 'Avec le mandat, la réglementation demande une fourchette de rendement et de durée. Vous la choisirez à l\'étape suivante.') : ''}
-      <div class="v2-card tr-box"><b class="tr-h">Ce qui change</b><ul><li>Bricks investit pour vous, sans confirmation</li><li>Vous êtes servi avant les investisseurs sans mandat</li><li>4 jours pour vous rétracter sur chaque projet</li></ul>
+      <div class="v2-card tr-box"><b class="tr-h">Ce qui change</b><ul><li>Bricks investit pour vous, sans confirmation</li><li>Vous êtes prioritaire sur les investisseurs sans mandat</li><li>4 jours pour vous rétracter sur chaque projet</li></ul>
         <b class="tr-h">Ce qui ne change pas</b><ul><li>Vos critères et votre montant par projet</li><li>Votre Solde Bricks et vos projets en cours</li><li>Vous pouvez revenir à la validation quand vous voulez</li></ul></div>
       <p class="v2-legal">Le mandat porte uniquement sur les projets en contrat de prêt.</p></div>`, v2grad('Continuer', 'trstart')); };
   SHEETS.trmail = () => sheet(`<div class="tr-mail"><small>De : Bricks · Objet</small><h3>Votre invest auto devient l'autopilote</h3>
     <p>Bonjour Camille,</p><p>Depuis l'an dernier, votre plan vous a réservé des bricks sur <b>14 projets</b>. Vous en avez confirmé 6 ; les autres ont expiré avant l'ouverture.</p>
-    <p>Avec l'autopilote et son <b>mandat</b>, Bricks investit pour vous dans chaque projet qui correspond à vos critères. Vous n'avez plus rien à confirmer, vous êtes servi en premier, et vous gardez 4 jours pour vous rétracter.</p>
+    <p>Avec l'autopilote et son <b>mandat</b>, Bricks investit pour vous dans chaque projet qui correspond à vos critères. Vous n'avez plus rien à confirmer, vous êtes prioritaire sur les investisseurs sans mandat, et vous gardez 4 jours pour vous rétracter.</p>
     <p>Rien ne change sans votre accord : jusqu'au ${trS.end}, puis ensuite, votre plan continue avec validation si vous ne signez pas.</p>
     <div class="acts">${btn('btn-grad', 'Passer au mandat en 2 minutes', 'trgo')}</div><p class="tr-mfoot">Investir comporte des risques de perte en capital et d'illiquidité.</p></div>`);
 
