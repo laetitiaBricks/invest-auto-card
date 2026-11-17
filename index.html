@@ -878,6 +878,7 @@
   #CX .svd-ncb b{font-size:14px;line-height:19px} #CX .svd-ncb p{margin:0;font-size:12.5px;line-height:17px;color:var(--grey);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
   #CX .svd-nmod{display:flex;flex-direction:column;gap:10px;padding-bottom:6px} #CX .svd-nmod p{margin:0;font-size:14px;line-height:21px}
   #CX .svd-nmn{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:6px} #CX .svd-nmn button{height:42px;border-radius:999px;border:1px solid var(--border);background:#fff;font:600 13.5px Inter,sans-serif;color:var(--navy);cursor:pointer} #CX .svd-nmn button:disabled{opacity:.35}
+  #CX .pc-risk{margin:10px 0 0;font-size:11.5px;line-height:1.45;color:var(--grey)} #CX .svd-pfh span b{color:var(--navy)} #CX .svd-pfl{margin:8px 0 0;font-size:11.5px;line-height:1.45;color:var(--grey)}
   #CX .svd-pfh{display:flex;flex-direction:column;gap:2px} #CX .svd-pfh span{font-size:12.5px;color:var(--grey)}
   #CX .svd-gh{display:grid;grid-template-columns:1fr 1fr;gap:8px} #CX .svd-gh>div{background:#fff;border:1px solid var(--line);border-radius:16px;padding:10px 12px;display:flex;flex-direction:column} #CX .svd-gh small{font-size:12px;color:var(--grey)} #CX .svd-gh b{font-size:16px}
   #CX .svd-gp{margin-top:6px;height:5px} #CX .svd-gv{display:flex;flex-direction:column;align-items:flex-end;flex:none} #CX .svd-gv b{font-size:14px} #CX .svd-gv small{font-size:11px;color:var(--grey)}
@@ -2674,7 +2675,7 @@ document.addEventListener('click', e => {
   const pendCardV = r => { const amt = r.bricks * BRICK_EUROS;
     return `<div class="pc cx-pc o" data-pend="${r.id}"${A(`pj:r:${r.id}`)} role="button"><div class="pc-top">${ICON_CLOCK('#EC5223', 13)} Expire dans ${leftTxt(r.left)}</div><div class="pc-in">${projHead(r.p)}
     <div class="pc-sep"></div><div class="pc-ia">${iaBox('neutral', `${r.bricks} 🧱 réservées pour vous <span class="a-sub">(soit ${eur(amt)})</span>`)}
-    ${fairBox(r, `r:${r.id}`)}${optIn(r)}<div class="cx-td-a"><button class="btn btn-ghost"${A(`refuse:${r.id}`)}>Refuser</button><button class="btn btn-primary"${A(`confirm:${r.id}`)}>Confirmer ${eur(amt)}</button></div></div></div></div>`; };
+    ${fairBox(r, `r:${r.id}`)}${optIn(r)}<div class="cx-td-a"><button class="btn btn-ghost"${A(`refuse:${r.id}`)}>Refuser</button><button class="btn btn-primary"${A(`confirm:${r.id}`)}>Confirmer ${eur(amt)}</button></div><p class="pc-risk">Taux affiché : rendement brut visé, non garanti. Investir comporte des risques de perte en capital et d'illiquidité.</p></div></div></div>`; };
   const ccCard = o => `<div class="cx-cc" data-oc="${o.k}"${o.key ? `${A(`pj:${o.key}`)} role="button"` : ''}>${o.icon || !(o.p.img || o.p.th) ? `<span class="cx-oc-ic">${ILI(o.icon || IP.house, 16)}</span>` : thumb(o.p)}<div><b>${nameOf(o.p)}</b><span class="oc-${ocTone(o)}">${ocShort(o)}</span><time>${fmtD(o.at)}</time></div></div>`;
   const offCc = mi => { const n = inM(app.fill, mi).length;
     return n ? `<div class="cx-cc" data-oc="off-h"${A('go:act')} role="button"><span class="cx-oc-ic">${ILI(IP.pct, 16)}</span><div><b>${plural(n, 'projet')} hors critères</b><span class="oc-z">Pas d'autopilote</span><time>Ce mois-ci</time></div></div>` : ''; };
@@ -3775,7 +3776,7 @@ document.addEventListener('click', e => {
         ${v2stepper('v2m:-1', 'v2m:1', m === 1, count)}
         <div class="v2-card v2-gap"><div class="v2-row"${A('v2m:0')} role="switch" aria-checked="${!m}"><b>Sans limite par mois</b><i class="v2-sw${m ? '' : ' on'}"></i></div></div>
         <div class="v2-gap">${sum}</div>
-        <h3 class="v2-sec">Filtres facultatifs</h3><div class="v2-card">${v2row('Types de projets', ptShort(c), 'sheet:v2ty')}${v2row("Taille minimum d'un projet", V2_MING.find(([v]) => v === (c.minGoal || 0))[1], 'sheet:v2ming')}${v2row('Score Bricks', scoreTxt(c), 'sheet:v2sc')}</div>`, v2grad(label, f.mandat ? (f.edit ? 'step:engage' : 'step:alim') : 'activate')); },
+        <h3 class="v2-sec">Filtres facultatifs</h3><div class="v2-card">${v2row('Types de projets', ptShort(c), 'sheet:v2ty')}${v2row("Taille minimum d'un projet", V2_MING.find(([v]) => v === (c.minGoal || 0))[1], 'sheet:v2ming')}${v2row('Score Bricks', scoreTxt(c), 'sheet:v2sc')}</div>${f.mandat ? '' : `<p class="v2-legal">Investir comporte des risques de perte en capital et d'illiquidité.</p>`}`, v2grad(label, f.mandat ? (f.edit ? 'step:engage' : 'step:alim') : 'activate')); },
     alim: () => { const f = ui.flow, k = f.feed;
       const list = `<div class="v2-list" role="radiogroup" aria-label="Alimentation">${Object.entries(V2_FEED).map(([v, [ic, t, s]]) => v2opt({on: k === v, a: `feed:${v}`, ic: ILI(ic, 20), t, s})).join('')}</div>`;
       return v2frame('alim', `${v2head('Comment alimenter votre Solde Bricks ?', "L'autopilote investit avec cet argent. Vous pourrez changer de mode à tout moment.")}${list}`, v2grad('Continuer', 'v2alim', !k)); },
@@ -4312,9 +4313,10 @@ document.addEventListener('click', e => {
       <div class="svc-card svd-nl"><p class="svd-nh">${unread.length} nouvelle${unread.length > 1 ? 's' : ''} actu${unread.length > 1 ? 's' : ''} · ${SVD_NEWS.filter(n => (SV_NOW - n.at) / 864e5 <= 30).length} ces 30 derniers jours</p>${SVD_NEWS.slice().sort((a, b) => b.at - a.at).slice(0, 2).map(svdNewsRow).join('')}</div></div>`;
     const yrs = svSum(SV, p => p.flows.filter(f => f.done && f.int).length / 12 * p.amt), intAll = svSum(SV, p => svdNet(svdCatOf(p), p.intGot)), real = intAll / Math.max(1, yrs) * 100;
     const inv = svSum(SV, p => p.amt), back = svSum(SV, p => p.capGot), extra = svSum(SVD_EXTRA, e => e.amt), po = svdS.open.pf;
-    const perf = `<div class="svc-card svc-pf${po ? ' open' : ''}"><div class="svc-ch"${A('svdo:pf')} role="button" aria-expanded="${!!po}"><div class="svd-pfh"><b>Votre performance</b><span><b class="g">${real.toLocaleString('fr-FR', {maximumFractionDigits: 1})} % par an</b> en réel, sur les intérêts reçus</span></div>${ICON_CHEV('#13273E', 16)}</div>
+    const perf = `<div class="svc-card svc-pf${po ? ' open' : ''}"><div class="svc-ch"${A('svdo:pf')} role="button" aria-expanded="${!!po}"><div class="svd-pfh"><b>Votre performance</b><span><b>${real.toLocaleString('fr-FR', {maximumFractionDigits: 1})} % par an</b> en réel, sur les intérêts reçus</span></div>${ICON_CHEV('#13273E', 16)}</div>
+      <p class="svd-pfl">Depuis votre premier investissement, au ${dmy(SV_NOW)}. Les performances passées ne préjugent pas des performances futures.</p>
       ${po ? `<div class="svc-wf">${[['Investi au total', sv0(inv), ''], ['Capital déjà rendu', `−${sv0(back)}`, 'b'], ['Capital en cours', sv0(capLive), 'k'], ['Revenus des projets reçus', `+${sv2(intAll)}`, 'g'], ['Parrainage et solde boosté', `+${sv2(extra)}`, 'g'], ['Pertes', '0 €', '']].map(([t, v, c]) => `<div class="${c}"><span>${t}</span><b>${v}</b></div>`).join('')}
-        <p>Le rendement réel rapporte les revenus reçus de vos projets au capital, au prorata du temps où il a été investi. Le capital réinvesti n'est pas compté deux fois. Parrainage et solde boosté n'entrent pas dans le calcul. Les performances passées ne préjugent pas des performances futures.</p></div>` : ''}</div>`;
+        <p>Le rendement réel rapporte les revenus reçus de vos projets au capital, au prorata du temps où il a été investi. Le capital réinvesti n'est pas compté deux fois. Parrainage et solde boosté n'entrent pas dans le calcul.</p></div>` : ''}</div>`;
     return svShell(`<div class="svc svd">${head}${sum}${rev}${perf}${projs}${watch}</div>`); };
 
   Object.assign(ACT, {
@@ -4403,7 +4405,8 @@ document.addEventListener('click', e => {
       <div class="v2-gap">${v2help('pending', nM ? `${plural(nM, 'mandat')} à signer` : 'Aucun mandat à signer', 'Un mandat par configuration avec mandat, signés ensemble avec un seul code SMS. Si un projet correspond à plusieurs configurations, la première de la liste est servie.')}</div>`,
       v2grad('Continuer', 'pkengage')); };
   SHEETS.pksign = () => { const L = pkS.draft, setup = ui.flow?.pkSetup;
-    return v2sheet(L.some(p => p.mandat) ? 'Signer vos mandats' : 'Activer vos configurations', `<div class="v2-card">${L.map(p => v2row(p.name, p.mandat ? 'Mandat à signer' : 'Sans mandat · validation')).join('')}</div>
+    return v2sheet(L.some(p => p.mandat) ? 'Signer vos mandats' : 'Activer vos configurations', `<div class="v2-card">${L.map(p => v2row(p.name, `${p.mandat ? 'Mandat' : 'Validation'} ·&nbsp;${eur(p.crit.max).replace(' ', '&nbsp;')}&nbsp;/&nbsp;projet`)).join('')}</div>
+      ${L.some(p => p.mandat) ? `<p class="v2-s" style="margin:12px 0 0">Vous signez ${plural(L.filter(p => p.mandat).length, 'mandat')} : ${L.filter(p => p.mandat).map(p => `<b>${p.name}</b> (${eur(p.crit.max)} par projet)`).join(', ')}. ${L.filter(p => p.mandat).length > 1 ? 'Chacun autorise' : 'Ce mandat autorise'} Bricks à investir en votre nom selon ses critères.</p>` : ''}
       <p class="v2-s" style="text-align:center;margin:16px 0 0">${L.some(p => p.mandat) ? 'Un seul code par SMS signe tous les mandats, au 06&nbsp;••&nbsp;••&nbsp;••&nbsp;42.' : 'Vous recevrez une notification à chaque projet à confirmer.'}</p>
       <div class="acts v2-acts">${btn('btn-grad', L.some(p => p.mandat) ? 'Recevoir mon code par SMS' : 'Activer', L.some(p => p.mandat) ? 'sheet:code' : 'pkcommit')}</div><p class="v2-legal" style="text-align:center;margin-top:12px">Investir comporte des risques de perte en capital et d'illiquidité.</p>`); };
   SHEETS.pkok = () => { const f = ui.flow, p = pkItem(f); pkS.uid--;
