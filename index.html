@@ -1154,6 +1154,7 @@
       <div class="cx-row cx-row-v"><span>Transition des plans existants</span><span class="cx-bals"><button data-p="trmail:1">Voir le mail</button><button data-p="trpush:1">Envoyer la notif</button></span></div>
       <div class="cx-row cx-row-v"><span>Fiche projet · moment de la collecte</span><select id="CXMK" class="cx-sel" aria-label="Moment de la collecte"><option value="naA">Sans autopilote</option><option value="todo" selected>À confirmer</option><option value="sheet">Refuser (fiche)</option><option value="refused">Refusé</option><option value="done">Confirmé</option><option value="open">Ouverture</option><option value="reinv">Réinvesti</option><option value="reinvManual">Investi · sans autopilote</option><option value="closed">Objectif atteint · auto + réinvesti</option><option value="closedAuto">Objectif atteint · auto seul</option><option value="closedManual">Objectif atteint · sans autopilote</option><option value="closedFin">Financé</option></select></div>
       <div class="cx-row cx-row-v"><span>Listing · carte en cours</span><span class="cx-bals" data-k="bo"><button class="on" data-p="bo:auto">Auto</button><button data-p="bo:reinv">Auto + réinvesti</button><button data-p="bo:manual">Sans auto</button><button data-p="bo:none">Pas investi</button></span></div>
+      <div class="cx-row cx-row-v"><span>Bricks Compute · collecte</span><span class="cx-bals" data-k="cpxs"><button class="on" data-p="cpxs:soon">Avant ouverture</button><button data-p="cpxs:open">En cours</button></span></div>
       <div id="CXROWS"></div>
       <button class="cx-new" data-p="new">+ Nouveau projet publié</button>
       <div class="cx-log" id="CXLOG"></div>
@@ -3857,103 +3858,431 @@ document.addEventListener('click', e => {
   const MK_TAB = `<div class="hm-tab cx-tabb"><span${A('tabhome')} role="button"><i></i>Accueil</span><span class="on"><i></i>Projets</span><span><i></i>Marketplace</span><span${A('go:list')} role="button"><i></i>Suivi</span></div>`;
   SUB.mkt = () => `<div class="scr cx-mkt">${SB}<div class="scr-bd"><div class="sec-h">En cours <span class="count">3</span></div>${mkLink(listOpen(state.BO))}
     <div class="sec-h" style="margin-top:32px">Prochainement <span class="count">5</span></div><div style="display:grid;gap:16px">${mkLink(listSoon('todo') + listSoon('done'))}${cpxCard()}</div></div></div>${MK_TAB}`;
-  // ── Bricks Compute (proto du 17/11) : card en fin de « Prochainement » + page dédiée. Chiffres fictifs quand la réunion n'en donne pas. ──
+  let cpxCard; // défini dans le bloc isolé ci-dessous
+  {
+  // ── Bricks Compute (proto du 17/11, kickoff Leexi) : 2 propals de card en fin de « Prochainement » + 2 designs de page. ──
+  // Repris du kickoff : partenariat long terme avec Antimatter, 1re collecte simple, container en 3D « vous financez celui-ci »,
+  // 1 container = X cartes graphiques, intérêts comme un loyer. On ne parle pas des collectes suivantes.
+  // Toutes les données chiffrées non citées en réunion sont FICTIVES.
   document.head.insertAdjacentHTML('beforeend', `<style>
-    .cpx-card{width:353px;background:#fff;border:1px solid var(--line);border-radius:24px;overflow:hidden;cursor:pointer}
-    .cpx-top{background:var(--navy);padding:16px;display:grid;gap:14px}
-    .cpx-badges{display:flex;gap:6px;flex-wrap:wrap}
-    .cpx-b{display:inline-flex;align-items:center;gap:4px;height:24px;padding:0 10px;border-radius:999px;font-size:12px;font-weight:700;background:#ffffff1F;color:#fff}
-    .cpx-b.o{background:#F3EAFC;color:#7B3FC4}.cpx-b.w{background:#FBE9EC;color:#B3203B}
-    .cpx-ct{position:relative;background:#0B1A2B;border-radius:12px;padding:10px;display:grid;grid-template-columns:repeat(8,1fr);gap:6px;overflow:hidden}
-    .cpx-ct:before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,#ffffff14 0 1px,transparent 1px 22px);pointer-events:none}
-    .cpx-rk{display:grid;gap:3px;background:#00000040;border-radius:4px;padding:3px}
-    .cpx-u{height:10px;border-radius:2px;background:#ffffff14;transition:background .25s}
-    .cpx-u.on{background:#F07141;box-shadow:inset -4px 0 0 -1px #7FE0B4}
-    .cpx-ct.sm .cpx-u{height:6px}
-    .cpx-row{display:flex;justify-content:space-between;align-items:flex-end;gap:12px}
-    .cpx-top small{display:block;color:#ffffffB3;font-size:12px}.cpx-top strong{color:#fff;font-size:16px}
-    .cpx-rate{text-align:right;color:#fff}.cpx-rate b{font-size:18px;display:block}.cpx-rate span{font-size:12px;color:#ffffffB3}
-    .cpx-pg{display:grid;gap:12px;padding-bottom:80px}
-    .cpx-hero{background:var(--navy);border-radius:20px;padding:18px 16px;display:grid;gap:14px}
-    .cpx-h1{font-size:22px;font-weight:700;color:#fff;line-height:1.25}.cpx-hero p{color:#ffffffCC;font-size:14px;margin:0;line-height:1.45}
-    .cpx-kpi{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-    .cpx-kpi div{background:#fff;border:1px solid var(--line);border-radius:16px;padding:10px 12px}.cpx-kpi span{font-size:12px;color:var(--grey);display:block}.cpx-kpi b{font-size:16px}
-    .cpx-sec{background:#fff;border:1px solid var(--line);border-radius:20px;padding:16px;display:grid;gap:12px}
-    .cpx-sec h4{margin:0;font-size:17px}.cpx-sec p{margin:0;font-size:13px;color:var(--grey);line-height:1.5}
-    .cpx-leg{display:flex;align-items:center;gap:8px;font-size:13px}.cpx-leg i{width:12px;height:12px;border-radius:3px}.cpx-leg b{margin-left:auto}
-    .cpx-facts{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px}.cpx-facts div{background:#F2F1EF;border-radius:12px;padding:8px}.cpx-facts span{display:block;font-size:11px;color:var(--grey)}.cpx-facts b{font-size:13px}
-    .cpx-sim{justify-self:start;height:36px;padding:0 14px;border-radius:10px;border:1px solid #DBD9D7;background:#fff;font-weight:700;font-size:13px;color:var(--navy);cursor:pointer}
-    .cpx-fl{display:grid;gap:4px}
-    .cpx-st{display:flex;gap:10px;align-items:center;border-radius:14px;padding:10px;background:#F2F1EF}.cpx-st.o{background:#FDE6D7}.cpx-st.d{background:var(--navy);color:#fff}.cpx-st.d p{color:#ffffffB3}
-    .cpx-st em{width:34px;height:34px;border-radius:50%;background:#fff;display:grid;place-items:center;font-style:normal;font-size:16px;flex:none}.cpx-st.d em{background:#ffffff1F}
-    .cpx-st b{font-size:14px;display:block}.cpx-sec .cpx-st p{font-size:12px}
-    .cpx-ar{font-size:12px;color:var(--grey);font-style:italic;padding-left:22px}
-    .cpx-tr{display:grid;grid-template-columns:24px 1fr;gap:10px}
-    .cpx-tr>i{width:24px;height:24px;border-radius:50%;border:2px solid var(--line);display:grid;place-items:center;font-style:normal;font-size:12px;font-weight:700;background:#fff}
-    .cpx-tr.on>i{background:#EC5223;border-color:#EC5223;color:#fff}
-    .cpx-tr>div{background:#F2F1EF;border-radius:12px;padding:10px;display:grid;gap:6px}.cpx-tr.on>div{background:#FDE6D7}
-    .cpx-tr .cpx-row b{font-size:14px}
-    .cpx-bar{display:flex;height:12px;border-radius:999px;overflow:hidden;gap:2px}
-    .cpx-ph{display:grid;grid-template-columns:12px 92px 1fr;gap:8px;align-items:center;font-size:12px;color:var(--grey)}.cpx-ph i{width:12px;height:12px;border-radius:3px}.cpx-ph b{color:var(--navy);font-size:13px}
-    .cpx-li{display:grid;grid-template-columns:20px 1fr;gap:8px;font-size:13px}.cpx-li b{display:block}.cpx-li div span{color:var(--grey);font-size:12px}
-    .cpx-tbc{justify-self:start}
+    .cpx-card{cursor:pointer}
+    .cpx-img{background:radial-gradient(120% 90% at 50% 100%,#24476E 0%,#13273E 60%,#0B1726 100%)!important;overflow:hidden}
+    .cpx-img>svg{position:absolute;inset:0;width:100%;height:100%}
+    .cpx-tease>svg{filter:blur(1px)}
+    .cpx-tease .cd{background:rgba(11,23,38,.72)}
+    .cpx-new{position:absolute;left:10px;top:10px;height:24px;padding:0 10px;border-radius:999px;background:#F3EAFC;color:#7B3FC4;font-size:12px;font-weight:700;display:inline-flex;align-items:center}
+    .cpx-flag{position:absolute;right:10px;top:10px;height:26px;padding:0 10px;border-radius:999px;background:#fff;color:var(--navy);font-size:12px;font-weight:700;display:inline-flex;align-items:center;gap:6px;box-shadow:0 2px 8px #0003}
+    .cpx-flag i{width:8px;height:8px;border-radius:50%;background:#F07141;animation:cpxPing 1.6s infinite}
+    .cpx-hook{margin:-6px 0 0;font-size:14px;line-height:1.45;color:var(--navy)}
+    .cpx-cline{font-size:13px;line-height:1.45;color:var(--grey);margin-top:-4px}.cpx-cline b{color:var(--navy)}
+    .cpx-u{fill:#0E1E31;stroke:#2B4867;stroke-width:.6}
+    .cpx-u.on{fill:#F07141;stroke:#FFB08F;animation:cpxOn .45s ease both}
+    .cpx-u.tw{animation:cpxTw 2.6s ease-in-out infinite}
+    .cpx-glow{animation:cpxGlow 3s ease-in-out infinite}
+    .cpx-cable{stroke:#F07141;stroke-width:1.6;fill:none;stroke-dasharray:3 7;animation:cpxFlow 1.2s linear infinite}
+    @keyframes cpxOn{from{opacity:0}to{opacity:1}}
+    @keyframes cpxTw{0%,100%{fill:#0E1E31}50%{fill:#F0714188}}
+    @keyframes cpxGlow{0%,100%{opacity:.35}50%{opacity:.8}}
+    @keyframes cpxFlow{to{stroke-dashoffset:-20}}
+    @keyframes cpxPing{0%,100%{box-shadow:0 0 0 2px #F0714150}50%{box-shadow:0 0 0 6px #F0714100}}
+    @keyframes cpxFan{to{transform:rotate(360deg)}}
+    @keyframes cpxPin{0%,100%{r:6;opacity:.5}50%{r:14;opacity:0}}
+    .cpxf .f-photo.cpx-hero{background:radial-gradient(120% 90% at 50% 100%,#24476E 0%,#13273E 60%,#0B1726 100%)}
+    .cpx-hero>svg{position:absolute;left:0;right:0;top:40px;width:100%;height:280px}
+    .cpx-backbtn{position:absolute;left:16px;top:48px;width:40px;height:40px;border-radius:50%;background:#fff;display:grid;place-items:center;cursor:pointer;z-index:2;box-shadow:0 2px 8px #0003}
+    .cpx-hchip{position:absolute;left:66px;top:54px;height:28px;padding:0 12px;border-radius:999px;background:#ffffff1F;color:#fff;font-size:12px;font-weight:700;display:inline-flex;align-items:center;gap:6px;backdrop-filter:blur(6px)}
+    .cpx-hleg{position:absolute;left:16px;right:16px;bottom:24px;display:flex;justify-content:space-between;align-items:flex-end;color:#fff;font-size:12px}
+    .cpx-hleg b{display:block;font-size:16px}.cpx-hleg span{opacity:.75}
+    .cpx-tag{display:inline-flex;align-items:center;height:22px;padding:0 8px;border-radius:6px;background:#FBE9EC;color:#B3203B;font-size:11px;font-weight:700;align-self:flex-start}
+    .cpx-s{display:flex;flex-direction:column;gap:12px;padding-top:8px;border-top:1px solid var(--line);scroll-margin-top:64px}
+    .cpx-s h3{margin:12px 0 0;font-size:20px;line-height:1.3}
+    .cpx-s p{margin:0;font-size:14px;line-height:1.5;color:var(--grey)}
+    .cpx-tiles{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+    .cpx-tiles div{border:1px solid var(--line);border-radius:16px;padding:12px;display:flex;flex-direction:column;gap:2px;font-size:12px;color:var(--grey)}
+    .cpx-tiles b{font-size:16px;color:var(--navy)}
+    .cpx-use{display:flex;height:10px;border-radius:999px;overflow:hidden;gap:2px}
+    .cpx-ul{display:flex;align-items:center;gap:8px;font-size:13px}.cpx-ul i{width:10px;height:10px;border-radius:3px;flex:none}.cpx-ul b{margin-left:auto;white-space:nowrap}
+    .cpx-flow{background:#F7F6F5;border-radius:16px;padding:8px 4px}
+    .cpx-flow svg{display:block;width:100%;height:auto}
+    .cpx-vid{position:relative;height:186px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#13273E,#2B4867 60%,#F07141 160%);display:flex;align-items:flex-end;padding:14px;color:#fff;cursor:pointer}
+    .cpx-vid .pl{position:absolute;left:50%;top:50%;transform:translate(-50%,-60%);width:56px;height:56px;border-radius:50%;background:#fff;display:grid;place-items:center}
+    .cpx-vid b{display:block;font-size:15px}.cpx-vid span{font-size:12px;opacity:.8}
+    .cpx-tl{display:flex;height:10px;border-radius:999px;overflow:hidden;gap:2px}
+    .cpx-ph{display:grid;grid-template-columns:10px 96px 1fr;gap:8px;align-items:center;font-size:13px;color:var(--grey)}.cpx-ph i{width:10px;height:10px;border-radius:3px}.cpx-ph b{color:var(--navy)}
+    .cpx-li{display:flex;gap:10px;font-size:14px;line-height:1.4}.cpx-li em{font-style:normal;flex:none;width:22px;text-align:center}.cpx-li b{display:block}.cpx-li span{color:var(--grey);font-size:13px}
+    .cpx-spark{display:flex;align-items:center;gap:12px;background:#F7F6F5;border-radius:16px;padding:12px}
+    .cpx-spark svg{flex:none}.cpx-spark b{display:block;font-size:14px}.cpx-spark span{font-size:12px;color:var(--grey)}
+    .cpx-win{background:linear-gradient(135deg,#E3F6EE,#FEF4EE);border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:4px;font-size:13px;color:var(--navy)}
+    .cpx-win b{font-size:16px}
+    /* Simulateur « votre part de carte graphique » */
+    .cpx-amts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+    .cpx-amts span{height:40px;padding:0 4px;justify-content:center;white-space:nowrap;font-size:13px!important;border:1px solid var(--border);border-radius:12px;display:inline-flex;align-items:center;font-weight:700;font-size:14px;cursor:pointer;background:#fff;color:var(--navy)}
+    .cpx-amts span.on{background:var(--navy);border-color:var(--navy);color:#fff}
+    .cpx-gpus{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;padding:14px 8px;background:#0B1726;border-radius:16px}
+    .cpx-gpu .fan{transform-box:fill-box;transform-origin:center;animation:cpxFan 1.4s linear infinite}
+    .cpx-res{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px}
+    .cpx-res div{background:#F7F6F5;border-radius:12px;padding:10px 8px;font-size:11px;color:var(--grey);display:flex;flex-direction:column;gap:2px}
+    .cpx-res b{font-size:15px;color:var(--navy)}
+    /* Localisation */
+    .cpx-map{border-radius:16px;overflow:hidden;border:1px solid var(--line)}
+    .cpx-map svg{display:block;width:100%;height:auto}
+    .cpx-pin{animation:cpxPin 2s ease-out infinite}
+    /* Porteur et documents (même rendu que les blocs de la fiche) */
+    .cpx-pdp{display:flex;gap:12px;align-items:center}
+    .cpx-pdp i{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;flex:none;font-style:normal;font-weight:800;font-size:15px}
+    .cpx-pdp b{display:block;font-size:16px}.cpx-pdp span{font-size:13px;color:var(--grey)}
+    .cpx-more{height:48px;border:1px solid var(--border);border-radius:12px;display:flex;align-items:center;justify-content:center;gap:6px;font-weight:700;font-size:14px;cursor:pointer;color:var(--navy);background:#fff}
+    .cpx-docs>div{display:flex;align-items:center;gap:12px;padding:14px 0;border-top:1px solid var(--line);font-size:14px;font-weight:700;cursor:pointer}
+    .cpx-docs>div:first-child{border-top:0}
+    .cpx-docs i{width:36px;height:36px;border-radius:10px;background:#F7F6F5;display:grid;place-items:center;flex:none;font-style:normal}
+    .cpx-docs span{flex:1}.cpx-docs small{display:block;font-weight:400;font-size:12px;color:var(--grey)}
+    .cpx-struct{display:grid;gap:6px;font-size:13px}
+    .cpx-struct div{border-radius:12px;padding:10px 12px;background:#F7F6F5}.cpx-struct div.d{background:var(--navy);color:#fff}
+    .cpx-struct em{display:block;text-align:center;font-style:normal;color:var(--grey);font-size:12px}
+    /* Design 2 : récit visuel */
+    .cpx-nav{position:sticky;top:0;z-index:3;margin:0 -20px;padding:10px 20px;background:#fffffff2;backdrop-filter:blur(8px);display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid var(--line)}
+    .cpx-nav span{flex:none;height:32px;padding:0 12px;border-radius:999px;background:#F7F6F5;font-size:13px;font-weight:700;display:inline-flex;align-items:center;cursor:pointer;color:var(--navy)}
+    .cpx-story{background:var(--navy);color:#fff;border-radius:24px;padding:20px 16px;display:flex;flex-direction:column;gap:22px;scroll-margin-top:64px}
+    .cpx-story>h3{margin:0;font-size:20px}
+    .cpx-step{display:grid;grid-template-columns:28px 1fr;gap:12px}
+    .cpx-step>i{width:28px;height:28px;border-radius:50%;background:#EC5223;display:grid;place-items:center;font-style:normal;font-weight:800;font-size:13px}
+    .cpx-step>div{display:flex;flex-direction:column;gap:10px;min-width:0}
+    .cpx-step b.t{font-size:16px}.cpx-step p{margin:0;font-size:13px;line-height:1.5;color:#ffffffB3}
+    .cpx-story .cpx-amts span{background:#ffffff14;border-color:#ffffff33;color:#fff}.cpx-story .cpx-amts span.on{background:#fff;color:var(--navy)}
+    .cpx-story .cpx-res div{background:#ffffff14;color:#ffffffB3}.cpx-story .cpx-res b{color:#fff}
+    .cpx-story .cpx-gpus{background:#0B1726}
+    .cpx-story .cpx-map{border-color:#ffffff22}
+    .cpx-tick{font-size:26px;font-weight:800;font-variant-numeric:tabular-nums;color:#F07141}
+    .cpx-live{display:flex;align-items:center;gap:6px;font-size:12px;color:#ffffffB3}.cpx-live i{width:8px;height:8px;border-radius:50%;background:#7FE0B4;animation:cpxPing 1.6s infinite}
+    .cpx-bars{display:flex;align-items:flex-end;gap:3px;height:70px}
+    .cpx-fp{border:1px solid var(--line);border-radius:16px;overflow:hidden}
+    .cpx-fp summary{list-style:none;display:flex;align-items:center;gap:12px;padding:14px 16px;cursor:pointer}
+    .cpx-fp summary::-webkit-details-marker{display:none}
+    .cpx-fp summary i{width:36px;height:36px;border-radius:10px;background:#F7F6F5;display:grid;place-items:center;flex:none;font-style:normal}
+    .cpx-fp summary span{flex:1;font-size:14px;color:var(--grey)}.cpx-fp summary b{font-size:16px;color:var(--navy)}
+    .cpx-fp summary svg.ch{transition:transform .2s}.cpx-fp[open] summary svg.ch{transform:rotate(90deg)}
+    .cpx-fp ul{list-style:none;margin:0;padding:0 16px 12px}
+    .cpx-fp li{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-top:1px solid var(--line);font-size:13px;color:var(--grey)}.cpx-fp li b{color:var(--navy);white-space:nowrap}
+    .cpx-am{background:#F7F6F5;border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:12px}
+    .cpx-am h4{margin:0;font-size:16px}
+    .cpx-am p{font-size:13px!important}
+    .cpx-role{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+    .cpx-role div{background:#fff;border-radius:12px;padding:10px 8px;display:flex;flex-direction:column;gap:4px;font-size:12px;color:var(--grey);line-height:1.35}
+    .cpx-role em{font-style:normal;font-size:18px}.cpx-role b{font-size:13px;color:var(--navy)}
+    .cpx-split{display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:12px;line-height:1.4}
+    .cpx-split div{border-radius:12px;padding:10px;background:#fff}.cpx-split b{display:block;font-size:13px;margin-bottom:2px}
+    .cpx-com{display:flex;gap:16px;align-items:center}
+    .cpx-com .n{font-size:40px;font-weight:800;line-height:1}.cpx-com .st{color:#F5A524;font-size:14px;letter-spacing:1px}.cpx-com small{font-size:12px;color:var(--grey)}
+    .cpx-dist{flex:1;display:flex;flex-direction:column;gap:3px}
+    .cpx-dist div{display:grid;grid-template-columns:10px 1fr;gap:6px;align-items:center;font-size:11px;color:var(--grey)}
+    .cpx-dist u{display:block;height:6px;border-radius:3px;background:#F2F1EF;overflow:hidden}.cpx-dist u i{display:block;height:100%;background:#F5A524}
+    .cpx-rev{border:1px solid var(--line);border-radius:16px;padding:12px;display:flex;flex-direction:column;gap:6px;font-size:13px;line-height:1.45}
+    .cpx-rev header{display:flex;align-items:center;gap:8px;font-size:13px}.cpx-rev header i{width:28px;height:28px;border-radius:50%;flex:none}.cpx-rev header b{flex:1}.cpx-rev header span{color:#F5A524;font-size:12px}
+    .cpx-rev time{font-size:11px;color:var(--grey)}
+    .ds-b{display:flex;flex-direction:column;gap:20px;padding:24px 0 8px;scroll-margin-top:64px}
+    .ds-b+.ds-b{border-top:1px solid var(--line)}
+    .ds-b>p{margin:-8px 0 0;font-size:14px;line-height:1.5;color:var(--grey)}
+    .ds-t{margin:0;font-size:20px;font-weight:700;line-height:1.3;color:var(--navy);display:flex;align-items:center;gap:8px}
+    .ds-t .cnt{height:24px;min-width:24px;padding:0 8px;border-radius:999px;background:#F2F1EF;font-size:13px;display:inline-grid;place-items:center}
+    .ds-sub{margin:-12px 0 0;font-size:14px;color:var(--grey)}
+    .ds-txt{position:relative;font-size:14px;line-height:1.55;color:var(--navy);max-height:88px;overflow:hidden;-webkit-mask-image:linear-gradient(#000 55%,transparent);mask-image:linear-gradient(#000 55%,transparent)}
+    .ds-txt u{font-weight:700}
+    .ds-btn{height:40px;border:1px solid var(--border);border-radius:10px;background:#fff;display:flex;align-items:center;justify-content:center;gap:6px;font-weight:700;font-size:14px;color:var(--navy);cursor:pointer}
+    .ds-btn.sm{height:32px;padding:0 10px;font-size:12px;align-self:flex-end}
+    .ds-vid{position:relative;height:186px;border-radius:12px;overflow:hidden;background:linear-gradient(120deg,#0B1726 0%,#24476E 55%,#3B5A7A 100%);cursor:pointer}
+    .ds-vid .yt{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:68px;height:48px;border-radius:12px;background:#FF0033;display:grid;place-items:center}
+    .ds-vid .tt{position:absolute;left:12px;right:12px;top:10px;display:flex;gap:8px;align-items:center;color:#fff;font-weight:700;font-size:15px;line-height:1.2}
+    .ds-vid .tt i{width:28px;height:28px;border-radius:50%;background:#fff;flex:none}
+    .ds-vid .wy{position:absolute;left:12px;bottom:10px;height:36px;padding:0 12px;border-radius:999px;background:#000000B3;color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;gap:6px}
+    .ds-com{display:grid;grid-template-columns:1fr 1px 1fr;align-items:center;text-align:center}
+    .ds-com>i{height:64px;background:var(--line)}
+    .ds-com b{display:flex;align-items:center;justify-content:center;gap:4px;font-size:20px}
+    .ds-com span{display:inline-flex;align-items:center;gap:2px;font-size:12px;color:var(--navy);margin-top:6px;cursor:pointer}
+    .ds-own{background:#F7F5F2;border-radius:24px;padding:20px 16px;display:flex;flex-direction:column;gap:16px}
+    .ds-oc{background:#fff;border-radius:20px;box-shadow:0 2px 10px #13273E14;padding:16px;display:flex;align-items:center;gap:16px}
+    .ds-oc i{width:56px;height:56px;border-radius:50%;flex:none;display:grid;place-items:center;font-style:normal;font-weight:800;color:#fff;font-size:18px;background:linear-gradient(135deg,#13273E,#EC5223)}
+    .ds-oc b{display:block;font-size:14px;text-transform:uppercase}.ds-oc span{font-size:13px;color:var(--orange)}
+    .ds-map{position:relative;border-radius:12px;overflow:hidden}
+    .ds-map .ds-btn{position:absolute;right:8px;bottom:8px;background:#fff}
+    .ds-gh{display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center}
+    .ds-gh .gpc{font-size:52px;font-weight:800;line-height:1;display:flex;align-items:center;gap:8px}
+    .ds-gh h4{margin:6px 0 0;font-size:20px}.ds-gh p{margin:0;font-size:14px;color:var(--grey)}
+    .ds-gh .cc{height:28px;padding:0 10px;border-radius:999px;background:#F2F1EF;font-size:13px;display:inline-flex;align-items:center;gap:6px;margin-top:8px}
+    .ds-acc{border-bottom:1px solid var(--line)}
+    .ds-acc summary{list-style:none;display:flex;align-items:center;gap:14px;padding:14px 0;cursor:pointer;font-size:14px;font-weight:700;color:var(--navy)}
+    .ds-acc summary::-webkit-details-marker{display:none}
+    .ds-acc summary .tx{flex:1}
+    .ds-acc summary .cv{transition:transform .2s}.ds-acc[open] summary .cv{transform:rotate(180deg)}
+    .ds-acc .bd{padding:0 0 14px 38px;font-size:13px;line-height:1.5;color:var(--grey);display:flex;flex-direction:column;gap:8px}
+    .ds-acc .bd li{display:flex;justify-content:space-between;gap:12px;list-style:none}.ds-acc .bd li b{color:var(--navy);white-space:nowrap}
+    .ds-acc .bd ul{margin:0;padding:0}
+    .ds-ok{width:22px;height:22px;border-radius:50%;background:#16B374;display:grid;place-items:center;flex:none}
+    .ds-link{font-size:13px;font-weight:700;color:var(--navy);text-decoration:underline;text-underline-offset:4px;cursor:pointer}
+    .ds-docs{display:flex;flex-wrap:wrap;gap:8px}
+    .ds-docs span{height:44px;padding:0 14px;border:1px solid var(--border);border-radius:12px;display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:14px;cursor:pointer;color:var(--navy)}
+    .ds-mh{display:grid;grid-template-columns:24px 1fr 24px;align-items:center;margin:4px -20px 0;padding:0 20px 14px;border-bottom:1px solid var(--line)}
+    .ds-mh b{text-align:center;font-size:16px}
+    .ds-mtx{font-size:14px;line-height:1.55;color:var(--navy);margin:0}
+    .cpx-ctn{position:relative;border-radius:12px;padding:12px 30px 12px 12px;background:repeating-linear-gradient(90deg,#24405F 0 6px,#1F3A57 6px 12px);box-shadow:inset 0 0 0 2px #2E4E72}
+    .cpx-ctn:after{content:'';position:absolute;right:10px;top:16px;bottom:16px;width:4px;border-radius:2px;background:#ffffff40;box-shadow:-8px 0 0 #ffffff40}
+    .cpx-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;background:#0B1726;border-radius:8px;padding:8px}
+    .cpx-cell{position:relative;height:54px;border-radius:6px;background:#132A43;box-shadow:inset 0 0 0 1px #2B4867;overflow:hidden;display:grid;place-items:center;color:#ffffff40;font-style:normal}
+    .cpx-cell svg{position:relative;width:22px;height:22px;z-index:1}
+    .cpx-cell b{position:absolute;left:0;right:0;bottom:0;background:#F07141;transform-origin:bottom;animation:cpxGrow .7s cubic-bezier(.2,.8,.2,1) both}
+    .cpx-cell b~svg,.cpx-cell:has(b) svg{color:#fff}
+    .cpx-cell.cur{box-shadow:0 0 0 2px #fff,0 0 12px #F07141}
+    @keyframes cpxGrow{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+    .cpx-lens{display:flex;align-items:center;gap:14px;background:#F7F6F5;border-radius:16px;padding:12px}
+    .cpx-big{display:grid;grid-template-columns:repeat(10,1fr);gap:3px;width:132px;height:132px;padding:7px;border-radius:10px;background:#132A43;box-shadow:0 0 0 2px #F07141;flex:none;font-style:normal}
+    .cpx-big u{display:block;border-radius:1.5px;background:#ffffff1A}
+    .cpx-big u.on{background:#F07141;animation:cpxOn .4s ease both}
+    .cpx-big u.p{animation:none}
+    .cpx-lens>div{min-width:0;flex:1}
+    .cpx-kv{display:flex;gap:14px;margin-top:10px;padding-top:10px;border-top:1px solid #E6E3DF}
+    .cpx-kv div{font-size:11px;color:var(--grey);line-height:1.3}.cpx-kv b{display:block;font-size:14px;color:var(--navy)}
+    .cpx-fulls{display:flex;align-items:center;gap:4px;margin-bottom:8px}
+    .cpx-fulls i{width:22px;height:22px;border-radius:5px;background:repeating-linear-gradient(90deg,#F07141 0 4px,#F58A62 4px 5px);box-shadow:0 0 0 1.5px #EC5223;animation:cpxOn .4s ease both}
+    .cpx-fulls em{font-style:normal;font-size:12px;font-weight:700;color:var(--orange)}
+    .cpx-fulls span{margin-left:4px;font-size:12px!important;font-weight:700;color:var(--navy)!important}
+    .cpx-lens span{display:block;font-size:12px;color:var(--grey)}.cpx-lens>div>b{font-size:20px;color:var(--navy)}
+    .cpx-cats{display:flex;gap:6px;justify-content:center;flex-wrap:wrap}
+    .cpx-cats span{height:28px;padding:0 10px;border-radius:999px;background:#F2F1EF;color:var(--navy);font-size:12px;font-weight:700;display:inline-flex;align-items:center;gap:4px}
+    .cpx-cats span.c{background:#E6F0F9;color:#1F5F96}
+    .cpx-ctag{position:absolute;left:10px;bottom:10px;display:flex;gap:6px}
+    .cpx-ctag span{height:24px;padding:0 10px;border-radius:999px;background:#fff;color:var(--navy);font-size:12px;font-weight:700;display:inline-flex;align-items:center}
+    .cpx-ctag span.c{background:#E6F0F9;color:#1F5F96}
+    .cpx-stp{font-size:12px;font-weight:800;color:var(--orange);letter-spacing:.04em;text-transform:uppercase;margin-top:12px}
+    .cpx-stp+h3{margin-top:0!important}
+    .cpx-lv{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--grey)}.cpx-lv i{width:8px;height:8px;border-radius:50%;background:#0A915D;animation:cpxPing 1.6s infinite}
+    .cpx-livebox{border:1px solid var(--line);border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:2px}
+    .cpx-bars i{flex:1;border-radius:3px 3px 0 0}
   </style>`);
-  const cpxUnits = (filled, sm) => { const n = Math.round(filled * 40); let h = '';
-    for (let r = 0; r < 8; r++) { h += '<div class="cpx-rk">'; for (let u = 0; u < 5; u++) h += `<div class="cpx-u${r * 5 + u < n ? ' on' : ''}"></div>`; h += '</div>'; }
-    return `<div class="cpx-ct${sm ? ' sm' : ''}" role="img" aria-label="Container de 8 baies de processeurs, ${Math.round(filled * 100)} % financé">${h}</div>`; };
-  const cpxCard = () => `<div class="cpx-card"${A('mkc')} role="button" aria-label="Voir le projet Bricks Compute"><div class="cpx-top">
-      <div class="cpx-badges"><span class="cpx-b o">Nouveau programme</span><span class="cpx-b">Infrastructure de calcul</span></div>${cpxUnits(0)}
-      <div class="cpx-row"><div><small>Tranche 1 · financer le container n°1</small><strong>Avec Antimatter, en Oregon</strong></div><div class="cpx-rate"><b>9 %</b><span>24 mois</span></div></div></div>
-    <div class="body">${cardHead('Bricks Compute · Tranche 1', 'Le 13 décembre à 12h30')}${bricksers}</div></div>`;
-  const cpx = {fill: 0};
-  const cpxTbc = t => `<span class="cpx-b w cpx-tbc">${t}</span>`;
-  const cpxStep = (ic, t, d, k = '') => `<div class="cpx-st ${k}"><em>${ic}</em><div><b>${t}</b><p>${d}</p></div></div>`;
-  const cpxTr = (n, t, amt, d, on) => `<div class="cpx-tr${on ? ' on' : ''}"><i>${n}</i><div><div class="cpx-row"><b>${t}</b><b>${amt}</b></div><p>${d}</p>${on ? `<span class="cpx-b o" style="justify-self:start">Cette collecte</span>${cpxUnits(cpx.fill, true)}` : ''}</div></div>`;
-  const cpxLi = (ic, t, d) => `<div class="cpx-li"><span>${ic}</span><div><b>${t}</b><span>${d}</span></div></div>`;
-  SUB.mkc = () => { const pc = Math.round(cpx.fill * 100);
-    return frame('Bricks Compute', `<div class="cpx-pg">
-    <div class="cpx-hero"><div class="cpx-badges"><span class="cpx-b o">Nouveau programme</span><span class="cpx-b">Infrastructure de calcul</span><span class="cpx-b">Partenariat Antimatter</span></div>
-      <div class="cpx-h1">Bricks Compute · Tranche 1</div><p>Financez un container de processeurs, loué à des entreprises qui ont besoin de puissance de calcul. Leurs loyers paient vos intérêts.</p>${cpxUnits(cpx.fill)}</div>
-    <div class="cpx-kpi"><div><span>Rendement visé</span><b>9,00 % /an</b></div><div><span>Horizon</span><b>2 ans</b></div><div><span>Objectif de la tranche</span><b>1 200 000 €</b></div><div><span>Ouverture</span><b>13 déc. à 12h30</b></div></div>
-    ${cpxTbc('Taux, objectif et durée fictifs · à arbitrer')}
-    <div class="cpx-sec"><h4>Ce que vous financez</h4><p>Un container équipé de processeurs. Chaque brick achetée finance une part de ses équipements.</p>${cpxUnits(cpx.fill)}
-      <div class="cpx-leg"><i style="background:#F07141"></i>Déjà financé<b>${pc} %</b></div><div class="cpx-leg"><i style="background:#0B1A2B"></i>Reste à financer<b>${100 - pc} %</b></div>
-      <button class="cpx-sim"${A('cpxsim')}>${pc >= 100 ? 'Revenir à l’ouverture' : 'Simuler la collecte ›'}</button>
-      <div class="cpx-facts"><div><span>Prix du container</span><b>≈ 1,2 M€</b></div><div><span>Livraison</span><b>6 à 8 mois</b></div><div><span>Site</span><b>Oregon</b></div></div>
-      ${cpxTbc('Le visuel doit refléter l’usage réel des fonds')}</div>
-    <div class="cpx-sec"><h4>D’où viennent vos intérêts</h4><p>Comme un loyer : le container est loué, et ce loyer paie vos intérêts.</p><div class="cpx-fl">
-      ${cpxStep('👥', 'Vous investissez', 'Dans Bricks Compute, la société du groupe qui porte le programme.', 'o')}<div class="cpx-ar">↓ Bricks Compute achète</div>
-      ${cpxStep('📦', 'Le container et ses processeurs', 'Construits puis exploités par Antimatter dans l’Oregon.', 'd')}<div class="cpx-ar">↓ Antimatter loue la puissance de calcul</div>
-      ${cpxStep('☁️', 'Des clients sous contrat', 'Des entreprises qui ont besoin de calcul. Contrats signés avant la mise en service [à documenter].')}<div class="cpx-ar">↓ Les loyers remontent à Bricks Compute</div>
-      ${cpxStep('💶', 'Vos intérêts, chaque mois', 'Taux fixe, comme sur les autres projets Bricks. Capital remboursé à l’échéance.', 'o')}</div></div>
-    <div class="cpx-sec"><h4>Le programme Bricks Compute</h4><p>Chaque tranche finance un actif différent : vous ne financez jamais deux fois le même container.</p>
-      ${cpxTr(1, 'Container n°1', '1,2 M€', 'Commande du container et de ses équipements.', true)}
-      ${cpxTr(2, 'Le terrain', '≈ 4 M€', 'Achat du site dans l’Oregon, en négociation.')}
-      ${cpxTr(3, 'Containers n°2, n°3…', 'À définir', 'Selon la demande des clients et des investisseurs.')}
-      ${cpxTbc('Ordre terrain / containers à confirmer')}</div>
-    <div class="cpx-sec"><h4>Le calendrier de la tranche 1</h4><p>Le container ne produit rien pendant sa construction. Une réserve constituée sur la collecte paie vos intérêts pendant cette période.</p>
-      <div class="cpx-bar"><i style="flex:1;background:#FBC3A6"></i><i style="flex:7;background:#9CC3E6"></i><i style="flex:16;background:#F07141"></i></div>
-      <div class="cpx-row" style="font-size:11px;color:var(--grey)"><span>Mois 0</span><span>Mois 8</span><span>Mois 24 · échéance</span></div>
-      <div class="cpx-ph"><i style="background:#FBC3A6"></i><b>Collecte</b>Ouverture le 13 décembre</div>
-      <div class="cpx-ph"><i style="background:#9CC3E6"></i><b>Construction</b>6 à 8 mois · intérêts payés par la réserve</div>
-      <div class="cpx-ph"><i style="background:#F07141"></i><b>Exploitation</b>Intérêts payés par les loyers</div>
-      ${cpxTbc('Réserve d’intérêts et durée à confirmer')}</div>
-    <div class="cpx-sec"><h4>L’opérateur : Antimatter</h4><p>Construit et exploite les containers. Partenaire exclusif de Bricks sur ce programme.</p>
-      <div class="cpx-facts"><div><span>Containers en service</span><b>[à compléter]</b></div><div><span>Clients sous contrat</span><b>[à compléter]</b></div><div><span>Depuis</span><b>[à compléter]</b></div></div></div>
-    <div class="cpx-sec"><h4>Ce qui protège votre investissement</h4>
-      ${cpxLi('📦', 'Le container et ses processeurs', 'Des équipements qui se revendent. Leur valeur peut baisser avec le temps.')}
-      ${cpxLi('🔒', 'La réserve d’intérêts', 'Elle couvre la période de construction.')}
-      ${cpxLi('🏞️', 'Le terrain (tranche 2)', 'S’il est acheté, il renforce la valeur détenue par la société.')}
-      ${cpxLi('🛡️', 'Un engagement du groupe Bricks', 'Périmètre et limites en cours d’étude.')}${cpxTbc('Garanties non arbitrées')}</div>
-    <div class="cpx-sec"><h4>Les risques propres à ce projet</h4>
-      ${cpxLi('📉', 'Baisse de la demande en calcul', 'Si le marché de l’IA ralentit, les loyers et la valeur des processeurs peuvent baisser.')}
-      ${cpxLi('⏱️', 'Retard de construction', 'Un retard de livraison décale la mise en service.')}
-      ${cpxLi('🎯', 'Une seule activité', 'Toute la tranche dépend d’un même secteur et d’un même opérateur.')}
-      ${cpxLi('💱', 'Actif aux États-Unis', 'Actifs et loyers en dollars : le taux de change peut jouer.')}</div>
-    <p style="font-size:11px;text-align:center;color:var(--grey);margin:0">Investir comporte des risques de perte en capital et d’illiquidité.</p></div>`,
-    `<div class="sticky-cta on"><button class="btn btn-primary" style="width:100%;height:48px">Être prévenu de l’ouverture</button></div>`); };
+  const cpx = {card: 'A', st: 'soon', page: '1', amt: 1000};
+  const CPX_FILL = {soon: 0, open: 0.64, full: 1};
+  const CPX_AMT = 1_500_000, GPU_EUR = 28_000, RATE = 0.11;
+  const eurs = v => `${Math.round(v).toLocaleString('fr-FR')} €`;
+  // Container isométrique : face longue = baies de cartes graphiques, cellules allumées = part financée.
+  const cpxIso = ({fill = 0, x = 190, y = 205, k = 1, twinkle = false, cable = true, highlight = true}) => {
+    const L = 168 * k, W = 58 * k, H = 62 * k, ax = -0.866, ay = -0.5, cx = 0.866, cy = -0.5;
+    const P = (n, s, w, h) => `${(n[0] + ax * s + cx * w).toFixed(1)},${(n[1] + ay * s + cy * w - h).toFixed(1)}`;
+    const XY = (n, s, w, h) => P(n, s, w, h).split(',');
+    const n = [x, y];
+    let s = '';
+    if (cable) s += `<path class="cpx-cable" d="M${P(n, -10 * k, W * 0.5, 0)} L${(x + 70 * k).toFixed(1)},${(y + 26 * k).toFixed(1)} L${(x + 170 * k).toFixed(1)},${(y + 26 * k).toFixed(1)}"/>`;
+    if (highlight) s += `<polygon class="cpx-glow" points="${P(n, -8 * k, -8 * k, 0)} ${P(n, L + 8 * k, -8 * k, 0)} ${P(n, L + 8 * k, W + 8 * k, 0)} ${P(n, -8 * k, W + 8 * k, 0)}" fill="#F0714133"/>`;
+    const face = (pts, c) => `<polygon points="${pts}" fill="${c}"/>`;
+    s += face(`${P(n, 0, 0, 0)} ${P(n, L, 0, 0)} ${P(n, L, 0, H)} ${P(n, 0, 0, H)}`, '#24405F')
+      + face(`${P(n, 0, 0, 0)} ${P(n, 0, W, 0)} ${P(n, 0, W, H)} ${P(n, 0, 0, H)}`, '#1B3149')
+      + face(`${P(n, 0, 0, H)} ${P(n, L, 0, H)} ${P(n, L, W, H)} ${P(n, 0, W, H)}`, '#2E4E72');
+    for (let i = 1; i < 6; i++) { const [a, b] = XY(n, 0, W * i / 6, 2 * k), [c, d] = XY(n, 0, W * i / 6, H - 2 * k); s += `<line x1="${a}" y1="${b}" x2="${c}" y2="${d}" stroke="#ffffff1A"/>`; }
+    for (let i = 1; i < 12; i++) { const [a, b] = XY(n, L * i / 12, 2 * k, H), [c, d] = XY(n, L * i / 12, W - 2 * k, H); s += `<line x1="${a}" y1="${b}" x2="${c}" y2="${d}" stroke="#ffffff14"/>`; }
+    const C = 12, R = 4, pad = 5 * k, cw = (L - pad * 2) / C, rh = (H - pad * 2) / R, lit = Math.round(fill * C * R);
+    for (let c = 0; c < C; c++) for (let r = 0; r < R; r++) {
+      const s0 = pad + c * cw + 1.2 * k, s1 = pad + (c + 1) * cw - 1.2 * k, h0 = pad + r * rh + 1.2 * k, h1 = pad + (r + 1) * rh - 1.2 * k, i = (C - 1 - c) * R + r;
+      const on = i < lit, tw = !on && twinkle && (i * 7) % 5 === 0;
+      s += `<polygon class="cpx-u${on ? ' on' : ''}${tw ? ' tw' : ''}" style="${on ? `animation-delay:${i * 22}ms` : tw ? `animation-delay:${(i % 9) * 0.3}s` : ''}" points="${P(n, s0, 0, h0)} ${P(n, s1, 0, h0)} ${P(n, s1, 0, h1)} ${P(n, s0, 0, h1)}"/>`;
+    }
+    return s; };
+  const cpxSvg = (vb, o) => `<svg viewBox="${vb}" preserveAspectRatio="xMidYMid meet" aria-hidden="true">${cpxIso(o)}</svg>`;
+
+  // ── Cards « Prochainement » : A = teasing, B = le container ──
+  const cpxCardA = () => `<div class="card cpx-card"${A('mkc')} role="button" aria-label="Voir le nouveau projet Bricks × Antimatter">
+    <div class="img cpx-img cpx-tease">${cpxSvg('0 0 353 160', {k: 0.8, x: 225, y: 196, twinkle: true, cable: false, highlight: false})}${countdown(['25', '23', '59'])}<span class="cpx-new">Nouveau sur Bricks</span><span class="cpx-ctag"><span class="c">Économie réelle</span><span>Calcul pour l’IA</span></span></div>
+    <div class="body">${cardHead('Bricks × Antimatter', 'Le 13 décembre à 12h30')}<p class="cpx-hook">Un nouveau type de projet arrive. Il ne dort jamais, et il est déjà loué.</p>${bricksers}</div></div>`;
+  const cpxCardB = () => `<div class="card cpx-card"${A('mkc')} role="button" aria-label="Voir le projet Bricks Compute, Oregon">
+    <div class="img cpx-img">${cpxSvg('0 0 353 160', {k: 0.66, x: 210, y: 150, twinkle: true})}<span class="cpx-new">Nouveau</span><span class="cpx-flag"><i></i>Vous financez celui-ci</span></div>
+    <div class="body">${cardHead('Bricks Compute · Oregon', 'Le 13 décembre à 12h30')}${openKpi('11,00 % /an', '2 ans')}
+    <div class="cpx-cline"><b>512</b> cartes graphiques · puissance <b>déjà louée</b> sous contrat</div>${bricksers}</div></div>`;
+  cpxCard = () => cpxCardA();
+
+  // ── Briques de page ──
+  const cpxTag = t => `<span class="cpx-tag">${t}</span>`;
+  const cpxLi = (ic, t, d) => `<div class="cpx-li"><em>${ic}</em><div><b>${t}</b><span>${d}</span></div></div>`;
+  const sec = (id, title, body) => `<div class="cpx-s" id="cpx-${id}"><h3>${title}</h3>${body}</div>`;
+
+  const hero = st => { const f = CPX_FILL[st], pc = Math.round(f * 100), got = CPX_AMT * f;
+    return `<div class="f-photo cpx-hero"><span class="cpx-backbtn"${A('back')} role="button" aria-label="Retour au listing">${ICON_CHEV('#13273E', 18).replace('<path d="m9 6 6 6-6 6"/>', '<path d="m15 6-6 6 6 6"/>')}</span>
+      ${cpxSvg('0 0 393 280', {k: 0.92, x: 240, y: 228, fill: f, twinkle: st === 'soon'})}</div>`; };
+
+  // En-tête : mêmes composants que la fiche projet (titre, méta, intéressés, rendement/horizon, score).
+  const head = st => `<div class="cpx-cats"><span class="c">Économie réelle</span><span>Calcul pour l’IA</span></div>
+      <div class="f-title" style="margin-top:-6px">Bricks Compute · Oregon</div>
+      ${st === 'soon' ? '<div class="date" style="text-align:center;margin:-8px 0 0">Ouverture le 13 décembre à 12h30</div>' : ''}
+      <div class="f-meta">📍 Prineville, Oregon (USA) · ${eurs(CPX_AMT)} · Calcul pour l’IA<br>Garanties : container et cartes graphiques ›</div>
+      <div class="f-int">${st === 'soon' ? bricksers : BRICKSERS_OPEN.replace('1 234', '1 380').replace('860', '910')}</div>
+      ${openKpi('11,00 % /an', '2 ans')}
+      <div class="f-score">Score Bricks : <span>Dynamique</span> ›</div>
+      ${cpxTag('Données fictives · taux, montants, lieu et score à arbitrer')}`;
+
+  // Carte graphique dessinée ; `part` = portion financée (0 → 1), les ventilateurs tournent.
+  const gpu = (part, w = 132) => { const id = `g${Math.random().toString(36).slice(2, 7)}`, fillW = Math.max(part, 0.015) * 120;
+    return `<svg class="cpx-gpu" width="${w}" height="${w * 0.52}" viewBox="0 0 132 68" role="img" aria-label="Carte graphique, ${Math.round(part * 100)} % à vous">
+      <defs><clipPath id="${id}"><rect x="6" y="6" width="${fillW.toFixed(1)}" height="50" rx="6"/></clipPath></defs>
+      <rect x="6" y="56" width="70" height="8" rx="2" fill="#C9A227"/>
+      <rect x="6" y="6" width="120" height="50" rx="6" fill="#24405F" stroke="#3B5A7A"/>
+      <g clip-path="url(#${id})"><rect x="6" y="6" width="120" height="50" rx="6" fill="#F07141"/></g>
+      ${[38, 94].map(cx => `<circle cx="${cx}" cy="31" r="17" fill="#0B1726" stroke="#ffffff33"/><g class="fan"><path d="M${cx} 31 l0 -14 a14 14 0 0 1 10 4z M${cx} 31 l12 7 a14 14 0 0 1 -8 9z M${cx} 31 l-12 7 a14 14 0 0 1 2 -12z" fill="#ffffff55"/></g><circle cx="${cx}" cy="31" r="3" fill="#fff"/>`).join('')}</svg>`; };
+  const AMTS = [100, 1000, 10000, 30000];
+  // Le container de la collecte : 12 cases = les 12 cartes graphiques financées. Le montant choisi remplit les cases.
+  const simulator = () => { const part = cpx.amt / GPU_EUR, full = Math.floor(part), rest = part - full, N = 12;
+    const cur = rest > 0.0001 ? full : full - 1, curFill = rest > 0.0001 ? rest : 1;
+    const cells = Array.from({length: N}, (_, i) => { const f = i < full ? 1 : i === full ? rest : 0;
+      return `<i class="cpx-cell${i === cur ? ' cur' : ''}">${f > 0 ? `<b style="height:${Math.max(f * 100, 4)}%;animation-delay:${i * 90}ms"></b>` : ''}<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="6.5" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M12 12V6.5M12 12l4.8 2.8M12 12l-4.8 2.8" stroke="currentColor" stroke-width="1.4"/></svg></i>`; }).join('');
+    const pctTxt = part >= 1 ? `${part.toLocaleString('fr-FR', {maximumFractionDigits: 1})} carte${part >= 2 ? 's' : ''}` : `${(part * 100).toLocaleString('fr-FR', {maximumFractionDigits: 1})} % d’une carte`;
+    const lens = rest > 0.0001 ? `${(rest * 100).toLocaleString('fr-FR', {maximumFractionDigits: 1})} %` : '100 %';
+    return `<div class="cpx-amts" role="group" aria-label="Montant investi">${AMTS.map(v => `<span class="${v === cpx.amt ? 'on' : ''}"${A(`cpxamt:${v}`)} role="button">${eurs(v)}</span>`).join('')}</div>
+      <div class="cpx-lens"><i class="cpx-big" aria-hidden="true">${Array.from({length: 100}, (_, j) => { const k = 99 - j, lit = curFill * 100 - k;
+          return lit > 0 ? (lit < 1 ? `<u class="on p" style="opacity:${(0.35 + lit * 0.65).toFixed(2)}"></u>` : `<u class="on" style="animation-delay:${Math.min(k, 40) * 25}ms"></u>`) : '<u></u>'; }).join('')}</i><div>${full >= 1 ? `<div class="cpx-fulls" aria-label="${full} carte${full > 1 ? 's' : ''} complète${full > 1 ? 's' : ''}">${'<i></i>'.repeat(Math.min(full, 4))}${full > 4 ? `<em>+${full - 4}</em>` : ''}<span>${full} carte${full > 1 ? 's' : ''} complète${full > 1 ? 's' : ''}</span></div>` : ''}<span>${full >= 1 ? (rest > 0.0001 ? 'Et sur la suivante :' : '') : 'Votre carte graphique'}</span><b>${lens}${rest > 0.0001 || full === 0 ? ' à vous' : ''}</b><div class="cpx-kv"><div><b>${Math.round(part * 720).toLocaleString('fr-FR')} h</b>calcul / mois</div><div><b>${eurs(cpx.amt * RATE)}</b>intérêts / an</div></div></div></div>`; };
+
+  // Carte de l'Oregon (contours simplifiés), site et repères.
+  const map = (dark = false) => { const k = 29, X = lon => ((lon + 126.3) * k).toFixed(1), Y = lat => ((47.6 - lat) * k * 1.32).toFixed(1);
+    const poly = pts => pts.map(([lo, la]) => `${X(lo)},${Y(la)}`).join(' ');
+    const OR = [[-124.55, 42], [-117.03, 42], [-117.03, 44.3], [-116.47, 45.6], [-116.9, 46], [-119, 46], [-120.6, 45.7], [-121.2, 45.6], [-122.3, 45.55], [-122.8, 45.65], [-123.2, 46.18], [-124, 46.25], [-124.1, 45], [-124.4, 43.5]];
+    const land = dark ? '#1F3550' : '#EFEDEA', or = dark ? '#2E4E72' : '#FFFFFF', sea = dark ? '#0B1726' : '#DDEBF6', txt = dark ? '#ffffffB3' : '#76818B';
+    return `<div class="cpx-map"><svg viewBox="0 0 353 236" role="img" aria-label="Carte de l'Oregon : le site est à Prineville, au centre de l'État, à environ 3 heures de Portland.">
+      <rect width="353" height="236" fill="${sea}"/>
+      <polygon points="${poly([[-124.7, 46.3], [-123.2, 46.18], [-122.8, 45.65], [-121.2, 45.6], [-119, 46], [-116.9, 46], [-116.9, 48], [-124.7, 48]])}" fill="${land}"/>
+      <polygon points="${poly([[-124.2, 42], [-114, 42], [-114, 40], [-124.2, 40]])}" fill="${land}"/>
+      <polygon points="${poly([[-117.03, 42], [-117.03, 44.3], [-116.47, 45.6], [-116.9, 46], [-116.9, 48], [-114, 48], [-114, 42]])}" fill="${land}"/>
+      <polygon points="${poly(OR)}" fill="${or}" stroke="#EC5223" stroke-width="1.5"/>
+      <text x="${X(-120.2)}" y="${Y(42.6)}" font-size="11" font-weight="800" fill="${dark ? '#fff' : '#13273E'}" letter-spacing="2" text-anchor="middle">OREGON</text>
+      <text x="${X(-124.7)}" y="${Y(43.2)}" font-size="9" fill="${txt}" transform="rotate(-90 ${X(-124.7)} ${Y(43.2)})" text-anchor="middle">Océan Pacifique</text>
+      <circle cx="${X(-122.68)}" cy="${Y(45.52)}" r="3.5" fill="#13273E" stroke="#fff"/><text x="${+X(-122.68) + 6}" y="${+Y(45.52) + 3}" font-size="10" font-weight="700" fill="${dark ? '#fff' : '#13273E'}">Portland</text>
+      <path d="M${X(-122.68)} ${Y(45.52)} Q ${X(-121.6)} ${Y(45.3)} ${X(-120.83)} ${Y(44.3)}" stroke="${txt}" stroke-dasharray="3 4" fill="none"/>
+      <text x="${X(-121.5)}" y="${Y(44.95)}" font-size="9" fill="${txt}">3 h de route</text>
+      <circle class="cpx-pin" cx="${X(-120.83)}" cy="${Y(44.3)}" r="6" fill="#EC5223"/>
+      <circle cx="${X(-120.83)}" cy="${Y(44.3)}" r="6" fill="#EC5223" stroke="#fff" stroke-width="2"/>
+      <text x="${+X(-120.83) + 10}" y="${+Y(44.3) + 4}" font-size="11" font-weight="800" fill="${dark ? '#fff' : '#13273E'}">Prineville · le site</text></svg></div>`; };
+  const placeTiles = `<div class="cpx-tiles"><div>Électricité<b>Hydraulique</b>5 MW raccordés</div><div>Climat<b>Sec et frais</b>refroidissement naturel</div></div>`;
+
+  const flowSvg = `<div class="cpx-flow"><svg viewBox="0 0 330 150" role="img" aria-label="Les clients louent la puissance de calcul à l'heure, les loyers remontent chaque mois, et vous recevez vos intérêts.">
+    <g font-family="Inter,sans-serif" text-anchor="middle">
+      <rect x="8" y="22" width="88" height="56" rx="12" fill="#fff" stroke="#ECEAE8"/><text x="52" y="46" font-size="18">☁️</text><text x="52" y="66" font-size="10" font-weight="700" fill="#13273E">Clients</text>
+      <rect x="121" y="22" width="88" height="56" rx="12" fill="#13273E"/><text x="165" y="46" font-size="18">📦</text><text x="165" y="66" font-size="10" font-weight="700" fill="#fff">Le container</text>
+      <rect x="234" y="22" width="88" height="56" rx="12" fill="#FEF4EE" stroke="#FCD3BE"/><text x="278" y="46" font-size="18">💶</text><text x="278" y="66" font-size="10" font-weight="700" fill="#13273E">Vos intérêts</text>
+      <path class="cpx-cable" d="M121 40 H98" style="stroke:#76818B"/><path class="cpx-cable" d="M209 40 H232"/>
+      <text x="109" y="100" font-size="9.5" fill="#76818B">louent la puissance</text><text x="109" y="112" font-size="9.5" fill="#76818B">à l'heure</text>
+      <text x="221" y="100" font-size="9.5" fill="#76818B">loyers reversés</text><text x="221" y="112" font-size="9.5" fill="#76818B">chaque mois</text>
+      <text x="165" y="140" font-size="10" font-weight="700" fill="#13273E">Comme un immeuble loué : le loyer paie vos intérêts.</text></g></svg></div>`;
+  const video = `<div class="cpx-vid" role="button" aria-label="Lire la vidéo"><div class="pl"><svg width="22" height="22" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="#13273E"/></svg></div><div><b>Richard Détente et Cédric présentent Bricks Compute</b><span>Grand Angle · 13 décembre</span></div></div>`;
+  const pdp = () => `<div class="cpx-pdp"><i style="background:#EC5223;color:#fff">B</i><div><b>Bricks Compute</b><span>Société du groupe Bricks · emprunteur de cette collecte</span></div></div>
+      <div class="cpx-pdp"><i style="background:#13273E;color:#fff">A</i><div><b>Antimatter</b><span>Opérateur : construit et exploite le container · 150 M€ déjà collectés</span></div></div>
+      <div class="cpx-more"${A('sheet:cpxpdp')} role="button">En savoir plus sur le porteur de projet ${CHEV_R}</div>`;
+  SHEETS.cpxpdp = () => sheet(`<h3 style="margin:0 0 4px">Le porteur de projet</h3>
+    <p class="md-p">Bricks Compute emprunte auprès des investisseurs. Antimatter, son partenaire de long terme, construit et exploite le container.</p>
+      <div class="cpx-am" style="margin-top:14px"><h4>Qui est Antimatter ?</h4>
+        <p>Une entreprise américaine spécialisée dans les infrastructures de calcul pour l’IA. Elle achète les cartes graphiques, les installe dans des containers raccordés à l’électricité, les fait tourner 24 h / 24 et loue leur puissance à des entreprises de l’IA.</p>
+        <div class="cpx-role"><div><em>🛠️</em><b>Construit</b>Achète les cartes et équipe le container</div><div><em>⚙️</em><b>Exploite</b>Maintenance et électricité, 24 h / 24</div><div><em>🤝</em><b>Loue</b>Signe les contrats avec les clients</div></div>
+        <div class="cpx-tiles"><div>Déjà collectés pour ses projets<b>150 M€</b></div><div>Containers en service<b>[à compléter]</b></div></div>
+        <div class="cpx-split"><div><b>Bricks Compute</b>Collecte auprès de vous et finance le container.</div><div><b>Antimatter</b>Le construit, le fait tourner et le loue.</div></div>
+        <p>Antimatter travaille en exclusivité avec Bricks sur ce programme. Elle est présentée par Richard Détente, de la chaîne Grand Angle, dans la vidéo du projet.</p>
+</div>
+    <h4 style="margin:16px 0 0;font-size:16px">Le montage</h4>
+    <div class="cpx-struct" style="margin-top:14px"><div>👥 <b>Vous</b> prêtez à</div><em>↓</em><div class="d">🏢 <b>Bricks Compute</b> · société française du groupe Bricks</div><em>↓ investit dans</em><div>🇺🇸 <b>La société d’exploitation</b> · détenue avec Antimatter, propriétaire du container</div><em>↓ loue la puissance à</em><div>☁️ <b>Des clients</b> sous contrat</div></div>
+    <p class="md-p" style="margin-top:12px"><span class="cpx-tag">Description, montage et chiffres à valider avec Cédric, Antimatter et le juridique</span></p>
+    <div class="acts" style="margin-top:16px"><button class="btn btn-primary" style="width:100%;height:48px"${A('close')}>J’ai compris</button></div>`);
+  const calendar = `<div class="cpx-tl"><i style="flex:1;background:#FBC3A6"></i><i style="flex:8;background:#9CC3E6"></i><i style="flex:15;background:#F07141"></i></div>
+        <div class="cpx-ph"><i style="background:#FBC3A6"></i><b>Collecte</b>À partir du 13 décembre</div>
+        <div class="cpx-ph"><i style="background:#9CC3E6"></i><b>Construction</b>8 mois · intérêts payés par une réserve</div>
+        <div class="cpx-ph"><i style="background:#F07141"></i><b>Exploitation</b>Intérêts payés par les loyers · remboursement à 2 ans</div>`;
+  const guarantees = `${cpxLi('📦', 'Le container et ses cartes graphiques', 'Des équipements qui se revendent sur un marché actif.')}
+        <div class="cpx-spark"><svg width="96" height="40" viewBox="0 0 96 40" aria-hidden="true"><path d="M2 32 L14 30 L26 31 L38 26 L50 24 L62 18 L74 15 L86 9 L94 6" fill="none" stroke="#0A915D" stroke-width="2.2" stroke-linecap="round"/><circle cx="94" cy="6" r="3" fill="#0A915D"/></svg><div><b>Prix d'une carte graphique : +30 % en 6 mois</b><span>Donnée de marché. Elle ne préjuge pas de la valeur future.</span></div></div>
+        ${cpxLi('🔒', 'Une réserve d’intérêts', 'Elle couvre les 8 mois de construction.')}
+        ${cpxLi('🛡️', 'Le groupe Bricks', 'Engagement à l’étude.')}`;
+  const risks = `${cpxLi('📉', 'Baisse de la demande en calcul', 'Les loyers et la valeur des cartes graphiques peuvent baisser.')}
+        ${cpxLi('⏱️', 'Retard de livraison', 'La mise en service peut être décalée.')}
+        ${cpxLi('🎯', 'Une seule activité, un seul opérateur', 'Le projet ne se diversifie pas tout seul.')}
+        ${cpxLi('💱', 'Actifs en dollars', 'Le taux de change peut jouer.')}
+        <p style="font-size:12px">Investir comporte des risques de perte en capital et d’illiquidité.</p>`;
+  const DOC_IC = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#13273E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg>';
+  const DL_IC = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#13273E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>';
+  const docs = `<div class="cpx-docs">${[['Document d’information synthétique', 'PDF · 8 pages'], ['Contrat de prêt', 'PDF · prêt ou obligations, à confirmer'], ['Présentation du projet', 'PDF · Bricks Compute × Antimatter'], ['Contrats de location de puissance', 'PDF · extraits'], ['Analyse Bricks', 'PDF · score et risques']]
+    .map(([t, d]) => `<div role="button"><i>${DOC_IC}</i><span>${t}<small>${d}</small></span>${DL_IC}</div>`).join('')}</div>`;
+  const bar = st => { const f = CPX_FILL[st], pc = Math.round(f * 100);
+    if (st === 'soon') return `<div class="f-bar">${summary(ICON_CAL_SM, 'neutral', 'Dim. 13 déc. à 12 h 30', 'Ouverture de la collecte')}<button class="btn btn-outline" style="height:54px;width:100%">Me le rappeler</button></div>`;
+    const prog = `<div style="flex:1;min-width:0"><div class="f-row" style="gap:8px"><span class="amt">${eurs(CPX_AMT * f)}</span><span class="muted">${pc} %</span></div><div class="prog" style="max-width:none;margin-top:6px"><i style="width:${pc}%"></i></div></div>`;
+    return `<div class="f-bar"><div class="f-row">${prog}<button class="btn btn-primary" style="height:54px;padding:0 24px">Investir</button></div></div>`; };
+
+  // ── Page : le récit en 4 étapes, dans les sections claires de la fiche (pas de menu, pas de risques) ──
+  const step = (n, id, title, body) => blk(id, title, body);
+  const bars = Array.from({length: 24}, (_, i) => `<i style="height:${34 + (i % 3) * 2}px;background:${i < 8 ? '#9CC3E6' : '#F07141'}"></i>`).join('');
+  const community = `<div class="cpx-com"><div><div class="n">4,4</div><div class="st">★★★★★</div><small>186 avis</small></div>
+      <div class="cpx-dist">${[[5, 62], [4, 24], [3, 9], [2, 3], [1, 2]].map(([s, v]) => `<div>${s}<u><i style="width:${v}%"></i></u></div>`).join('')}</div></div>
+    ${[['#BEF0C6', 'Julien M.', '★★★★★', 'il y a 2 h', 'Enfin un projet hors immobilier avec un vrai actif derrière. La puissance déjà louée avant la livraison me rassure.'],
+       ['#FFD9A2', 'Sophie L.', '★★★★☆', 'il y a 5 h', 'J’attends la vidéo pour mieux comprendre Antimatter, mais l’idée me plaît. J’aimerais savoir ce qui se passe si les cartes perdent de la valeur.']]
+      .map(([c, n, s, t, txt]) => `<div class="cpx-rev"><header><i style="background:${c}"></i><b>${n}</b><span>${s}</span></header>${txt}<time>${t}</time></div>`).join('')}
+    <div class="cpx-more" role="button">Voir les 47 commentaires ${CHEV_R}</div>`;
+  const finPlan = (ic, label, total, rows, open = false) => `<details class="cpx-fp"${open ? ' open' : ''}><summary><i>${ic}</i><span>${label}</span><b>${eurs(total)}</b>${CHEV_R.replace('<svg', '<svg class="ch"')}</summary>
+      <ul>${rows.map(([t, v]) => `<li>${t}<b>${typeof v === 'number' ? eurs(v) : v}</b></li>`).join('')}</ul></details>`;
+  // ── Blocs repris des composants Storybook de la fiche projet (app-investors / project / blocks) ──
+  const CHEV_D = '<svg class="cv" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#13273E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>';
+  const CHEV_S = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#13273E" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>';
+  const ICO = d => `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#13273E" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
+  const OK = '<span class="ds-ok"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span>';
+  const blk = (id, title, body, cnt) => `<div class="ds-b" id="cpx-${id}">${title ? `<h3 class="ds-t">${title}${cnt ? `<span class="cnt">${cnt}</span>` : ''}</h3>` : ''}${body}</div>`;
+  const acc = (lead, label, body, open = false) => `<details class="ds-acc"${open ? ' open' : ''}><summary>${lead}<span class="tx">${label}</span>${CHEV_D}</summary><div class="bd">${body}</div></details>`;
+  const dsPresentation = blk('pres', 'Présentation', `<div class="ds-vid" role="button" aria-label="Regarder la vidéo"><div class="tt"><i></i>BRICKS COMPUTE × ANTIMATTER, AVEC RICHARD DÉTENTE</div><div class="yt"><svg width="22" height="22" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="#fff"/></svg></div><div class="wy">Regarder sur YouTube</div></div>
+    <div class="ds-txt"><u>Opportunité de l’investissement :</u><br>Le projet consiste à financer un container de calcul et ses premières cartes graphiques, installés à Prineville dans l’Oregon et exploités par Antimatter. La puissance de calcul est louée à l’heure à des entreprises de l’IA, sous contrat de 3 ans.</div>
+    <div class="ds-btn">Lire la suite</div>`);
+  const dsCommunity = blk('avis', 'L’avis de la communauté', `<div class="ds-com"><div><b>4,4 <span style="color:#F5A524;font-size:22px;margin:0">★</span></b><span>186 évaluations ${CHEV_S}</span></div><i></i><div><b>47</b><span>Commentaires ${CHEV_S}</span></div></div>`);
+  const dsOwner = `<div class="ds-b" id="cpx-pdp"><div class="ds-own"><h3 class="ds-t">Découvrez votre porteur de projet</h3>
+    <div class="ds-oc"><i>BC</i><div><b>Bricks Compute</b><span>1er projet sur Bricks</span></div></div>
+    <div class="ds-txt">Société du groupe Bricks créée pour financer des infrastructures de calcul pour l’IA, en partenariat de long terme avec Antimatter, l’opérateur qui construit, exploite et loue le container.</div>
+    <div class="ds-btn"${A('sheet:cpxpdp')} role="button">En savoir plus</div></div></div>`;
+  const dsLocation = blk('lieu', 'Où se situe le projet ?', `<p class="ds-sub">Prineville, Oregon, États-Unis</p>
+    <div class="ds-map">${map()}<div class="ds-btn sm">Ouvrir la carte ↗</div></div>
+    <div class="ds-txt">Prineville, au centre de l’Oregon, est l’un des grands pôles de data centers des États-Unis. Le site est raccordé à 5 MW d’électricité hydraulique et profite d’un climat sec et frais, qui facilite le refroidissement des cartes graphiques.</div>
+    <div class="ds-btn">Lire la suite</div>`);
+  const dsGuarantees = blk('garanties', '', `<div class="ds-gh"><div class="gpc">🔒 120 %</div><h4>Couverture des garanties</h4><p>Les conditions pour sécuriser l’opération</p><span class="cc">Comprendre le calcul ${ICON_INFO('#13273E', 14)}</span></div>
+    <div>${acc(OK, 'Nantissement du container et des cartes graphiques', 'Des équipements qui se revendent sur un marché actif. Le prix d’une carte graphique a pris 30 % en 6 mois (donnée de marché, qui ne préjuge pas de la valeur future).')}
+    ${acc(OK, 'Réserve d’intérêts de 8 mois', 'Constituée sur la collecte, elle paie vos intérêts pendant la construction du container.')}
+    ${acc(OK, 'Engagement du groupe Bricks', 'Périmètre et limites à l’étude.')}</div>
+    <span class="ds-link">Mieux comprendre les garanties</span>`);
+  const fp = rows => `<ul>${rows.map(([t, v]) => `<li>${t}<b>${eurs(v)}</b></li>`).join('')}</ul>`;
+  const dsFinancial = blk('prev', 'Prévisionnel financier', `<div>${acc(ICO('<path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6"/>'), 'Coût de l’opération : 1 730 000 €', fp([['Le container (coque, refroidissement, réseau)', 1200000], ['Les premières cartes graphiques', 300000], ['Réserve d’intérêts (8 mois)', 110000], ['Installation et raccordement', 70000], ['Frais et honoraires', 50000]]))}
+    ${acc(ICO('<rect x="3" y="3" width="18" height="18" rx="5"/><path d="M14.5 9.5c-.4-.9-1.4-1.5-2.5-1.5-1.4 0-2.5.8-2.5 2s1.1 1.6 2.5 2 2.5.8 2.5 2-1.1 2-2.5 2c-1.1 0-2.1-.6-2.5-1.5M12 6.5v11"/>'), 'Financement : 1 730 000 €', fp([['Collecte Bricks', 1500000], ['Apport d’Antimatter', 230000]]))}</div>`);
+  const DOC_S = ICO('<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/>').replace(/width="22" height="22"/, 'width="18" height="18"');
+  const dsDocs = blk('docs', 'Documents', `<div class="ds-docs">${['Contrat de prêt', 'DIS', 'Note d’opération', 'Contrats de location'].map(t => `<span>${DOC_S}${t}</span>`).join('')}</div>`, 4);
+  SHEETS.cpxpdp = () => sheet(`<div class="ds-mh"><span></span><b>Porteur de projet</b><span${A('close')} role="button" aria-label="Fermer" style="cursor:pointer;font-size:20px;text-align:right">✕</span></div>
+    <div class="ds-oc" style="margin-top:16px"><i>BC</i><div><b>Bricks Compute</b><span>1er projet sur Bricks</span></div></div>
+    <p class="ds-mtx" style="margin-top:16px">Société du groupe Bricks créée pour financer des infrastructures de calcul pour l’IA. Elle collecte auprès des investisseurs et finance le container, que son partenaire Antimatter construit, exploite et loue.</p>
+    <div class="cpx-am" style="margin-top:16px"><h4>Qui est Antimatter ?</h4>
+      <p>Une entreprise spécialisée dans les infrastructures de calcul pour l’IA. Elle achète les cartes graphiques, les installe dans des containers raccordés à l’électricité, les fait tourner 24 h / 24 et loue leur puissance à des entreprises de l’IA.</p>
+      <div class="cpx-role"><div><em>🛠️</em><b>Construit</b>Achète les cartes et équipe le container</div><div><em>⚙️</em><b>Exploite</b>Maintenance et électricité, 24 h / 24</div><div><em>🤝</em><b>Loue</b>Signe les contrats avec les clients</div></div>
+      <div class="cpx-tiles"><div>Déjà collectés pour ses projets<b>150 M€</b></div><div>Containers en service<b>[à compléter]</b></div></div>
+      <p>Antimatter travaille en exclusivité avec Bricks sur ce programme. Elle est présentée par Richard Détente, de la chaîne Grand Angle, dans la vidéo du projet.</p></div>
+    <h4 style="margin:20px 0 10px;font-size:16px">Le montage</h4>
+    <div class="cpx-struct"><div>👥 <b>Vous</b> prêtez à</div><em>↓</em><div class="d">🏢 <b>Bricks Compute</b> · société française du groupe Bricks</div><em>↓ investit dans</em><div>🇺🇸 <b>La société d’exploitation</b> · détenue avec Antimatter, propriétaire du container</div><em>↓ loue la puissance à</em><div>☁️ <b>Des clients</b> sous contrat</div></div>
+    <p class="md-p" style="margin-top:12px"><span class="cpx-tag">À valider avec Cédric, Antimatter et le juridique</span></p>`);
+  const pageMix = st => `${head(st)}
+    ${step(1, 'part', 'Vous achetez une part de carte graphique', `<p>La collecte finance le container et ses premières cartes graphiques. Choisissez un montant : voici ce qu’il finance.</p>${simulator()}`)}
+    ${step(3, 'heure', 'Elle est louée à l’heure', `<p>Des entreprises de l’IA louent la puissance de calcul, sous contrat de 3 ans. Antimatter exploite le container.</p>
+        <div class="cpx-livebox"><div class="cpx-lv"><i></i>En direct chez Antimatter</div><div class="cpx-tick">${cpxTickVal().toLocaleString('fr-FR')}</div><p style="font-size:13px">heures de calcul louées depuis ce matin</p></div>
+        <div class="cpx-tiles"><div>Prix de location<b>2,10 $ / h</b>par carte graphique</div><div>Puissance louée<b>100 %</b>contrats de 3 ans</div></div>`)}
+    ${dsPresentation}
+    ${dsCommunity}
+    ${dsOwner}
+    ${dsLocation}
+    ${dsGuarantees}
+    ${dsFinancial}
+    ${dsDocs}`;
+  const cpxTickVal = () => { const d = new Date(), s = d.getHours() * 3600 + d.getMinutes() * 60 + d.getSeconds(); return 3072 * Math.floor(s / 3600) + Math.floor((s % 3600) * 0.853); };
+  setInterval(() => document.querySelectorAll('#CXV .cpx-tick').forEach(e => { e.textContent = cpxTickVal().toLocaleString('fr-FR'); }), 1000);
+  document.addEventListener('click', e => { const t = e.target.closest('#CXV [data-cpxgo]'); if (!t) return;
+    document.getElementById(t.dataset.cpxgo)?.scrollIntoView({behavior: 'smooth', block: 'start'}); });
+
+  SUB.mkc = () => { const st = cpx.st;
+    return `<div class="fiche scrolly cpxf">${hero(st)}<div class="f-body">${pageMix(st)}</div>${bar(st)}</div>`; };
   ACT.mkc = () => go('mkc');
-  ACT.cpxsim = () => { cpx.fill = cpx.fill >= 1 ? 0 : Math.min(1, +(cpx.fill + 0.35).toFixed(2)); };
+  ACT.cpxamt = v => { cpx.amt = +v; };
+  const cpxSync = () => [['cpxc', cpx.card], ['cpxs', cpx.st], ['cpxp', cpx.page]].forEach(([k, v]) =>
+    panel.querySelectorAll(`[data-k="${k}"] button`).forEach(b => b.classList.toggle('on', b.dataset.p === `${k}:${v}`)));
+  const toTop = () => setTimeout(() => { const fc = CXV.querySelector('.cpxf'); if (fc) fc.scrollTop = 0; }, 30);
+  PANEL.cpxc = v => { cpx.card = v; cpxSync(); if (top() !== 'mkt') { ui.stack = ['home', 'mkt']; ui.sheet = null; }
+    setTimeout(() => CXV.querySelector('.cpx-card')?.scrollIntoView({block: 'center', behavior: 'smooth'}), 60); };
+  PANEL.cpxs = v => { cpx.st = v; cpxSync(); if (top() !== 'mkc') go('mkc'); toTop(); };
+  PANEL.cpxp = v => { cpx.page = v; cpxSync(); if (top() !== 'mkc') go('mkc'); toTop(); };
+  }
   // Every green "investies" box on the product page gets its chevron and opens the project tracking.
   const mkTrack = h => h.replace(/<div class="ia-box ia-1 green"><div class="ia-l">(.*?)<div class="strip-t">(.*?)<\/div><\/div>(.*?)<\/div>/g,
     (_, ic, t) => `<div class="ia-box ia-1 green"${A('mkp')} role="button" aria-label="Voir le suivi du projet"><div class="ia-l">${ic}<div class="strip-t">${t}</div></div>${ICON_CHEV('#08744D', 20)}</div>`);
