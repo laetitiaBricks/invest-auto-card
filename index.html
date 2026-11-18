@@ -1,7 +1,8 @@
 <!doctype html>
 <html lang="fr">
 <head>
-<script>window.P4 = /[?&]p4\b/.test(location.search); window.P3 = window.P4 || /[?&]p3\b/.test(location.search); window.P2 = window.P3 || /[?&]p2\b/.test(location.search); if (window.P2) document.documentElement.classList.add('p2'); if (window.P3) document.documentElement.classList.add('p3'); if (window.P4) document.documentElement.classList.add('p4');</script>
+<script>window.PUB = /github\.io$/.test(location.hostname); if (window.PUB && /[?&]p[23]\b/.test(location.search) && !/[?&]p4\b/.test(location.search)) location.replace(location.pathname); if (window.PUB) document.documentElement.classList.add('pub');
+window.P4 = /[?&]p4\b/.test(location.search); window.P3 = window.P4 || /[?&]p3\b/.test(location.search); window.P2 = window.P3 || /[?&]p2\b/.test(location.search); if (window.P2) document.documentElement.classList.add('p2'); if (window.P3) document.documentElement.classList.add('p3'); if (window.P4) document.documentElement.classList.add('p4');</script>
 <meta charset="utf-8">
 <link rel="icon" href="data:,">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -1364,7 +1365,7 @@
   <h1>Autopilote</h1>
   <p class="sub">Quatre prototypes cliquables. Proto 1 : la version actuelle. Proto 2 : simplifiée et gamifiée (retours de Romain du 18/11). V3 : la version minimum à sortir (revue du 18/11 avec Cédric et Romain) : un seul parcours, des réglages déjà faits par défaut, un accord en une case à cocher, et une page Autopilote recentrée. V4 : la V3 avec la gamification (Score Autopilote, niveaux, série, missions, jalons), expliquée dans l'encart à droite. Le panneau Scénario agit sur tous les téléphones ; « Afficher » choisit ceux qu'on voit.</p>
 <div id="tab-c">
-  <h2 class="line-title"><span class="n">1</span> Parcours complet · quatre prototypes cliquables</h2>
+  <h2 class="line-title"><span class="n">1</span> Parcours complet · <span class="np">quatre prototypes cliquables</span><span class="yp">prototype cliquable</span></h2>
   <div class="ph-vis" role="group" aria-label="Téléphones affichés"><span>Afficher</span><button data-vis="1" aria-pressed="false">Proto 1</button><button data-vis="2" aria-pressed="false">Proto 2</button><button data-vis="3" aria-pressed="false">V3</button><button data-vis="4" aria-pressed="true">V4</button></div>
   <div class="cx-stage h1 h2 h3" id="CXSTAGE"><div class="col">
     <div class="ph-col ph-c1"><div class="ph-h"><div><b>Proto 1</b><span>Version actuelle</span></div></div>
@@ -1867,6 +1868,8 @@ document.addEventListener('click', e => {
   #CX .cxf-2 .strip-t{white-space:normal}
   #CX .cxf-sub{display:block;margin-top:2px;font-size:12px;font-weight:400;color:var(--grey)}
   #CX .cx-lst{display:grid;gap:16px}
+  .line-title .yp,html.pub .line-title .np{display:none}html.pub .line-title .yp{display:inline}
+  html.pub .ph-c1,html.pub .ph-p2,html.pub .ph-c3,html.pub .ph-vis,html.pub .cx-p2note,html.pub .wrap>.sub{display:none!important}
   .ph-ceo{width:340px}.cx-stage.h4 .ph-ceo{display:none}html.p2 .ph-ceo{display:none!important}.ph-ceo .ph-h{width:340px}
   .ceo{position:sticky;top:16px;background:#fff;border-radius:20px;padding:18px 18px 14px;color:var(--navy);font-size:13px;line-height:19px;max-height:calc(100vh - 40px);overflow:auto;box-sizing:border-box}
   .ceo h4{margin:16px 0 6px;font-size:13px;text-transform:uppercase;letter-spacing:.04em;color:#EC5223}.ceo p{margin:0 0 6px}.ceo ul{margin:0;padding-left:16px}.ceo li{margin:3px 0}
@@ -5823,7 +5826,7 @@ document.addEventListener('click', e => {
 (() => { if (window.P2) return;
   const mk = (slot, id, title, src) => { const el = document.getElementById(slot); if (!el) return null;
     const f = document.createElement('iframe'); f.id = id; f.title = title; f.src = src; el.appendChild(f); return f; };
-  const frames = [mk('P2SLOT', 'P2F', 'Proto 2 · Autopilote simplifié et gamifié', '?p2'), mk('P3SLOT', 'P3F', 'V3 · version minimum à sortir', '?p3'), mk('P4SLOT', 'P4F', 'V4 · V3 et score de diversification', '?p4')].filter(Boolean);
+  const frames = [!window.PUB && mk('P2SLOT', 'P2F', 'Proto 2 · Autopilote simplifié et gamifié', '?p2'), !window.PUB && mk('P3SLOT', 'P3F', 'V3 · version minimum à sortir', '?p3'), mk('P4SLOT', 'P4F', 'V4 · V3 et score de diversification', '?p4')].filter(Boolean);
   let v = 'A';
   const send = m => frames.forEach(f => { if (f.contentWindow) f.contentWindow.postMessage({p2fw: m}, '*'); });
   // La V4 signale son état (activation, pause…) : le panneau Scénario affiche le même.
