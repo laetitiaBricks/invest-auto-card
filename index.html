@@ -1378,7 +1378,7 @@ window.P4 = /[?&]p4\b/.test(location.search); window.P3 = window.P4 || /[?&]p3\b
     <div class="ph-col ph-c4"><div class="ph-h"><div><b>V4</b><span>V3 + Score Autopilote</span></div></div>
       <div id="P4SLOT"></div></div>
     <aside class="ph-col ph-ceo" aria-label="Le Score Autopilote expliqué"><div class="ph-h"><div><b>Le Score Autopilote</b><span>Ce qu'il faut savoir, en une page</span></div></div>
-      <div class="ceo">
+      <details class="ceo"><summary>Comprendre le score et ses règles</summary><div class="ceo-b">
         <p class="ceo-tl"><b>En bref.</b> Un score sur 100 qui montre si l'autopilote d'un investisseur est bien réglé : son argent réparti sur beaucoup de projets, et un autopilote qui ne manque aucun projet. Il récompense ce qui réduit le risque, jamais le montant investi.</p>
         <h4>1. Ce qui compte dans le score</h4>
         <table><tr><th colspan="2">Diversification · 70 pts <i>un fait sur le portefeuille</i></th></tr>
@@ -1401,7 +1401,7 @@ window.P4 = /[?&]p4\b/.test(location.search); window.P3 = window.P4 || /[?&]p3\b
         <h4>6. Optionnel : se comparer</h4>
         <p>Une fois par mois, et seulement si c'est flatteur (top 25 %) : mieux diversifié que X %, dans les X % les plus impliqués, parmi ceux qui ont le plus progressé ce mois-ci. Jamais de classement nominatif, jamais sur les montants.</p>
         <p class="ceo-ft">Chiffres de la maquette fictifs. Un score plus haut ne veut pas dire moins de risque.</p>
-      </div></aside>
+      </div></details></aside>
     <aside class="cx-panel" id="CXP">
       <h3>Scénario <button class="cx-lk" data-p="fold">Replier</button></h3>
       <div id="CXVER"></div>
@@ -1869,9 +1869,10 @@ document.addEventListener('click', e => {
   #CX .cxf-sub{display:block;margin-top:2px;font-size:12px;font-weight:400;color:var(--grey)}
   #CX .cx-lst{display:grid;gap:16px}
   .line-title .yp,html.pub .line-title .np{display:none}html.pub .line-title .yp{display:inline}
-  html.pub .ph-c1,html.pub .ph-p2,html.pub .ph-c3,html.pub .ph-vis,html.pub .cx-p2note,html.pub .wrap>.sub{display:none!important}
+  html.pub:not(.p2) .ph-c1,html.pub .ph-p2,html.pub .ph-c3,html.pub .ph-vis,html.pub .cx-p2note,html.pub .wrap>.sub{display:none!important}
   .ph-ceo{width:340px}.cx-stage.h4 .ph-ceo{display:none}html.p2 .ph-ceo{display:none!important}.ph-ceo .ph-h{width:340px}
   .ceo{position:sticky;top:16px;background:#fff;border-radius:20px;padding:18px 18px 14px;color:var(--navy);font-size:13px;line-height:19px;max-height:calc(100vh - 40px);overflow:auto;box-sizing:border-box}
+  .ceo summary{cursor:pointer;font-size:14px;font-weight:700;color:var(--navy);list-style:none;display:flex;justify-content:space-between;align-items:center}.ceo summary::-webkit-details-marker{display:none}.ceo summary::after{content:'+';font-size:20px;color:#EC5223}.ceo[open] summary::after{content:'–'}.ceo[open] summary{margin-bottom:12px}
   .ceo h4{margin:16px 0 6px;font-size:13px;text-transform:uppercase;letter-spacing:.04em;color:#EC5223}.ceo p{margin:0 0 6px}.ceo ul{margin:0;padding-left:16px}.ceo li{margin:3px 0}
   .ceo .ceo-tl{padding:10px 12px;border-radius:12px;background:#FFF1EA;margin:0}
   .ceo table{width:100%;border-collapse:collapse;font-size:12.5px}.ceo th{text-align:left;padding:8px 0 4px;font-size:12.5px}.ceo th i{font-weight:400;font-style:normal;color:#76818B}.ceo td{padding:4px 0;border-top:1px solid #EEF0F2}.ceo td+td{text-align:right;font-weight:700;width:30px}
