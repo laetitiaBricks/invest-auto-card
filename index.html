@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="fr">
 <head>
-<script>window.P2 = /[?&]p2\b/.test(location.search); if (window.P2) document.documentElement.classList.add('p2');</script>
+<script>window.P4 = /[?&]p4\b/.test(location.search); window.P3 = window.P4 || /[?&]p3\b/.test(location.search); window.P2 = window.P3 || /[?&]p2\b/.test(location.search); if (window.P2) document.documentElement.classList.add('p2'); if (window.P3) document.documentElement.classList.add('p3'); if (window.P4) document.documentElement.classList.add('p4');</script>
 <meta charset="utf-8">
 <link rel="icon" href="data:,">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -1115,11 +1115,11 @@
   .ph-tabs{display:flex;gap:2px;background:#1F1F1F;border:1px solid #333;border-radius:12px;padding:3px}
   .ph-tabs button{font:600 12px Inter,sans-serif;color:#ccc;background:none;border:0;border-radius:9px;padding:7px 10px;cursor:pointer;white-space:nowrap}
   .ph-tabs button.on{background:#fff;color:var(--navy)}
-  #P2F{width:393px;height:852px;border:0;border-radius:32px;box-shadow:0 30px 60px rgba(0,0,0,.45);background:var(--bg);display:block}
+  #P2F,#P3F,#P4F{width:393px;height:852px;border:0;border-radius:32px;box-shadow:0 30px 60px rgba(0,0,0,.45);background:var(--bg);display:block}
   .cx-p2note{margin:6px 2px 0;font-size:11.5px;line-height:15px;color:#9A9A9A}
   /* Mode ?p2 : la page ne montre que le téléphone */
   html.p2 body{background:transparent;overflow:hidden}
-  html.p2 .warn,html.p2 .wrap>h1,html.p2 .wrap>.sub,html.p2 .line-title,html.p2 #CXP,html.p2 .ph-h,html.p2 .ph-p2,html.p2 #annot-ia-fab{display:none!important}
+  html.p2 .warn,html.p2 .wrap>h1,html.p2 .wrap>.sub,html.p2 .line-title,html.p2 #CXP,html.p2 .ph-h,html.p2 .ph-p2,html.p2 .ph-c3,html.p2 .ph-c4,html.p2 .ph-vis,html.p2 #annot-ia-fab{display:none!important}
   html.p2 .wrap{padding:0;max-width:none}
   html.p2 .cx-stage{margin:0;justify-content:flex-start}
   html.p2 .cx-stage>.col{gap:0}
@@ -1283,26 +1283,130 @@
   #CX .p2-hlb i{position:absolute;top:50%;width:16px;height:16px;margin:-8px 0 0 -8px;border-radius:50%;background:#fff;border:3px solid var(--navy);box-sizing:border-box}
   #CX .p2-hll{display:flex;gap:4px;margin-top:8px}#CX .p2-hll span{flex:1;font-size:10.5px;line-height:13px;color:var(--grey);text-align:center}#CX .p2-hll span.on{color:var(--navy);font-weight:700}
   @media (prefers-reduced-motion:reduce){#CX .p2-gg.bump .fl,#CX .p2-dn-i,#CX .p2-plus{animation:none}}
+  /* ── V4 · budget et moyen de paiement ── */
+  #CX .p4-cov{margin-top:16px;padding:14px;border-radius:16px;background:var(--neutral-100)}
+  #CX .p4-cov-h{display:flex;justify-content:space-between;align-items:baseline;gap:8px;font-size:13px;color:var(--grey)}#CX .p4-cov-h b{font-size:16px;color:var(--navy)}
+  #CX .p4-cov-b{display:grid;grid-template-columns:repeat(10,1fr);gap:4px;margin-top:10px}#CX .p4-cov-b i{height:8px;border-radius:4px;background:#fff;border:1px solid var(--line)}#CX .p4-cov-b i.on{background:linear-gradient(90deg,#F07141,#EC5223);border-color:transparent}
+  #CX .p4-cov p{margin:10px 0 0;font-size:13px;line-height:18px;color:var(--navy)}
+  #CX .p4-lbl{margin:20px 2px 0}#CX .p4-chips{justify-content:flex-start;margin-top:10px}
+  #CX .v2-opt u{text-decoration:underline;text-underline-offset:2px;color:var(--navy);font-weight:600;cursor:pointer}
+  #CX .p4-crb{padding:14px 12px}#CX .p4-crb-h{display:flex;justify-content:space-between;align-items:center}#CX .p4-crb-h b{font-size:16px;color:var(--navy)}#CX .p4-crb-h .p3-mod{cursor:pointer}
+  #CX .p4-crb-i{margin-top:14px}#CX .p4-crb-t{display:flex;justify-content:space-between;align-items:baseline;gap:8px}#CX .p4-crb-t span{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--grey)}#CX .p4-crb-t b{font-size:14px;color:var(--navy);text-align:right}
+  #CX .p4-crb-i .p2-cr-bar{margin-top:8px}#CX .p4-crb-i p{margin:6px 0 0;font-size:12.5px;line-height:17px;color:var(--grey)}
+  #CX .p4-crb+.p3-rr{border-top:1px solid var(--line)}
+  /* V4 · gamification V1 (18/11) */
+  #CX .p4-jl{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:14px;padding:10px 12px 0;border-top:1px solid rgba(255,255,255,.14);font-size:13px;line-height:18px;color:rgba(255,255,255,.88)}#CX .p4-jl span{display:flex;gap:6px;align-items:center}#CX .p4-jl svg{color:#F9B48E}#CX .p4-jl em{font-style:normal;font-size:12px;color:rgba(255,255,255,.7)}
+  #CX .p4-mi.sm{margin-top:8px;gap:4px}#CX .p4-mi.sm i{height:6px}
+  #CX .cx-hB>.p4-bdg{position:absolute;top:44px;right:16px;display:inline-flex;align-items:center;gap:5px;padding:5px 10px;border-radius:999px;background:rgba(255,255,255,.14);font-size:12px;font-weight:700;color:#fff;cursor:pointer;z-index:2}#CX .p4-bdg svg{color:#F9B48E}
+  #CX .p4-trS ul{list-style:none;margin:12px 0 4px;padding:0;display:flex;flex-direction:column;gap:6px}#CX .p4-trS li{display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:18px}
+  #CX .p4-trS li svg{color:#08744D;flex:none}
+  #CX .p4-trn{margin:8px 16px 0;font-size:12px;line-height:16px;color:var(--grey)}
+  #CX .p4-trB{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;margin:12px 16px 0;padding:12px 14px;border-radius:16px;background:linear-gradient(135deg,#EC5223,#F07141);color:#fff;cursor:pointer}
+  #CX .p4-trB b{display:block;font-size:14px;line-height:19px}#CX .p4-trB span:nth-child(2){font-size:12px;line-height:16px}#CX .p4-trB-j{font-size:15px;font-weight:800;padding:8px 10px;border-radius:12px;background:rgba(255,255,255,.2)}#CX .p4-trB svg{color:#fff}
+  #CX .p4-trS{text-align:left}#CX .p4-trS-i{display:flex;width:56px;height:56px;border-radius:18px;align-items:center;justify-content:center;background:linear-gradient(135deg,#13273E,#2C4F78)}
+  #CX .p4-trS small{display:block;margin-top:14px;font-size:12px;font-weight:700;color:var(--orange)}#CX .p4-trS h3{margin:4px 0 8px}#CX .p4-trS-w{padding:10px 12px;border-radius:12px;background:var(--orange-tint);font-size:13px;line-height:18px;color:var(--navy)}
+  #CX .p4-sub{margin:2px 0 0;text-align:center;font-size:13px;line-height:18px;color:rgba(255,255,255,.8)}
+  #CX .p4-pbs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+  #CX .p4-pb{padding:10px 12px;border-radius:14px;background:rgba(255,255,255,.08)}#CX .p4-pb>div{display:flex;justify-content:space-between;align-items:baseline;font-size:12px;line-height:16px;color:rgba(255,255,255,.8)}
+  #CX .p4-pb b{font-size:14px;color:#fff}#CX .p4-pb b i{font-style:normal;font-weight:500;font-size:11px;color:rgba(255,255,255,.65)}
+  #CX .p4-pb u{display:block;height:6px;border-radius:3px;background:rgba(255,255,255,.18);margin-top:6px;overflow:hidden}#CX .p4-pb u i{display:block;height:100%;border-radius:3px;background:#F9B48E}
+  #CX .p4-mi{display:flex;gap:6px;justify-content:center;margin:12px 0 0}#CX .p4-mi i{flex:0 1 36px;height:8px;border-radius:4px;background:rgba(255,255,255,.2)}#CX .p4-mi i.on{background:#F9B48E}
+  #CX .p4-opt{opacity:.55;border-style:dashed}#CX .p4-opt-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}#CX .p4-opt-h b{font-size:14px;color:var(--navy)}
+  #CX .p4-opt-h em{font-style:normal;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;padding:2px 8px;border-radius:999px;background:var(--surface);color:var(--grey)}
+  #CX .p4-opt-r{display:flex;gap:10px;align-items:flex-start;font-size:13px;line-height:18px;color:var(--navy);padding:6px 0}#CX .p4-opt-r svg{color:var(--orange);flex:none}
+  #CX .p4-opt p{margin:6px 0 0;font-size:11px;line-height:15px;color:var(--grey)}
+  #CX .p4-hg{margin-top:14px}#CX .p4-hg-h{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px}#CX .p4-hg-h em{font-style:normal;font-weight:700}#CX .p4-hg-h em i{font-style:normal;font-weight:500;color:var(--grey)}
+  #CX .p4-q{margin-top:10px}#CX .p4-q b{display:block;font-size:14px;line-height:19px;color:var(--navy)}#CX .p4-qa{display:flex;gap:8px;margin-top:8px}#CX .p4-qa .btn{flex:1}
+  #CX .p4-q p{display:none;margin:8px 0 0;font-size:13px;line-height:18px}#CX .p4-q.r p{display:block}#CX .p4-q.y p{color:#08744D}#CX .p4-q.n p{color:var(--orange)}#CX .p4-q.r .p4-qa{display:none}
+  #CX .p4-rk{display:flex;align-items:center;justify-content:center;gap:8px;margin:12px auto 0;padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.12);font-size:13px;line-height:18px;color:#fff;width:fit-content;max-width:100%;box-sizing:border-box}#CX .p4-rk svg{flex:none;color:#F9B48E}
+  #CX .p4-sw{margin-top:16px;text-align:center}#CX .p4-sw small{font-size:12px;font-weight:600;color:var(--grey)}#CX .p4-sw .cd{position:static;margin:10px auto 0;background:var(--navy)}
+  #CX .p4-sw p{margin:10px 0 0;font-size:13px;line-height:18px;color:var(--navy);text-align:left}#CX .p4-sw-b{display:flex;gap:8px;align-items:flex-start;padding:10px;border-radius:12px;background:var(--green-soft)}#CX .p4-sw-b svg{flex:none;margin-top:1px;color:var(--green)}
+  #CX .p4-same{margin-top:16px}#CX .p4-same>b{display:block;font-size:15px;color:var(--navy)}#CX .p4-same>b+ul{margin-bottom:12px}#CX .p4-same ul{list-style:none;padding:0;margin:8px 0 0;display:grid;gap:6px}#CX .p4-same li{display:flex;gap:8px;font-size:13px;line-height:18px;color:var(--navy)}#CX .p4-same li svg{flex:none;margin-top:1px}
+  #CX .p4-com{margin-top:12px}#CX .p4-sh2{margin-top:8px!important;color:var(--grey)!important;font-size:13px!important}
+  #CX .p4-wait{display:flex;gap:12px;align-items:flex-start;margin-top:16px}#CX .p4-wait p{font-size:13px;line-height:18px}#CX .p4-wait b{display:block;font-size:15px;margin-bottom:2px}
+  /* ── V3 · version minimum à sortir ── */
+  #CX .p3-ht{text-align:center;font-size:16px;line-height:22px;font-weight:600;color:var(--navy)}
+  #CX .p3-intro{margin:4px 2px 0;font-size:14px;line-height:20px;color:var(--grey)}
+  #CX .p3-rc{margin-top:20px}
+  #CX .p3-rr{display:flex;align-items:center;gap:12px;padding:14px 12px;min-height:64px;box-sizing:border-box}
+  #CX .p3-rr+.p3-rr{border-top:1px solid var(--line)}
+  #CX .p3-rr[role=button]{cursor:pointer}
+  #CX .p3-ri{width:40px;height:40px;border-radius:12px;background:var(--neutral-100);display:grid;place-items:center;color:var(--navy);flex:none}
+  #CX .p3-ri.o{background:#fff;color:var(--orange)}
+  #CX .p3-rt{flex:1;min-width:0;display:flex;flex-direction:column}
+  #CX .p3-rt small{font-size:12px;line-height:16px;font-weight:500;color:var(--grey)}
+  #CX .p3-rt b{font-size:16px;line-height:22px;font-weight:600;color:var(--navy)}
+  #CX .p3-rt span{font-size:13px;line-height:18px;color:var(--grey)}
+  #CX .p3-mod{flex:none;font-style:normal;font-size:14px;font-weight:600;color:var(--navy);text-decoration:underline;text-underline-offset:3px}
+  #CX .p3-h h2{margin:14px 0 0;font-size:22px;line-height:28px;font-weight:700;letter-spacing:-.3px;color:#fff}
+  #CX .p3-h>p{margin:8px 0 0;font-size:14px;line-height:20px;color:rgba(255,255,255,.82)}
+  #CX .p3-h .hero-cta{width:100%;height:48px;margin-top:16px}
+  #CX .p3-h .p2-dh-l{margin:10px 0 0;font-size:12px;line-height:16px;text-align:center;color:rgba(255,255,255,.7)}
+  #CX .p3-big{margin-top:18px}
+  #CX .p3-big b{display:block;font-size:34px;line-height:40px;font-weight:700;letter-spacing:-.5px;color:#fff}
+  #CX .p3-big span{display:block;margin-top:2px;font-size:14px;line-height:20px;color:rgba(255,255,255,.82)}
+  #CX .p3-tl{display:grid;grid-template-columns:repeat(10,1fr);gap:5px;margin-top:16px}
+  #CX .p3-tl i{aspect-ratio:1;border-radius:5px;background:rgba(255,255,255,.14)}
+  #CX .p3-tl i.on{background:linear-gradient(135deg,#F07141,#EC5223)}
+  #CX .p3-h .p3-last{margin:12px 0 0;font-size:13px;line-height:18px;color:rgba(255,255,255,.75)}
+  #CX .p3-al{display:grid;grid-template-columns:40px 1fr;gap:12px;align-items:start;margin-top:16px;padding:14px;border-radius:16px;background:var(--orange-tint);border:1px solid #F9CAAF}
+  #CX .p3-al>span:nth-child(2){font-size:13px;line-height:18px;color:var(--navy)}
+  #CX .p3-al b,#CX .p3-nx b{display:block;font-size:15px;line-height:20px;font-weight:600;margin-bottom:2px;color:var(--navy)}
+  #CX .p3-alb{grid-column:1/-1;width:100%;height:44px}
+  #CX .p3-ed{display:flex;align-items:center;justify-content:center;min-height:48px;border-top:1px solid var(--line);font-size:14px;font-weight:600;color:var(--navy);cursor:pointer}
+  #CX .p3-nx{display:flex;gap:12px;align-items:flex-start;text-align:left;margin:16px 0 24px;padding:12px;border-radius:16px;background:var(--orange-tint);font-size:13px;line-height:18px;color:var(--navy)}
+  #CX .p3-wh p{margin:0;font-size:14px;line-height:20px;color:var(--navy)}
 </style>
 </head>
 <body>
 <div class="warn">MAQUETTE, PAS LE VRAI RENDU</div>
 <div class="wrap">
   <h1>Autopilote</h1>
-  <p class="sub">Deux prototypes cliquables côte à côte. À gauche, le proto 1 (version actuelle). À droite, le proto 2, simplifié et gamifié (retours de Romain du 18/11) : parcours Autopilote ou Manuel, rendement et durée ouverts au maximum par défaut, page Autopilote centrée sur un score de diversification en jauge et des missions. Le panneau Scénario agit sur les deux téléphones.</p>
+  <p class="sub">Quatre prototypes cliquables. Proto 1 : la version actuelle. Proto 2 : simplifiée et gamifiée (retours de Romain du 18/11). V3 : la version minimum à sortir (revue du 18/11 avec Cédric et Romain) : un seul parcours, des réglages déjà faits par défaut, un accord en une case à cocher, et une page Autopilote recentrée. V4 : la V3 avec la gamification (Score Autopilote, niveaux, série, missions, jalons), expliquée dans l'encart à droite. Le panneau Scénario agit sur tous les téléphones ; « Afficher » choisit ceux qu'on voit.</p>
 <div id="tab-c">
-  <h2 class="line-title"><span class="n">1</span> Parcours complet · deux prototypes cliquables</h2>
-  <div class="cx-stage"><div class="col">
-    <div class="ph-col"><div class="ph-h"><div><b>Proto 1</b><span>Version actuelle</span></div></div>
+  <h2 class="line-title"><span class="n">1</span> Parcours complet · quatre prototypes cliquables</h2>
+  <div class="ph-vis" role="group" aria-label="Téléphones affichés"><span>Afficher</span><button data-vis="1" aria-pressed="false">Proto 1</button><button data-vis="2" aria-pressed="false">Proto 2</button><button data-vis="3" aria-pressed="false">V3</button><button data-vis="4" aria-pressed="true">V4</button></div>
+  <div class="cx-stage h1 h2 h3" id="CXSTAGE"><div class="col">
+    <div class="ph-col ph-c1"><div class="ph-h"><div><b>Proto 1</b><span>Version actuelle</span></div></div>
       <div id="CX"><div id="CXV"></div><div class="push cx-push" id="CXPUSH" data-a="push"></div></div></div>
     <div class="ph-col ph-p2"><div class="ph-h"><div><b>Proto 2</b><span>Simplifié et gamifié</span></div>
       </div>
       <div id="P2SLOT"></div></div>
+    <div class="ph-col ph-c3"><div class="ph-h"><div><b>V3</b><span>Version minimum à sortir</span></div></div>
+      <div id="P3SLOT"></div></div>
+    <div class="ph-col ph-c4"><div class="ph-h"><div><b>V4</b><span>V3 + Score Autopilote</span></div></div>
+      <div id="P4SLOT"></div></div>
+    <aside class="ph-col ph-ceo" aria-label="Le Score Autopilote expliqué"><div class="ph-h"><div><b>Le Score Autopilote</b><span>Ce qu'il faut savoir, en une page</span></div></div>
+      <div class="ceo">
+        <p class="ceo-tl"><b>En bref.</b> Un score sur 100 qui montre si l'autopilote d'un investisseur est bien réglé : son argent réparti sur beaucoup de projets, et un autopilote qui ne manque aucun projet. Il récompense ce qui réduit le risque, jamais le montant investi.</p>
+        <h4>1. Ce qui compte dans le score</h4>
+        <table><tr><th colspan="2">Diversification · 70 pts <i>un fait sur le portefeuille</i></th></tr>
+          <tr><td>Nombre de projets</td><td>40</td></tr><tr><td>Villes différentes</td><td>20</td></tr><tr><td>Critères ouverts (tous rendements, toutes durées)</td><td>10</td></tr>
+          <tr><th colspan="2">Implication · 30 pts <i>un comportement</i></th></tr>
+          <tr><td>Paiement automatique (carte ou solde rechargé)</td><td>15</td></tr><tr><td>Série de projets d'affilée sans en manquer</td><td>10</td></tr><tr><td>Notifications activées</td><td>5</td></tr></table>
+        <h4>2. Les règles</h4>
+        <ul><li><b>Le montant investi ne compte pas.</b> Le budget n'entre pas dans le score : l'AMF reproche à la gamification de pousser à investir plus.</li>
+          <li><b>L'implication est plafonnée à 30.</b> On ne peut pas atteindre les hauts niveaux sans être vraiment diversifié.</li>
+          <li><b>La série</b> ne se casse que si un projet passe faute d'argent. Le paiement automatique la protège.</li>
+          <li><b>Pas de score à 0 :</b> la jauge apparaît avec le premier projet.</li></ul>
+        <h4>3. Les 5 niveaux</h4>
+        <p class="ceo-lv"><span>Lancé</span><span>Installé</span><span>Bien réglé</span><span>Rodé</span><span>Pleinement déployé</span></p>
+        <p>Ils décrivent le réglage de l'outil, pas la sécurité du portefeuille. Chaque niveau est suivi d'une phrase factuelle (« 9 projets dans 4 villes · paiement automatique »).</p>
+        <h4>4. Ce que voit l'investisseur</h4>
+        <ul><li><b>0 projet :</b> une seule chose à faire, alimenter son autopilote.</li><li><b>Dès le 1er projet :</b> la jauge, le niveau et des missions (3 au maximum). Les jalons (5, 10, 25 projets…) sont dans la pastille des réussites.</li>
+          <li><b>À partir de 5 projets :</b> en plus, « suivez tous les projets du mois » et la comparaison avec la communauté.</li><li><b>Ancien autopilote sans mandat :</b> une annonce à l'ouverture de l'app, puis un bandeau J-X jusqu'à la bascule du 1er janvier.</li></ul>
+        <h4>5. L'ordre des missions</h4>
+        <p>Alimenter son autopilote ou recharger un solde trop bas → paiement automatique → ouvrir ses critères → notifications → suivre tous les projets du mois. Ensuite, sans points : 3 questions sur le risque, donner son avis sur un projet.</p>
+        <h4>6. Optionnel : se comparer</h4>
+        <p>Une fois par mois, et seulement si c'est flatteur (top 25 %) : mieux diversifié que X %, dans les X % les plus impliqués, parmi ceux qui ont le plus progressé ce mois-ci. Jamais de classement nominatif, jamais sur les montants.</p>
+        <p class="ceo-ft">Chiffres de la maquette fictifs. Un score plus haut ne veut pas dire moins de risque.</p>
+      </div></aside>
     <aside class="cx-panel" id="CXP">
       <h3>Scénario <button class="cx-lk" data-p="fold">Replier</button></h3>
       <div id="CXVER"></div>
       <div class="toggle" data-v="CXM"><button class="on" data-s="none">Sans autopilote</button><button data-s="plan">Autopilote sans mandat</button><button data-s="mandat">Avec mandat</button><button class="cx-more-only" data-s="revoked">Révoqué</button><button class="cx-more-only" data-s="off">Désactivé</button></div>
-      <p class="cx-p2note">Dans le proto 2 : « sans mandat » = Manuel, « avec mandat » = Autopilote.</p>
+      <p class="cx-p2note">Proto 2 : « sans mandat » = Manuel, « avec mandat » = Autopilote. V3 : « sans mandat » = ancien autopilote, à faire passer au nouveau fonctionnement.</p>
+      
       <div class="cx-row cx-row-v"><span>Transition des plans existants</span><span class="cx-bals"><button data-p="trmail:1">Voir le mail</button><button data-p="trpush:1">Envoyer la notif</button></span></div>
       <div class="cx-row cx-row-v"><span>Fiche projet · moment de la collecte</span><select id="CXMK" class="cx-sel" aria-label="Moment de la collecte"><option value="naA">Sans autopilote</option><option value="todo" selected>À confirmer</option><option value="sheet">Refuser (fiche)</option><option value="refused">Refusé</option><option value="done">Confirmé</option><option value="open">Ouverture</option><option value="reinv">Réinvesti</option><option value="reinvManual">Investi · sans autopilote</option><option value="closed">Objectif atteint · auto + réinvesti</option><option value="closedAuto">Objectif atteint · auto seul</option><option value="closedManual">Objectif atteint · sans autopilote</option><option value="closedFin">Financé</option></select></div>
       <div class="cx-row cx-row-v"><span>Listing · carte en cours</span><span class="cx-bals" data-k="bo"><button class="on" data-p="bo:auto">Auto</button><button data-p="bo:reinv">Auto + réinvesti</button><button data-p="bo:manual">Sans auto</button><button data-p="bo:none">Pas investi</button></span></div>
@@ -1763,7 +1867,19 @@ document.addEventListener('click', e => {
   #CX .cxf-2 .strip-t{white-space:normal}
   #CX .cxf-sub{display:block;margin-top:2px;font-size:12px;font-weight:400;color:var(--grey)}
   #CX .cx-lst{display:grid;gap:16px}
-  .cx-stage{display:flex;justify-content:center;margin-top:20px}
+  .ph-ceo{width:340px}.cx-stage.h4 .ph-ceo{display:none}html.p2 .ph-ceo{display:none!important}.ph-ceo .ph-h{width:340px}
+  .ceo{position:sticky;top:16px;background:#fff;border-radius:20px;padding:18px 18px 14px;color:var(--navy);font-size:13px;line-height:19px;max-height:calc(100vh - 40px);overflow:auto;box-sizing:border-box}
+  .ceo h4{margin:16px 0 6px;font-size:13px;text-transform:uppercase;letter-spacing:.04em;color:#EC5223}.ceo p{margin:0 0 6px}.ceo ul{margin:0;padding-left:16px}.ceo li{margin:3px 0}
+  .ceo .ceo-tl{padding:10px 12px;border-radius:12px;background:#FFF1EA;margin:0}
+  .ceo table{width:100%;border-collapse:collapse;font-size:12.5px}.ceo th{text-align:left;padding:8px 0 4px;font-size:12.5px}.ceo th i{font-weight:400;font-style:normal;color:#76818B}.ceo td{padding:4px 0;border-top:1px solid #EEF0F2}.ceo td+td{text-align:right;font-weight:700;width:30px}
+  .ceo .ceo-lv{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px}.ceo .ceo-lv span{padding:3px 8px;border-radius:999px;background:#EEF2F7;font-size:12px;font-weight:600}
+  .ceo .ceo-ft{margin-top:14px;font-size:11.5px;color:#76818B}
+  .cx-stage{display:flex;justify-content:safe center;margin-top:20px;overflow-x:auto;padding-bottom:8px}
+  .ph-vis{display:flex;align-items:center;gap:6px;margin:16px 0 0;color:#A9A9A9;font-size:12.5px}
+  .ph-vis button{height:30px;padding:0 12px;border-radius:999px;border:1px solid #444;background:transparent;color:#ccc;font:600 12.5px Inter,sans-serif;cursor:pointer}
+  .ph-vis button[aria-pressed=true]{background:#fff;color:#13273E;border-color:#fff}
+  .cx-stage.h1 .ph-c1,.cx-stage.h2 .ph-p2,.cx-stage.h3 .ph-c3,.cx-stage.h4 .ph-c4{display:none}
+  html.p2 .cx-stage .ph-c1{display:flex}
   .cx-stage>.col{display:flex;gap:28px;align-items:flex-start;width:auto}
   #CX{position:relative;width:393px;flex:none;border-radius:32px;overflow:hidden;box-shadow:0 30px 60px rgba(0,0,0,.45)}
   #CX .cx-home .hm{height:100%;border-radius:0}
@@ -2296,7 +2412,7 @@ document.addEventListener('click', e => {
 </style>
 <script>
 (() => {
-  const P2 = !!window.P2, P2X = {};
+  const P2 = !!window.P2, P3 = !!window.P3, P4 = !!window.P4, P2X = {};
   const PROJECTS = [[0,9,15],[0,10,12],[0,9.5,20],[0,8,24],[0,8,20],[0,8,12],[0,9.5,36],[0,8.5,18],[0,10,60],[0,10,20],[0,12.5,9],[1,11,18],[1,8.5,12],[1,9,36],[1,8.5,24],[1,10,20],[1,10,12],[1,8,15],[1,10,20],[1,9,24],[1,9.5,18],[1,10.5,30],[1,9,24],[1,9.5,42],[1,10.5,18],[2,12.5,12],[2,9.5,36],[2,8.5,24],[2,8,30],[2,10.5,24],[2,11,18],[2,10.5,24],[2,10,20],[2,11,48],[2,9.5,30],[2,8,30],[2,10,72],[2,11,18],[2,9,30],[2,7.5,24],[2,8.5,12]];
   // One letter per PROJECTS entry: l logement, c commerce et loisirs, e entreprises.
   const PROJECTS_T = [...'llllcllllelclllllcllllclllelcllllcllellcl'].map(x => ({l: 'log', c: 'com', e: 'ent'})[x]);
@@ -3497,6 +3613,7 @@ document.addEventListener('click', e => {
   const emptyBal = () => strip(app.mode === 'mandat' && !fa() ? 'lowbal' : 'topup', ICON_WALLET, ...(app.balance > 0 ? ['Votre Solde Bricks est bas', 'Il faut au moins 10 € pour investir sur un projet'] : ['Votre Solde Bricks est vide', 'Rechargez-le pour ne pas passer à côté du prochain projet']), 'Recharger').replace('<span>', '<span style="white-space:normal">');
   const homeStrip = () => {
     const m = app.mode, n = app.pending.length;
+    if (P2X.homeTr && (m === 'plan' || m === 'revoked')) { const h = P2X.homeTr(n); if (h != null) return h; }
     if (m === 'none') return homeHeroA();
     if (n) return strip('go:ia', ICO(), `${plural(n, 'projet')} à confirmer`, isPlan() && trS.on ? `Avant le ${deadline()} · ou passez au mandat` : `Avant le ${deadline()}`, `<span class="bdg">${n}</span>`);
     if (m === 'revoked') return '';
@@ -4484,6 +4601,7 @@ document.addEventListener('click', e => {
   const annotating = () => document.body.classList.contains('annot') || document.body.classList.contains('annot-ia-on');
   document.addEventListener('input', e => {
     if (annotating()) return;
+    if (e.target.id === 'P4CAP') { const d = e.target.value.replace(/\D/g, '').replace(/^0+/, '').slice(0, 5); ui.flow.capRaw = d; ui.flow.cap = +d || 0; paint(); const el = document.getElementById('P4CAP'); el.focus(); el.setSelectionRange(d.length, d.length); return; }
     const r = e.target.closest('#CX .cx-rng input');
     if (r) { onRange(r); return; }
     if (e.target.id !== 'CXAMT') return;
@@ -4500,7 +4618,7 @@ document.addEventListener('click', e => {
     const scn = e.target.closest('#CXP .toggle[data-v="CXM"] button');
     if (scn) { start(scn.dataset.s); return; }
     const p = e.target.closest('#CXP [data-p]');
-    if (p) { const [k, v] = p.dataset.p.split(':'); PANEL[k](v); if (app) paint(); return; }
+    if (p) { const [k, v] = p.dataset.p.split(':'); if (k === 'p4v' || k === 'p4tr') { ui[k] = v; if (k === 'p4tr') ui.p4trSeen = false; panel.querySelectorAll(`[data-k="${k}"] button`).forEach(b => b.classList.toggle('on', b === p)); paint(); return; } PANEL[k](v); if (app) paint(); return; }
     const a = e.target.closest('#CX [data-a]');
     if (!a) return;
     const [k, ...rest] = a.dataset.a.split(':');
@@ -5140,7 +5258,7 @@ document.addEventListener('click', e => {
     // ── Visualisations du score : A en jauge, B en paliers ──
     const gauge = (s, {bump, lt, sm} = {}) => { const a = Math.PI * (1 - s / 100), cx = (100 + 80 * Math.cos(a)).toFixed(1), cy = (100 - 80 * Math.sin(a)).toFixed(1), id = lt ? 'p2gl' : 'p2g';
       const ticks = [20, 40, 60, 80].map(v => { const b = Math.PI * (1 - v / 100); return `<line x1="${(100 + 70 * Math.cos(b)).toFixed(1)}" y1="${(100 - 70 * Math.sin(b)).toFixed(1)}" x2="${(100 + 90 * Math.cos(b)).toFixed(1)}" y2="${(100 - 90 * Math.sin(b)).toFixed(1)}"/>`; }).join('');
-      return `<svg class="p2-gg${bump ? ' bump' : ''}${lt ? ' lt' : ''}${sm ? ' sm' : ''}" viewBox="0 0 200 112" role="img" aria-label="Score de diversification : ${s} sur 100">
+      return `<svg class="p2-gg${bump ? ' bump' : ''}${lt ? ' lt' : ''}${sm ? ' sm' : ''}" viewBox="0 0 200 112" role="img" aria-label="${P2X.scoreName || 'Score de diversification'} : ${s} sur 100">
         <defs><linearGradient id="${id}" x1="0" x2="1"><stop offset="0" stop-color="#EC5223"/><stop offset=".5" stop-color="#E9A23B"/><stop offset="1" stop-color="#1FA866"/></linearGradient></defs>
         <path class="tk" d="M20 100A80 80 0 0 1 180 100" pathLength="100"/>${s ? `<path class="fl" d="M20 100A80 80 0 0 1 180 100" pathLength="100" stroke="url(#${id})" style="--s:${s}"/>` : ''}<g class="tc">${ticks}</g>
         <circle class="dt" cx="${cx}" cy="${cy}" r="8"/>${sm ? '' : `<text x="100" y="90" text-anchor="middle" class="v">${s}</text><text x="100" y="108" text-anchor="middle" class="u">sur 100</text>`}</svg>`; };
@@ -5154,7 +5272,7 @@ document.addEventListener('click', e => {
         <span class="p2-how"${A('sheet:p2how')} role="button">Comment est calculé mon score ?</span></div>`; };
     const pbar = (a, b) => `<span class="p2-mp" aria-hidden="true"><i style="width:${Math.min(100, a / b * 100)}%"></i></span>`;
     const mCard = m => `<div class="p2-mcd${m.done ? ' done' : ''}"><span class="p2-me" aria-hidden="true">${m.done ? ICON_CHECK('#08744D', 20) : ic(m.ic)}</span><b>${m.t}</b><span class="p2-ms-s">${m.done ? 'Mission réussie' : m.s}</span>
-      <em class="p2-rw${m.g > 0 || m.done ? '' : ' z'}">${m.done ? (m.g > 0 ? `+${m.g} pts gagnés` : 'Fait') : m.g > 0 ? `+${m.g} pts` : m.tag}</em>${!m.done && m.cta ? btn('btn-primary p2-mb', m.cta[0], m.cta[1]) : ''}</div>`;
+      <em class="p2-rw${m.g > 0 || m.done || m.lab ? '' : ' z'}">${m.done ? (m.g > 0 ? `+${m.g} pts gagnés` : 'Fait') : m.lab ? m.lab : m.g > 0 ? `+${m.g} pts` : m.tag}</em>${!m.done && m.cta ? btn('btn-primary p2-mb', m.cta[0], m.cta[1]) : ''}</div>`;
     const missions = ms => sec('Pour monter votre score', ms.length ? `<div class="p2-mc">${ms.map(mCard).join('')}</div>`
       : `<div class="cx-card p2-mok"><span class="p2-me" aria-hidden="true">${ICON_CHECK('#08744D', 20)}</span><span><b>Vos réglages sont au mieux</b>Votre score montera avec les prochains projets, sans rien faire de plus.</span></div>`);
     const p2val = () => { const t = topSec(); if (!t) return '';
@@ -5193,7 +5311,7 @@ document.addEventListener('click', e => {
       cx.appendChild(el); setTimeout(() => el.remove(), 2400); };
     const runFx = () => { const f = p2S.fx; p2S.fx = null; if (!f) return; const h = CXV.querySelector('.p2-hero');
       if (h && f.d > 0) h.insertAdjacentHTML('beforeend', `<em class="p2-plus">+${f.d} pts</em>`);
-      if (f.up) { confetti(); p2toast(`Vous passez « <b>${LVL[f.k][1]}</b> » 🎉`); } else if (f.d > 0) p2toast(`+${f.d} points de diversification`); };
+      if (f.up) { confetti(); p2toast(P2X.lvlUp ? P2X.lvlUp(LVL[f.k][1]) : `Vous passez « <b>${LVL[f.k][1]}</b> » 🎉`); } else if (f.d > 0) p2toast(P2X.ptsTxt ? P2X.ptsTxt(f.d) : `+${f.d} points de diversification`); };
 
     P2X.ia = () => {
       if (p2S.ui !== ui) Object.assign(p2S, {ui, last: null, seen: null, seenMode: null, done: {}, g0: {}, fx: null});
@@ -5321,6 +5439,374 @@ document.addEventListener('click', e => {
     // Curseurs rendement / durée : le compteur de projets suit en direct.
     document.addEventListener('input', e => { if (!e.target.closest('#CX .cx-rng') || ui.flow?.u !== 'p2') return; const m = CXV.querySelector('.p2-cnt'); if (m) m.outerHTML = opMeter(ui.flow.crit); });
 
+    // ═══ V3 · la version minimum à sortir (retours de Cédric et Romain du 18/11) ═══
+    // Un seul parcours : les réglages par défaut sont déjà faits, l'accord se donne d'une case à cocher.
+    // Pas de mode Manuel, pas de score ni de missions (formule à cadrer), l'alimentation reste une fonction du solde.
+    if (P3) {
+      const same = (a, b) => JSON.stringify(a) === JSON.stringify(b), NST = P4 ? 3 : 2;
+      const allOpen = c => isFull('rate', c.rate) && isFull('hor', c.hor);
+      const critT = c => allOpen(c) ? 'Tous les projets' : 'Projets choisis';
+      // Les bornes extrêmes du curseur valent « et plus » : on l'écrit comme ça.
+      const rateW = c => c.rate[1] >= RMAX ? `${c.rate[0]} % et plus` : c.rate[0] <= RMIN ? `jusqu'à ${c.rate[1]} %` : `de ${c.rate[0]} à ${c.rate[1]} %`;
+      const horW = c => c.hor[1] >= HMAX ? `${c.hor[0]} ans et plus` : c.hor[0] <= 0 ? `jusqu'à ${c.hor[1]} ans` : `de ${c.hor[0]} à ${c.hor[1]} ans`;
+      const critS = c => `${isFull('rate', c.rate) ? 'Tous les rendements' : `Rendement ${rateW(c)}`}, ${isFull('hor', c.hor) ? 'toutes les durées' : `durée ${horW(c)}`}`;
+      const critC = c => allOpen(c) ? 'Tous les projets' : [isFull('rate', c.rate) ? '' : rateW(c), isFull('hor', c.hor) ? '' : horW(c)].filter(Boolean).join(' · ').replace(/^./, m => m.toUpperCase());
+      const rrow = (icn, k, v, s, a, lk = 'Modifier') => `<div class="p3-rr"${a ? `${A(a)} role="button"` : ''}><span class="p3-ri" aria-hidden="true">${ic(icn, 20)}</span><span class="p3-rt"><small>${k}</small><b>${v}</b>${s ? `<span>${s}</span>` : ''}</span>${a ? `<em class="p3-mod">${lk}</em>` : ''}</div>`;
+      const payS = (b, max) => b >= max ? `${eur2(b)} disponibles` : b < 10 ? 'Vide pour le moment : vous l’alimenterez ensuite' : `${eur2(b)} disponibles, moins qu’un projet`;
+      const recapCard = (c, act = true) => `<div class="v2-card p3-rc">${P4 ? P2X.critRows(c) : rrow('grid', 'Projets', critT(c), critS(c), act && 'p3to:p3crit')}
+        ${rrow('coins', 'Montant par projet', eur(c.max), c.max === 50 ? 'Le montant le plus choisi par les Bricksers' : `Soit ${c.max / BRICK_EUROS} bricks`, act && 'p3to:p3amt')}
+        ${P4 ? P2X.payRow(c) : rrow('wallet', 'Prélevé sur', 'Votre Solde Bricks', payS(app.balance, c.max), act && 'sheet:p3pay', 'Détails')}</div>`;
+      const steps = n => `<div class="v2-seg" role="progressbar" aria-label="Étape ${n} sur ${NST}" aria-valuenow="${n}" aria-valuemin="1" aria-valuemax="${NST}">${(P4 ? [1, 2, 3] : [1, 2]).map(i => `<i${i <= n ? ' class="on"' : ''}></i>`).join('')}</div>`;
+      const p3frame = (n, body, cta) => `<div class="scr v2 p2f">${SB}<div class="v2-hd"><span class="v2-bk"${A('back')} role="button" aria-label="Retour">${V2I.back}</span>${steps(n)}
+        <span class="v2-x"${A('v2close')} role="button" aria-label="Quitter">${V2I.close}</span></div><div class="scr-bd v2-bd">${body}</div></div>${cta}`;
+      const p3sub = (title, body, cta) => `<div class="scr v2 p2f">${SB}<div class="v2-hd"><span class="v2-bk"${A('back')} role="button" aria-label="Retour">${V2I.back}</span><b class="p3-ht">${title}</b><span></span></div>
+        <div class="scr-bd v2-bd">${body}</div></div>${cta}`;
+
+      // ── Parcours d'activation : 1. vos réglages (déjà faits) · 2. votre accord ──
+      STEP.p3rec = () => { const f = ui.flow, c = f.crit, meter = allOpen(c) ? '' : opMeter(c);
+        const ex = P4 ? P2X.recExtra(c) : '';
+        if (f.edit) return p3sub('Mes réglages', `<p class="p3-intro">Ils s’appliquent aux prochains projets publiés.</p>${recapCard(c)}${meter}${ex}`,
+          v2grad('Enregistrer', app.mode === 'mandat' ? 'sheet:p3upd' : 'p3save', same(c, app.crit) && (!P4 || (f.pay === (app.pay || 'wallet') && f.cap === (app.cap || 200)))));
+        const head = f.mig ? v2head('Vos réglages actuels', 'Ce sont ceux de votre autopilote. Vérifiez-les avant de passer au nouveau fonctionnement.')
+          : P4 ? P2X.recHead() : v2head('Vos réglages sont prêts', 'On les a choisis pour répartir votre argent sur le plus de projets possible. Vous pouvez les modifier.');
+        return p3frame(P4 ? 2 : 1, `${head}${recapCard(c)}${meter}${ex}`, v2grad('Continuer', 'p2go:p3sign')); };
+
+      // Le parcours plus complet, seulement si on veut changer : projets, puis montant.
+      STEP.p3crit = () => { const f = ui.flow;
+        return p3sub('Projets', `${v2head('Sur quels projets investir ?', 'Par défaut, tous : plus il y a de projets, mieux votre argent est réparti.')}
+          <div class="p2-crs">${critBlock('R', f)}${critBlock('H', f)}</div>${opMeter(f.crit)}
+          <p class="v2-legal">Le rendement n'est jamais garanti. Investir comporte un risque de perte en capital.</p>`, v2grad('Valider', 'p3ok')); };
+
+      STEP.p3amt = () => { const f = ui.flow, c = f.crit, raw = +f.amt || 0, reasons = riskReasons(c.max), hint = amountHint(raw, c.max), blocked = c.max < 10 || (reasons.length > 0 && !f.riskOk);
+        const chips = AMOUNTS.map(v => `<span class="v2-chip${raw === v ? ' on' : ''}"${A(`max:${v}`)} role="button">${v} €${v === 50 ? '<em>Le plus choisi</em>' : ''}</span>`).join('');
+        const input = `<label class="v2-ul"><input id="CXAMT" inputmode="numeric" autocomplete="off" value="${f.amt}" style="width:${Math.max(f.amt.length, 1) + 0.1}ch" aria-label="Montant par projet, en euros"><span>€</span></label>`;
+        return p3sub('Montant', `${v2head('Combien sur chaque projet ?', 'Dès 10 €. Bricks investit ce montant sur chaque nouveau projet, tant que votre Solde Bricks le permet.')}
+          ${v2stepper('bump:-1', 'bump:1', c.max <= 10, input)}<p class="v2-amt-s">${c.max >= 10 ? `= ${c.max / BRICK_EUROS} 🧱` : ''}</p>${hint ? `<p class="v2-hint">${V2I.info(16)}<span>${hint}</span></p>` : ''}
+          <div class="v2-chips">${chips}</div><div class="v2-gap">${v2help('pending', '', 'En moyenne, les Bricksers mettent 50 € par projet.')}</div>${reasons.length ? warnBox(reasons, c, f.riskOk) : ''}`, v2grad('Valider', 'p3ok', blocked)); };
+
+      // L'accord : une case à cocher, pas de code SMS (à valider avec Cédric).
+      STEP.p3sign = () => { const f = ui.flow, c = f.crit, mig = f.mig;
+        const it = (icn, t, d) => `<div class="v2-li"><span class="v2-ico l" aria-hidden="true">${icn}</span><span class="v2-ot"><b>${t}</b><span>${d}</span></span></div>`;
+        return p3frame(NST, `${v2head('Votre accord, une seule fois', 'Ensuite, Bricks investit pour vous sur chaque nouveau projet, sans vous demander de valider.')}
+          <div class="v2-card">${it(ICON_AUTO('currentColor', 24), 'Bricks investit pour vous', `${eur(c.max)} sur chaque nouveau projet${allOpen(c) ? '' : ' qui correspond à vos réglages'}`)}
+          ${P4 ? P2X.payIt(f) : it(ic('wallet', 24), 'Avec votre Solde Bricks', 'S’il ne suffit pas, le projet se fait sans vous')}
+          ${it(ILI(IP.undo, 24), 'Vous pouvez vous retirer', mig ? 'Pendant 6 jours après chaque investissement, le temps de la transition' : 'Pendant 4 jours après chaque investissement')}
+          ${it(ILI(IP.x, 24), 'Vous arrêtez quand vous voulez', 'En un geste, depuis votre autopilote')}</div>
+          <div class="v2-card v2-gap"><div class="v2-row"${A('sheet:p3doc')} role="button"><span class="v2-ico l" aria-hidden="true">${ILI(IP.doc, 24)}</span><b>Lire le mandat (PDF)</b>${V2I.chev}</div></div>
+          <div class="v2-consent">${checkBox(f.check, 'check', "J'autorise Bricks à investir pour moi selon ces réglages, sans valider chaque projet.")}</div>
+          ${P4 ? '' : v2help('pending', 'À valider avec Cédric', `Le nom du document (mandat ou « bon pour accord »), le PDF, et une simple case à cocher sans code SMS.`)}${LEGAL}`,
+          v2grad(mig ? 'Passer au nouvel autopilote' : "Activer l'autopilote", 'p3act', !f.check)); };
+
+      // ── Page Autopilote ──
+      const p3top = () => { const m = app.mode, low = app.balance < app.crit.max;
+        const [tone, t] = m === 'mandat' ? (low ? ['o', app.balance < 10 ? 'Solde vide' : 'Solde bas'] : ['', 'Actif']) : m === 'off' ? ['n', 'En pause'] : ['o', 'À mettre à jour'];
+        return `<div class="cx-hB-top"><span class="cx-hB-brand">${ICON_AUTO('#fff', 14)}Autopilote</span><span class="cx-dot ${tone}">${t}</span></div>`; };
+      // Un carré par projet financé avec l'autopilote : la preuve que ça tourne, sans refaire le Suivi.
+      const tiles = n => { const all = Math.max(10, Math.ceil((n + 1) / 10) * 10);
+        return `<div class="p3-tl" aria-hidden="true">${Array.from({length: all}, (_, i) => `<i${i < n ? ' class="on"' : ''}></i>`).join('')}</div>`; };
+      const ago = i => { const d = Math.floor(i.ageH / 24); return d < 1 ? "aujourd'hui" : d < 2 ? 'hier' : d < 60 ? `il y a ${d} jours` : `le ${dateOf(i).toLocaleDateString('fr-FR', {day: 'numeric', month: 'long'})}`; };
+      const lowBal = () => { const b = app.balance, m = app.crit.max; if (b >= m) return '';
+        return `<div class="p3-al"><span class="p3-ri o" aria-hidden="true">${ic('wallet', 20)}</span><span><b>${b < 10 ? 'Votre Solde Bricks est vide' : 'Votre Solde Bricks est bas'}</b>${b < 10 ? 'Nous ne pourrons pas investir pour vous sur le prochain projet.' : `${eur2(b)} disponibles pour ${eur(m)} par projet : le prochain projet ne sera pas couvert en entier.`}</span>${btn('btn-primary p3-alb', "Ajouter de l'argent", 'topup')}</div>`; };
+      const settings = () => { const c = app.crit;
+        return sec('Mes réglages', `<div class="v2-card">${v2row('Projets', critC(c))}${v2row('Par projet', eur(c.max))}${v2row('Prélevé sur', 'Solde Bricks')}<div class="p3-ed"${A('p3edit')} role="button">Modifier mes réglages</div></div>${allOpen(c) ? '' : opMeter(c)}`); };
+      const manage = () => sec('Gérer', `<div class="v2-card">${v2row('Mes investissements', '', 'go:hist')}${v2row('Alimenter mon Solde Bricks', '', 'topup')}${v2row('Documents', '', 'sheet:docs')}</div>
+        <div class="v2-card v2-gap">${v2row(`<span style="color:var(--orange)">Mettre l'autopilote en pause</span>`, '', 'sheet:deactivate')}</div>`);
+      const dash = () => { const x = p2calc(), inv = app.invest, tot = inv.reduce((s, i) => s + amountOf(i), 0), last = inv.length ? inv.reduce((a, i) => i.ageH < a.ageH ? i : a) : null;
+        const fig = x.n ? `<div class="p3-big"><b>${eur(tot)}</b><span>investis pour vous sur ${plural(x.n, 'projet')}${x.city > 1 ? `, dans ${plural(x.city, 'ville')}` : ''}</span></div>${tiles(x.n)}${last ? `<p class="p3-last">Dernier investissement : ${last.p.short || last.p.name}, ${ago(last)}</p>` : ''}`
+          : `<div class="p3-big"><b>Prêt à investir</b><span>Bricks investira pour vous sur le prochain projet publié.</span></div>`;
+        return `<div class="cx-hB p3-h">${p3top()}${fig}</div>${lowBal()}${settings()}${manage()}${DIV_NOTE}`; };
+      // Anciens autopilotes (sans mandat) : on les fait passer au nouveau fonctionnement, avec leurs réglages.
+      // Bascule le 1er janvier 2027 : compte à rebours, puis ce qui change et ce qui ne change pas (pour rassurer).
+      const SWITCH = new Date(2027, 0, 1, 0, 0);
+      const switchBox = () => { const ms = Math.max(0, SWITCH - now()), j = Math.floor(ms / 864e5), h = Math.floor(ms % 864e5 / 36e5), m = Math.floor(ms % 36e5 / 6e4);
+        return `<div class="cx-card p4-sw"><small>Bascule le 1er janvier 2027</small>${countdown([String(j), String(h).padStart(2, '0'), String(m).padStart(2, '0')])}
+          <p>À cette date, l'investissement automatique actuel s'arrête. Activez le nouvel autopilote d'ici là pour garder votre accès en avance aux projets.</p>
+          <p class="p4-sw-b">${ic('check', 16)}<span>Pour vous aider, vous aurez <b>6 jours</b> au lieu de 4 pour vous retirer de chaque investissement.</span></p></div>`; };
+      const sameBox = () => `<div class="cx-card p4-same"><b>Le fond ne change pas, seulement la forme</b><ul>${['Les mêmes projets, sélectionnés de la même façon', 'Vos critères et votre montant, repris tels quels', 'Votre argent reste sur votre Solde Bricks jusqu’à l’investissement', 'Vous arrêtez quand vous voulez'].map(t => `<li>${V2I.tick}<span>${t}</span></li>`).join('')}</ul>
+        <b>Ce qui change</b><ul><li>${V2I.tick}<span>Plus besoin de confirmer : Bricks investit pour vous</span></li></ul></div>`;
+      const migPage = () => { const n = app.pending.length, rev = app.mode === 'revoked';
+        return `<div class="cx-hB p3-h">${p3top()}<h2>${rev ? 'Laissez Bricks investir pour vous' : 'Votre investissement automatique évolue : plus rien à confirmer'}</h2>
+          <p>Désormais, c'est Bricks qui investit pour vous, automatiquement, sur chaque nouveau projet qui respecte vos critères. Plus rien à confirmer : vous ne manquez plus aucun projet.</p>
+          <button class="btn btn-grad hero-cta"${A('setup')}>Passer au nouvel autopilote</button><p class="p2-dh-l">Investir comporte des risques de perte en capital et d'illiquidité.</p></div>
+          ${switchBox()}${sameBox()}
+          ${n ? sec('À confirmer, comme avant', topSec().body, `<em class="cx-cnt">${n}</em>`) : ''}${settings()}${manage()}`; };
+      const offPage = () => `<div class="cx-hB p3-h">${p3top()}<h2>Votre autopilote est en pause</h2><p>Bricks n'investit plus pour vous. Vos réglages sont gardés : ${critC(app.crit).toLowerCase()}, ${eur(app.crit.max)} par projet.</p>
+        <button class="btn btn-grad hero-cta"${A('setup')}>Relancer l'autopilote</button><p class="p2-dh-l">Investir comporte des risques de perte en capital et d'illiquidité.</p></div>${community()}`;
+      const disco3 = () => `<div class="cx-hB p2-dh"><span class="cx-hB-brand">${ICON_AUTO('#fff', 14)}Autopilote</span>
+          <h2>Investissez sur tous les nouveaux projets, sans y penser</h2>
+          <p>Dès 10 € par projet, Bricks investit pour vous sur chaque nouveau projet.</p>
+          <button class="btn btn-grad hero-cta"${A('setup')}>Activer l'autopilote</button><p class="p2-dh-l">Investir comporte des risques de perte en capital et d'illiquidité.</p></div>
+        ${sec('Comment ça marche', `<div class="cx-card p2-st"><div><i>1</i><span><b>Vos réglages sont déjà prêts</b>Tous les projets, 50 € par projet. Vous pouvez les changer.</span></div><div><i>2</i><span><b>Vous donnez votre accord</b>Une seule fois, en un geste.</span></div><div><i>3</i><span><b>Bricks investit pour vous</b>Sur chaque nouveau projet, avec votre Solde Bricks.</span></div></div>`)}
+        ${sec('Où va votre argent', `<div class="cx-card p3-wh"><p>Il finance des projets immobiliers présentés sur Bricks : rénovations, achats-reventes, constructions. Chaque projet prévoit de vous verser des intérêts, puis de vous rembourser à son échéance.</p></div>`)}
+        <div class="cx-card p2-cmp"><b>Pourquoi plusieurs projets ?</b><span class="p2-cmp-s">Si l'un d'eux rencontre des difficultés, seule une petite part de votre argent est concernée.</span>
+          <div class="p2-cmp-r"><span>Sur 1 projet</span>${seg(1)}<em class="n">100 % de votre argent concerné</em></div>
+          <div class="p2-cmp-r"><span>Sur 10 projets</span>${seg(10)}<em class="y">10 % de votre argent concerné</em></div></div>
+        ${community()}${DIV_NOTE}`;
+      P2X.ia = () => { const m = app.mode; return m === 'none' ? disco3() : m === 'off' ? offPage() : m === 'mandat' ? dash() : migPage(); };
+
+      // ── Feuilles ──
+      SHEETS.trmail = () => sheet(`<div class="tr-mail"><small>De : Bricks · Objet</small><h3>Votre investissement automatique évolue</h3>
+        <p>Bonjour Camille,</p><p>Bonne nouvelle : vous n'aurez bientôt plus rien à confirmer. Avec le nouvel autopilote, Bricks investit pour vous, automatiquement, sur chaque projet qui respecte vos critères. Vous ne manquez plus aucun projet.</p>
+        <p>Le <b>1er janvier 2027</b>, l'investissement automatique actuel s'arrête. Activez le nouvel autopilote d'ici là pour garder votre accès en avance aux projets : vos critères et votre montant sont repris.</p>
+        <p>Pour faciliter le changement, vous aurez <b>6 jours</b> au lieu de 4 pour vous retirer de chaque investissement.</p>
+        <div class="acts">${btn('btn-grad', 'Passer au nouvel autopilote', 'p3trgo')}</div><p class="tr-mfoot">Investir comporte des risques de perte en capital et d'illiquidité.</p></div>`);
+      Object.assign(SHEETS, {
+        p3done: () => { if (ui.fresh) setTimeout(confetti, 120); const c = app.crit, b = app.balance, low = b < c.max;
+          return sheet(`<div class="p2-dn"><div class="p2-dn-i" aria-hidden="true">${ICON_CHECK('#08744D', 30)}</div><h3>${ui.p3mig ? 'Bienvenue dans le nouvel autopilote' : 'Votre autopilote est activé'}</h3>
+            <p>Bricks investira ${eur(c.max)} sur chaque nouveau projet. Vous recevrez une notification à chaque investissement.</p>
+            ${low ? `<div class="p3-nx"><span class="p3-ri o" aria-hidden="true">${ic('wallet', 20)}</span><span><b>Il reste votre Solde Bricks</b>${b < 10 ? 'Il est vide' : `Il contient ${eur2(b)}`} : ajoutez de l'argent pour que Bricks puisse investir sur le prochain projet.</span></div>` : ''}
+            <div class="acts">${low ? btn('btn-primary', "Ajouter de l'argent", 'topup') + btn('btn-ghost', 'Plus tard', 'close') : btn('btn-primary', 'Voir mon autopilote', 'close')}</div></div>`); },
+        p3upd: () => { const f = ui.flow;
+          return v2sheet('Mettre à jour votre accord', `<p>Vos réglages font partie de votre accord avec Bricks. Les nouveaux s’appliquent aux prochains projets publiés.</p>
+            <div class="v2-consent">${checkBox(f.check, 'check', "J'autorise Bricks à investir pour moi selon ces nouveaux réglages.")}</div>
+            <div class="acts v2-acts">${btn(`btn-grad${f.check ? '' : ' btn-disabled'}`, 'Valider', 'p3upok')}${btn('btn-ghost', 'Annuler', 'close')}</div>${LEGAL}`); },
+        p3pay: () => v2sheet('Votre Solde Bricks', `<p>Bricks investit avec l'argent de votre Solde Bricks. Vous l'alimentez par carte ou par virement, quand vous voulez, depuis votre solde.</p>
+          <div class="v2-gap">${v2help('pending', 'Plus tard', 'Payer directement par carte, sans passer par le solde, et le virement permanent : à cadrer côté solde, pas dans l’autopilote.')}</div>
+          <div class="acts v2-acts">${btn('btn-ghost', 'Fermer', 'close')}</div>`),
+        p3doc: () => v2sheet('Le mandat', `<p>Le document que vous acceptez. Il reprend :</p><div class="v2-card">${v2row('Ce que Bricks investit', `${eur(ui.flow?.crit.max || app.crit.max)} par projet`)}${v2row('Sur quels projets', critC(ui.flow?.crit || app.crit))}${v2row('Retrait', '4 jours')}${v2row('Durée', 'Sans limite, arrêt à tout moment')}</div>
+          <div class="v2-gap">${v2help('pending', 'À rédiger avec Cédric', 'La forme (mandat, accord dans les CGU ou autre) et le PDF à mettre à disposition.')}</div>`),
+        deactivate: () => sheet(`<h3>Mettre l'autopilote en pause ?</h3>
+          <p>Bricks n'investira plus pour vous sur les nouveaux projets. Vos investissements déjà faits ne changent pas, et vos réglages sont gardés pour la reprise.</p>
+          <div class="acts">${btn('btn-primary', 'Mettre en pause', 'do-deactivate')}${btn('btn-ghost', 'Annuler', 'close')}</div>`),
+      });
+      // Le rendement se lit avec son risque : place réservée au taux de défaut constaté.
+      SHEETS.p2infR = () => v2sheet('Le rendement', `<p>C'est ce que le projet prévoit de vous verser chaque année, avant impôts. Il n'est jamais garanti : un rendement plus élevé va avec un risque plus élevé.</p>
+        <div class="v2-gap">${v2help('pending', 'À ajouter', 'Le taux de défaut constaté par tranche de rendement, pour lire le risque à côté du rendement (chiffres à sourcer).')}</div>
+        <div class="v2-gap">${v2help('pending', 'Pourquoi tout garder ?', 'Plus la fourchette est large, plus Bricks peut investir sur des projets différents : votre argent est mieux réparti.')}</div>`);
+
+      // ── Actions ──
+      const back0 = ACT.back;
+      Object.assign(ACT, {
+        setup: () => { const m = app.mode; p2flow(true, m === 'none' ? wide({...CRIT_NEW, max: 50}) : app.crit, false); ui.flow.mig = m === 'plan' || m === 'revoked'; go('p3rec'); },
+        p3to: s => { const f = ui.flow; f.snap = {crit: cloneCrit(f.crit), amt: f.amt, advR: f.advR, advH: f.advH, pay: f.pay, cap: f.cap}; go(s); },
+        p3ok: () => { ui.flow.snap = null; ui.stack.pop(); ui.sheet = null; },
+        // Retour depuis un écran de réglage = on annule ce qui a été touché.
+        back: () => { const t = top(), f = ui.flow; if ((t === 'p3crit' || t === 'p3amt' || t === 'p4pay') && f?.snap) { Object.assign(f, f.snap); f.snap = null; } back0(); },
+        p3edit: () => { p2flow(app.mode === 'mandat', app.crit, true); go('p3rec'); },
+        p3trgo: () => { if (!['plan', 'revoked'].includes(app.mode)) setMode('plan'); toIa(); ACT.setup(); },
+        p3save: () => { app.crit = ui.flow.crit; toIa(); p2toast('Réglages enregistrés ✓'); },
+        p3upok: () => { app.crit = ui.flow.crit; app.signedAt = dmy(now()); toIa(); p2toast('Accord mis à jour ✓'); },
+        p3act: () => { const f = ui.flow; app.crit = f.crit; app.signedAt = dmy(now()); ui.p3mig = !!f.mig; setMode('mandat'); toIa(); ui.sheet = 'p3done'; ui.fresh = true; },
+      });
+
+      // ═══ V4 · la V3 avec les retours de Laetitia (18/11, 14h49) et le score de diversification ═══
+      // But : être sur le maximum de projets, avec un budget de plus en plus haut. Le budget compte dans le score
+      // parce qu'il décide combien de projets l'autopilote peut suivre (et non le montant par projet).
+      if (P4) {
+        const PER_MONTH = 10; // une dizaine de projets publiés par mois (repère donné par Laetitia le 18/11)
+        const CAPS = [100, 200, 500, 1000];
+        const PAY = {wallet: ['wallet', 'Avec mon solde, rechargé à la main'], auto: ['auto', 'Mon solde, rechargé automatiquement'], vir: ['coins', 'Par virement permanent'], card: ['card', 'Par carte, automatiquement à chaque projet']};
+        const payOf = () => ({pay: ui.flow?.pay || app.pay || 'wallet', cap: ui.flow?.cap || app.cap || 200});
+        const budget = (bal, pay, cap) => bal + (pay === 'wallet' ? 0 : cap);
+        const covers = (bal, pay, cap, max) => max >= 10 ? Math.floor(budget(bal, pay, cap) / max) : 0;
+        const payLabel = (pay, cap) => pay === 'wallet' ? 'Solde Bricks' : pay === 'auto' ? 'Solde rechargé auto' : pay === 'vir' ? 'Virement permanent' : `Carte · ${eur(cap)}/mois max`;
+        const payS = (pay, cap, bal) => pay === 'wallet' ? (bal >= 10 ? `${eur2(bal)} disponibles` : 'Vide pour le moment') : pay === 'auto' ? `Votre wallet est rechargé de ${eur(cap)} par mois` : `Jusqu’à ${eur(cap)} par mois, débités à chaque projet`;
+        const cov = (n, max) => `<div class="p4-cov"><div class="p4-cov-h"><span>Votre budget suit</span><b>${n >= 10 ? '10 projets et +' : plural(n, 'projet')}</b></div>
+          <div class="p4-cov-b" aria-hidden="true">${Array.from({length: 10}, (_, i) => `<i${i < n ? ' class="on"' : ''}></i>`).join('')}</div>
+          <p>${n >= 10 ? `De quoi suivre les prochains projets à ${eur(max)}, sans en manquer.` : `Bricks publie environ ${PER_MONTH} projets par mois. Plus votre budget est haut, plus l'autopilote en suit.`}</p></div>`;
+        const fixCom = h => h.replace("investissent automatiquement avec l'autopilote Bricks", "utilisent l'autopilote Bricks");
+
+        // ── Gamification V1 (cadrage du 18/11) : Score Autopilote sur 100 = Diversification 70 + Implication 30 ──
+        // Diversification = un fait sur le portefeuille ; Implication = un comportement. Le budget ne compte plus dans le score.
+        const lastMiss = () => app.ev.filter(e => e.t === 'miss').reduce((a, e) => Math.max(a, e.seq || 0), 0);
+        // Série : projets investis d'affilée depuis le dernier projet manqué (solde vide, limite…).
+        const streak = () => { const m = lastMiss(); return new Set(app.invest.filter(i => i.id > m).map(i => i.p)).size; };
+        const payAuto = o => (o.payChosen ?? app.payChosen) && (o.pay ?? app.pay ?? 'wallet') !== 'wallet';
+        P2_PARTS.splice(0, P2_PARTS.length,
+          {g: 'D', ic: 'grid', t: 'Nombre de projets', max: 40, pts: x => Math.min(40, x.n * 2), v: x => `${plural(x.n, 'projet')} · le maximum à 20 projets`},
+          {g: 'D', ic: 'pin', t: 'Variété des villes', max: 20, pts: x => Math.min(20, x.city * 4), v: x => `${plural(x.city, 'ville')} · le maximum à 5 villes`},
+          {g: 'D', ic: 'open', t: 'Critères ouverts', max: 10, pts: x => Math.round(x.hits / NP * 10), v: x => x.hits === NP ? 'Tous les rendements et toutes les durées' : `${x.hits} projets sur ${NP} vous auraient correspondu`},
+          {g: 'I', ic: 'auto', t: 'Paiement automatique', max: 15, pts: x => x.pauto ? 15 : 0, v: x => x.pauto ? 'Activé : votre autopilote est toujours alimenté' : 'Rechargement auto, virement permanent ou carte'},
+          {g: 'I', ic: 'flag', t: 'Série de projets', max: 10, pts: x => Math.min(10, x.streak), v: x => `${x.streak ? `Série de ${x.streak}` : 'Pas de série en cours'} · le maximum à 10 projets d'affilée`},
+          {g: 'I', ic: 'star', t: 'Notifications', max: 5, pts: x => x.notif ? 5 : 0, v: x => x.notif ? 'Activées' : 'Pour voir passer vos projets et vos paliers'});
+        const calc = (o = {}) => ({...p2calc(o), pay: o.pay ?? app.pay, cap: o.cap ?? app.cap, pauto: payAuto(o), notif: o.notif ?? !!app.notif, streak: o.streak ?? streak()});
+        const part = (x, g) => x.n ? P2_PARTS.filter(p => p.g === g).reduce((s, p) => s + p.pts(x), 0) : 0;
+        // Paliers : le réglage de l'outil, jamais la sécurité du portefeuille.
+        [['Lancé'], ['Installé'], ['Bien réglé'], ['Rodé'], ['Pleinement déployé']].forEach(([t], i) => { LVL[i][1] = t; });
+        P2X.scoreName = 'Score Autopilote';
+        P2X.lvlUp = t => `Votre autopilote passe au niveau « <b>${t}</b> » 🎉`;
+        P2X.ptsTxt = d => `+${d} points sur votre Score Autopilote`;
+        const facts4 = x => [plural(x.n, 'projet') + (x.city ? ` dans ${plural(x.city, 'ville')}` : ''), x.pauto && 'paiement automatique', x.streak >= 2 && `série de ${x.streak}`].filter(Boolean).join(' · ');
+
+        // Missions : d'abord ce qui bloque, ensuite le plus de points pour le moins d'effort, enfin la pédagogie. 3 au maximum.
+        const miss = x => { const s0 = p2score(x), gain = o => p2score(calc(o)) - s0, c = app.crit, pay = app.pay || 'wallet', cap = app.cap || 200, out = [];
+          if (!app.payChosen) { out.push({id: 'pay', ic: 'flag', t: 'Alimentez votre autopilote', s: 'Sans argent prévu, l’autopilote ne peut pas investir sur le prochain projet.', g: null, lab: x.n ? `Jusqu'à +${gain({pay: 'auto', payChosen: true})} pts` : null, tag: 'Première étape', cta: ['Choisir', 'p4payE']}); }
+          else if (pay === 'wallet' && app.balance < c.max) out.push({id: 'low', ic: 'wallet', t: 'Votre solde ne couvre pas le prochain projet', s: x.streak >= 2 ? `Rechargez pour garder votre série de ${x.streak} projets.` : `${eur2(app.balance)} disponibles pour ${eur(c.max)} par projet.`, g: null, tag: 'À faire avant le prochain projet', cta: ['Recharger', 'p4payE']});
+          if (!x.n) return out; // 0 projet : seulement ce qui bloque
+          if (app.payChosen && pay === 'wallet') out.push({id: 'rech', ic: 'auto', t: 'Passez au paiement automatique', s: 'Rechargement auto, virement permanent ou carte : votre solde ne tombe plus à zéro.', g: gain({pay: 'auto', payChosen: true}), tag: 'Aucun projet manqué', cta: ['Activer', 'p4payE']});
+          if (!allOpen(c)) out.push({id: 'crit', ic: 'open', t: 'Ouvrez vos critères', s: 'Tous les rendements et toutes les durées : l’autopilote peut investir sur plus de projets.', g: gain({crit: {...c, rate: [RMIN, RMAX], hor: [0, HMAX]}}), tag: 'Plus de projets possibles', cta: ['Mettre à jour', 'p3edit']});
+          if (!app.notif) out.push({id: 'notif', ic: 'star', t: 'Activez les notifications', s: 'Pour voir passer chaque projet investi, votre série et vos paliers.', g: gain({notif: true}), tag: '', cta: ['Activer', 'p4notif']});
+          const k = covers(app.balance, pay, cap, c.max);
+          if (x.n >= 5 && payAuto({}) && k < PER_MONTH) { const need = Math.ceil(PER_MONTH * c.max / 50) * 50;
+            out.push({id: 'all', ic: 'grid', t: 'Suivez tous les projets du mois', s: `Votre budget suit ${plural(k, 'projet')} sur environ ${PER_MONTH} par mois. Avec ${eur(need)} par mois, vous les suivez tous.`, g: null, tag: 'Plus de projets suivis', cta: ['Ajuster', 'p4payE']}); }
+          if (!app.quiz) out.push({id: 'quiz', ic: 'check', t: '3 questions sur le risque', s: 'Une minute pour vérifier ce qu’il faut savoir avant d’investir.', g: null, tag: 'Sans points', cta: ['Commencer', 'sheet:p4quiz']});
+          if (!app.avis) out.push({id: 'avis', ic: 'pin', t: 'Donnez votre avis sur un projet', s: 'Votre retour aide les autres investisseurs à choisir.', g: null, tag: 'Sans points', cta: ['Donner mon avis', 'p4avis']});
+          return out.slice(0, 3); };
+        COMPLETABLE.push('pay', 'low', 'rech', 'notif', 'all', 'quiz', 'avis');
+        Object.assign(DONE_T, {pay: 'Moyen de paiement choisi', low: 'Solde rechargé', rech: 'Paiement automatique activé', notif: 'Notifications activées', all: 'Tous les projets suivis', quiz: 'Questions sur le risque', avis: 'Avis donné'});
+
+        const manage4 = () => { const c = app.crit, {pay, cap} = {pay: app.pay || 'wallet', cap: app.cap || 200};
+          return sec('Gérer', `<div class="v2-card">${v2row('Mes réglages', `${critC(c)} · ${eur(c.max)}`, 'p3edit')}${v2row('Moyen de paiement', payLabel(pay, cap), 'p4payE')}${v2row('Historique des configurations', '', 'sheet:p4hist')}${v2row('Documents', '', 'sheet:docs')}</div>
+            <div class="v2-card v2-gap">${v2row(`<span style="color:var(--orange)">Mettre l'autopilote en pause</span>`, '', 'sheet:deactivate')}</div>`); };
+        const running = () => { const t = topSec(); return t ? `<div id="p2-val">${sec('En cours de financement', t.body, `<em class="cx-cnt">${t.n}</em>`)}</div>` : ''; };
+        const wait4 = x => x.n || !(app.payChosen || app.balance >= app.crit.max) ? '' : `<div class="cx-card p3-wh p4-wait"><span class="p3-ri" aria-hidden="true">${ic('clock', 20)}</span><p><b>En attente du prochain projet</b>Dès qu'un projet qui respecte vos critères est publié, l'autopilote y investit ${eur(app.crit.max)}. Votre Score Autopilote démarre avec ce premier projet.</p></div>`;
+        // Série cassée (dernier projet manqué) : on dit comment repartir, sans culpabiliser.
+        const broke4 = x => !x.n || x.streak || !lastMiss() ? '' : `<div class="cx-card p3-wh p4-brk"><span class="p3-ri o" aria-hidden="true">${ic('flag', 20)}</span><p><b>Votre série reprend au prochain projet</b>Le dernier projet n'a pas pu être investi. Le prochain relance votre série.</p></div>`;
+
+        // ── En-tête selon le profil ──
+        const corner = x => { if (!x || !x.n) return ''; const bs = BADGES4(x), n = bs.filter(b => b[2]).length; return `<span class="p4-bdg"${A('sheet:p4bd')} role="button" aria-label="Vos réussites : ${n} sur ${bs.length}">${ic('star', 14)}${n}/${bs.length}</span>`; };
+        const top4 = (inner, cls = '', x) => `<div class="cx-hB p2-hero${cls}">${p2top()}${corner(x)}${inner}</div>`;
+        const hero0 = () => top4(`<small class="p2-k">Votre autopilote est activé</small><b class="p2-lvn">Prêt pour le prochain projet</b><p class="p2-nx">Votre Score Autopilote démarre avec votre premier projet.</p>`);
+        const MILES = [1, 5, 10, 25];
+        const heroM = x => { const nx = MILES.find(m => m > x.n) || 5, left = nx - x.n;
+          return top4(`<small class="p2-k">Prochain jalon</small><b class="p2-lvn">${nx} projets</b><div class="p4-mi" aria-hidden="true">${Array.from({length: nx}, (_, i) => `<i${i < x.n ? ' class="on"' : ''}></i>`).join('')}</div>
+            <p class="p2-nx">Plus que <b>${plural(left, 'projet')}</b> pour débloquer « ${nx} projets ».</p>
+            <div class="p2-fx"><div><small>Projets</small><b>${x.n}</b></div><div><small>Villes</small><b>${x.city}</b></div><div><small>Série</small><b>${x.streak}</b></div></div>
+            <span class="p2-how"${A('sheet:p2how')} role="button">Comment fonctionne mon Score Autopilote ?</span>`, '', x); };
+        const jalon = x => { const nx = [5, 10, 25, 50].find(m => m > x.n); if (!nx) return ''; const left = nx - x.n;
+          return `<div class="p4-jl"><span>${ic('flag', 16)}Prochain jalon : <b>${nx} projets</b></span><em>plus que ${left}</em></div><div class="p4-mi sm" aria-hidden="true">${Array.from({length: Math.min(nx, 10)}, (_, i) => `<i${i < Math.round(x.n / nx * Math.min(nx, 10)) ? ' class="on"' : ''}></i>`).join('')}</div>`; };
+        const bar4 = (t, v, m) => `<div class="p4-pb"><div><span>${t}</span><b>${v}<i> / ${m}</i></b></div><u><i style="width:${v / m * 100}%"></i></u></div>`;
+        const heroS = (x, s, k, bump) => { const nx = LVL[k + 1], need = nx ? nx[0] - s : 0;
+          return top4(`<small class="p2-k">Votre Score Autopilote</small><div class="p2-gw">${gauge(s, {bump})}</div><b class="p2-lvn">${LVL[k][1]}</b><p class="p4-sub">${facts4(x)}</p>
+            <p class="p2-nx">${nx ? `Encore <b>${plural(need, 'point')}</b> pour passer au niveau « ${nx[1]} »` : 'Le niveau le plus haut.'}</p>
+            <span class="p2-how"${A('sheet:p2how')} role="button">Comment est calculé mon score ?</span>`, '', x); };
+        // Se situer dans la communauté (optionnel en V1) : 3 messages, seulement quand c'est flatteur (top 25 %). Chiffres fictifs.
+        const comm4 = (x, s) => { const d = part(x, 'D'), i = part(x, 'I'), pd = Math.min(97, Math.round(d / 70 * 95)), ti = Math.max(3, 100 - Math.round(i / 30 * 92)), mois = now().toLocaleDateString('fr-FR', {month: 'long'});
+          const rows = [pd >= 75 && [ic('grid', 18), `Votre portefeuille est mieux diversifié que <b>${pd} %</b> des autopilotes`],
+            ti <= 25 && [ic('auto', 18), `Vous êtes dans les <b>${ti} %</b> les plus impliqués de la communauté`],
+            x.streak >= 3 && [ic('star', 18), `Vous êtes parmi ceux qui ont le plus progressé en ${mois}`]].filter(Boolean);
+          return rows.length ? `<div class="cx-card p4-opt"><div class="p4-opt-h"><b>Vous et la communauté</b><em>Optionnel</em></div>${rows.map(([icn, t]) => `<div class="p4-opt-r"><span aria-hidden="true">${icn}</span><span>${t}</span></div>`).join('')}<p>Calculé une fois par mois sur les investisseurs en autopilote. Chiffres fictifs (maquette).</p></div>` : ''; };
+        const page4 = (x, s, k, ms, bump) => !x.n ? `${hero0()}${wait4(x)}${missions(ms)}${manage4()}${DIV_NOTE}`
+          : x.n < 5 ? `${heroS(x, s, k, bump)}${broke4(x)}${missions(ms)}${running()}${manage4()}${DIV_NOTE}`
+          : `${heroS(x, s, k, bump)}${broke4(x)}${comm4(x, s)}${missions(ms)}${running()}${manage4()}${DIV_NOTE}`;
+        // Jalons (« Vos réussites »)
+        const BADGES4 = x => [['flag', 'Premier projet', x.n >= 1, 'Votre premier projet'], ['grid', '5 projets', x.n >= 5, 'Ayez 5 projets'], ['grid', '10 projets', x.n >= 10, 'Ayez 10 projets'], ['star', '25 projets', x.n >= 25, 'Ayez 25 projets'],
+          ['pin', '5 villes', x.city >= 5, 'Des projets dans 5 villes'], ['flag', 'Série de 10', x.streak >= 10, '10 projets d’affilée'], ['auto', 'Paiement automatique', x.pauto, 'Passez au paiement automatique'], ['clock', "1 an d'autopilote", false, "Dans un an d'autopilote"]];
+        const badges4 = x => { const bs = BADGES4(x), n = bs.filter(b => b[2]).length;
+          return `<div class="cx-card p2-bdc"${A('sheet:p4bd')} role="button" aria-label="Vos réussites : ${n} sur ${bs.length}"><div class="p2-bdc-h"><b>Vos réussites</b><span>${n} sur ${bs.length}</span>${CHEV_R}</div>
+            <div class="p2-bdr" aria-hidden="true">${bs.map(b => `<i class="${b[2] ? 'on' : ''}">${ic(b[0], 14)}</i>`).join('')}</div></div>`; };
+        const dash4 = () => {
+          if (p2S.ui !== ui) Object.assign(p2S, {ui, last: null, seen: null, seenMode: null, done: {}, g0: {}, fx: null});
+          const x = calc(), s = p2score(x), k = lvlOf(s, x), L = p2S.last;
+          if (L && s > L.s) p2S.fx = {d: s - L.s, up: k > L.k, k}; p2S.last = {s, k};
+          const ms = miss(x), ids = new Set(ms.map(m => m.id)); ms.forEach(m => { if (!(m.id in p2S.g0)) p2S.g0[m.id] = m.g; });
+          if (p2S.seen && p2S.seenMode === app.mode) p2S.seen.forEach((m, id) => { if (!ids.has(id) && COMPLETABLE.includes(id) && DONE_OK[id]?.()) p2S.done[id] = {...m, t: DONE_T[id], g: p2S.g0[id]}; });
+          p2S.seen = new Map(ms.map(m => [m.id, m])); p2S.seenMode = app.mode;
+          const shown = [...ms, ...Object.entries(p2S.done).filter(([id]) => !ids.has(id)).slice(-2).map(([, m]) => ({...m, done: true}))];
+          if (p2S.fx) setTimeout(runFx, 30);
+          return page4(x, s, k, shown, !!p2S.fx); };
+        // Une mission ne compte comme réussie que si l'action est vraiment faite (pas seulement masquée par la limite de 3).
+        const DONE_OK = {pay: () => app.payChosen, low: () => app.balance >= app.crit.max || payAuto({}), rech: () => payAuto({}), notif: () => app.notif, quiz: () => app.quiz, avis: () => app.avis,
+          crit: () => allOpen(app.crit), all: () => covers(app.balance, app.pay || 'wallet', app.cap || 200, app.crit.max) >= PER_MONTH};
+        const SHARE = sec('Comment les projets sont partagés', `<div class="cx-card p3-wh"><p>Quand un projet est publié, ses places sont réparties équitablement entre les investisseurs en autopilote dont les critères correspondent. Chacun reçoit sa part, jusqu'à son montant par projet.</p><p class="p4-sh2">Si les demandes dépassent les places, la part de chacun est réduite pour que tout le monde soit servi.</p></div>`);
+        const lift = h => { const m = h.match(/<div class="cx-com sm">[\s\S]*?<\/span><\/div>/); if (!m) return h; h = h.replace(m[0], ''); const i = h.indexOf("d'illiquidité.</p></div>") + "d'illiquidité.</p></div>".length; return h.slice(0, i) + `<div class="p4-com">${m[0]}</div>` + h.slice(i); };
+        const disco4 = () => fixCom(lift(disco3()).replace('<div class="cx-card p2-cmp">', `${SHARE}<div class="cx-card p2-cmp">`)
+          .replace('Dès 10 € par projet, Bricks investit pour vous sur chaque nouveau projet.', 'Dès 10 € par projet, Bricks investit pour vous sur chaque nouveau projet qui respecte vos critères.')
+          .replace('<b>Vos réglages sont déjà prêts</b>Tous les projets, 50 € par projet. Vous pouvez les changer.', '<b>Vous choisissez votre montant</b>Dès 10 € par projet. Vos critères sont déjà prêts, les plus ouverts possible.')
+          .replace('<b>Bricks investit pour vous</b>Sur chaque nouveau projet, avec votre Solde Bricks.', '<b>Bricks investit pour vous</b>Sur chaque nouveau projet qui respecte vos critères. Vous choisissez ensuite comment le financer : Solde Bricks ou carte.')
+          .replace(/<section class="cx-sec"><div class="cx-sec-h"><b>Où va votre argent<\/b>[\s\S]*?<\/section>/, ''));
+        const ia3 = P2X.ia;
+        const CHG = ['Le paiement peut devenir automatique : par carte à chaque projet, ou solde rechargé automatiquement', 'Bricks investit dès 10 € sur chaque projet, jusqu’à votre montant maximum'];
+        const mig4 = h => h.replace('Plus besoin de confirmer : Bricks investit pour vous</span></li>', `Plus besoin de confirmer : Bricks investit pour vous</span></li>${CHG.map(t => `<li>${V2I.tick}<span>${t}</span></li>`).join('')}`);
+        // #3 : quand l'autopilote change d'état dans ce téléphone (activation, pause…), le panneau Scénario le reflète.
+        let sentMode = null;
+        const syncMode = () => { if (app.mode !== sentMode) { sentMode = app.mode; try { parent.postMessage({p4mode: app.mode}, '*'); } catch (e) {} } };
+        P2X.ia = () => { syncMode(); return app.mode === 'mandat' ? dash4() : app.mode === 'none' ? disco4() : mig4(fixCom(ia3())); };
+
+        // ── Écrans : 1. montant · 2. vos réglages sont prêts · 3. votre accord ──
+        // Le financement sort du parcours d'activation : il devient la 1re étape de la gamification (mission).
+        const daysLeft = () => Math.max(0, Math.ceil((SWITCH - now()) / 864e5));
+        P2X.homeTr = n => { const j = daysLeft(), conf = n ? `<p class="p4-trn">${plural(n, 'projet')} encore à confirmer avant le ${deadline()} : ils restent dans votre autopilote.</p>` : '';
+          if (!ui.p4trSeen) { ui.p4trSeen = true; setTimeout(() => { if (top() === 'home' && !ui.sheet) { ACT.sheet('p4tr'); paint(); } }, 350); }
+          return `<div class="p4-trB"${A('sheet:p4tr')} role="button"><span class="p4-trB-j">J-${j}</span><span><b>Passez au nouvel autopilote</b>Avant le 1er janvier, sinon l'investissement automatique s'arrête</span>${CHEV_R}</div>${conf}`; };
+        P2X.payRow = () => '';
+        // Rendement et durée détaillés dans le récap : proposition A (deux lignes) ou B (barres et définitions).
+        const fullBar = (k, c) => { const key = k === 'R' ? 'rate' : 'hor', lo = key === 'rate' ? (c.rate[0] - RMIN) / (RMAX - RMIN) : c.hor[0] / HMAX, hi = key === 'rate' ? (Math.min(c.rate[1], RMAX) - RMIN) / (RMAX - RMIN) : Math.min(c.hor[1], HMAX) / HMAX;
+          return `<div class="p2-cr-bar" aria-hidden="true"><i style="left:${(lo * 100).toFixed(1)}%;right:${((1 - hi) * 100).toFixed(1)}%"></i></div><div class="p2-cr-ax" aria-hidden="true"><span>${RNG[key].ends[0]}</span><span>${RNG[key].ends[1]} et +</span></div>`; };
+        const rTxt = c => isFull('rate', c.rate) ? 'De 6 % à 12 % et plus' : rateW(c).replace(/^./, m => m.toUpperCase());
+        const hTxt = c => isFull('hor', c.hor) ? 'De quelques mois à 10 ans et plus' : horW(c).replace(/^./, m => m.toUpperCase());
+        P2X.critRows = c => true // version A retenue le 18/11 (deux lignes)
+          ? `${rrow('pct', 'Rendement visé par an', rTxt(c), 'Ce que le projet prévoit de vous verser, non garanti', 'p3to:p3crit')}${rrow('clock', 'Durée des projets', hTxt(c), 'Le temps avant d’être remboursé', 'p3to:p3crit')}`
+          : `<div class="p4-crb"><div class="p4-crb-h"><b>Sur quels projets</b><em class="p3-mod"${A('p3to:p3crit')} role="button">Modifier</em></div>
+              <div class="p4-crb-i"><div class="p4-crb-t"><span>${ic('pct', 16)}Rendement visé</span><b>${rTxt(c)}</b></div>${fullBar('R', c)}<p>Ce que le projet prévoit de vous verser chaque année. Jamais garanti : plus il est haut, plus le risque l'est aussi.</p></div>
+              <div class="p4-crb-i"><div class="p4-crb-t"><span>${ic('clock', 16)}Durée</span><b>${hTxt(c)}</b></div>${fullBar('H', c)}<p>Le temps pendant lequel votre argent reste investi, jusqu'au remboursement.</p></div></div>`;
+        P2X.payIt = () => `<div class="v2-li"><span class="v2-ico l" aria-hidden="true">${ic('wallet', 24)}</span><span class="v2-ot"><b>Avec le moyen de paiement de votre choix</b><span>Vous le choisissez juste après : Solde Bricks, recharge auto ou carte</span></span></div>`;
+        P2X.recExtra = () => '';
+        P2X.recHead = () => v2head('Vos réglages sont prêts', 'Ce sont les critères les plus ouverts : plus votre argent est réparti sur de nombreux projets, moins une difficulté sur l’un d’eux pèse sur l’ensemble.');
+        const frame4 = (n, body, cta) => `<div class="scr v2 p2f">${SB}<div class="v2-hd"><span class="v2-bk"${A('back')} role="button" aria-label="Retour">${V2I.back}</span>${steps(n)}
+          <span class="v2-x"${A('v2close')} role="button" aria-label="Quitter">${V2I.close}</span></div><div class="scr-bd v2-bd">${body}</div></div>${cta}`;
+        const amt3 = STEP.p3amt;
+        STEP.p4amt = () => { const h = amt3(), body = h.slice(h.indexOf('<div class="scr-bd v2-bd">') + 26, h.lastIndexOf('</div></div>')), blocked = /btn-disabled/.test(h.slice(h.lastIndexOf('</div></div>')));
+          return frame4(1, body, v2grad('Continuer', 'p2go:p3rec', blocked)); };
+
+        // Moyen de paiement (titre choisi par Laetitia le 18/11).
+        STEP.p4pay = () => { const f = ui.flow, {pay, cap} = payOf(), solo = f.payOnly;
+          const opt = (k, s) => v2opt({on: pay === k, a: `p4p:${k}`, ic: ic(PAY[k][0], 20), t: PAY[k][1], s});
+          const capIn = pay !== 'card' ? '' : `<div class="md-lbl p4-lbl">Plafond par mois</div><div class="v2-gap">${v2stepper('p4cb:-1', 'p4cb:1', cap <= 10, `<label class="v2-ul"><input id="P4CAP" inputmode="numeric" autocomplete="off" value="${f.capRaw ?? cap}" style="width:${Math.max(String(f.capRaw ?? cap).length, 1) + 0.1}ch" aria-label="Plafond par mois, en euros"><span>€</span></label>`)}</div>
+            <div class="v2-chips">${CAPS.map(v => `<span class="v2-chip${cap === v ? ' on' : ''}"${A(`p4c:${v}`)} role="button">${eur(v)}</span>`).join('')}</div>`;
+          const body = `${v2head('Comment souhaitez-vous que l’autopilote finance les projets ?', 'Vous pouvez changer à tout moment.')}
+            <div class="v2-list" role="radiogroup" aria-label="Moyen de paiement">${opt('wallet', `${eur2(app.balance)} disponibles. Vous le rechargez quand vous voulez.`)}${opt('auto', `Bricks investit avec votre solde et le recharge par carte (${cardShort()}) quand il baisse : il ne tombe jamais à zéro.`)}${opt('vir', 'Un virement programmé depuis votre banque alimente votre solde chaque mois.')}${opt('card', `Votre carte (${cardShort()}) est débitée à chaque investissement, dans un plafond.`)}</div>${capIn}`;
+          const next = pay === 'auto' ? v2grad('Continuer', 'p4go:p4auto') : pay === 'vir' ? v2grad('Continuer', 'p4go:p4vir') : solo ? v2grad('Enregistrer', 'p4paysave', app.payChosen && pay === app.pay && cap === app.cap || (pay === 'card' && cap < 10)) : v2grad('Valider', 'p3ok');
+          return p3sub('Moyen de paiement', body, next); };
+        // Recharge auto : le seuil (ou chaque mois), le montant, le plafond — l'écran existant du solde.
+        STEP.p4auto = () => { const f = ui.flow; if (!f.fd) f.fd = {...fundDraft(), mode: 'low'}; ui.fd = f.fd;
+          return p3sub('Recharge automatique', `${v2head('Quand recharger votre solde ?', 'Bricks recharge votre Solde Bricks par carte pour que l’autopilote ait toujours de quoi investir.')}${v2fund(f.fd)}`, v2grad('Enregistrer', 'p4paysave', !v2fundOk(f.fd))); };
+        STEP.p4vir = () => p3sub('Virement permanent', `${v2head('Programmez un virement vers votre Solde Bricks', 'Depuis votre banque, avec ces coordonnées. Le montant et la date sont à votre choix.')}
+          <div class="v2-card">${v2row('Bénéficiaire', 'Bricks · Solde Bricks')}${v2row('IBAN', 'FR76 •••• •••• 4821')}${v2row('Référence', 'BRK-CAMILLE-0042')}</div>
+          <p class="v2-legal">Coordonnées fictives (maquette).</p>`, v2grad("C'est fait", 'p4paysave'));
+
+        Object.assign(SHEETS, {
+          p3done: () => { if (ui.fresh) setTimeout(confetti, 120); const c = app.crit;
+            return sheet(`<div class="p2-dn"><div class="p2-dn-i" aria-hidden="true">${ICON_CHECK('#08744D', 30)}</div><h3>${ui.p3mig ? 'Bienvenue dans le nouvel autopilote' : 'Votre autopilote est activé'}</h3>
+              <p>Bricks investira ${eur(c.max)} sur chaque nouveau projet qui respecte vos critères.</p>
+              ${app.payChosen ? '' : `<div class="p3-nx"><span class="p3-ri o" aria-hidden="true">${ic('flag', 20)}</span><span><b>Plus qu'une chose</b>Alimentez votre autopilote, pour qu'il ne manque aucun projet.</span></div>`}
+              <div class="acts">${app.payChosen ? btn('btn-primary', 'Voir mon autopilote', 'close') : btn('btn-primary', 'Choisir maintenant', 'p4payE') + btn('btn-ghost', 'Plus tard', 'close')}</div></div>`); },
+          p2how: () => { const x = calc(), sc = p2score(x), k = lvlOf(sc, x);
+            const grp = (g, t, m) => `<div class="p4-hg"><div class="p4-hg-h"><b>${t}</b><em class="num">${part(x, g)}<i> / ${m}</i></em></div><div class="p2-hw">${P2_PARTS.filter(p => p.g === g).map(p => { const v = x.n ? p.pts(x) : 0; return `<div class="p2-hwr"><span class="p2-hwi" aria-hidden="true">${ic(p.ic, 20)}</span><div class="p2-hwm"><div class="p2-hsr"><b>${p.t}</b><em class="num">${v}<i> / ${p.max}</i></em></div>${pbar(v, p.max)}<span>${p.v(x)}</span></div></div>`; }).join('')}</div></div>`;
+            return v2sheet('Votre Score Autopilote', `<p>Sur 100 points, il montre à quel point votre autopilote est bien réglé : votre argent réparti sur de nombreux projets, et un autopilote qui ne manque aucun projet.</p>
+              ${v2help('pending', 'Pourquoi c\'est important ?', "Quand votre argent est réparti sur beaucoup de projets, une difficulté sur l'un d'eux ne touche qu'une petite part de votre argent.")}
+              ${grp('D', 'Diversification', 70)}${grp('I', 'Implication', 30)}
+              <div class="p2-hlv"><b>Les niveaux</b><div class="p2-hlb"><i style="left:${Math.min(98, Math.max(2, sc))}%"></i></div><div class="p2-hll">${LVL.map((l, i) => `<span class="${i === k && x.n ? 'on' : ''}">${l[1]}</span>`).join('')}</div></div>
+              <p class="cx-cap2">Un score plus haut ne veut pas dire moins de risque : chaque projet peut perdre tout ou partie du capital investi.</p>`); },
+          p4bd: () => { const bs = BADGES4(calc());
+            return v2sheet('Vos réussites', `<div class="v2-card">${bs.map(([k, t, on, how]) => `<div class="v2-row p2-bdl${on ? ' on' : ''}"><span class="p2-bdi" aria-hidden="true">${ic(k, 18)}</span><b>${t}</b><span>${on ? 'Débloquée' : how}</span></div>`).join('')}</div>`); },
+          p4quiz: () => { const Q = [['Un rendement visé de 10 % est garanti.', false, "Faux. C'est ce que le projet prévoit de verser, sans garantie. Il peut être en retard ou ne pas être payé."],
+              ['Mon argent peut rester bloqué plus longtemps que prévu.', true, "Vrai. Un projet peut prendre du retard : vous ne pouvez pas récupérer votre argent avant son remboursement."],
+              ['Investir sur beaucoup de projets supprime le risque.', false, "Faux. Ça limite l'effet d'une difficulté sur un projet, mais le risque de perte en capital reste."]];
+            return v2sheet('3 questions sur le risque', `<p>Vrai ou faux ? Touchez une réponse pour voir l'explication.</p>${Q.map(([q, ok, why], i) => `<div class="cx-card p4-q"><b>${q}</b><div class="p4-qa"><button class="btn btn-ghost" onclick="this.closest('.p4-q').classList.add('${ok ? 'y' : 'n'}','r')">Vrai</button><button class="btn btn-ghost" onclick="this.closest('.p4-q').classList.add('${ok ? 'n' : 'y'}','r')">Faux</button></div><p>${why}</p></div>`).join('')}
+              <div class="acts v2-acts">${btn('btn-grad', "C'est noté", 'p4quizok')}</div>`); },
+          p4tr: () => { const j = daysLeft();
+            return sheet(`<div class="p4-trS"><span class="p4-trS-i" aria-hidden="true">${ICON_AUTO('#fff', 30)}</span><small>Dans ${plural(j, 'jour')}, le 1er janvier 2027</small><h3>Votre investissement automatique évolue</h3>
+              <p>Avec le nouvel autopilote, Bricks investit pour vous sur chaque projet qui respecte vos critères. Plus rien à confirmer.</p>
+              <ul>${['Vous ne manquez plus aucun projet', 'Paiement automatique possible, par carte ou solde rechargé', 'Bricks investit dès 10 €, jusqu’à votre montant maximum', 'Vos critères et votre montant sont repris'].map(t => `<li>${V2I.tick}<span>${t}</span></li>`).join('')}</ul>
+              <p class="p4-trS-w">Sans activation avant le 1er janvier, l'investissement automatique actuel s'arrête.</p>
+              <div class="acts">${btn('btn-grad', 'Passer au nouvel autopilote', 'setup')}${btn('btn-ghost', 'Plus tard', 'close')}</div><p class="tr-mfoot">Investir comporte des risques de perte en capital et d'illiquidité.</p></div>`); },
+          p4hist: () => { const c = app.crit;
+            return v2sheet('Historique des configurations', `<div class="v2-card">${[[app.signedAt || dmy(now()), 'Configuration en cours', `${critC(c)} · ${eur(c.max)} par projet · ${payLabel(app.pay || 'wallet', app.cap || 200)}`], ['12/09/2024', 'Première configuration', 'De 9 à 12 % · de 1 à 3 ans · 20 € par projet']]
+              .map(([d, t, s]) => `<div class="v2-li"><span class="v2-ico l" aria-hidden="true">${ILI(IP.cal, 22)}</span><span class="v2-ot"><b>${t}</b><span>${d} · ${s}</span></span></div>`).join('')}</div>`); },
+        });
+
+        // ── Actions ──
+        const act3 = ACT.p3act, up3 = ACT.p3upok, save3 = ACT.p3save, keepPay = () => { if (ui.flow?.pay) { app.pay = ui.flow.pay; app.cap = ui.flow.cap; } };
+        Object.assign(ACT, {
+          setup: () => { const m = app.mode; p2flow(true, m === 'none' ? wide({...CRIT_NEW, max: 50}) : app.crit, false); Object.assign(ui.flow, {mig: m === 'plan' || m === 'revoked', pay: app.pay || 'wallet', cap: app.cap || 200}); go(m === 'none' ? 'p4amt' : 'p3rec'); },
+          p4p: k => { ui.flow.pay = k; ui.flow.capRaw = null; },
+          p4c: v => { ui.flow.cap = +v; ui.flow.capRaw = null; },
+          p4cb: d => { const f = ui.flow; f.cap = Math.max(10, Math.floor((f.cap || 0) / 10) * 10 + +d * 10); f.capRaw = null; },
+          p4go: s => go(s),
+                    p4payE: () => { p2flow(true, app.crit, true); Object.assign(ui.flow, {payOnly: true, pay: app.pay || 'wallet', cap: app.cap || 200}); go('p4pay'); },
+          p4paysave: () => { const f = ui.flow; if (f.pay === 'auto' && f.fd) { const {ok, raw, ...cfg} = f.fd; app.fa = {...cfg, used: 0}; f.cap = cfg.amt; } keepPay(); app.payChosen = true; toIa(); p2toast('Moyen de paiement enregistré ✓'); },
+          p3act: () => { keepPay(); act3(); },
+          p3upok: () => { keepPay(); up3(); },
+          p3save: () => { keepPay(); save3(); },
+          p4notif: () => { app.notif = true; toIa(); p2toast('Notifications activées ✓'); },
+          p4avis: () => { app.avis = true; toIa(); p2toast("Merci ! Votre avis est publié dans l'Espace avis"); },
+          p4quizok: () => { app.quiz = true; ui.sheet = null; toIa(); p2toast('Merci, c’est noté ✓'); },
+          topup: () => ACT.p4payE(),
+        });
+      }
+    }
+
     // Le panneau Scénario de la page principale pilote aussi ce téléphone : chaque clic y est rejoué ici.
     window.addEventListener('message', e => { const m = e.data && e.data.p2fw; if (!m) return;
       if (m.v) { p2S.v = m.v; paint(); return; }
@@ -5333,19 +5819,28 @@ document.addEventListener('click', e => {
 })();
 </script>
 <script>
-// Proto 2 : le 2e téléphone charge cette même page avec ?p2. Chaque réglage du panneau Scénario y est rejoué.
+// Proto 2 et V3 : ces téléphones chargent cette même page avec ?p2 ou ?p3. Chaque réglage du panneau Scénario y est rejoué.
 (() => { if (window.P2) return;
-  const slot = document.getElementById('P2SLOT'); if (!slot) return;
-  const f = document.createElement('iframe'); f.id = 'P2F'; f.title = 'Proto 2 · Autopilote simplifié et gamifié'; f.src = '?p2'; slot.appendChild(f);
+  const mk = (slot, id, title, src) => { const el = document.getElementById(slot); if (!el) return null;
+    const f = document.createElement('iframe'); f.id = id; f.title = title; f.src = src; el.appendChild(f); return f; };
+  const frames = [mk('P2SLOT', 'P2F', 'Proto 2 · Autopilote simplifié et gamifié', '?p2'), mk('P3SLOT', 'P3F', 'V3 · version minimum à sortir', '?p3'), mk('P4SLOT', 'P4F', 'V4 · V3 et score de diversification', '?p4')].filter(Boolean);
   let v = 'A';
-  const send = m => { if (f.contentWindow) f.contentWindow.postMessage({p2fw: m}, '*'); };
-  f.addEventListener('load', () => send({v}));
+  const send = m => frames.forEach(f => { if (f.contentWindow) f.contentWindow.postMessage({p2fw: m}, '*'); });
+  // La V4 signale son état (activation, pause…) : le panneau Scénario affiche le même.
+  window.addEventListener('message', e => { const m = e.data && e.data.p4mode; if (!m) return;
+    document.querySelectorAll('#CXP .toggle[data-v="CXM"] button').forEach(b => b.classList.toggle('on', b.dataset.s === m)); });
+  frames.forEach(f => f.addEventListener('load', () => f.contentWindow?.postMessage({p2fw: {v}}, '*')));
   document.getElementById('CXP').addEventListener('click', e => {
     const t = e.target.closest('.toggle[data-v="CXM"] button'); if (t) { send({s: t.dataset.s}); return; }
     const p = e.target.closest('[data-p]'); if (p && !['fold', 'more'].includes(p.dataset.p)) send({p: p.dataset.p}); });
   document.getElementById('CXMK')?.addEventListener('change', e => send({mk: e.target.value}));
   document.querySelectorAll('[data-p2v]').forEach(b => b.addEventListener('click', () => { v = b.dataset.p2v;
     document.querySelectorAll('[data-p2v]').forEach(x => { x.classList.toggle('on', x === b); x.setAttribute('aria-selected', String(x === b)); }); send({v}); }));
+  // Afficher ou masquer chaque téléphone (trois côte à côte ne tiennent pas sur tous les écrans).
+  const stage = document.getElementById('CXSTAGE');
+  document.querySelectorAll('[data-vis]').forEach(b => b.addEventListener('click', () => { const on = b.getAttribute('aria-pressed') !== 'true';
+    if (!on && document.querySelectorAll('[data-vis][aria-pressed="true"]').length < 2) return;
+    b.setAttribute('aria-pressed', String(on)); stage.classList.toggle(`h${b.dataset.vis}`, !on); }));
 })();
 </script>
 
@@ -5354,7 +5849,7 @@ document.addEventListener('click', e => {
   .annot-ia-ui{font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased;letter-spacing:0;text-transform:none;line-height:1.4}
   .annot-ia-ui *,.annot-ia-ui *::before,.annot-ia-ui *::after{box-sizing:border-box}
   body.annot-ia-on *{cursor:crosshair!important}
-  body.annot-ia-on:not(.annot-ia-alt) #P2F{pointer-events:none}
+  body.annot-ia-on:not(.annot-ia-alt) #P2F,body.annot-ia-on:not(.annot-ia-alt) #P3F,body.annot-ia-on:not(.annot-ia-alt) #P4F{pointer-events:none}
   body.annot-ia-on .annot-ia-ui,body.annot-ia-on .annot-ia-ui *{cursor:auto!important}
   body.annot-ia-on .annot-ia-ui button,body.annot-ia-on .annot-ia-pin,body.annot-ia-on .annot-ia-item-main{cursor:pointer!important}
   body.annot-ia-on .annot-ia-ui textarea{cursor:text!important}
@@ -5500,15 +5995,18 @@ document.addEventListener('click', e => {
     return b && {v: t.dataset.v, s: b.dataset.s, label: clean(b.textContent)};
   }).filter(Boolean);
   const targetOf = node => node.closest('svg') || node;
-  // Proto 2 : le 2e téléphone est une iframe de la même page (?p2). On vise les éléments à l'intérieur.
-  const p2f = () => document.getElementById('P2F');
-  const docOf = n => n.frame ? (() => { try { return p2f()?.contentDocument || null; } catch { return null; } })() : document;
-  const inner = (x, y) => { const f = p2f(); if (!f) return null; const r = f.getBoundingClientRect();
-    if (x < r.left || x > r.right || y < r.top || y > r.bottom) return null;
-    let d = null; try { d = f.contentDocument; } catch {} if (!d) return null;
-    const t = d.elementFromPoint(x - r.left, y - r.top); return t && t !== d.body && t !== d.documentElement ? {d, t: targetOf(t)} : null; };
+  // Proto 2 et V3 : ces téléphones sont des iframes de la même page (?p2, ?p3). On vise les éléments à l'intérieur.
+  const FRAMES = {P2F: 'Proto 2', P3F: 'V3', P4F: 'V4'};
+  const frameEls = () => Object.keys(FRAMES).map(id => document.getElementById(id)).filter(f => f && f.offsetParent);
+  const docIn = f => { try { return f?.contentDocument || null; } catch { return null; } };
+  const frameOf = d => frameEls().find(f => docIn(f) === d) || null;
+  const docOf = n => n.frame ? docIn(document.getElementById(n.frame)) : document;
+  const inner = (x, y) => { for (const f of frameEls()) { const r = f.getBoundingClientRect();
+    if (x < r.left || x > r.right || y < r.top || y > r.bottom) continue;
+    const d = docIn(f); if (!d) return null;
+    const t = d.elementFromPoint(x - r.left, y - r.top); return t && t !== d.body && t !== d.documentElement ? {d, t: targetOf(t)} : null; } return null; };
   const rectOf = node => { const r = node.getBoundingClientRect(); if (node.ownerDocument === document) return r;
-    const o = p2f()?.getBoundingClientRect() || {left: 0, top: 0}; return {left: r.left + o.left, top: r.top + o.top, right: r.right + o.left, bottom: r.bottom + o.top, width: r.width, height: r.height}; };
+    const o = frameOf(node.ownerDocument)?.getBoundingClientRect() || {left: 0, top: 0}; return {left: r.left + o.left, top: r.top + o.top, right: r.right + o.left, bottom: r.bottom + o.top, width: r.width, height: r.height}; };
   const pick = e => { const h = inner(e.clientX, e.clientY); return h ? h.t : targetOf(e.target); };
 
   const resolve = n => {
@@ -5646,7 +6144,7 @@ document.addEventListener('click', e => {
   };
 
   function createDraft(target, cx, cy){
-    const r = rectOf(target), fr = target.ownerDocument !== document, host = fr ? p2f() : target;
+    const r = rectOf(target), fr = target.ownerDocument !== document ? frameOf(target.ownerDocument) : null, host = fr || target;
     const sec = sectionOf(host), col = colOf(host);
     return {
       id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
@@ -5654,8 +6152,8 @@ document.addEventListener('click', e => {
       tab: tabInfo(),
       section: clean(sec?.textContent) || 'Sans section',
       sectionIdx: [...document.querySelectorAll('.line-title')].indexOf(sec),
-      col: fr ? 'Proto 2' : target.closest('#CX') ? 'Proto 1' : colLabel(col),
-      frame: fr ? 'P2F' : '',
+      col: fr ? FRAMES[fr.id] : target.closest('#CX') ? 'Proto 1' : colLabel(col),
+      frame: fr ? fr.id : '',
       colIdx: col ? [...document.querySelectorAll('.col, .why-col')].indexOf(col) : -1,
       text: textOf(target),
       selector: selectorOf(target),
